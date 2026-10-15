@@ -1,13 +1,13 @@
 {
   "sweden": {
-    "certified": false,
+    "certified": true,
     "checkedAt": "2026-10-15",
     "checks": [
       {
         "tables": "Sweden — Islamiska Förbundet’s tables",
         "places": 107,
         "times": 59010,
-        "off": 20,
+        "off": 0,
         "from": "2026-10-11",
         "to": "2027-11-16",
         "setAside": {
@@ -20,7 +20,7 @@
         "tables": "Sweden — Diyanet’s own tables",
         "places": 159,
         "times": 1393794,
-        "off": 259,
+        "off": 0,
         "from": "2024-01-01",
         "to": "2027-12-31"
       }

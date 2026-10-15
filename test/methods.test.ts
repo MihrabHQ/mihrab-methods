@@ -12,8 +12,8 @@ const bars: [Parameters<typeof checkAuthority>[0], number][] = [
   ['indonesia', 0.9996], // 99.965 %
   ['algeria', 0.9936], // 99.366 %
   ['morocco', 0.9855], // 98.571 %
-  ['sweden', 0.9995], // 99.966 % — Islamiska Förbundet's timetables; Diyanet's own below
-  ['diyanet', 0.9998], // 99.981 %
+  ['sweden', 1], // 100 % with the correction list — Islamiska Förbundet's timetables; Diyanet's own below
+  ['diyanet', 1], // 100 % with the correction list (99.981 % without)
 ];
 
 for (const [authority, bar] of bars) {
@@ -25,7 +25,7 @@ for (const [authority, bar] of bars) {
     }
     assert.ok(r.times > 1000, `only ${r.times} times`);
     assert.ok(r.exact / r.times >= bar, `${((100 * r.exact) / r.times).toFixed(3)} % exact`);
-    assert.equal(r.worst, 1);
+    assert.ok(r.worst <= 1, `worst ${r.worst} min`);
   });
 }
 

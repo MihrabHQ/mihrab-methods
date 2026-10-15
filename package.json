@@ -8,6 +8,7 @@
   "scripts": {
     "test": "tsx --test test/*.test.ts",
     "verify": "tsx src/verify.ts",
+    "corrections": "tsx src/corrections.ts",
     "certify": "tsx src/certify.ts",
     "typecheck": "tsc --noEmit"
   },

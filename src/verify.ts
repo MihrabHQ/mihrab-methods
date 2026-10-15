@@ -15,7 +15,7 @@ import { AUTHORITIES, placesOf, candidateTimes, type Authority, type Place } fro
 
 const ROOT = path.join(__dirname, '..');
 export const TABLES = process.env.MIHRAB_TABLES ?? path.join(ROOT, '.tables');
-const KEYS = ['fajr', 'sunrise', 'dhuhr', 'asr', 'maghrib', 'isha'] as const;
+export const KEYS = ['fajr', 'sunrise', 'dhuhr', 'asr', 'maghrib', 'isha'] as const;
 
 export type Result = {
   name: string;
@@ -45,12 +45,12 @@ export type CheckOptions = {
   copiedYears?: boolean;
 };
 
-function clockIn(tz: string, d: Date): number {
+export function clockIn(tz: string, d: Date): number {
   const p = new Intl.DateTimeFormat('en-GB', { timeZone: tz, hourCycle: 'h23', hour: '2-digit', minute: '2-digit' }).formatToParts(d);
   const get = (t: string) => Number(p.find(x => x.type === t)!.value);
   return get('hour') * 60 + get('minute');
 }
-const minutes = (s: string | undefined) => {
+export const minutes = (s: string | undefined) => {
   const m = /^(\d{1,2}):(\d{2})/.exec((s ?? '').trim());
   return m ? Number(m[1]) * 60 + Number(m[2]) : NaN;
 };
@@ -122,13 +122,13 @@ export function check(name: string, places: Place[], dir: string, opts: CheckOpt
  * Isha between 2026 and 2027), so the two are told apart. Rows confirmed by
  * the authority's own are the year they claim and are left out.
  */
-function copiedYearsOf(place: Place, days: Record<string, string[]>, original: Record<string, string[]> | null): Set<number> {
+export function copiedYearsOf(place: Place, days: Record<string, string[]>, original: Record<string, string[]> | null): Set<number> {
   const score = new Map<number, [number, number]>();
   for (const [date, row] of Object.entries(days)) {
     if (original?.[date]) continue;
     const [y, m, d] = date.split('-').map(Number);
     const on = (yy: number) => {
-      const t = candidateTimes(place, yy, m - 1, d);
+      const t = candidateTimes(place, yy, m - 1, d, 1, { corrections: false });
       return t ? KEYS.filter((k, i) => clockIn(place.tz, t[k]) === minutes(row[i + 1])).length : 0;
     };
     const s = score.get(y) ?? [0, 0];
@@ -139,7 +139,7 @@ function copiedYearsOf(place: Place, days: Record<string, string[]>, original: R
   return new Set([...score].filter(([, [thisYear, lastYear]]) => lastYear > thisYear).map(([y]) => y));
 }
 
-const DIYANET_ROOT = process.env.DIYANET_TABLES ?? path.join(TABLES, 'diyanet');
+export const DIYANET_ROOT = process.env.DIYANET_TABLES ?? path.join(TABLES, 'diyanet');
 
 /** Diyanet's own rows for an Islamiska Förbundet city, by its key, when present. */
 function diyanetDaysFor(slug: string): Record<string, string[]> | null {
