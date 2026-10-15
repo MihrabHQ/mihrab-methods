@@ -1,0 +1,73 @@
+{
+  "sweden": {
+    "certified": false,
+    "checkedAt": "2026-10-15",
+    "checks": [
+      {
+        "tables": "Sweden — Islamiska Förbundet’s tables",
+        "places": 106,
+        "times": 57834,
+        "off": 955,
+        "from": "2026-10-11",
+        "to": "2027-11-16",
+        "setAside": {
+          "misplaced": [
+            "Ystad (522 of 522 off)"
+          ],
+          "sourceFaults": 32053,
+          "copiedRows": 307
+        }
+      },
+      {
+        "tables": "Sweden — Diyanet’s own tables",
+        "places": 159,
+        "times": 1386162,
+        "off": 794,
+        "from": "2024-01-01",
+        "to": "2027-12-31"
+      }
+    ]
+  },
+  "morocco": {
+    "certified": false,
+    "checkedAt": "2026-10-15",
+    "checks": [
+      {
+        "tables": "Morocco — Habous",
+        "places": 164,
+        "times": 31488,
+        "off": 450,
+        "from": "2026-10-11",
+        "to": "2026-11-11"
+      }
+    ]
+  },
+  "algeria": {
+    "certified": false,
+    "checkedAt": "2026-10-15",
+    "checks": [
+      {
+        "tables": "Algeria — Ministry of Religious Affairs",
+        "places": 68,
+        "times": 101184,
+        "off": 642,
+        "from": "2026-10-01",
+        "to": "2027-06-05"
+      }
+    ]
+  },
+  "indonesia": {
+    "certified": false,
+    "checkedAt": "2026-10-15",
+    "checks": [
+      {
+        "tables": "Indonesia — Kemenag",
+        "places": 517,
+        "times": 266772,
+        "off": 94,
+        "from": "2026-10-07",
+        "to": "2026-12-31"
+      }
+    ]
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "name": "mihrab-methods",
+  "version": "0.1.0",
+  "private": true,
+  "description": "The prayer-time authorities' own methods, fitted to their published tables: Sweden (Diyanet), Morocco (Habous), Algeria (Ministry of Religious Affairs), Indonesia (Kemenag).",
+  "license": "AGPL-3.0-or-later",
+  "main": "src/index.ts",
+  "scripts": {
+    "test": "tsx --test test/*.test.ts",
+    "verify": "tsx src/verify.ts",
+    "certify": "tsx src/certify.ts",
+    "typecheck": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.0",
+    "tsx": "^4.19.2",
+    "typescript": "^5.7.2"
+  }
+}
