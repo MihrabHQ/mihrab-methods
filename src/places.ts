@@ -26,6 +26,8 @@ export type Place = {
   highland?: boolean;
   /** Indonesia: the highland degree on Fajr and Isha too (six regencies of Papua). */
   twilightDip?: boolean;
+  /** Indonesia: where the ministry computes the regency's Asr, Maghrib and Isha, when not at its point. */
+  afternoon?: readonly [number, number];
   /** Diyanet: Isha's depression, 16° or 17° by country. */
   ishaDeg?: number;
   /**
@@ -142,6 +144,7 @@ export function placesOf(authority: Authority): Place[] {
           tz: indonesiaZone(province),
           highland: p ? (p[2] & 1) !== 0 : false,
           twilightDip: p ? (p[2] & 2) !== 0 : false,
+          ...(p && p.length >= 5 ? { afternoon: [p[3], p[4]] as const } : {}),
         };
       });
     }

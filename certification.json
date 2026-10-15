@@ -6,14 +6,14 @@
       {
         "tables": "Sweden — Islamiska Förbundet’s tables",
         "places": 107,
-        "times": 59010,
+        "times": 59640,
         "off": 0,
         "from": "2026-10-11",
-        "to": "2027-11-16",
+        "to": "2027-11-19",
         "setAside": {
           "misplaced": [],
-          "sourceFaults": 32360,
-          "copiedRows": 626
+          "sourceFaults": 33395,
+          "copiedRows": 646
         }
       },
       {
@@ -24,7 +24,13 @@
         "from": "2024-01-01",
         "to": "2027-12-31"
       }
-    ]
+    ],
+    "corrections": {
+      "from": "2024-01-01",
+      "to": "2027-12-31",
+      "entries": 270
+    },
+    "revision": 1
   },
   "diyanet": {
     "certified": true,
@@ -38,7 +44,13 @@
         "from": "2024-01-01",
         "to": "2027-12-31"
       }
-    ]
+    ],
+    "corrections": {
+      "from": "2024-01-01",
+      "to": "2027-12-31",
+      "entries": 765
+    },
+    "revision": 1
   },
   "morocco": {
     "certified": true,
@@ -52,7 +64,13 @@
         "from": "2026-08-27",
         "to": "2026-11-11"
       }
-    ]
+    ],
+    "corrections": {
+      "from": "2026-08-27",
+      "to": "2026-11-11",
+      "entries": 665
+    },
+    "revision": 1
   },
   "algeria": {
     "certified": true,
@@ -66,7 +84,13 @@
         "from": "2026-10-01",
         "to": "2027-06-05"
       }
-    ]
+    ],
+    "corrections": {
+      "from": "2026-10-01",
+      "to": "2027-06-05",
+      "entries": 642
+    },
+    "revision": 1
   },
   "indonesia": {
     "certified": true,
@@ -80,6 +104,12 @@
         "from": "2026-10-07",
         "to": "2026-12-31"
       }
-    ]
+    ],
+    "corrections": {
+      "from": "2026-10-07",
+      "to": "2026-12-31",
+      "entries": 84
+    },
+    "revision": 1
   }
 }

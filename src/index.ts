@@ -87,7 +87,7 @@ export function candidateTimes(
           ? moroccoTimes(place.lat, place.lon, year, month, day, place.dipDeg ?? 0, asrShadow, place.dipMaghribDeg)
           : place.authority === 'algeria'
             ? algeriaTimes(place.lat, place.lon, year, month, day, asrShadow)
-            : kemenagTimes(place.lat, place.lon, year, month, day, { highland: place.highland, twilightDip: place.twilightDip, asrShadow });
+            : kemenagTimes(place.lat, place.lon, year, month, day, { highland: place.highland, twilightDip: place.twilightDip, asrShadow, afternoon: place.afternoon });
       // the correction list: the authority's few times on the other side of a minute (the standard Asr only)
       const fix = place.authority === 'morocco' ? moroccoCorrection : place.authority === 'algeria' ? algeriaCorrection : indonesiaCorrection;
       const c = !t || opts.corrections === false ? undefined : fix(place.lat, place.lon, year, month, day);

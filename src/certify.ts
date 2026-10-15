@@ -8,15 +8,27 @@
  *   npm run certify
  *
  * Needs the reference timetables (MIHRAB_TABLES); it refuses to run
- * without them rather than write a certification of nothing.
+ * without them rather than write a certification of nothing. Each entry
+ * names the correction list it certifies (its dates and size): apps read
+ * this file to tell their users when a newer list is out, or when an
+ * authority's newest tables are not yet certified.
  */
 import fs from 'node:fs';
 import path from 'node:path';
 import { AUTHORITIES, type Authority } from './places';
 import type { Certification, CheckRecord } from './certification';
+import { METHOD_REVISION } from './methods/revisions';
 import { checkAuthority, TABLES, type CheckRun, type Result } from './verify';
 
 const FILE = path.join(__dirname, '..', 'certification.json');
+
+/** The correction list's dates and size (`data/corrections/<authority>.json`). */
+function correctionsOf(a: Authority): Certification['corrections'] {
+  const f = path.join(__dirname, '..', 'data', 'corrections', `${a}.json`);
+  if (!fs.existsSync(f)) return undefined;
+  const list = JSON.parse(fs.readFileSync(f, 'utf8')) as { from: string; to: string; points: Record<string, string[]> };
+  return { from: list.from, to: list.to, entries: Object.values(list.points).reduce((n, e) => n + e.length, 0) };
+}
 
 function record(r: Result): CheckRecord {
   return {
@@ -47,7 +59,7 @@ for (const a of AUTHORITIES as readonly Authority[]) {
     checks.push(record(r));
   }
   const certified = checks.length > 0 && checks.every(c => c.times > 0 && c.off === 0);
-  out[a] = { certified, checkedAt, checks };
+  out[a] = { certified, checkedAt, checks, corrections: correctionsOf(a), revision: METHOD_REVISION[a] };
   const summary = checks.map(c => `${c.tables}: ${c.off} of ${c.times} off`).join('; ');
   console.log(`${certified ? 'CERTIFIED  ' : 'uncertified'} ${a} — ${summary}`);
 }

@@ -24,6 +24,15 @@ export type Certification = {
   certified: boolean;
   checkedAt: string;
   checks: CheckRecord[];
+  /**
+   * The correction list this certification is for: the dates it covers and
+   * how many times it moves. An app holding a list with another `to` or
+   * count holds another list — the app compares it with its own to say when
+   * a newer one is out.
+   */
+  corrections?: { from: string; to: string; entries: number };
+  /** The method's revision (`src/methods/revisions.ts`) the list is for. */
+  revision?: number;
 };
 
 const FILE = path.join(__dirname, '..', 'certification.json');

@@ -19,7 +19,7 @@ Methods today:
 | **Diyanet** — Türkiye and worldwide | `src/methods/sweden.ts` with Isha's angle by country (16° or 17°), a point per prayer per year in Türkiye, with `data/corrections/diyanet.json` | **100 %** of Diyanet's timetables for all 880 districts of Türkiye and Northern Cyprus and 184 places in about 95 countries (8.06 M times) | 100 % | 2024 → 2027 |
 | **Morocco** — Ministry of Habous | `src/methods/morocco.ts` — each city's own sunrise and Maghrib horizon, the sun's semidiameter by its distance, the tables' own clock (GMT+1 until 17 Sep 2026), with `data/corrections/morocco.json` | **100 %** of the ministry's tables for its 164 located cities (75 768 times) — 99.122 % by the method alone | 100 % | 27 Aug → 11 Nov 2026 |
 | **Algeria** — Ministry of Religious Affairs and Wakfs | `src/methods/algeria.ts`, with `data/corrections/algeria.json` | **100 %** of the ministry's 1448 AH table for its 68 cities (101 184 times) — 99.366 % by the method alone | 100 % | 1 Oct 2026 → 5 Jun 2027 |
-| **Indonesia** — Kemenag | `src/methods/indonesia.ts`, with `data/corrections/indonesia.json` | **100 %** of the ministry's tables for all 517 regencies and cities (266 772 times) — 99.965 % by the method alone | 100 % | 7 Oct → 31 Dec 2026 |
+| **Indonesia** — Kemenag | `src/methods/indonesia.ts`, with `data/corrections/indonesia.json` | **100 %** of the ministry's tables for all 517 regencies and cities (266 772 times) — 99.969 % by the method alone | 100 % | 7 Oct → 31 Dec 2026 |
 
 The goal is 100 % on the printed minute, for every time of a full year, for
 each method.
@@ -43,7 +43,7 @@ Today (checked 2026-10-15) **every method is certified**: Sweden and Diyanet for
 
 | Authority | Off the printed minute |
 |---|---|
-| Sweden | 0 of 59 010 (Islamiska Förbundet); 0 of 1 393 794 (Diyanet) |
+| Sweden | 0 of 59 640 (Islamiska Förbundet); 0 of 1 393 794 (Diyanet) |
 | Diyanet (Türkiye and worldwide) | 0 of 8 059 932 |
 | Morocco | 0 of 75 768 |
 | Algeria | 0 of 101 184 |
@@ -56,8 +56,8 @@ Today (checked 2026-10-15) **every method is certified**: Sweden and Diyanet for
 | Sweden | Certified, 2024–2027. |
 | Diyanet | Certified, 2024–2027, for every district of Türkiye and Northern Cyprus and 184 places abroad. Diyanet lists 8 528 places in 202 countries; the rest of them abroad (about 7 300) are being added as their tables are checked — 2026 first. Not yet included: Grozny (Diyanet serves no table for it). |
 | Morocco | Certified for 27 Aug → 11 Nov 2026 (164 cities): the method gives 99.12 % alone, and a list of 665 corrections the rest. Each newly published month is checked and its few corrections added. |
-| Algeria | Certified for 1448 AH (1 Oct 2026 → 5 Jun 2027, 68 cities): the method gives 99.37 % alone, and a list of 642 corrections the rest. |
-| Indonesia | Certified for 7 Oct → 31 Dec 2026 (517 regencies and cities): the method gives 99.97 % alone, and a list of 94 corrections the rest. Each newly published month is checked and its corrections added. |
+| Algeria | Certified for 1448 AH (1 Oct 2026 → 5 Jun 2027, 68 cities): the method gives 99.37 % alone, and a list of 642 corrections the rest. The method is at its limit: the angles, horizon, Maghrib margin, rounding, sun series, iterations and city points are each sharp optima, and the 642 are independent sub-second differences (no pattern by prayer, city, date or season; refitting the points to them only fits noise, and is worse on days held out). |
+| Indonesia | Certified for 7 Oct → 31 Dec 2026 (517 regencies and cities): the method gives 99.969 % alone, and a list of 84 corrections the rest. Karawang's Asr, Maghrib and Isha are computed at a second point, about 2 km north-east of its first (its afternoon fits it, and it holds on days held out). The 84 are independent differences of under a second at a minute's edge — eight at Sibolga, whose mornings no point fits — and refitting points to them only fits noise. Each newly published month is checked and its corrections added. |
 
 ## Formulas and correction lists: why this can be used freely
 
@@ -124,6 +124,30 @@ What Diyanet's worldwide tables add to the Swedish method:
 - **The day's clock:** a table prints the whole day in the clock kept at noon,
   so on the morning the clocks go forward a Fajr before the change is printed
   in the new time.
+
+## Keeping an app current
+
+`certification.json` is meant to be read by apps. For each authority it
+says whether the method is certified, the method's `revision`
+(`src/methods/revisions.ts`) and the correction list it certifies
+(`corrections`: the dates it covers and how many times it moves):
+
+```json
+"morocco": { "certified": true, "revision": 1,
+             "corrections": { "from": "2026-08-27", "to": "2026-11-11", "entries": 665 }, … }
+```
+
+An app that computes revision 1 can take any newer list certified for
+revision 1 straight from `data/corrections/<authority>.json` (check that
+the file matches what the certification names) — no release needed. A
+higher revision means the method itself changed and its lists no longer
+fit the older code: the app should ask its user to update. `certified:
+false` means the authority has published tables the method is not yet on
+every minute of. Past a list's `to`, the method alone applies.
+
+The revision is raised whenever a change to a method or to its places'
+points changes what it prints; `npm test` fails until certification.json
+names the current revision and list.
 
 ## Use
 
