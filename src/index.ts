@@ -1,8 +1,9 @@
 /**
  * The authorities' own methods, as their published tables are computed —
  * Sweden (Diyanet's Congress method, as in Islamiska Förbundet's
- * timetables), Morocco (Habous), Algeria (the Ministry of Religious
- * Affairs) and Indonesia (Kemenag) — one call for a place and a date.
+ * timetables), Diyanet worldwide (the same method, Isha by country), Morocco
+ * (Habous), Algeria (the Ministry of Religious Affairs) and Indonesia
+ * (Kemenag) — one call for a place and a date.
  *
  * A method may be used only once it reproduces every time of its
  * authority's tables on the printed minute (certification.json, written by
@@ -14,13 +15,13 @@ import { moroccoTimes } from './methods/morocco';
 import { algeriaTimes } from './methods/algeria';
 import { kemenagTimes } from './methods/indonesia';
 import { certificationOf, isCertified } from './certification';
-import { swedenCorrection } from './methods/swedenCorrections';
+import { algeriaCorrection, diyanetCorrection, indonesiaCorrection, moroccoCorrection, swedenCorrection } from './methods/swedenCorrections';
 import type { Place } from './places';
 
 export { placesOf, AUTHORITIES, type Authority, type Place } from './places';
 export { preciseApparentSun } from './sun/preciseSun';
 export { certificationOf, isCertified, type Certification, type CheckRecord } from './certification';
-export { swedenCorrectionsCoverage } from './methods/swedenCorrections';
+export { swedenCorrectionsCoverage, diyanetCorrectionsCoverage, moroccoCorrectionsCoverage, algeriaCorrectionsCoverage, indonesiaCorrectionsCoverage } from './methods/swedenCorrections';
 
 export type Instants = { fajr: Date; sunrise: Date; dhuhr: Date; asr: Date; maghrib: Date; isha: Date };
 
@@ -66,20 +67,64 @@ export function candidateTimes(
   opts: { corrections?: boolean } = {},
 ): Instants | null {
   switch (place.authority) {
-    case 'sweden': {
+    case 'sweden':
+    case 'diyanet': {
       // The Congress method's own rounding is inside it; its instants land on the minute (rounded, as the app does).
-      const t = congressTimes(place.lat, place.lon, year, month, day, asrShadow);
+      const clock = placeClockAt(place, year, month, day);
+      const t = place.prayerPoints ? perPrayer(place, place.prayerPoints, year, month, day, asrShadow) : congressTimes(place.lat, place.lon, year, month, day, asrShadow, place.ishaDeg, clock);
       // then the correction list: the few times Diyanet's program rounds the other way (the standard Asr only)
-      const c = opts.corrections === false ? undefined : swedenCorrection(place.lat, place.lon, year, month, day);
+      const fix = place.authority === 'sweden' ? swedenCorrection : diyanetCorrection;
+      const c = opts.corrections === false ? undefined : fix(place.lat, place.lon, year, month, day);
       const min = (d: Date, k: keyof Instants) =>
         new Date((Math.round(d.getTime() / 60_000) + (k === 'asr' && asrShadow !== 1 ? 0 : (c?.[k] ?? 0))) * 60_000);
       return { fajr: min(t.fajr, 'fajr'), sunrise: min(t.sunrise, 'sunrise'), dhuhr: min(t.dhuhr, 'dhuhr'), asr: min(t.asr, 'asr'), maghrib: min(t.maghrib, 'maghrib'), isha: min(t.isha, 'isha') };
     }
     case 'morocco':
-      return moroccoTimes(place.lat, place.lon, year, month, day, place.dipDeg ?? 0, asrShadow);
     case 'algeria':
-      return algeriaTimes(place.lat, place.lon, year, month, day, asrShadow);
-    case 'indonesia':
-      return kemenagTimes(place.lat, place.lon, year, month, day, { highland: place.highland, twilightDip: place.twilightDip, asrShadow });
+    case 'indonesia': {
+      const t =
+        place.authority === 'morocco'
+          ? moroccoTimes(place.lat, place.lon, year, month, day, place.dipDeg ?? 0, asrShadow, place.dipMaghribDeg)
+          : place.authority === 'algeria'
+            ? algeriaTimes(place.lat, place.lon, year, month, day, asrShadow)
+            : kemenagTimes(place.lat, place.lon, year, month, day, { highland: place.highland, twilightDip: place.twilightDip, asrShadow });
+      // the correction list: the authority's few times on the other side of a minute (the standard Asr only)
+      const fix = place.authority === 'morocco' ? moroccoCorrection : place.authority === 'algeria' ? algeriaCorrection : indonesiaCorrection;
+      const c = !t || opts.corrections === false ? undefined : fix(place.lat, place.lon, year, month, day);
+      if (!t || !c) return t;
+      const mv = (d: Date, k: keyof Instants) => new Date(d.getTime() + (k === 'asr' && asrShadow !== 1 ? 0 : (c[k] ?? 0)) * 60_000);
+      return { fajr: mv(t.fajr, 'fajr'), sunrise: mv(t.sunrise, 'sunrise'), dhuhr: mv(t.dhuhr, 'dhuhr'), asr: mv(t.asr, 'asr'), maghrib: mv(t.maghrib, 'maghrib'), isha: mv(t.isha, 'isha') };
+    }
   }
+}
+
+/** Türkiye's districts: each prayer at its own point for the year (the nearest year's beyond the tables). */
+function perPrayer(place: Place, pts: Record<string, [number, number][]>, year: number, month: number, day: number, asrShadow: 1 | 2): Instants {
+  const years = Object.keys(pts).map(Number).sort((a, b) => a - b);
+  const y = years.reduce((b, v) => (Math.abs(v - year) < Math.abs(b - year) ? v : b), years[0]);
+  const p = pts[String(y)];
+  const clock = placeClockAt(place, year, month, day);
+  const at = (i: number) => congressTimes(p[i][0], p[i][1], year, month, day, asrShadow, place.ishaDeg, clock);
+  return { fajr: at(0).fajr, sunrise: at(1).sunrise, dhuhr: at(2).dhuhr, asr: at(3).asr, maghrib: at(4).maghrib, isha: at(5).isha };
+}
+
+const offsetFormats = new Map<string, Intl.DateTimeFormat>();
+/** Minutes east of UTC that a zone keeps at noon UTC of a date — the clock a table prints the day in. */
+function clockOffsetAt(tz: string, year: number, month: number, day: number): number {
+  let f = offsetFormats.get(tz);
+  if (!f) offsetFormats.set(tz, (f = new Intl.DateTimeFormat('en-US', { timeZone: tz, timeZoneName: 'longOffset' })));
+  const z = f.formatToParts(new Date(Date.UTC(year, month, day, 12))).find(x => x.type === 'timeZoneName')!.value;
+  const m = /GMT([+-])(\d\d):?(\d\d)?/.exec(z);
+  return m ? (m[1] === '-' ? -1 : 1) * (Number(m[2]) * 60 + Number(m[3] ?? 0)) : 0;
+}
+
+/** The clock a place's table prints a date in: its own (`Place.clock`) where it has one, else its zone's. */
+export function placeClockAt(place: Place, year: number, month: number, day: number): number {
+  if (place.clock) {
+    const date = `${year}-${String(month + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
+    let off = place.clock[0][1];
+    for (const [from, o] of place.clock) if (from <= date) off = o;
+    return off;
+  }
+  return clockOffsetAt(place.tz, year, month, day);
 }

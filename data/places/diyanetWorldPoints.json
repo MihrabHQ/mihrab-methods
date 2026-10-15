@@ -1,0 +1,1664 @@
+{
+ "8573": {
+  "name": "AUBURN",
+  "country": "33",
+  "tz": "America/Chicago",
+  "ishaDeg": 16,
+  "lat": 32.614,
+  "lon": -85.494
+ },
+ "8576": {
+  "name": "FLORENCE",
+  "country": "33",
+  "tz": "America/Chicago",
+  "ishaDeg": 16,
+  "lat": 34.805,
+  "lon": -87.706
+ },
+ "8579": {
+  "name": "MOBILE",
+  "country": "33",
+  "tz": "America/Chicago",
+  "ishaDeg": 16,
+  "lat": 30.689,
+  "lon": -88.057
+ },
+ "8754": {
+  "name": "BOISE",
+  "country": "33",
+  "tz": "America/Boise",
+  "ishaDeg": 16,
+  "lat": 43.62,
+  "lon": -116.216
+ },
+ "8755": {
+  "name": "MOSCOW",
+  "country": "33",
+  "tz": "America/Los_Angeles",
+  "ishaDeg": 16,
+  "lat": 46.733,
+  "lon": -117.004
+ },
+ "8756": {
+  "name": "SUN VALLEY",
+  "country": "33",
+  "tz": "America/Boise",
+  "ishaDeg": 16,
+  "lat": 43.7,
+  "lon": -114.356
+ },
+ "8842": {
+  "name": "HATTIESBURG",
+  "country": "33",
+  "tz": "America/Chicago",
+  "ishaDeg": 16,
+  "lat": 31.322,
+  "lon": -89.31
+ },
+ "8843": {
+  "name": "JACKSON",
+  "country": "33",
+  "tz": "America/Chicago",
+  "ishaDeg": 16,
+  "lat": 32.304,
+  "lon": -90.201
+ },
+ "8844": {
+  "name": "OXFORD",
+  "country": "33",
+  "tz": "America/Chicago",
+  "ishaDeg": 16,
+  "lat": 34.374,
+  "lon": -89.541
+ },
+ "8936": {
+  "name": "LAWTON",
+  "country": "33",
+  "tz": "America/Chicago",
+  "ishaDeg": 16,
+  "lat": 34.632,
+  "lon": -98.434
+ },
+ "8937": {
+  "name": "OKLAHOMA CITY",
+  "country": "33",
+  "tz": "America/Chicago",
+  "ishaDeg": 16,
+  "lat": 35.478,
+  "lon": -97.532
+ },
+ "8938": {
+  "name": "STILLWATER",
+  "country": "33",
+  "tz": "America/Chicago",
+  "ishaDeg": 16,
+  "lat": 36.13,
+  "lon": -95.079
+ },
+ "9059": {
+  "name": "BANFF",
+  "country": "52",
+  "tz": "UTC",
+  "ishaDeg": 16,
+  "lat": 51.177,
+  "lon": -115.566,
+  "clock": [
+   [
+    "2024-01-01",
+    -420
+   ],
+   [
+    "2024-03-10",
+    -360
+   ],
+   [
+    "2024-11-03",
+    -420
+   ],
+   [
+    "2025-03-09",
+    -360
+   ],
+   [
+    "2025-11-02",
+    -420
+   ],
+   [
+    "2026-03-08",
+    -360
+   ]
+  ]
+ },
+ "9060": {
+  "name": "CALGARY",
+  "country": "52",
+  "tz": "UTC",
+  "ishaDeg": 16,
+  "lat": 51.042,
+  "lon": -114.066,
+  "clock": [
+   [
+    "2024-01-01",
+    -420
+   ],
+   [
+    "2024-03-10",
+    -360
+   ],
+   [
+    "2024-11-03",
+    -420
+   ],
+   [
+    "2025-03-09",
+    -360
+   ],
+   [
+    "2025-11-02",
+    -420
+   ],
+   [
+    "2026-03-08",
+    -360
+   ]
+  ]
+ },
+ "9061": {
+  "name": "EDMONTON",
+  "country": "52",
+  "tz": "UTC",
+  "ishaDeg": 16,
+  "lat": 53.549,
+  "lon": -113.516,
+  "clock": [
+   [
+    "2024-01-01",
+    -420
+   ],
+   [
+    "2024-03-10",
+    -360
+   ],
+   [
+    "2024-11-03",
+    -420
+   ],
+   [
+    "2025-03-09",
+    -360
+   ],
+   [
+    "2025-11-02",
+    -420
+   ],
+   [
+    "2026-03-08",
+    -360
+   ]
+  ]
+ },
+ "9080": {
+  "name": "FREDERICTON",
+  "country": "52",
+  "tz": "America/Moncton",
+  "ishaDeg": 16,
+  "lat": 45.959,
+  "lon": -66.661
+ },
+ "9081": {
+  "name": "MONCTON",
+  "country": "52",
+  "tz": "America/Moncton",
+  "ishaDeg": 16,
+  "lat": 46.099,
+  "lon": -64.79
+ },
+ "9082": {
+  "name": "SAINT JOHN",
+  "country": "52",
+  "tz": "America/Moncton",
+  "ishaDeg": 16,
+  "lat": 45.282,
+  "lon": -66.074
+ },
+ "9086": {
+  "name": "ALMONTE",
+  "country": "52",
+  "tz": "America/Toronto",
+  "ishaDeg": 16,
+  "lat": 45.232,
+  "lon": -76.196
+ },
+ "9109": {
+  "name": "OTTAVA",
+  "country": "52",
+  "tz": "America/Toronto",
+  "ishaDeg": 16,
+  "lat": 45.43,
+  "lon": -75.71
+ },
+ "10010": {
+  "name": "GEROLSTEIN",
+  "country": "13",
+  "tz": "Europe/Berlin",
+  "ishaDeg": 16,
+  "lat": 50.218,
+  "lon": 6.659
+ },
+ "10031": {
+  "name": "FINKENWERDER",
+  "country": "13",
+  "tz": "Europe/Berlin",
+  "ishaDeg": 16,
+  "lat": 53.535,
+  "lon": 9.859
+ },
+ "10032": {
+  "name": "HARBURG",
+  "country": "13",
+  "tz": "Europe/Berlin",
+  "ishaDeg": 16,
+  "lat": 53.464,
+  "lon": 9.963
+ },
+ "10115": {
+  "name": "BERGEDORF",
+  "country": "13",
+  "tz": "Europe/Berlin",
+  "ishaDeg": 16,
+  "lat": 53.485,
+  "lon": 10.176
+ },
+ "10227": {
+  "name": "NEUSTADT A.D. WEINSTRASSE",
+  "country": "13",
+  "tz": "Europe/Berlin",
+  "ishaDeg": 16,
+  "lat": 49.353,
+  "lon": 8.135
+ },
+ "11033": {
+  "name": "HEIDELBERG",
+  "country": "13",
+  "tz": "Europe/Berlin",
+  "ishaDeg": 16,
+  "lat": 49.41,
+  "lon": 8.674
+ },
+ "11119": {
+  "name": "PFORZHEIM",
+  "country": "13",
+  "tz": "Europe/Berlin",
+  "ishaDeg": 16,
+  "lat": 48.892,
+  "lon": 8.692
+ },
+ "11186": {
+  "name": "AVALLANEDA",
+  "country": "199",
+  "tz": "America/Argentina/Buenos_Aires",
+  "ishaDeg": 17,
+  "lat": -34.666,
+  "lon": -58.386
+ },
+ "11207": {
+  "name": "BAJRAM CURRI",
+  "country": "25",
+  "tz": "Europe/Tirane",
+  "ishaDeg": 17,
+  "lat": 42.359,
+  "lon": 20.071
+ },
+ "11426": {
+  "name": "ADELAIDE",
+  "country": "59",
+  "tz": "Australia/Adelaide",
+  "ishaDeg": 17,
+  "lat": -34.93,
+  "lon": 138.584
+ },
+ "11469": {
+  "name": "ABSAM",
+  "country": "35",
+  "tz": "Europe/Vienna",
+  "ishaDeg": 16,
+  "lat": 47.3,
+  "lon": 11.494
+ },
+ "11519": {
+  "name": "HALLEIN",
+  "country": "35",
+  "tz": "Europe/Vienna",
+  "ishaDeg": 16,
+  "lat": 47.678,
+  "lon": 13.112
+ },
+ "11523": {
+  "name": "NEUHOFEN (Salzburg)",
+  "country": "35",
+  "tz": "Europe/Vienna",
+  "ishaDeg": 16,
+  "lat": 47.867,
+  "lon": 13.175
+ },
+ "11704": {
+  "name": "AALST",
+  "country": "11",
+  "tz": "Europe/Brussels",
+  "ishaDeg": 16,
+  "lat": 50.947,
+  "lon": 4.032
+ },
+ "11749": {
+  "name": "MORTSEL",
+  "country": "11",
+  "tz": "Europe/Brussels",
+  "ishaDeg": 16,
+  "lat": 51.17,
+  "lon": 4.456
+ },
+ "11865": {
+  "name": "FLEURUS",
+  "country": "11",
+  "tz": "Europe/Brussels",
+  "ishaDeg": 16,
+  "lat": 50.484,
+  "lon": 4.526
+ },
+ "11939": {
+  "name": "HAMILTON",
+  "country": "51",
+  "tz": "Atlantic/Bermuda",
+  "ishaDeg": 17,
+  "lat": 32.298,
+  "lon": -64.792
+ },
+ "11987": {
+  "name": "GORNJI VAKUF",
+  "country": "9",
+  "tz": "Europe/Sarajevo",
+  "ishaDeg": 16,
+  "lat": 43.936,
+  "lon": 17.577
+ },
+ "11991": {
+  "name": "JAJCE",
+  "country": "9",
+  "tz": "Europe/Sarajevo",
+  "ishaDeg": 16,
+  "lat": 44.342,
+  "lon": 17.25
+ },
+ "11992": {
+  "name": "MAGLAJ",
+  "country": "9",
+  "tz": "Europe/Sarajevo",
+  "ishaDeg": 16,
+  "lat": 44.542,
+  "lon": 18.094
+ },
+ "11997": {
+  "name": "DOBOJ",
+  "country": "9",
+  "tz": "Europe/Sarajevo",
+  "ishaDeg": 16,
+  "lat": 44.734,
+  "lon": 18.076
+ },
+ "11999": {
+  "name": "GRACANICA",
+  "country": "9",
+  "tz": "Europe/Sarajevo",
+  "ishaDeg": 16,
+  "lat": 44.7,
+  "lon": 18.298
+ },
+ "12003": {
+  "name": "SREBRENICA",
+  "country": "9",
+  "tz": "Europe/Sarajevo",
+  "ishaDeg": 16,
+  "lat": 44.109,
+  "lon": 19.303
+ },
+ "12004": {
+  "name": "TREBINJE",
+  "country": "9",
+  "tz": "Europe/Sarajevo",
+  "ishaDeg": 16,
+  "lat": 42.711,
+  "lon": 18.334
+ },
+ "12005": {
+  "name": "ZVORNIK",
+  "country": "9",
+  "tz": "Europe/Sarajevo",
+  "ishaDeg": 16,
+  "lat": 44.394,
+  "lon": 19.098
+ },
+ "12007": {
+  "name": "MUTNIK",
+  "country": "9",
+  "tz": "Europe/Sarajevo",
+  "ishaDeg": 16,
+  "lat": 44.967,
+  "lon": 15.871
+ },
+ "12013": {
+  "name": "STOLAC",
+  "country": "9",
+  "tz": "Europe/Sarajevo",
+  "ishaDeg": 16,
+  "lat": 43.079,
+  "lon": 17.951
+ },
+ "12025": {
+  "name": "TRAVNIK",
+  "country": "9",
+  "tz": "Europe/Sarajevo",
+  "ishaDeg": 16,
+  "lat": 44.23,
+  "lon": 17.654
+ },
+ "12026": {
+  "name": "VISOKO",
+  "country": "9",
+  "tz": "Europe/Sarajevo",
+  "ishaDeg": 16,
+  "lat": 43.99,
+  "lon": 18.164
+ },
+ "12027": {
+  "name": "BANJA LUKA",
+  "country": "9",
+  "tz": "Europe/Sarajevo",
+  "ishaDeg": 16,
+  "lat": 44.77,
+  "lon": 17.174
+ },
+ "12028": {
+  "name": "TUZLA",
+  "country": "9",
+  "tz": "Europe/Sarajevo",
+  "ishaDeg": 16,
+  "lat": 44.54,
+  "lon": 18.654
+ },
+ "12030": {
+  "name": "MOSTAR",
+  "country": "9",
+  "tz": "Europe/Sarajevo",
+  "ishaDeg": 16,
+  "lat": 43.346,
+  "lon": 17.794
+ },
+ "12031": {
+  "name": "ZENICA",
+  "country": "9",
+  "tz": "Europe/Sarajevo",
+  "ishaDeg": 16,
+  "lat": 44.2,
+  "lon": 17.897
+ },
+ "12176": {
+  "name": "ABA ETETUBA",
+  "country": "146",
+  "tz": "America/Belem",
+  "ishaDeg": 17,
+  "lat": -1.722,
+  "lon": -48.891
+ },
+ "12215": {
+  "name": "VARNA",
+  "country": "44",
+  "tz": "Europe/Sofia",
+  "ishaDeg": 17,
+  "lat": 43.209,
+  "lon": 27.897
+ },
+ "12224": {
+  "name": "ARDINO",
+  "country": "44",
+  "tz": "Europe/Sofia",
+  "ishaDeg": 17,
+  "lat": 41.586,
+  "lon": 25.133
+ },
+ "12234": {
+  "name": "RUSE",
+  "country": "44",
+  "tz": "Europe/Sofia",
+  "ishaDeg": 17,
+  "lat": 43.854,
+  "lon": 25.964
+ },
+ "12237": {
+  "name": "SOFYA",
+  "country": "44",
+  "tz": "Europe/Sofia",
+  "ishaDeg": 17,
+  "lat": 42.71,
+  "lon": 23.324
+ },
+ "12240": {
+  "name": "SILISTRA",
+  "country": "44",
+  "tz": "Europe/Sofia",
+  "ishaDeg": 17,
+  "lat": 44.124,
+  "lon": 27.259
+ },
+ "12346": {
+  "name": "ANNABA",
+  "country": "86",
+  "tz": "Africa/Algiers",
+  "ishaDeg": 17,
+  "lat": 36.905,
+  "lon": 7.748
+ },
+ "12370": {
+  "name": "CHANGCHUN",
+  "country": "61",
+  "tz": "Asia/Shanghai",
+  "ishaDeg": 16,
+  "lat": 43.882,
+  "lon": 125.294
+ },
+ "12422": {
+  "name": "AIHUI ( HeIhe )",
+  "country": "61",
+  "tz": "Asia/Shanghai",
+  "ishaDeg": 16,
+  "lat": 50.247,
+  "lon": 127.472
+ },
+ "12423": {
+  "name": "ALTAY",
+  "country": "61",
+  "tz": "Asia/Shanghai",
+  "ishaDeg": 16,
+  "lat": 47.84,
+  "lon": 88.117
+ },
+ "12444": {
+  "name": "CHIFENG",
+  "country": "61",
+  "tz": "Asia/Shanghai",
+  "ishaDeg": 16,
+  "lat": 42.271,
+  "lon": 118.946
+ },
+ "12450": {
+  "name": "DAQING",
+  "country": "61",
+  "tz": "Asia/Shanghai",
+  "ishaDeg": 16,
+  "lat": 46.592,
+  "lon": 125.01
+ },
+ "12577": {
+  "name": "GUANGZHOU",
+  "country": "61",
+  "tz": "Asia/Shanghai",
+  "ishaDeg": 16,
+  "lat": 23.13,
+  "lon": 113.224
+ },
+ "12578": {
+  "name": "DALIAN",
+  "country": "61",
+  "tz": "Asia/Shanghai",
+  "ishaDeg": 16,
+  "lat": 38.921,
+  "lon": 121.574
+ },
+ "12631": {
+  "name": "HERNING",
+  "country": "26",
+  "tz": "Europe/Copenhagen",
+  "ishaDeg": 16,
+  "lat": 56.14,
+  "lon": 8.978
+ },
+ "12642": {
+  "name": "NIVEROD",
+  "country": "26",
+  "tz": "Europe/Copenhagen",
+  "ishaDeg": 16,
+  "lat": 55.934,
+  "lon": 12.498
+ },
+ "12646": {
+  "name": "AABENRAA",
+  "country": "26",
+  "tz": "Europe/Copenhagen",
+  "ishaDeg": 16,
+  "lat": 55.05,
+  "lon": 9.404
+ },
+ "12690": {
+  "name": "AMBATO",
+  "country": "139",
+  "tz": "America/Guayaquil",
+  "ishaDeg": 17,
+  "lat": -1.239,
+  "lon": -78.627
+ },
+ "12727": {
+  "name": "AMBON",
+  "country": "117",
+  "tz": "Asia/Jayapura",
+  "ishaDeg": 17,
+  "lat": -3.705,
+  "lon": 128.158
+ },
+ "12784": {
+  "name": "ERIVAN",
+  "country": "104",
+  "tz": "Asia/Yerevan",
+  "ishaDeg": 17,
+  "lat": 40.205,
+  "lon": 44.529
+ },
+ "12786": {
+  "name": "JOGEVA",
+  "country": "6",
+  "tz": "Europe/Tallinn",
+  "ishaDeg": 16,
+  "lat": 58.755,
+  "lon": 26.388
+ },
+ "12807": {
+  "name": "AGADIR",
+  "country": "145",
+  "tz": "UTC",
+  "ishaDeg": 17,
+  "lat": 30.419,
+  "lon": -9.619,
+  "clock": [
+   [
+    "2024-01-01",
+    60
+   ],
+   [
+    "2024-03-10",
+    0
+   ],
+   [
+    "2024-04-14",
+    60
+   ],
+   [
+    "2025-02-23",
+    0
+   ],
+   [
+    "2025-04-06",
+    60
+   ],
+   [
+    "2026-01-01",
+    0
+   ],
+   [
+    "2026-03-22",
+    60
+   ],
+   [
+    "2026-09-20",
+    0
+   ],
+   [
+    "2027-01-01",
+    60
+   ],
+   [
+    "2027-02-07",
+    0
+   ],
+   [
+    "2027-03-14",
+    60
+   ]
+  ]
+ },
+ "12874": {
+  "name": "KIRKKONUMMI",
+  "country": "41",
+  "tz": "Europe/Helsinki",
+  "ishaDeg": 16,
+  "lat": 60.118,
+  "lon": 24.425
+ },
+ "12932": {
+  "name": "PARIKKALA",
+  "country": "41",
+  "tz": "Europe/Helsinki",
+  "ishaDeg": 16,
+  "lat": 61.553,
+  "lon": 29.474
+ },
+ "12941": {
+  "name": "ESPOO",
+  "country": "41",
+  "tz": "Europe/Helsinki",
+  "ishaDeg": 16,
+  "lat": 60.209,
+  "lon": 24.65
+ },
+ "12965": {
+  "name": "ORNANS",
+  "country": "21",
+  "tz": "Europe/Paris",
+  "ishaDeg": 16,
+  "lat": 47.114,
+  "lon": 6.13
+ },
+ "12983": {
+  "name": "AGNEAUX",
+  "country": "21",
+  "tz": "Europe/Paris",
+  "ishaDeg": 16,
+  "lat": 49.118,
+  "lon": -1.15
+ },
+ "13277": {
+  "name": "FEURS",
+  "country": "21",
+  "tz": "Europe/Paris",
+  "ishaDeg": 16,
+  "lat": 45.742,
+  "lon": 4.218
+ },
+ "13393": {
+  "name": "AIX-EN-PROVENCE",
+  "country": "21",
+  "tz": "Europe/Paris",
+  "ishaDeg": 16,
+  "lat": 43.533,
+  "lon": 5.435
+ },
+ "13397": {
+  "name": "ANTIBES",
+  "country": "21",
+  "tz": "Europe/Paris",
+  "ishaDeg": 16,
+  "lat": 43.592,
+  "lon": 7.112
+ },
+ "13400": {
+  "name": "BAYONNE",
+  "country": "21",
+  "tz": "Europe/Paris",
+  "ishaDeg": 16,
+  "lat": 43.494,
+  "lon": -1.482
+ },
+ "13428": {
+  "name": "AVIGNON",
+  "country": "21",
+  "tz": "Europe/Paris",
+  "ishaDeg": 16,
+  "lat": 43.954,
+  "lon": 4.805
+ },
+ "13452": {
+  "name": "NUUK",
+  "country": "48",
+  "tz": "UTC",
+  "ishaDeg": 16,
+  "lat": 64.182,
+  "lon": -51.74,
+  "clock": [
+   [
+    "2024-01-01",
+    -180
+   ],
+   [
+    "2025-03-30",
+    -120
+   ],
+   [
+    "2025-10-26",
+    -180
+   ],
+   [
+    "2026-03-28",
+    -120
+   ],
+   [
+    "2026-10-25",
+    -180
+   ],
+   [
+    "2027-03-28",
+    -120
+   ],
+   [
+    "2027-10-31",
+    -180
+   ]
+  ]
+ },
+ "13491": {
+  "name": "ALEXANDRA",
+  "country": "67",
+  "tz": "Africa/Johannesburg",
+  "ishaDeg": 17,
+  "lat": -26.1,
+  "lon": 28.08
+ },
+ "13501": {
+  "name": "ANDONG-SI",
+  "country": "128",
+  "tz": "Asia/Seoul",
+  "ishaDeg": 17,
+  "lat": 36.566,
+  "lon": 128.72
+ },
+ "13690": {
+  "name": "BASKA",
+  "country": "30",
+  "tz": "Europe/Zagreb",
+  "ishaDeg": 16,
+  "lat": 44.977,
+  "lon": 14.739
+ },
+ "13772": {
+  "name": "GELDROP",
+  "country": "4",
+  "tz": "Europe/Amsterdam",
+  "ishaDeg": 16,
+  "lat": 51.434,
+  "lon": 5.56
+ },
+ "13858": {
+  "name": "PANNINGEN",
+  "country": "4",
+  "tz": "Europe/Amsterdam",
+  "ishaDeg": 16,
+  "lat": 51.333,
+  "lon": 5.976
+ },
+ "14015": {
+  "name": "ABERDEEN",
+  "country": "15",
+  "tz": "Europe/London",
+  "ishaDeg": 16,
+  "lat": 57.148,
+  "lon": -2.11
+ },
+ "14022": {
+  "name": "POOLE",
+  "country": "15",
+  "tz": "Europe/London",
+  "ishaDeg": 16,
+  "lat": 50.722,
+  "lon": -1.99
+ },
+ "14046": {
+  "name": "FILTON",
+  "country": "15",
+  "tz": "Europe/London",
+  "ishaDeg": 16,
+  "lat": 51.517,
+  "lon": -2.574
+ },
+ "14176": {
+  "name": "AHVAZ",
+  "country": "202",
+  "tz": "Asia/Tehran",
+  "ishaDeg": 17,
+  "lat": 31.32,
+  "lon": 48.675
+ },
+ "14206": {
+  "name": "DUNDALK",
+  "country": "32",
+  "tz": "Europe/Dublin",
+  "ishaDeg": 16,
+  "lat": 54.015,
+  "lon": -6.416
+ },
+ "14209": {
+  "name": "ATHLONE",
+  "country": "32",
+  "tz": "Europe/Dublin",
+  "ishaDeg": 16,
+  "lat": 53.425,
+  "lon": -7.957
+ },
+ "14212": {
+  "name": "CORK",
+  "country": "32",
+  "tz": "Europe/Dublin",
+  "ishaDeg": 16,
+  "lat": 51.902,
+  "lon": -8.487
+ },
+ "14216": {
+  "name": "BILBAO",
+  "country": "23",
+  "tz": "Europe/Madrid",
+  "ishaDeg": 17,
+  "lat": 43.28,
+  "lon": -2.976
+ },
+ "14220": {
+  "name": "SAN SEBASTIAN",
+  "country": "23",
+  "tz": "Europe/Madrid",
+  "ishaDeg": 17,
+  "lat": 43.324,
+  "lon": -1.996
+ },
+ "14233": {
+  "name": "ALBACETE",
+  "country": "23",
+  "tz": "Europe/Madrid",
+  "ishaDeg": 17,
+  "lat": 38.99,
+  "lon": -1.87
+ },
+ "14243": {
+  "name": "GIJON",
+  "country": "23",
+  "tz": "Europe/Madrid",
+  "ishaDeg": 17,
+  "lat": 43.547,
+  "lon": -5.67
+ },
+ "14255": {
+  "name": "OVIEDO",
+  "country": "23",
+  "tz": "Europe/Madrid",
+  "ishaDeg": 17,
+  "lat": 43.368,
+  "lon": -5.852
+ },
+ "14466": {
+  "name": "GOSSAU (SG)",
+  "country": "49",
+  "tz": "Europe/Zurich",
+  "ishaDeg": 16,
+  "lat": 47.421,
+  "lon": 9.248
+ },
+ "14498": {
+  "name": "REINACH (A)",
+  "country": "49",
+  "tz": "Europe/Zurich",
+  "ishaDeg": 16,
+  "lat": 47.267,
+  "lon": 8.176
+ },
+ "14548": {
+  "name": "AARAU",
+  "country": "49",
+  "tz": "Europe/Zurich",
+  "ishaDeg": 16,
+  "lat": 47.398,
+  "lon": 8.031
+ },
+ "14561": {
+  "name": "ANCONA",
+  "country": "8",
+  "tz": "Europe/Rome",
+  "ishaDeg": 16,
+  "lat": 43.623,
+  "lon": 13.506
+ },
+ "14580": {
+  "name": "FLORENCE",
+  "country": "8",
+  "tz": "Europe/Rome",
+  "ishaDeg": 16,
+  "lat": 43.78,
+  "lon": 11.234
+ },
+ "14584": {
+  "name": "BARI",
+  "country": "8",
+  "tz": "Europe/Rome",
+  "ishaDeg": 16,
+  "lat": 41.125,
+  "lon": 16.859
+ },
+ "14611": {
+  "name": "CATANIA",
+  "country": "8",
+  "tz": "Europe/Rome",
+  "ishaDeg": 16,
+  "lat": 37.502,
+  "lon": 15.078
+ },
+ "14691": {
+  "name": "BOLOGNA",
+  "country": "8",
+  "tz": "Europe/Rome",
+  "ishaDeg": 16,
+  "lat": 44.506,
+  "lon": 11.33
+ },
+ "14694": {
+  "name": "REYKJAVIK",
+  "country": "122",
+  "tz": "Atlantic/Reykjavik",
+  "ishaDeg": 16,
+  "lat": 64.136,
+  "lon": -21.904
+ },
+ "14717": {
+  "name": "ABIKO",
+  "country": "116",
+  "tz": "Asia/Tokyo",
+  "ishaDeg": 17,
+  "lat": 35.875,
+  "lon": 140.028
+ },
+ "14723": {
+  "name": "ASAHIKAWA",
+  "country": "116",
+  "tz": "Asia/Tokyo",
+  "ishaDeg": 17,
+  "lat": 43.772,
+  "lon": 142.362
+ },
+ "14746": {
+  "name": "HAKODATE",
+  "country": "116",
+  "tz": "Asia/Tokyo",
+  "ishaDeg": 17,
+  "lat": 41.787,
+  "lon": 140.737
+ },
+ "14778": {
+  "name": "KUSHIRO",
+  "country": "116",
+  "tz": "Asia/Tokyo",
+  "ishaDeg": 17,
+  "lat": 42.975,
+  "lon": 144.376
+ },
+ "14798": {
+  "name": "OKAZAKI",
+  "country": "116",
+  "tz": "Asia/Tokyo",
+  "ishaDeg": 17,
+  "lat": 34.957,
+  "lon": 137.158
+ },
+ "14830": {
+  "name": "KASHIWAZAKI",
+  "country": "116",
+  "tz": "Asia/Tokyo",
+  "ishaDeg": 17,
+  "lat": 37.376,
+  "lon": 138.554
+ },
+ "14862": {
+  "name": "BAR",
+  "country": "34",
+  "tz": "Europe/Podgorica",
+  "ishaDeg": 17,
+  "lat": 42.09,
+  "lon": 19.104
+ },
+ "14881": {
+  "name": "ABAY",
+  "country": "92",
+  "tz": "Etc/GMT-5",
+  "ishaDeg": 16,
+  "lat": 49.641,
+  "lon": 72.87
+ },
+ "14910": {
+  "name": "CHIMKENT",
+  "country": "92",
+  "tz": "Etc/GMT-5",
+  "ishaDeg": 16,
+  "lat": 42.31,
+  "lon": 69.584
+ },
+ "14986": {
+  "name": "KARAGANDA",
+  "country": "92",
+  "tz": "Etc/GMT-5",
+  "ishaDeg": 16,
+  "lat": 49.875,
+  "lon": 73.16
+ },
+ "14997": {
+  "name": "ALMATI",
+  "country": "92",
+  "tz": "Etc/GMT-5",
+  "ishaDeg": 16,
+  "lat": 43.28,
+  "lon": 76.924
+ },
+ "15011": {
+  "name": "ELDORET",
+  "country": "114",
+  "tz": "Africa/Nairobi",
+  "ishaDeg": 17,
+  "lat": 0.517,
+  "lon": 35.259
+ },
+ "15023": {
+  "name": "AK BULAK",
+  "country": "168",
+  "tz": "Asia/Bishkek",
+  "ishaDeg": 17,
+  "lat": 42.789,
+  "lon": 78.255
+ },
+ "15123": {
+  "name": "FERİZOVİK",
+  "country": "18",
+  "tz": "Europe/Belgrade",
+  "ishaDeg": 17,
+  "lat": 42.377,
+  "lon": 21.162
+ },
+ "15134": {
+  "name": "BAYAMO",
+  "country": "209",
+  "tz": "America/Havana",
+  "ishaDeg": 17,
+  "lat": 20.379,
+  "lon": -76.647
+ },
+ "15177": {
+  "name": "DAUGAVPILS",
+  "country": "20",
+  "tz": "Europe/Riga",
+  "ishaDeg": 16,
+  "lat": 55.881,
+  "lon": 26.511
+ },
+ "15204": {
+  "name": "ALYTAUS",
+  "country": "47",
+  "tz": "Europe/Vilnius",
+  "ishaDeg": 16,
+  "lat": 54.391,
+  "lon": 24.047
+ },
+ "15212": {
+  "name": "BAALBEK",
+  "country": "42",
+  "tz": "Asia/Beirut",
+  "ishaDeg": 17,
+  "lat": 34.004,
+  "lon": 36.214
+ },
+ "15218": {
+  "name": "BETEMBOURG",
+  "country": "31",
+  "tz": "Europe/Luxembourg",
+  "ishaDeg": 16,
+  "lat": 49.518,
+  "lon": 6.093
+ },
+ "15239": {
+  "name": "ALBERTIRSA",
+  "country": "7",
+  "tz": "Europe/Budapest",
+  "ishaDeg": 16,
+  "lat": 47.237,
+  "lon": 19.609
+ },
+ "15274": {
+  "name": "BEROVO",
+  "country": "28",
+  "tz": "Europe/Skopje",
+  "ishaDeg": 17,
+  "lat": 41.716,
+  "lon": 22.858
+ },
+ "15314": {
+  "name": "ALUR SETAR",
+  "country": "107",
+  "tz": "Asia/Kuala_Lumpur",
+  "ishaDeg": 17,
+  "lat": 6.115,
+  "lon": 100.361
+ },
+ "15350": {
+  "name": "BIRKIRKARA",
+  "country": "24",
+  "tz": "Europe/Malta",
+  "ishaDeg": 17,
+  "lat": 35.901,
+  "lon": 14.459
+ },
+ "15359": {
+  "name": "ACAMBARO",
+  "country": "53",
+  "tz": "UTC",
+  "ishaDeg": 17,
+  "lat": 20.035,
+  "lon": -100.738,
+  "clock": [
+   [
+    "2024-01-01",
+    -360
+   ],
+   [
+    "2025-03-09",
+    -300
+   ],
+   [
+    "2025-11-02",
+    -360
+   ]
+  ]
+ },
+ "15455": {
+  "name": "AZ ZAQAZIO",
+  "country": "189",
+  "tz": "Africa/Cairo",
+  "ishaDeg": 17,
+  "lat": 30.581,
+  "lon": 31.49
+ },
+ "15464": {
+  "name": "AL FAYYUM",
+  "country": "189",
+  "tz": "Africa/Cairo",
+  "ishaDeg": 17,
+  "lat": 29.312,
+  "lon": 30.832
+ },
+ "15469": {
+  "name": "KAFR AD DAWWAR",
+  "country": "189",
+  "tz": "Africa/Cairo",
+  "ishaDeg": 17,
+  "lat": 31.131,
+  "lon": 30.119
+ },
+ "15542": {
+  "name": "BALTI",
+  "country": "46",
+  "tz": "Europe/Chisinau",
+  "ishaDeg": 16,
+  "lat": 47.756,
+  "lon": 27.906
+ },
+ "15645": {
+  "name": "HØNEFOSS",
+  "country": "36",
+  "tz": "Europe/Oslo",
+  "ishaDeg": 16,
+  "lat": 60.18,
+  "lon": 10.237
+ },
+ "15658": {
+  "name": "AKREHAMN",
+  "country": "36",
+  "tz": "Europe/Oslo",
+  "ishaDeg": 16,
+  "lat": 59.26,
+  "lon": 5.194
+ },
+ "15676": {
+  "name": "OPPHAUG",
+  "country": "36",
+  "tz": "Europe/Oslo",
+  "ishaDeg": 16,
+  "lat": 63.734,
+  "lon": 9.688
+ },
+ "15726": {
+  "name": "AKTASH",
+  "country": "131",
+  "tz": "Asia/Tashkent",
+  "ishaDeg": 17,
+  "lat": 39.92,
+  "lon": 65.912
+ },
+ "15767": {
+  "name": "KARACHI",
+  "country": "77",
+  "tz": "Asia/Karachi",
+  "ishaDeg": 17,
+  "lat": 24.853,
+  "lon": 66.998
+ },
+ "15768": {
+  "name": "PESHAWER",
+  "country": "77",
+  "tz": "Asia/Karachi",
+  "ishaDeg": 17,
+  "lat": 34.008,
+  "lon": 71.535
+ },
+ "15789": {
+  "name": "BAHAWALPUR",
+  "country": "77",
+  "tz": "Asia/Karachi",
+  "ishaDeg": 17,
+  "lat": 29.389,
+  "lon": 71.669
+ },
+ "15844": {
+  "name": "KATOWICE",
+  "country": "39",
+  "tz": "Europe/Warsaw",
+  "ishaDeg": 16,
+  "lat": 50.264,
+  "lon": 19.017
+ },
+ "15883": {
+  "name": "BIALYSTOK",
+  "country": "39",
+  "tz": "Europe/Warsaw",
+  "ishaDeg": 16,
+  "lat": 53.13,
+  "lon": 23.144
+ },
+ "15907": {
+  "name": "BAYAMON",
+  "country": "68",
+  "tz": "America/Puerto_Rico",
+  "ishaDeg": 17,
+  "lat": 18.39,
+  "lon": -66.166
+ },
+ "15990": {
+  "name": "KRYUKOVO",
+  "country": "207",
+  "tz": "Europe/Moscow",
+  "ishaDeg": 16,
+  "lat": 55.974,
+  "lon": 37.173
+ },
+ "16137": {
+  "name": "SAMARA",
+  "country": "207",
+  "tz": "Europe/Samara",
+  "ishaDeg": 16,
+  "lat": 53.23,
+  "lon": 50.164
+ },
+ "16214": {
+  "name": "SINGAPUR",
+  "country": "179",
+  "tz": "Asia/Singapore",
+  "ishaDeg": 17,
+  "lat": 1.3,
+  "lon": 103.844
+ },
+ "16216": {
+  "name": "ALIBUNAR",
+  "country": "27",
+  "tz": "Europe/Belgrade",
+  "ishaDeg": 16,
+  "lat": 45.084,
+  "lon": 20.964
+ },
+ "16309": {
+  "name": "MEKKE",
+  "country": "64",
+  "tz": "Asia/Riyadh",
+  "ishaDeg": 17,
+  "lat": 21.43,
+  "lon": 39.807
+ },
+ "16310": {
+  "name": "CIDDE",
+  "country": "64",
+  "tz": "Asia/Riyadh",
+  "ishaDeg": 17,
+  "lat": 21.55,
+  "lon": 39.164
+ },
+ "16311": {
+  "name": "AD DAMMAM",
+  "country": "64",
+  "tz": "Asia/Riyadh",
+  "ishaDeg": 17,
+  "lat": 26.433,
+  "lon": 50.101
+ },
+ "16320": {
+  "name": "BOSHKENGASH",
+  "country": "101",
+  "tz": "Asia/Dushanbe",
+  "ishaDeg": 17,
+  "lat": 38.436,
+  "lon": 68.76
+ },
+ "16382": {
+  "name": "AL QAYRAWAN",
+  "country": "118",
+  "tz": "Africa/Tunis",
+  "ishaDeg": 17,
+  "lat": 35.678,
+  "lon": 10.089
+ },
+ "16408": {
+  "name": "ASKABAT",
+  "country": "159",
+  "tz": "Asia/Ashgabat",
+  "ishaDeg": 17,
+  "lat": 37.95,
+  "lon": 58.394
+ },
+ "16418": {
+  "name": "ARUA",
+  "country": "75",
+  "tz": "Africa/Kampala",
+  "ishaDeg": 17,
+  "lat": 3.025,
+  "lon": 30.892
+ },
+ "16422": {
+  "name": "ALCHEVSK",
+  "country": "40",
+  "tz": "UTC",
+  "ishaDeg": 16,
+  "lat": 48.465,
+  "lon": 38.8,
+  "clock": [
+   [
+    "2024-01-01",
+    180
+   ],
+   [
+    "2024-03-31",
+    240
+   ],
+   [
+    "2024-10-27",
+    180
+   ],
+   [
+    "2025-03-30",
+    240
+   ],
+   [
+    "2025-10-26",
+    180
+   ]
+  ]
+ },
+ "16514": {
+  "name": "AKMESCIT (Simferopol)",
+  "country": "29",
+  "tz": "Europe/Simferopol",
+  "ishaDeg": 16,
+  "lat": 45,
+  "lon": 34.094
+ },
+ "16640": {
+  "name": "AUCKLAND",
+  "country": "193",
+  "tz": "Pacific/Auckland",
+  "ishaDeg": 17,
+  "lat": -36.85,
+  "lon": 174.754
+ },
+ "16651": {
+  "name": "ALEXANDRIA",
+  "country": "22",
+  "tz": "Europe/Athens",
+  "ishaDeg": 17,
+  "lat": 40.634,
+  "lon": 22.443
+ },
+ "16700": {
+  "name": "CORNWALL",
+  "country": "52",
+  "tz": "America/Toronto",
+  "ishaDeg": 16,
+  "lat": 45.034,
+  "lon": -74.739
+ },
+ "17837": {
+  "name": "BENESOV",
+  "country": "16",
+  "tz": "Europe/Prague",
+  "ishaDeg": 16,
+  "lat": 49.788,
+  "lon": 16.681
+ },
+ "18967": {
+  "name": "AL AMARAH",
+  "country": "124",
+  "tz": "Asia/Baghdad",
+  "ishaDeg": 17,
+  "lat": 31.843,
+  "lon": 47.143
+ },
+ "19016": {
+  "name": "AVEIRO",
+  "country": "45",
+  "tz": "Europe/Lisbon",
+  "ishaDeg": 17,
+  "lat": 40.642,
+  "lon": -8.658
+ },
+ "20026": {
+  "name": "ADENAU",
+  "country": "13",
+  "tz": "Europe/Berlin",
+  "ishaDeg": 16,
+  "lat": 50.384,
+  "lon": 6.927
+ },
+ "20033": {
+  "name": "CELJE",
+  "country": "19",
+  "tz": "Europe/Ljubljana",
+  "ishaDeg": 16,
+  "lat": 46.241,
+  "lon": 15.263
+ },
+ "20035": {
+  "name": "BANSKA BYSTRICA",
+  "country": "14",
+  "tz": "Europe/Bratislava",
+  "ishaDeg": 16,
+  "lat": 48.737,
+  "lon": 19.146
+ },
+ "20064": {
+  "name": "ANTOFAGASTA",
+  "country": "200",
+  "tz": "America/Santiago",
+  "ishaDeg": 17,
+  "lat": -23.641,
+  "lon": -70.402
+ },
+ "20073": {
+  "name": "AALSMEER",
+  "country": "4",
+  "tz": "Europe/Amsterdam",
+  "ishaDeg": 16,
+  "lat": 52.267,
+  "lon": 4.759
+ },
+ "20095": {
+  "name": "ACQUI TERME",
+  "country": "8",
+  "tz": "Europe/Rome",
+  "ishaDeg": 16,
+  "lat": 44.682,
+  "lon": 8.46
+ },
+ "20099": {
+  "name": "ASHMYANY",
+  "country": "208",
+  "tz": "Europe/Minsk",
+  "ishaDeg": 16,
+  "lat": 54.431,
+  "lon": 25.933
+ },
+ "20130": {
+  "name": "AK-ARAL",
+  "country": "60",
+  "tz": "Asia/Ulaanbaatar",
+  "ishaDeg": 16,
+  "lat": 49.208,
+  "lon": 105.881
+ },
+ "21169": {
+  "name": "AALEN",
+  "country": "13",
+  "tz": "Europe/Berlin",
+  "ishaDeg": 16,
+  "lat": 48.85,
+  "lon": 10.084
+ },
+ "21172": {
+  "name": "ADAMCLISI",
+  "country": "37",
+  "tz": "Europe/Bucharest",
+  "ishaDeg": 16,
+  "lat": 44.096,
+  "lon": 27.957
+ },
+ "21176": {
+  "name": "ABAKAN",
+  "country": "207",
+  "tz": "Asia/Krasnoyarsk",
+  "ishaDeg": 16,
+  "lat": 53.72,
+  "lon": 91.434
+ },
+ "27073": {
+  "name": "AGBEND",
+  "country": "5",
+  "tz": "Asia/Baku",
+  "ishaDeg": 17,
+  "lat": 38.9,
+  "lon": 46.564
+ },
+ "33301": {
+  "name": "ADIGENI",
+  "country": "62",
+  "tz": "Asia/Tbilisi",
+  "ishaDeg": 17,
+  "lat": 41.675,
+  "lon": 42.699
+ },
+ "33328": {
+  "name": "SKARZYSKO KAMIENNA",
+  "country": "39",
+  "tz": "Europe/Warsaw",
+  "ishaDeg": 16,
+  "lat": 51.117,
+  "lon": 20.911
+ },
+ "33336": {
+  "name": "ABIAN SAMAN",
+  "country": "191",
+  "tz": "Asia/Damascus",
+  "ishaDeg": 17,
+  "lat": 36.088,
+  "lon": 36.754
+ }
+}

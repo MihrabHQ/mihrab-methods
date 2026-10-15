@@ -6,8 +6,8 @@
 import fs from 'node:fs';
 import path from 'node:path';
 
-export type Authority = 'sweden' | 'morocco' | 'algeria' | 'indonesia';
-export const AUTHORITIES: readonly Authority[] = ['sweden', 'morocco', 'algeria', 'indonesia'];
+export type Authority = 'sweden' | 'diyanet' | 'morocco' | 'algeria' | 'indonesia';
+export const AUTHORITIES: readonly Authority[] = ['sweden', 'diyanet', 'morocco', 'algeria', 'indonesia'];
 
 export type Place = {
   authority: Authority;
@@ -18,12 +18,30 @@ export type Place = {
   lon: number;
   /** The zone the authority prints the place's table in. */
   tz: string;
-  /** Morocco: the horizon's dip, degrees (fitted, or 0.02°·√height). */
+  /** Morocco: the horizon's dip, degrees (fitted, or 0.02°·√height) — eastward, at sunrise. */
   dipDeg?: number;
+  /** Morocco: the horizon's dip westward, at Maghrib (fitted per city). */
+  dipMaghribDeg?: number;
   /** Indonesia: Kemenag's highland class (sunrise and Maghrib at −2°). */
   highland?: boolean;
   /** Indonesia: the highland degree on Fajr and Isha too (six regencies of Papua). */
   twilightDip?: boolean;
+  /** Diyanet: Isha's depression, 16° or 17° by country. */
+  ishaDeg?: number;
+  /**
+   * Diyanet in Türkiye and Northern Cyprus: each prayer is computed at a point
+   * of its own, and the points move by a few thousandths of a degree from one
+   * year's tables to the next — year → [fajr, sunrise, dhuhr, asr, maghrib, isha]
+   * as [lat, lon]. `lat`/`lon` are the district's own point (its sunrise).
+   */
+  prayerPoints?: Record<string, [number, number][]>;
+  /**
+   * A table printed on a clock no zone keeps (Diyanet's for Alberta, with
+   * summer time into December; for Acámbaro, with summer time in 2025 only):
+   * the clock read off the table itself, [from date, minutes east of UTC], in
+   * place of `tz`. The instants are the method's; only the labels differ.
+   */
+  clock?: [string, number][];
 };
 
 const ROOT = path.join(__dirname, '..');
@@ -62,6 +80,8 @@ export function indonesiaZone(province: string): string {
  * move its clock, so the zone is pinned rather than named.
  */
 const MOROCCO_TZ = 'Etc/GMT';
+/** The ministry's clock: GMT+1, then GMT — its tables print GMT from 17 September 2026, three days before the clocks moved. */
+const MOROCCO_CLOCK: [string, number][] = [['2020-01-01', 60], ['2026-09-17', 0]];
 const MOROCCO_DIP_PER_SQRT_M = 0.02;
 
 export function placesOf(authority: Authority): Place[] {
@@ -71,6 +91,21 @@ export function placesOf(authority: Authority): Place[] {
       const coords = read<Record<string, { lat: number; lng: number }>>('islamiskaForbundetCoords.json');
       return Object.entries(coords).map(([name, c]) => ({ authority, key: citySlug(name), name, lat: c.lat, lon: c.lng, tz: 'Europe/Stockholm' }));
     }
+    case 'diyanet': {
+      // Diyanet's places beyond Sweden and Türkiye, at the points it computes them, with the
+      // zone each table is printed in and Isha's angle for its country.
+      const pts = read<Record<string, { name: string; country: string; tz: string; ishaDeg: number; lat: number; lon: number; clock?: [string, number][] }>>('diyanetWorldPoints.json');
+      const world: Place[] = Object.entries(pts).map(([iid, v]) => ({ authority, key: iid, name: v.name, lat: v.lat, lon: v.lon, tz: v.tz, ishaDeg: v.ishaDeg, ...(v.clock ? { clock: v.clock } : {}) }));
+      // Türkiye's districts (and Northern Cyprus's), with a point per prayer per year
+      const tr = fs.existsSync(path.join(ROOT, 'data/places', 'diyanetTurkeyPoints.json'))
+        ? read<Record<string, { name: string; country: string; years: Record<string, [number, number][]> }>>('diyanetTurkeyPoints.json')
+        : {};
+      for (const [iid, v] of Object.entries(tr)) {
+        const base = v.years['2026'] ?? Object.values(v.years)[0];
+        world.push({ authority, key: iid, name: v.name, lat: base[1][0], lon: base[1][1], tz: v.country === '1' ? 'Asia/Nicosia' : 'Europe/Istanbul', ishaDeg: 17, prayerPoints: v.years });
+      }
+      return world;
+    }
     case 'morocco': {
       const points = read<Record<string, number[]>>('moroccoMethodPoints.json');
       return read<{ id: number; name: string; lat: number | null; lng: number | null; heightM?: number }[]>('moroccoCities.json')
@@ -78,8 +113,8 @@ export function placesOf(authority: Authority): Place[] {
         .map(c => {
           const p = points[String(c.id)];
           return p
-            ? { authority, key: String(c.id), name: c.name, lat: p[0], lon: p[1], tz: MOROCCO_TZ, dipDeg: p[2] }
-            : { authority, key: String(c.id), name: c.name, lat: c.lat as number, lon: c.lng as number, tz: MOROCCO_TZ, dipDeg: MOROCCO_DIP_PER_SQRT_M * Math.sqrt(c.heightM ?? 0) };
+            ? { authority, key: String(c.id), name: c.name, lat: p[0], lon: p[1], tz: MOROCCO_TZ, clock: MOROCCO_CLOCK, dipDeg: p[2], ...(p.length > 3 ? { dipMaghribDeg: p[3] } : {}) }
+            : { authority, key: String(c.id), name: c.name, lat: c.lat as number, lon: c.lng as number, tz: MOROCCO_TZ, clock: MOROCCO_CLOCK, dipDeg: MOROCCO_DIP_PER_SQRT_M * Math.sqrt(c.heightM ?? 0) };
         });
     }
     case 'algeria': {

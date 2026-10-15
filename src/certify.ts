@@ -14,7 +14,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { AUTHORITIES, type Authority } from './places';
 import type { Certification, CheckRecord } from './certification';
-import { checkAuthority, TABLES, type Result } from './verify';
+import { checkAuthority, TABLES, type CheckRun, type Result } from './verify';
 
 const FILE = path.join(__dirname, '..', 'certification.json');
 
@@ -35,12 +35,12 @@ function record(r: Result): CheckRecord {
 const out: Record<string, Certification> = {};
 const checkedAt = new Date().toISOString().slice(0, 10);
 for (const a of AUTHORITIES as readonly Authority[]) {
-  const runs: (Authority | 'diyanet')[] = a === 'sweden' ? ['sweden', 'diyanet'] : [a];
+  const runs: CheckRun[] = a === 'sweden' ? ['sweden', 'sweden-diyanet'] : [a];
   const checks: CheckRecord[] = [];
   for (const run of runs) {
     const r = checkAuthority(run);
     if (!r || !r.times) {
-      if (run === 'diyanet') continue; // optional: Diyanet's own timetables, when present
+      if (run === 'sweden-diyanet') continue; // optional: Diyanet's own Swedish timetables, when present
       console.error(`No tables for ${run} under ${TABLES} — set MIHRAB_TABLES. Nothing written.`);
       process.exit(1);
     }

@@ -26,43 +26,57 @@
       }
     ]
   },
+  "diyanet": {
+    "certified": true,
+    "checkedAt": "2026-10-15",
+    "checks": [
+      {
+        "tables": "Diyanet — its tables worldwide",
+        "places": 1064,
+        "times": 8059932,
+        "off": 0,
+        "from": "2024-01-01",
+        "to": "2027-12-31"
+      }
+    ]
+  },
   "morocco": {
-    "certified": false,
+    "certified": true,
     "checkedAt": "2026-10-15",
     "checks": [
       {
         "tables": "Morocco — Habous",
         "places": 164,
-        "times": 31488,
-        "off": 450,
-        "from": "2026-10-11",
+        "times": 75768,
+        "off": 0,
+        "from": "2026-08-27",
         "to": "2026-11-11"
       }
     ]
   },
   "algeria": {
-    "certified": false,
+    "certified": true,
     "checkedAt": "2026-10-15",
     "checks": [
       {
         "tables": "Algeria — Ministry of Religious Affairs",
         "places": 68,
         "times": 101184,
-        "off": 642,
+        "off": 0,
         "from": "2026-10-01",
         "to": "2027-06-05"
       }
     ]
   },
   "indonesia": {
-    "certified": false,
+    "certified": true,
     "checkedAt": "2026-10-15",
     "checks": [
       {
         "tables": "Indonesia — Kemenag",
         "places": 517,
         "times": 266772,
-        "off": 94,
+        "off": 0,
         "from": "2026-10-07",
         "to": "2026-12-31"
       }

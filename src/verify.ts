@@ -3,7 +3,8 @@
  *
  *   npm run verify                 # all four
  *   npm run verify -- morocco      # some
- *   npm run verify -- diyanet      # Sweden against Diyanet's own timetables
+ *   npm run verify -- sweden-diyanet  # Sweden against Diyanet's own Swedish timetables
+ *   npm run verify -- diyanet         # Diyanet worldwide
  *
  * The reference timetables are not part of this repository: MIHRAB_TABLES
  * names their folder (default .tables), laid out <authority>/v1/cities/<key>.json,
@@ -45,10 +46,39 @@ export type CheckOptions = {
   copiedYears?: boolean;
 };
 
+const fmtDate = new Map<string, Intl.DateTimeFormat>();
+const fmtOffset = new Map<string, Intl.DateTimeFormat>();
+/** Minutes east of UTC that the zone keeps at an instant. */
+function offsetAt(tz: string, ms: number): number {
+  let f = fmtOffset.get(tz);
+  if (!f) fmtOffset.set(tz, (f = new Intl.DateTimeFormat('en-US', { timeZone: tz, timeZoneName: 'longOffset' })));
+  const z = f.formatToParts(new Date(ms)).find(x => x.type === 'timeZoneName')!.value;
+  const m = /GMT([+-])(\d\d):?(\d\d)?/.exec(z);
+  return m ? (m[1] === '-' ? -1 : 1) * (Number(m[2]) * 60 + Number(m[3] ?? 0)) : 0;
+}
+/**
+ * The instant on the timetable's clock, minutes past midnight. A table prints
+ * the whole day in that day's clock — the one kept at noon — so on the day the
+ * clocks go forward a Fajr before the change is printed in the new time.
+ */
 export function clockIn(tz: string, d: Date): number {
-  const p = new Intl.DateTimeFormat('en-GB', { timeZone: tz, hourCycle: 'h23', hour: '2-digit', minute: '2-digit' }).formatToParts(d);
-  const get = (t: string) => Number(p.find(x => x.type === t)!.value);
-  return get('hour') * 60 + get('minute');
+  let f = fmtDate.get(tz);
+  if (!f) fmtDate.set(tz, (f = new Intl.DateTimeFormat('en-CA', { timeZone: tz, year: 'numeric', month: '2-digit', day: '2-digit' })));
+  const [y, m, day] = f.format(d).split('-').map(Number);
+  const noonGuess = Date.UTC(y, m - 1, day, 12) - offsetAt(tz, d.getTime()) * 60_000;
+  const local = d.getTime() / 60_000 + offsetAt(tz, noonGuess);
+  return ((Math.floor(local) % 1440) + 1440) % 1440;
+}
+/**
+ * The instant on the place's table's clock: its own clock where it keeps one
+ * no zone does (`Place.clock`, read off the table), else its zone's.
+ */
+export function tableClock(place: Place, date: string, d: Date): number {
+  if (!place.clock) return clockIn(place.tz, d);
+  let off = place.clock[0][1];
+  for (const [from, o] of place.clock) if (from <= date) off = o;
+  const local = d.getTime() / 60_000 + off;
+  return ((Math.floor(local) % 1440) + 1440) % 1440;
 }
 export const minutes = (s: string | undefined) => {
   const m = /^(\d{1,2}):(\d{2})/.exec((s ?? '').trim());
@@ -87,7 +117,7 @@ export function check(name: string, places: Place[], dir: string, opts: CheckOpt
       KEYS.forEach((k, i) => {
         const theirs = minutes(row[i + 1]);
         if (!Number.isFinite(theirs)) return;
-        let diff = Math.abs(clockIn(place.tz, t[k]) - theirs);
+        let diff = Math.abs(tableClock(place, date, t[k]) - theirs);
         if (diff > 720) diff = 1440 - diff;
         pr.times++;
         if (diff === 0) pr.exact++;
@@ -149,7 +179,10 @@ function diyanetDaysFor(slug: string): Record<string, string[]> | null {
   return f && fs.existsSync(f) ? ((JSON.parse(fs.readFileSync(f, 'utf8')) as { days: Record<string, string[]> }).days ?? null) : null;
 }
 
-export function checkAuthority(a: Authority | 'diyanet'): Result | null {
+/** A check run: an authority's own tables, or (sweden-diyanet) Sweden against Diyanet's Swedish tables. */
+export type CheckRun = Authority | 'sweden-diyanet';
+
+export function checkAuthority(a: CheckRun): Result | null {
   if (a === 'sweden') {
     return check('Sweden — Islamiska Förbundet’s tables', placesOf('sweden'), path.join(TABLES, 'sweden/v1/cities'), {
       original: p => diyanetDaysFor(p.key),
@@ -157,6 +190,9 @@ export function checkAuthority(a: Authority | 'diyanet'): Result | null {
     });
   }
   if (a === 'diyanet') {
+    return check('Diyanet — its tables worldwide', placesOf('diyanet'), path.join(DIYANET_ROOT, 'v1/cities'));
+  }
+  if (a === 'sweden-diyanet') {
     const root = DIYANET_ROOT;
     const pts = JSON.parse(fs.readFileSync(path.join(ROOT, 'data/places/diyanet-sweden-points.json'), 'utf8')) as Record<string, { name: string; lat: number; lon: number }>;
     const places: Place[] = Object.entries(pts).map(([iid, v]) => ({ authority: 'sweden', key: iid, name: v.name, lat: v.lat, lon: v.lon, tz: 'Europe/Stockholm' }));
@@ -164,6 +200,7 @@ export function checkAuthority(a: Authority | 'diyanet'): Result | null {
   }
   const names: Record<Authority, string> = {
     sweden: 'Sweden — Islamiska Förbundet’s tables',
+    diyanet: 'Diyanet — its tables worldwide',
     morocco: 'Morocco — Habous',
     algeria: 'Algeria — Ministry of Religious Affairs',
     indonesia: 'Indonesia — Kemenag',
@@ -173,7 +210,7 @@ export function checkAuthority(a: Authority | 'diyanet'): Result | null {
 
 if (require.main === module) {
   const asked = process.argv.slice(2);
-  const list = (asked.length ? asked : [...AUTHORITIES, 'diyanet']) as (Authority | 'diyanet')[];
+  const list = (asked.length ? asked : [...AUTHORITIES, 'sweden-diyanet']) as CheckRun[];
   for (const a of list) {
     const r = checkAuthority(a);
     if (!r) {

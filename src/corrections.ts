@@ -8,14 +8,28 @@
  *
  *   npm run corrections
  *
+ *
+ * `npm run corrections -- morocco` writes Morocco's (data/corrections/morocco.json)
+ * from the ministry's tables; `-- algeria` and `-- indonesia` likewise. `npm run corrections -- diyanet` writes Diyanet's worldwide list
+ * (data/corrections/diyanet.json) the same way, at its points beyond Sweden.
+ *
  * Needs the reference timetables (MIHRAB_TABLES); refuses to write without them.
  */
 import fs from 'node:fs';
 import path from 'node:path';
 import { candidateTimes, placesOf, type Place } from './index';
-import { clockIn, copiedYearsOf, DIYANET_ROOT, KEYS, minutes, TABLES } from './verify';
-import { CORRECTIONS_FILE, pointKey, type SwedenCorrections } from './methods/swedenCorrections';
+import { clockIn, copiedYearsOf, DIYANET_ROOT, KEYS, minutes, tableClock, TABLES } from './verify';
+import { ALGERIA_CORRECTIONS_FILE, CORRECTIONS_FILE, DIYANET_CORRECTIONS_FILE, INDONESIA_CORRECTIONS_FILE, MOROCCO_CORRECTIONS_FILE, pointKey, type SwedenCorrections } from './methods/swedenCorrections';
 
+const WORLD = process.argv.includes('diyanet');
+/** A national authority's own tables (Morocco, Algeria, Indonesia), at its places' points. */
+const NATIONAL = (['morocco', 'algeria', 'indonesia'] as const).find(a => process.argv.includes(a));
+const MOROCCO = NATIONAL !== undefined;
+const FILE =
+  NATIONAL === 'morocco' ? MOROCCO_CORRECTIONS_FILE
+  : NATIONAL === 'algeria' ? ALGERIA_CORRECTIONS_FILE
+  : NATIONAL === 'indonesia' ? INDONESIA_CORRECTIONS_FILE
+  : WORLD ? DIYANET_CORRECTIONS_FILE : CORRECTIONS_FILE;
 const TZ = 'Europe/Stockholm';
 const pts = JSON.parse(fs.readFileSync(path.join(__dirname, '..', 'data/places/diyanet-sweden-points.json'), 'utf8')) as Record<string, { name: string; lat: number; lon: number }>;
 const read = (f: string) => (fs.existsSync(f) ? ((JSON.parse(fs.readFileSync(f, 'utf8')) as { days: Record<string, string[]> }).days) : null);
@@ -39,7 +53,7 @@ function compare(place: Place, date: string, row: string[], asOf: string): void 
   KEYS.forEach((k, i) => {
     const theirs = minutes(row[i + 1]);
     if (!Number.isFinite(theirs)) return;
-    let diff = (theirs - clockIn(TZ, t[k])) % 1440;
+    let diff = (theirs - tableClock(place, asOf, t[k])) % 1440;
     if (diff > 720) diff -= 1440;
     if (diff < -720) diff += 1440;
     if (diff === 0) return;
@@ -52,9 +66,30 @@ function compare(place: Place, date: string, row: string[], asOf: string): void 
   });
 }
 
-// Diyanet's own tables, at Diyanet's points
+// Morocco, Algeria, Indonesia: the authority's own tables, at its places' points
 let diyanetTables = 0;
-for (const [iid, v] of Object.entries(pts)) {
+for (const place of NATIONAL ? placesOf(NATIONAL) : []) {
+  const days = read(path.join(TABLES, `${NATIONAL}/v1/cities`, `${place.key}.json`));
+  if (!days) continue;
+  diyanetTables++;
+  for (const [date, row] of Object.entries(days)) {
+    compare(place, date, row, date);
+    if (date < from) from = date;
+    if (date > to) to = date;
+  }
+}
+// Diyanet's own tables, at Diyanet's points (worldwide: the places beyond Sweden)
+for (const place of WORLD && !MOROCCO ? placesOf('diyanet') : []) {
+  const days = read(path.join(DIYANET_ROOT, 'v1/cities', `${place.key}.json`));
+  if (!days) continue;
+  diyanetTables++;
+  for (const [date, row] of Object.entries(days)) {
+    compare(place, date, row, date);
+    if (date < from) from = date;
+    if (date > to) to = date;
+  }
+}
+for (const [iid, v] of WORLD || MOROCCO ? [] : Object.entries(pts)) {
   const days = read(path.join(DIYANET_ROOT, 'v1/cities', `${iid}.json`));
   if (!days) continue;
   diyanetTables++;
@@ -72,7 +107,7 @@ if (!diyanetTables) {
 
 // Islamiska Förbundet's towns that are not at a Diyanet point
 const diyanetPoints = new Set(Object.values(pts).map(v => pointKey(v.lat, v.lon)));
-for (const place of placesOf('sweden')) {
+for (const place of WORLD || MOROCCO ? [] : placesOf('sweden')) {
   if (diyanetPoints.has(pointKey(place.lat, place.lon))) continue;
   const days = read(path.join(TABLES, 'sweden/v1/cities', `${place.key}.json`));
   if (!days) continue;
@@ -94,6 +129,6 @@ for (const key of Object.keys(points).sort()) {
     n += list.length;
   }
 }
-fs.mkdirSync(path.dirname(CORRECTIONS_FILE), { recursive: true });
-fs.writeFileSync(CORRECTIONS_FILE, JSON.stringify(out, null, 1) + '\n');
-console.log(`${n} corrections at ${Object.keys(out.points).length} points, ${from} → ${to}${tooFar ? `; ${tooFar} differences of more than a minute left out` : ''}. Written ${path.relative(process.cwd(), CORRECTIONS_FILE)}`);
+fs.mkdirSync(path.dirname(FILE), { recursive: true });
+fs.writeFileSync(FILE, JSON.stringify(out, null, 1) + '\n');
+console.log(`${n} corrections at ${Object.keys(out.points).length} points, ${from} → ${to}${tooFar ? `; ${tooFar} differences of more than a minute left out` : ''}. Written ${path.relative(process.cwd(), FILE)}`);
