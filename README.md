@@ -1,7 +1,17 @@
 # mihrab-methods
 
-The prayer-time calculation methods of four national authorities, implemented
-to reproduce their official timetables to the minute:
+An open prayer-time API: the calculation methods of the national
+authorities, implemented to reproduce their official timetables to the
+minute, free for anyone to use. Accurate prayer times shouldn't be something
+only a few apps can offer.
+
+Each method is the authority's own formula, worked out again from its
+published times, with a small, fixed correction list where the formula alone
+lands a hundredth of a second on the wrong side of a minute. The aim is that
+any app, site or mosque can give the times its community prays by, without
+asking anyone.
+
+Methods today:
 
 | Authority | Method | On the printed minute | Within a minute | Checked over |
 |---|---|---|---|---|
@@ -36,6 +46,30 @@ Today (checked 2026-10-15) **Sweden is certified**, for 2024–2027; the others 
 | Morocco | 450 of 31 488 |
 | Algeria | 642 of 101 184 |
 | Indonesia | 94 of 266 772 |
+
+## Formulas and correction lists: why this can be used freely
+
+Under EU and Swedish law, this approach is lawful use and "insubstantial
+extraction": an unprotected mathematical formula, worked out from published
+times, plus a very small, static list of factual data points that fixes edge
+cases.
+
+- **The methods are formulas.** A method of calculation is not protected as
+  such. What is here is the arithmetic: the sun's position, the angles, the
+  margins and the high-latitude rules each authority applies. It is written
+  from scratch, not copied.
+- **The correction lists are microscopically small and static.** Each one
+  holds only the few times where the authority's own rounding falls the
+  other way: a point, a date, a prayer, a minute either way. Sweden's is 270
+  entries against 1.39 million times (0.02 %). The aim is the same for every
+  method: get the formula as close as possible, so the list that remains is
+  insubstantial.
+- **No timetable is part of this repository.** It holds no copy of any
+  authority's tables. The times are computed, for any date and any point.
+
+This is the project's position, not legal advice. The same rule applies to
+every method added here: the best formula first, and a correction list only
+for what is left.
 
 ## Sweden's correction list
 
