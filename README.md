@@ -5,7 +5,7 @@ to reproduce their official timetables to the minute:
 
 | Authority | Method | On the printed minute | Within a minute | Checked over |
 |---|---|---|---|---|
-| **Sweden** — Diyanet's method, as used by Islamiska Förbundet | `src/methods/sweden.ts` — the Istanbul congress method as Diyanet computes it | 99.981 % of Diyanet's timetables (1.39 M times, 2024–2027); 99.961 % of Islamiska Förbundet's | 100 % | Oct 2026 → Nov 2027 |
+| **Sweden** — Diyanet's method, as used by Islamiska Förbundet | `src/methods/sweden.ts` — the Istanbul congress method as Diyanet computes it | 99.981 % of Diyanet's timetables (1.39 M times, 2024–2027); 99.966 % of Islamiska Förbundet's | 100 % | Oct 2026 → Nov 2027 |
 | **Morocco** — Ministry of Habous | `src/methods/morocco.ts` | 98.571 % | 100 % | Oct–Nov 2026, 164 cities |
 | **Algeria** — Ministry of Religious Affairs and Wakfs | `src/methods/algeria.ts` | 99.366 % | 100 % | 1448 AH, 68 cities |
 | **Indonesia** — Kemenag | `src/methods/indonesia.ts` | 99.965 % | 100 % | Oct–Dec 2026, 517 regencies |
@@ -32,7 +32,7 @@ Today (checked 2026-10-15) **none is certified**:
 
 | Authority | Off the printed minute |
 |---|---|
-| Sweden | 23 of 59 010 (Islamiska Förbundet); 259 of 1 393 794 (Diyanet) |
+| Sweden | 20 of 59 010 (Islamiska Förbundet); 259 of 1 393 794 (Diyanet) |
 | Morocco | 450 of 31 488 |
 | Algeria | 642 of 101 184 |
 | Indonesia | 94 of 266 772 |

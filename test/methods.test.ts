@@ -12,7 +12,7 @@ const bars: [Parameters<typeof checkAuthority>[0], number][] = [
   ['indonesia', 0.9996], // 99.965 %
   ['algeria', 0.9936], // 99.366 %
   ['morocco', 0.9855], // 98.571 %
-  ['sweden', 0.9995], // 99.961 % — Islamiska Förbundet's timetables; Diyanet's own below
+  ['sweden', 0.9995], // 99.966 % — Islamiska Förbundet's timetables; Diyanet's own below
   ['diyanet', 0.9998], // 99.981 %
 ];
 
