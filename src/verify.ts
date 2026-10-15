@@ -50,12 +50,6 @@ function clockIn(tz: string, d: Date): number {
   const get = (t: string) => Number(p.find(x => x.type === t)!.value);
   return get('hour') * 60 + get('minute');
 }
-/** Minutes east of UTC for a zone at an instant. */
-function offsetMin(tz: string, ms: number): number {
-  const p = new Intl.DateTimeFormat('en-US', { timeZone: tz, hourCycle: 'h23', year: 'numeric', month: 'numeric', day: 'numeric', hour: 'numeric', minute: 'numeric' }).formatToParts(new Date(ms));
-  const get = (t: string) => Number(p.find(x => x.type === t)!.value);
-  return Math.round((Date.UTC(get('year'), get('month') - 1, get('day'), get('hour'), get('minute')) - ms) / 60000);
-}
 const minutes = (s: string | undefined) => {
   const m = /^(\d{1,2}):(\d{2})/.exec((s ?? '').trim());
   return m ? Number(m[1]) * 60 + Number(m[2]) : NaN;
@@ -66,13 +60,14 @@ export function check(name: string, places: Place[], dir: string, opts: CheckOpt
   const r: Result = { name, places: 0, days: 0, times: 0, exact: 0, within1: 0, worst: 0, misses: { fajr: 0, sunrise: 0, dhuhr: 0, asr: 0, maghrib: 0, isha: 0 }, worstPlaces: [], sourceFaults: 0, copiedRows: 0, misplaced: [], from: '', to: '' };
   const perPlace = new Map<string, number>();
   for (const place of places) {
-    // Per place first: a table that is mostly off is another town's, printed for this one (Islamiska
-    // Förbundet's Ystad, Munkedal, Torsby) — the source's fault, reported apart, not counted.
+    // Per place first: a table that is mostly off is another town's, printed for this one — the
+    // source's fault, reported apart, not counted. Every day is checked, the days the clock changes too.
     const pr: Result = { ...r, times: 0, exact: 0, within1: 0, worst: 0, days: 0, misses: { fajr: 0, sunrise: 0, dhuhr: 0, asr: 0, maghrib: 0, isha: 0 }, sourceFaults: 0, copiedRows: 0, from: '', to: '' };
     const f = path.join(dir, `${place.key}.json`);
     if (!fs.existsSync(f)) continue;
     const days = (JSON.parse(fs.readFileSync(f, 'utf8')) as { days: Record<string, string[]> }).days;
     const original = opts.original?.(place) ?? null;
+    const copied = opts.copiedYears ? copiedYearsOf(place, days, original) : new Set<number>();
     for (const [date, row] of Object.entries(days)) {
       let [y, m, d] = date.split('-').map(Number);
       const confirmed = !!original?.[date];
@@ -80,9 +75,7 @@ export function check(name: string, places: Place[], dir: string, opts: CheckOpt
         pr.sourceFaults++;
         continue;
       }
-      // A day the clock changes is the table's own convention, not the method's.
-      if (offsetMin(place.tz, Date.UTC(y, m - 1, d, 0)) !== offsetMin(place.tz, Date.UTC(y, m - 1, d, 23, 59))) continue;
-      if (opts.copiedYears && !confirmed && isPreviousYearsRow(place, y, m - 1, d, row[1], row[6])) {
+      if (!confirmed && copied.has(y)) {
         pr.copiedRows++;
         y -= 1;
       }
@@ -121,26 +114,29 @@ export function check(name: string, places: Place[], dir: string, opts: CheckOpt
 }
 
 /**
- * Is a Swedish row the year it claims, or the previous year's figures served
- * for the date? The Congress method's summer share moves from year to year
- * (ten minutes at Umeå between 2026 and 2027), so a row whose Fajr or Isha
- * is two minutes or more from this year's and on the minute of last year's
- * is last year's.
+ * The years of a table that are the previous year's figures served under
+ * this year's dates (Islamiska Förbundet, before it publishes the new year).
+ * Decided for the whole year at once: the year is copied when its rows are
+ * on last year's minute more often than on this year's. The Congress
+ * method's carried share moves from year to year (ten minutes at Umeå's
+ * Isha between 2026 and 2027), so the two are told apart. Rows confirmed by
+ * the authority's own are the year they claim and are left out.
  */
-function isPreviousYearsRow(place: Place, y: number, m: number, d: number, fajr: string, isha: string): boolean {
-  const row = [minutes(fajr), minutes(isha)];
-  const at = (yy: number) => {
-    const t = candidateTimes(place, yy, m, d);
-    return t ? [clockIn(place.tz, t.fajr), clockIn(place.tz, t.isha)] : [NaN, NaN];
-  };
-  const circ = (a: number, b: number) => {
-    let x = Math.abs(a - b) % 1440;
-    if (x > 720) x = 1440 - x;
-    return x;
-  };
-  const thisYear = at(y);
-  const lastYear = at(y - 1);
-  return row.some((v, i) => Number.isFinite(v) && circ(v, thisYear[i]) >= 2 && circ(v, lastYear[i]) <= 1);
+function copiedYearsOf(place: Place, days: Record<string, string[]>, original: Record<string, string[]> | null): Set<number> {
+  const score = new Map<number, [number, number]>();
+  for (const [date, row] of Object.entries(days)) {
+    if (original?.[date]) continue;
+    const [y, m, d] = date.split('-').map(Number);
+    const on = (yy: number) => {
+      const t = candidateTimes(place, yy, m - 1, d);
+      return t ? KEYS.filter((k, i) => clockIn(place.tz, t[k]) === minutes(row[i + 1])).length : 0;
+    };
+    const s = score.get(y) ?? [0, 0];
+    s[0] += on(y);
+    s[1] += on(y - 1);
+    score.set(y, s);
+  }
+  return new Set([...score].filter(([, [thisYear, lastYear]]) => lastYear > thisYear).map(([y]) => y));
 }
 
 const DIYANET_ROOT = process.env.DIYANET_TABLES ?? path.join(TABLES, 'diyanet');

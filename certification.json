@@ -5,24 +5,22 @@
     "checks": [
       {
         "tables": "Sweden — Islamiska Förbundet’s tables",
-        "places": 106,
-        "times": 57834,
-        "off": 955,
+        "places": 107,
+        "times": 59010,
+        "off": 23,
         "from": "2026-10-11",
         "to": "2027-11-16",
         "setAside": {
-          "misplaced": [
-            "Ystad (522 of 522 off)"
-          ],
-          "sourceFaults": 32053,
-          "copiedRows": 307
+          "misplaced": [],
+          "sourceFaults": 32360,
+          "copiedRows": 626
         }
       },
       {
         "tables": "Sweden — Diyanet’s own tables",
         "places": 159,
-        "times": 1386162,
-        "off": 794,
+        "times": 1393794,
+        "off": 259,
         "from": "2024-01-01",
         "to": "2027-12-31"
       }
