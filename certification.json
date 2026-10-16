@@ -1,7 +1,7 @@
 {
   "sweden": {
     "certified": true,
-    "checkedAt": "2026-10-15",
+    "checkedAt": "2026-10-16",
     "checks": [
       {
         "tables": "Sweden — Islamiska Förbundet’s tables",
@@ -34,12 +34,12 @@
   },
   "diyanet": {
     "certified": true,
-    "checkedAt": "2026-10-15",
+    "checkedAt": "2026-10-16",
     "checks": [
       {
         "tables": "Diyanet — its tables worldwide",
-        "places": 1064,
-        "times": 8059932,
+        "places": 8132,
+        "times": 69999603,
         "off": 0,
         "from": "2024-01-01",
         "to": "2027-12-31"
@@ -48,13 +48,13 @@
     "corrections": {
       "from": "2024-01-01",
       "to": "2027-12-31",
-      "entries": 765
+      "entries": 9118
     },
     "revision": 1
   },
   "morocco": {
     "certified": true,
-    "checkedAt": "2026-10-15",
+    "checkedAt": "2026-10-16",
     "checks": [
       {
         "tables": "Morocco — Habous",
@@ -74,7 +74,7 @@
   },
   "algeria": {
     "certified": true,
-    "checkedAt": "2026-10-15",
+    "checkedAt": "2026-10-16",
     "checks": [
       {
         "tables": "Algeria — Ministry of Religious Affairs",
@@ -94,7 +94,7 @@
   },
   "indonesia": {
     "certified": true,
-    "checkedAt": "2026-10-15",
+    "checkedAt": "2026-10-16",
     "checks": [
       {
         "tables": "Indonesia — Kemenag",

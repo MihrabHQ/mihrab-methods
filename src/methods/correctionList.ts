@@ -1,6 +1,6 @@
 /**
  * A method's correction list: the few times its authority's program puts on
- * the other side of a minute's rounding point — a hundredth of a second away,
+ * the other side of a minute's rounding point — a fraction of a second away,
  * from its own arithmetic, not from the method. Each entry moves one printed
  * time of one point on one date by a minute. `npm run corrections` writes the
  * lists from the tables (data/corrections/<authority>.json); each covers the

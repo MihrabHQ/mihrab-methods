@@ -1,8 +1,9 @@
 /**
  * Each method against the authority's timetables, day by day, to the minute.
  *
- *   npm run verify                 # all four
+ *   npm run verify                 # all
  *   npm run verify -- morocco      # some
+ *   npm run verify -- --alone      # the methods without their correction lists
  *   npm run verify -- sweden-diyanet  # Sweden against Diyanet's own Swedish timetables
  *   npm run verify -- diyanet         # Diyanet worldwide
  *
@@ -17,6 +18,8 @@ import { AUTHORITIES, placesOf, candidateTimes, type Authority, type Place } fro
 const ROOT = path.join(__dirname, '..');
 export const TABLES = process.env.MIHRAB_TABLES ?? path.join(ROOT, '.tables');
 export const KEYS = ['fajr', 'sunrise', 'dhuhr', 'asr', 'maghrib', 'isha'] as const;
+/** `--alone`: each method without its correction list — what the formula gives by itself. */
+const ALONE = process.argv.includes('--alone');
 
 export type Result = {
   name: string;
@@ -109,7 +112,7 @@ export function check(name: string, places: Place[], dir: string, opts: CheckOpt
         pr.copiedRows++;
         y -= 1;
       }
-      const t = candidateTimes(place, y, m - 1, d);
+      const t = candidateTimes(place, y, m - 1, d, 1, { corrections: !ALONE });
       if (!t) continue;
       pr.days++;
       if (!pr.from || date < pr.from) pr.from = date;
@@ -209,7 +212,7 @@ export function checkAuthority(a: CheckRun): Result | null {
 }
 
 if (require.main === module) {
-  const asked = process.argv.slice(2);
+  const asked = process.argv.slice(2).filter(a => !a.startsWith('--'));
   const list = (asked.length ? asked : [...AUTHORITIES, 'sweden-diyanet']) as CheckRun[];
   for (const a of list) {
     const r = checkAuthority(a);
