@@ -261,8 +261,7 @@ GET /v1/places?authority=indonesia
 GET /v1/methods
 ```
 
-Self-hostable, nothing stored (`tools/serve.ts`, eighty lines). Under the
-AGPL a hosted copy's source must be published; this one already is.
+Self-hostable, nothing stored (`tools/serve.ts`, eighty lines).
 
 ### In another language
 
@@ -311,4 +310,11 @@ A method that improves here goes back as the same file in Mihrab's
 reads `certification.json` and the lists from this repository's `main`;
 that feed does not change shape between versions (`schemas/`).
 
-Licence: AGPL-3.0-or-later, as Mihrab.
+## Licence
+
+[MPL-2.0](LICENSE). Use the library in any app, open or closed, on a phone
+or on a server; what the licence asks is that changes to *these files* —
+a method fitted closer to its table, a corrected point — are published
+under the same terms, so an improvement to a method reaches everyone. The
+Mihrab app itself stays AGPL-3.0; it includes this library as the MPL
+allows. Versions before 1.0.0 were AGPL-3.0-or-later.

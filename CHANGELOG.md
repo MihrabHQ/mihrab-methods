@@ -32,6 +32,8 @@ their shape — `certification.json` gains `corrections.sha256`.
 - `fetchLatestCorrections` and `applyCorrections`: the update check with
   the revision, the list's identity and its SHA-256; JSON Schemas for
   `certification.json` and the lists.
+- Licence: MPL-2.0 (was AGPL-3.0-or-later), so any app can use the
+  library while changes to its files stay public.
 - `docs/methods.md` (the methods in words and formulas) and
   `test/vectors.json` (64 cases) for ports; `npm run serve`, a small HTTP
   server; a CI workflow; this changelog.
