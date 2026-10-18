@@ -167,6 +167,8 @@ export function namedFigures(cert, lang = 'en') {
       [`${p}.to`]: a.to,
       [`${p}.toMonthYear`]: monthYear(a.to, lang),
       [`${p}.span`]: span(a.from, a.to, lang),
+      [`${p}.years`]: a.from.slice(0, 4) === a.to.slice(0, 4) ? a.from.slice(0, 4) : `${a.from.slice(0, 4)}–${a.to.slice(0, 4)}`,
+      [`${p}.toLong`]: longDate(a.to, lang),
       [`${p}.checkedAt`]: a.checkedAt,
       [`${p}.revision`]: String(a.revision),
     });
@@ -177,6 +179,7 @@ export function namedFigures(cert, lang = 'en') {
         [`${p}.check${i}.off`]: int(c.off, lang),
         [`${p}.check${i}.alonePct`]: pct(c.times - c.offAlone, c.times, 3, lang),
         [`${p}.check${i}.span`]: span(c.from, c.to, lang),
+        [`${p}.check${i}.years`]: c.from.slice(0, 4) === c.to.slice(0, 4) ? c.from.slice(0, 4) : `${c.from.slice(0, 4)}–${c.to.slice(0, 4)}`,
       });
       if (c.setAside) {
         Object.assign(out, {
@@ -205,5 +208,23 @@ export function fillFigures(text, named, where = 'text') {
 export function fillBlock(text, name, body, where = 'text') {
   const re = new RegExp(`(<!-- ${name}:start -->)[\\s\\S]*?(<!-- ${name}:end -->)`);
   if (!re.test(text)) throw new Error(`${where} has no <!-- ${name}:start --> … <!-- ${name}:end --> block.`);
-  return text.replace(re, `$1\n${body}\n$2`);
+  return text.replace(re, (_, a, b) => `${a}\n${body}\n${b}`);
+}
+
+/** A flat badge drawn from the record, so no README needs a badge service. */
+export function badgeSvg(cert) {
+  const { total } = figures(cert);
+  const left = 'certified';
+  const right = `${total.certified}/${total.authorities} methods · ${int(total.off)} of ${compact(total.times)} off`;
+  const w = s => Math.round(s.length * 6.4 + 12);
+  const lw = w(left), rw = w(right);
+  const colour = total.certified === total.authorities && total.off === 0 ? '#2e7d4f' : '#b0601a';
+  return `<svg xmlns="http://www.w3.org/2000/svg" width="${lw + rw}" height="20" role="img" aria-label="${left}: ${right}">
+<title>${left}: ${right}</title>
+<rect width="${lw}" height="20" rx="3" fill="#555"/><rect x="${lw}" width="${rw}" height="20" rx="3" fill="${colour}"/><rect x="${lw}" width="4" height="20" fill="${colour}"/>
+<g fill="#fff" text-anchor="middle" font-family="Verdana,DejaVu Sans,sans-serif" font-size="11">
+<text x="${lw / 2}" y="14">${left}</text><text x="${lw + rw / 2}" y="14">${right}</text>
+</g>
+</svg>
+`;
 }

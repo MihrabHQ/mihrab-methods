@@ -46,7 +46,7 @@ What a new authority needs:
 
 Then `npm test`, `npm run typecheck` and `node scripts/readme.mjs --check`
 must pass. Figures in the README and docs are generated from
-`certification.json` — write `<!--fig:KEY-->…<!--/fig-->` and run
+`certification.json` — write `<!--fig:<key>-->…<!--/fig-->` and run
 `node scripts/readme.mjs`; never type a number in.
 
 ## Changing a method

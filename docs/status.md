@@ -26,17 +26,27 @@ The goal is 100 % on the printed minute, for every time of a full year, for
 each method.
 
 <!-- certification-table:start -->
+| Authority | Tables matched | Places | Times checked | Off the printed minute | By the method alone | Correction entries | Checked over |
+|---|---|---:|---:|---:|---:|---:|---|
+| **Sweden** | Islamiska Förbundet’s tables | 107 | 59,640 | **0** | 99.966 % | 270 | 11 Oct 2026 → 19 Nov 2027 |
+|  | Diyanet’s own tables | 159 | 1,393,794 | **0** | 99.981 % |  | 1 Jan 2024 → 31 Dec 2027 |
+| **Diyanet** | its tables worldwide | 8,132 | 69,999,603 | **0** | 99.986 % | 9,118 | 1 Jan 2024 → 31 Dec 2027 |
+| **Morocco** | Habous | 164 | 75,768 | **0** | 99.122 % | 665 | 27 Aug 2026 → 11 Nov 2026 |
+| **Algeria** | Ministry of Religious Affairs | 68 | 101,184 | **0** | 99.365 % | 642 | 1 Oct 2026 → 5 Jun 2027 |
+| **Indonesia** | Kemenag | 517 | 266,772 | **0** | 99.968 % | 84 | 7 Oct 2026 → 31 Dec 2026 |
+
+5 of 5 methods certified; 0 of 71,896,761 times off the printed minute. Last checked 18 October 2026. Generated from [`certification.json`](../certification.json) by `scripts/readme.mjs`.
 <!-- certification-table:end -->
 
 ## Sweden
 
-Certified over <!--fig:sweden.check1.span-->…<!--/fig--> against Diyanet's own
-tables for Sweden (<!--fig:sweden.check1.places-->…<!--/fig--> places), and over
-<!--fig:sweden.check0.span-->…<!--/fig--> against Islamiska Förbundet's published tables
-(<!--fig:sweden.check0.places-->…<!--/fig--> of its towns). Set aside from Islamiska
-Förbundet's: <!--fig:sweden.check0.sourceFaults-->…<!--/fig--> times that differ from Diyanet's own
+Certified over <!--fig:sweden.check1.span-->1 Jan 2024 → 31 Dec 2027<!--/fig--> against Diyanet's own
+tables for Sweden (<!--fig:sweden.check1.places-->159<!--/fig--> places), and over
+<!--fig:sweden.check0.span-->11 Oct 2026 → 19 Nov 2027<!--/fig--> against Islamiska Förbundet's published tables
+(<!--fig:sweden.check0.places-->107<!--/fig--> of its towns). Set aside from Islamiska
+Förbundet's: <!--fig:sweden.check0.sourceFaults-->33,395<!--/fig--> times that differ from Diyanet's own
 table for the day (its next year's rows repeat this year's figures), and
-<!--fig:sweden.check0.copiedRows-->…<!--/fig--> rows copied from another day. On each, the method
+<!--fig:sweden.check0.copiedRows-->646<!--/fig--> rows copied from another day. On each, the method
 gives Diyanet's own table.
 
 > **Research note, 2026-10-16** (not generated): Kiruna, printed with
@@ -44,7 +54,7 @@ gives Diyanet's own table.
 
 ## Diyanet
 
-Certified over <!--fig:diyanet.span-->…<!--/fig--> for <!--fig:diyanet.check0.places-->…<!--/fig-->
+Certified over <!--fig:diyanet.span-->1 Jan 2024 → 31 Dec 2027<!--/fig--> for <!--fig:diyanet.check0.places-->8,132<!--/fig-->
 places in Türkiye, Northern Cyprus and abroad (Sweden's are under Sweden).
 Each place is computed at a point of its own, checked to lie in the place's
 country.
@@ -69,17 +79,17 @@ country.
 
 ## Morocco
 
-Certified over <!--fig:morocco.span-->…<!--/fig--> (<!--fig:morocco.check0.places-->…<!--/fig-->
-cities): the method gives <!--fig:morocco.alonePct-->…<!--/fig--> % alone, and a list of
-<!--fig:morocco.corrections-->…<!--/fig--> corrections the rest. Certification covers only the dates
+Certified over <!--fig:morocco.span-->27 Aug 2026 → 11 Nov 2026<!--/fig--> (<!--fig:morocco.check0.places-->164<!--/fig-->
+cities): the method gives <!--fig:morocco.alonePct-->99.122<!--/fig--> % alone, and a list of
+<!--fig:morocco.corrections-->665<!--/fig--> corrections the rest. Certification covers only the dates
 in the table: each newly published month is checked against the method, and
 its corrections are added in a new list.
 
 ## Algeria
 
-Certified over <!--fig:algeria.span-->…<!--/fig--> (<!--fig:algeria.check0.places-->…<!--/fig-->
-cities): the method gives <!--fig:algeria.alonePct-->…<!--/fig--> % alone, and a list of
-<!--fig:algeria.corrections-->…<!--/fig--> corrections the rest. The method is at its limit: the
+Certified over <!--fig:algeria.span-->1 Oct 2026 → 5 Jun 2027<!--/fig--> (<!--fig:algeria.check0.places-->68<!--/fig-->
+cities): the method gives <!--fig:algeria.alonePct-->99.365<!--/fig--> % alone, and a list of
+<!--fig:algeria.corrections-->642<!--/fig--> corrections the rest. The method is at its limit: the
 angles, horizon, Maghrib margin, rounding, sun series, iterations and city
 points are each sharp optima, and the corrections are independent
 differences of about a second or less (no pattern by prayer, city, date or
@@ -88,9 +98,9 @@ held out).
 
 ## Indonesia
 
-Certified over <!--fig:indonesia.span-->…<!--/fig--> (<!--fig:indonesia.check0.places-->…<!--/fig-->
-regencies and cities): the method gives <!--fig:indonesia.alonePct-->…<!--/fig--> % alone, and a
-list of <!--fig:indonesia.corrections-->…<!--/fig--> corrections the rest. Karawang's Asr, Maghrib
+Certified over <!--fig:indonesia.span-->7 Oct 2026 → 31 Dec 2026<!--/fig--> (<!--fig:indonesia.check0.places-->517<!--/fig-->
+regencies and cities): the method gives <!--fig:indonesia.alonePct-->99.968<!--/fig--> % alone, and a
+list of <!--fig:indonesia.corrections-->84<!--/fig--> corrections the rest. Karawang's Asr, Maghrib
 and Isha are computed at a second point, about 2 km north-east of its first
 (its afternoon fits it, and it holds on days held out). The corrections are
 independent differences at a minute's edge, and refitting points to them

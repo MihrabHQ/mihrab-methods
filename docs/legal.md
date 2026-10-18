@@ -12,8 +12,8 @@ cases.
 - **The correction lists are microscopically small and static.** Each one
   holds only the few times where the authority's own rounding falls the
   other way: a point, a date, a prayer, a minute either way. Sweden's is
-  <!--fig:sweden.corrections-->…<!--/fig--> entries against <!--fig:sweden.timesCompact-->…<!--/fig-->
-  times (<!--fig:sweden.correctionsPct-->…<!--/fig--> %). The aim is the same for every method:
+  <!--fig:sweden.corrections-->270<!--/fig--> entries against <!--fig:sweden.timesCompact-->1.4 million<!--/fig-->
+  times (<!--fig:sweden.correctionsPct-->0.018<!--/fig--> %). The aim is the same for every method:
   get the formula as close as possible, so the list that remains is
   insubstantial.
 - **No timetable is part of this repository.** It holds no copy of any

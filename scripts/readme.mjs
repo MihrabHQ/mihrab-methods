@@ -11,7 +11,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { AUTHORITY_NAMES, AUTHORITY_ORDER, fillBlock, fillFigures, figures, int, longDate, namedFigures, pct, span } from './figures.mjs';
+import { AUTHORITY_NAMES, AUTHORITY_ORDER, badgeSvg, fillBlock, fillFigures, figures, int, longDate, namedFigures, pct, span } from './figures.mjs';
 
 const ROOT = path.join(path.dirname(fileURLToPath(import.meta.url)), '..');
 const CHECK = process.argv.includes('--check');
@@ -19,7 +19,7 @@ const cert = JSON.parse(fs.readFileSync(path.join(ROOT, 'certification.json'), '
 const { by, total } = figures(cert);
 const named = namedFigures(cert, 'en');
 
-function table() {
+function table(base = '') {
   const rows = [
     '| Authority | Tables matched | Places | Times checked | Off the printed minute | By the method alone | Correction entries | Checked over |',
     '|---|---|---:|---:|---:|---:|---:|---|',
@@ -44,25 +44,8 @@ function table() {
   return [
     ...rows,
     '',
-    `${int(total.certified)} of ${int(total.authorities)} methods certified; ${int(total.off)} of ${int(total.times)} times off the printed minute. Last checked ${longDate(total.checkedAt)}. Generated from [\`certification.json\`](certification.json) by \`scripts/readme.mjs\`.`,
+    `${int(total.certified)} of ${int(total.authorities)} methods certified; ${int(total.off)} of ${int(total.times)} times off the printed minute. Last checked ${longDate(total.checkedAt)}. Generated from [\`certification.json\`](${base}certification.json) by \`scripts/readme.mjs\`.`,
   ].join('\n');
-}
-
-/** A flat badge, drawn here so the README needs no badge service. */
-function badge() {
-  const left = 'certified';
-  const right = `${total.certified}/${total.authorities} methods · ${int(total.off)} of ${named['total.timesCompact']} off`;
-  const w = s => Math.round(s.length * 6.4 + 12);
-  const lw = w(left), rw = w(right);
-  const colour = total.certified === total.authorities && total.off === 0 ? '#2e7d4f' : '#b0601a';
-  return `<svg xmlns="http://www.w3.org/2000/svg" width="${lw + rw}" height="20" role="img" aria-label="${left}: ${right}">
-<title>${left}: ${right}</title>
-<rect width="${lw}" height="20" rx="3" fill="#555"/><rect x="${lw}" width="${rw}" height="20" rx="3" fill="${colour}"/><rect x="${lw}" width="4" height="20" fill="${colour}"/>
-<g fill="#fff" text-anchor="middle" font-family="Verdana,DejaVu Sans,sans-serif" font-size="11">
-<text x="${lw / 2}" y="14">${left}</text><text x="${lw + rw / 2}" y="14">${right}</text>
-</g>
-</svg>
-`;
 }
 
 const outputs = new Map();
@@ -72,10 +55,10 @@ for (const rel of docs) {
   if (!fs.existsSync(f)) continue;
   let text = fs.readFileSync(f, 'utf8');
   text = fillFigures(text, named, rel);
-  if (text.includes('<!-- certification-table:start -->')) text = fillBlock(text, 'certification-table', table(), rel);
+  if (text.includes('<!-- certification-table:start -->')) text = fillBlock(text, 'certification-table', table(rel.startsWith('docs/') ? '../' : ''), rel);
   outputs.set(rel, text);
 }
-outputs.set('docs/certification.svg', badge());
+outputs.set('docs/certification.svg', badgeSvg(cert));
 
 let stale = 0;
 for (const [rel, text] of outputs) {

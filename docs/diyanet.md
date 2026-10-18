@@ -4,16 +4,16 @@
 
 The method reproduces Diyanet's computation; what it cannot reproduce is the
 arithmetic of Diyanet's program, which puts a few times
-(<!--fig:sweden.correctionsPct-->…<!--/fig--> % in Sweden) on the other side of a minute's rounding point — a fraction of a second
+(<!--fig:sweden.correctionsPct-->0.018<!--/fig--> % in Sweden) on the other side of a minute's rounding point — a fraction of a second
 away, independently from place to place and day to day.
 `data/corrections/sweden.json` lists those times (point, date, prayer, a
-minute either way: <!--fig:sweden.corrections-->…<!--/fig--> over
-<!--fig:sweden.span-->…<!--/fig-->) and `timesFor` applies them. The list covers the
+minute either way: <!--fig:sweden.corrections-->270<!--/fig--> over
+<!--fig:sweden.span-->1 Jan 2024 → 31 Dec 2027<!--/fig-->) and `timesFor` applies them. The list covers the
 dates the timetables do, and certification holds over those dates only:
 outside them `timesFor` answers with `status: 'method-only'` (or refuses,
 with `strict`). Diyanet's worldwide list (`data/corrections/diyanet.json`)
-is the same kind: <!--fig:diyanet.corrections-->…<!--/fig--> entries against
-<!--fig:diyanet.timesCompact-->…<!--/fig--> times. Each year, once the next year's timetables are
+is the same kind: <!--fig:diyanet.corrections-->9,118<!--/fig--> entries against
+<!--fig:diyanet.timesCompact-->69.9 million<!--/fig--> times. Each year, once the next year's timetables are
 out:
 
 ```sh
