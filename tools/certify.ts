@@ -38,6 +38,7 @@ function record(r: Result): CheckRecord {
     places: r.places,
     times: r.times,
     off: r.times - r.exact,
+    offWithoutCorrections: r.times - r.exactAlone,
     from: r.from,
     to: r.to,
     ...(r.misplaced.length || r.sourceFaults || r.copiedRows
