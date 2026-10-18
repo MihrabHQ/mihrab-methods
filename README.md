@@ -2,6 +2,7 @@
 
 [![npm](https://img.shields.io/npm/v/mihrab-methods)](https://www.npmjs.com/package/mihrab-methods)
 [![checks](https://github.com/MihrabHQ/mihrab-methods/actions/workflows/ci.yml/badge.svg)](https://github.com/MihrabHQ/mihrab-methods/actions/workflows/ci.yml)
+[![feed](https://github.com/MihrabHQ/mihrab-methods/actions/workflows/feed.yml/badge.svg)](https://github.com/MihrabHQ/mihrab-methods/actions/workflows/feed.yml)
 [![certification](docs/certification.svg)](#how-verification-works)
 
 **Prayer times that match the published timetable to the printed minute.**

@@ -1,0 +1,39 @@
+name: feed
+
+# What installed apps read, checked daily: certification.json and every
+# correction list as served from main (schemas, the list the certification
+# names, SHA-256, what an app does with it), and the published package
+# installing and answering. Fails when an app would refuse the feed or fall
+# back to the method alone.
+
+on:
+  schedule:
+    - cron: '13 5 * * *' # daily
+  push:
+    branches: [main]
+    paths: ['certification.json', 'data/corrections/**', 'schemas/**']
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  feed:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - name: The live feed
+        run: npm run feed-check
+      - name: The published package installs and answers
+        if: always()
+        run: |
+          mkdir -p /tmp/consumer && cd /tmp/consumer && npm init -y >/dev/null
+          npm i --silent mihrab-methods@latest
+          node -e "const m=require('mihrab-methods/algeria');const {place}=m.nearestPlace('algeria',36.75,3.06);const d=m.timesFor(place,new Date().toISOString().slice(0,10));if(!/^\d\d:\d\d$/.test(d.times.fajr.printed))process.exit(1);console.log('CommonJS', d.status, d.times.fajr.printed)"
+          node --input-type=module -e "import {places,timesFor} from 'mihrab-methods/indonesia';const d=timesFor(places[0],new Date().toISOString().slice(0,10));if(!d.times)process.exit(1);console.log('ESM', d.status)"
