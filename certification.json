@@ -1,13 +1,15 @@
 {
   "sweden": {
     "certified": true,
-    "checkedAt": "2026-10-16",
+    "checkedAt": "2026-10-18",
+    "places": 108,
     "checks": [
       {
         "tables": "Sweden — Islamiska Förbundet’s tables",
         "places": 107,
         "times": 59640,
         "off": 0,
+        "offWithoutCorrections": 20,
         "from": "2026-10-11",
         "to": "2027-11-19",
         "setAside": {
@@ -21,6 +23,7 @@
         "places": 159,
         "times": 1393794,
         "off": 0,
+        "offWithoutCorrections": 259,
         "from": "2024-01-01",
         "to": "2027-12-31"
       }
@@ -35,13 +38,15 @@
   },
   "diyanet": {
     "certified": true,
-    "checkedAt": "2026-10-16",
+    "checkedAt": "2026-10-18",
+    "places": 8132,
     "checks": [
       {
         "tables": "Diyanet — its tables worldwide",
         "places": 8132,
         "times": 69999603,
         "off": 0,
+        "offWithoutCorrections": 9129,
         "from": "2024-01-01",
         "to": "2027-12-31"
       }
@@ -56,13 +61,15 @@
   },
   "morocco": {
     "certified": true,
-    "checkedAt": "2026-10-16",
+    "checkedAt": "2026-10-18",
+    "places": 164,
     "checks": [
       {
         "tables": "Morocco — Habous",
         "places": 164,
         "times": 75768,
         "off": 0,
+        "offWithoutCorrections": 665,
         "from": "2026-08-27",
         "to": "2026-11-11"
       }
@@ -77,13 +84,15 @@
   },
   "algeria": {
     "certified": true,
-    "checkedAt": "2026-10-16",
+    "checkedAt": "2026-10-18",
+    "places": 68,
     "checks": [
       {
         "tables": "Algeria — Ministry of Religious Affairs",
         "places": 68,
         "times": 101184,
         "off": 0,
+        "offWithoutCorrections": 642,
         "from": "2026-10-01",
         "to": "2027-06-05"
       }
@@ -98,13 +107,15 @@
   },
   "indonesia": {
     "certified": true,
-    "checkedAt": "2026-10-16",
+    "checkedAt": "2026-10-18",
+    "places": 517,
     "checks": [
       {
         "tables": "Indonesia — Kemenag",
         "places": 517,
         "times": 266772,
         "off": 0,
+        "offWithoutCorrections": 84,
         "from": "2026-10-07",
         "to": "2026-12-31"
       }

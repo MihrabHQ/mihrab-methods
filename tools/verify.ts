@@ -13,7 +13,8 @@
  */
 import fs from 'node:fs';
 import path from 'node:path';
-import { AUTHORITIES, placesOf, candidateInstants, type Authority, type Place } from '../src/index.js';
+import { AUTHORITIES, placesOf, candidateInstants, type Authority, type Instants, type Place } from '../src/index.js';
+import { authorityData } from '../src/core/registry.js';
 
 const ROOT = path.join(__dirname, '..');
 export const TABLES = process.env.MIHRAB_TABLES ?? path.join(ROOT, '.tables');
@@ -27,6 +28,8 @@ export type Result = {
   days: number;
   times: number;
   exact: number;
+  /** Times on the printed minute by the method alone, without its correction list — of the same times. */
+  exactAlone: number;
   within1: number;
   worst: number;
   misses: Record<(typeof KEYS)[number], number>;
@@ -88,14 +91,27 @@ export const minutes = (s: string | undefined) => {
   return m ? Number(m[1]) * 60 + Number(m[2]) : NaN;
 };
 
+/**
+ * The correction list applied to the method's instants (the standard Asr),
+ * exactly as `candidateInstants` applies it: a minute either way on the
+ * listed times.
+ */
+export function withCorrections(place: Place, alone: Instants, year: number, month0: number, day: number): Instants {
+  const c = authorityData(place.authority).corrections.correction(place.lat, place.lon, year, month0, day);
+  if (!c) return alone;
+  const out = { ...alone };
+  for (const k of KEYS) if (c[k]) out[k] = new Date(alone[k].getTime() + c[k]! * 60_000);
+  return out;
+}
+
 export function check(name: string, places: readonly Place[], dir: string, opts: CheckOptions = {}): Result | null {
   if (!fs.existsSync(dir)) return null;
-  const r: Result = { name, places: 0, days: 0, times: 0, exact: 0, within1: 0, worst: 0, misses: { fajr: 0, sunrise: 0, dhuhr: 0, asr: 0, maghrib: 0, isha: 0 }, worstPlaces: [], sourceFaults: 0, copiedRows: 0, misplaced: [], from: '', to: '' };
+  const r: Result = { name, places: 0, days: 0, times: 0, exact: 0, exactAlone: 0, within1: 0, worst: 0, misses: { fajr: 0, sunrise: 0, dhuhr: 0, asr: 0, maghrib: 0, isha: 0 }, worstPlaces: [], sourceFaults: 0, copiedRows: 0, misplaced: [], from: '', to: '' };
   const perPlace = new Map<string, number>();
   for (const place of places) {
     // Per place first: a table that is mostly off is another town's, printed for this one — the
     // source's fault, reported apart, not counted. Every day is checked, the days the clock changes too.
-    const pr: Result = { ...r, times: 0, exact: 0, within1: 0, worst: 0, days: 0, misses: { fajr: 0, sunrise: 0, dhuhr: 0, asr: 0, maghrib: 0, isha: 0 }, sourceFaults: 0, copiedRows: 0, from: '', to: '' };
+    const pr: Result = { ...r, times: 0, exact: 0, exactAlone: 0, within1: 0, worst: 0, days: 0, misses: { fajr: 0, sunrise: 0, dhuhr: 0, asr: 0, maghrib: 0, isha: 0 }, sourceFaults: 0, copiedRows: 0, from: '', to: '' };
     const f = path.join(dir, `${place.key}.json`);
     if (!fs.existsSync(f)) continue;
     const days = (JSON.parse(fs.readFileSync(f, 'utf8')) as { days: Record<string, string[]> }).days;
@@ -112,8 +128,11 @@ export function check(name: string, places: readonly Place[], dir: string, opts:
         pr.copiedRows++;
         y -= 1;
       }
-      const t = candidateInstants(place, y, m - 1, d, 1, { corrections: !ALONE });
-      if (!t) continue;
+      // The method alone, then its correction list on top — as `candidateInstants` applies it
+      // (`withCorrections`; test/verify.test.ts holds the two equal) — so both counts come from one pass.
+      const alone = candidateInstants(place, y, m - 1, d, 1, { corrections: false });
+      if (!alone) continue;
+      const t = ALONE ? alone : withCorrections(place, alone, y, m - 1, d);
       pr.days++;
       if (!pr.from || date < pr.from) pr.from = date;
       if (!pr.to || date > pr.to) pr.to = date;
@@ -123,6 +142,7 @@ export function check(name: string, places: readonly Place[], dir: string, opts:
         let diff = Math.abs(tableClock(place, date, t[k]) - theirs);
         if (diff > 720) diff = 1440 - diff;
         pr.times++;
+        if (tableClock(place, date, alone[k]) === theirs) pr.exactAlone++;
         if (diff === 0) pr.exact++;
         else pr.misses[k]++;
         if (diff <= 1) pr.within1++;
@@ -135,7 +155,7 @@ export function check(name: string, places: readonly Place[], dir: string, opts:
       continue;
     }
     r.places++;
-    r.days += pr.days; r.times += pr.times; r.exact += pr.exact; r.within1 += pr.within1;
+    r.days += pr.days; r.times += pr.times; r.exact += pr.exact; r.exactAlone += pr.exactAlone; r.within1 += pr.within1;
     r.worst = Math.max(r.worst, pr.worst); r.sourceFaults += pr.sourceFaults; r.copiedRows += pr.copiedRows;
     for (const k of KEYS) r.misses[k] += pr.misses[k];
     if (pr.from && (!r.from || pr.from < r.from)) r.from = pr.from;

@@ -2,319 +2,119 @@
 
 [![npm](https://img.shields.io/npm/v/mihrab-methods)](https://www.npmjs.com/package/mihrab-methods)
 [![checks](https://github.com/MihrabHQ/mihrab-methods/actions/workflows/ci.yml/badge.svg)](https://github.com/MihrabHQ/mihrab-methods/actions/workflows/ci.yml)
+[![certification](docs/certification.svg)](#how-verification-works)
 
-An open prayer-time library: the calculation methods of the national
-authorities, implemented to reproduce their official timetables to the
-minute, free for anyone to use. Accurate prayer times shouldn't be something
-only a few apps can offer.
+**Prayer times that match the published timetable to the printed minute.**
+Each national authority's own calculation method, worked out again from its
+published times and checked day by day against its timetables: <!--fig:total.off-->0<!--/fig--> of
+<!--fig:total.times-->71,896,761<!--/fig--> times off the printed minute. Free for any app, site or
+mosque to use.
 
 ```sh
 npm install mihrab-methods
 ```
 
 ```ts
-import { nearestPlace, timesFor } from 'mihrab-methods/algeria'; // or 'mihrab-methods' for all five
+import { nearestPlace, timesFor } from 'mihrab-methods/diyanet'; // one authority's data, or 'mihrab-methods' for all
 
-const { place } = nearestPlace('algeria', 36.75, 3.06)!;    // Algiers
-const day = timesFor(place, '2026-10-15');
-day.status;               // 'certified' — the ministry's own printed minute
-day.clock.label;          // 'Africa/Algiers'
-day.times!.fajr;          // { instant: 2026-10-15T04:29:00.000Z, printed: '05:29' }
+const { place } = nearestPlace('diyanet', 41.01, 28.98)!;  // Istanbul's district
+const day = timesFor(place, '2026-10-15');                  // or { year: 2026, month: 10, day: 15 }
+day.status;          // 'certified': inside the dates the method was checked over
+day.clock.label;     // 'Europe/Istanbul': the clock the table prints the day in
+day.times!.fajr;     // { instant: Date, printed: 'HH:MM' } — show printed, schedule on instant
+day.certifiedUntil;  // the last date checked; past it, status is 'method-only'
 ```
 
-It is a library, in TypeScript, with a small server over it for everything
-else (`npm run serve`); see [Use](#use).
+The full API, the HTTP server and the per-authority imports are in
+[docs/usage.md](docs/usage.md).
 
-Each method is the authority's own formula, worked out again from its
-published times, with a small, fixed correction list for the few times where the formula
-alone lands a fraction of a second on the wrong side of a minute. The aim is that
-any app, site or mosque can give the times its community prays by, without
-asking anyone.
+## What is certified
 
-Methods today:
+<!-- certification-table:start -->
+| Authority | Tables matched | Places | Times checked | Off the printed minute | By the method alone | Correction entries | Checked over |
+|---|---|---:|---:|---:|---:|---:|---|
+| **Sweden** | Islamiska Förbundet’s tables | 107 | 59,640 | **0** | 99.966 % | 270 | 11 Oct 2026 → 19 Nov 2027 |
+|  | Diyanet’s own tables | 159 | 1,393,794 | **0** | 99.981 % |  | 1 Jan 2024 → 31 Dec 2027 |
+| **Diyanet** | its tables worldwide | 8,132 | 69,999,603 | **0** | 99.986 % | 9,118 | 1 Jan 2024 → 31 Dec 2027 |
+| **Morocco** | Habous | 164 | 75,768 | **0** | 99.122 % | 665 | 27 Aug 2026 → 11 Nov 2026 |
+| **Algeria** | Ministry of Religious Affairs | 68 | 101,184 | **0** | 99.365 % | 642 | 1 Oct 2026 → 5 Jun 2027 |
+| **Indonesia** | Kemenag | 517 | 266,772 | **0** | 99.968 % | 84 | 7 Oct 2026 → 31 Dec 2026 |
 
-| Authority | Method | On the printed minute | Within a minute | Checked over |
-|---|---|---|---|---|
-| **Sweden** — Diyanet's method, as used by Islamiska Förbundet | `src/methods/sweden.ts` — the Istanbul congress method as Diyanet computes it, with `data/corrections/sweden.json` | **100 %** of Diyanet's timetables (1.39 M times, 2024–2027) and of Islamiska Förbundet's (107 cities, 59 640 times, Oct 2026 → Nov 2027, with the rows set aside below) — by the method alone, 99.981 % and 99.966 % | 100 % | 2024 → 2027 |
-| **Diyanet** — Türkiye and worldwide | `src/methods/sweden.ts` with Isha's angle by country (16° or 17°), a point per prayer per year in Türkiye, with `data/corrections/diyanet.json` | **100 %** of Diyanet's timetables for all 880 districts of Türkiye and Northern Cyprus and 7 252 places in 197 other countries (70.0 M times) — 99.987 % by the method alone | 100 % | 2024 → 2027 |
-| **Morocco** — Ministry of Habous | `src/methods/morocco.ts` — each city's own sunrise and Maghrib horizon, the sun's semidiameter by its distance, the tables' own clock (GMT+1 until 17 Sep 2026), with `data/corrections/morocco.json` | **100 %** of the ministry's tables for its 164 located cities (75 768 times) — 99.122 % by the method alone | 100 % | 27 Aug → 11 Nov 2026 |
-| **Algeria** — Ministry of Religious Affairs and Wakfs | `src/methods/algeria.ts`, with `data/corrections/algeria.json` | **100 %** of the ministry's 1448 AH table for its 68 cities (101 184 times) — 99.366 % by the method alone | 100 % | 1 Oct 2026 → 5 Jun 2027 |
-| **Indonesia** — Kemenag | `src/methods/indonesia.ts`, with `data/corrections/indonesia.json` | **100 %** of the ministry's tables for all 517 regencies and cities (266 772 times) — 99.969 % by the method alone | 100 % | 7 Oct → 31 Dec 2026 |
+5 of 5 methods certified; 0 of 71,896,761 times off the printed minute. Last checked 18 October 2026. Generated from [`certification.json`](certification.json) by `scripts/readme.mjs`.
+<!-- certification-table:end -->
 
-The goal is 100 % on the printed minute, for every time of a full year, for
-each method.
+"By the method alone" is the formula without its correction list. The list
+holds the few times the authority's own program puts a fraction of a second
+on the other side of a minute's rounding point: a point, a date, a prayer, a
+minute either way. Why that can be used freely is in
+[docs/legal.md](docs/legal.md); what each method still leaves out is in
+[docs/status.md](docs/status.md).
 
-## Certification: 100 % or not at all
+## How verification works
 
-A method may be used only once it reproduces **every** time of its
-authority's timetable on the printed minute — not one minute off, anywhere.
-`npm run certify` checks each method day by day and writes
-`certification.json`; `timesFor` throws `UncertifiedMethodError` for any
-method not certified there, and says `status: 'method-only'` for a date
-beyond the span it was checked over. `candidateTimes` runs a method
-regardless, for research and for the check itself — not for showing anyone
-their prayer times.
+1. **The tables.** For each authority, its own published timetables for
+   every place it lists, every day it has published. They are not part of
+   this repository and are not redistributed; the check reads them from
+   `MIHRAB_TABLES`.
+2. **The check.** [`tools/verify.ts`](tools/verify.ts) computes every place on
+   every day and compares each of the six times with the printed minute, on
+   the clock the table prints that day in. Days the table itself gets wrong
+   (another town's times under a name, a previous year's rows) are set aside
+   and listed in the record, so each can be judged.
+3. **The record.** [`tools/certify.ts`](tools/certify.ts) writes
+   [`certification.json`](certification.json): per authority, the tables
+   checked, the times, how many are off with and without the correction
+   list, the dates, the method's revision and the list's SHA-256.
+4. **The gate.** A method is certified only at **0** off. `timesFor` refuses
+   an uncertified method, and says `'method-only'` for a date past the
+   checked span. Every number on this page, on the Mihrab website and in its
+   store listings is generated from that record (`scripts/readme.mjs`).
 
-Days the timetable itself gets wrong (another town's times under a name, a
-previous year's figures for the date, a figure that differs from the
-authority's own) are set aside and listed in the record, so each can be
-judged.
-
-Today (checked 2026-10-16) **every method is certified**: Sweden and Diyanet for 2024–2027, and Morocco, Algeria and Indonesia for the tables published so far:
-
-| Authority | Off the printed minute |
-|---|---|
-| Sweden | 0 of 59 640 (Islamiska Förbundet); 0 of 1 393 794 (Diyanet) |
-| Diyanet (Türkiye and worldwide) | 0 of 69 999 603 |
-| Morocco | 0 of 75 768 |
-| Algeria | 0 of 101 184 |
-| Indonesia | 0 of 266 772 |
-
-## Status
-
-| Method | Where it stands |
-|---|---|
-| Sweden | Certified, 2024–2027, against Diyanet's tables for Sweden (159 places), and against Islamiska Förbundet's published tables (11 Oct 2026 → 19 Nov 2027) for 107 of its 108 cities. Set aside from Islamiska Förbundet's: Kiruna, printed with Umeå's times; 33 395 times that differ from Diyanet's own table for the day (its 2027 rows repeat 2026's figures); and 646 rows copied from another day. On each, the method gives Diyanet's own table. |
-| Diyanet | Certified, 2024–2027, for every district of Türkiye and Northern Cyprus and 7 252 places in 197 other countries: 8 291 of the 8 528 places Diyanet lists, with Sweden's 159. Each place is computed at a point of its own, checked to lie in the place's country. Not yet included: 147 places that could not be placed — seven of them Diyanet serves no table for (Grozny, Gudermes, Shali and Urus-Martan, Rožaje, Monte Carlo, Punta Arenas), the rest names the gazetteer does not match; 75 whose tables the method does not yet follow over all four years — about half of them in Mexico and Australia, whose tables keep a clock of their own, the rest scattered (Kazan, Fez, Ushuaia, Svalbard among them); 12 whose tables Diyanet computes at a point elsewhere — in another country, at sea or in the other hemisphere (Tupiza, Ribeirão das Neves, Montería, Hami, Kungälv and Galena among them); Syktyvkar, whose 2024 and 2027 tables print a Fajr hours from its 2025 and 2026 ones; and Ping Tung City and Rilchingen-Hanweiler, each listed again at the same point (as Pingtung and Kleinblittersdorf) with a table a minute apart on two days. |
-| Morocco | Certified for 27 Aug → 11 Nov 2026 (164 cities): the method gives 99.12 % alone, and a list of 665 corrections the rest. Certification covers only the dates in the table: each newly published month is checked against the method, and its corrections are added in a new list. |
-| Algeria | Certified for 1448 AH (1 Oct 2026 → 5 Jun 2027, 68 cities): the method gives 99.37 % alone, and a list of 642 corrections the rest. The method is at its limit: the angles, horizon, Maghrib margin, rounding, sun series, iterations and city points are each sharp optima, and the 642 are independent differences of about a second or less (no pattern by prayer, city, date or season; refitting the points to them only fits noise, and is worse on days held out). |
-| Indonesia | Certified for 7 Oct → 31 Dec 2026 (517 regencies and cities): the method gives 99.969 % alone, and a list of 84 corrections the rest. Karawang's Asr, Maghrib and Isha are computed at a second point, about 2 km north-east of its first (its afternoon fits it, and it holds on days held out). The 84 are independent differences at a minute's edge (median 0.2 s, nine in ten under 1.3 s, the largest 3.9 s) — eight at Sibolga, whose mornings no point fits — and refitting points to them only fits noise. Certification covers only the dates in the tables: each newly published month is checked against the method, and its corrections are added in a new list. |
-
-## Formulas and correction lists: why this can be used freely
-
-Under EU and Swedish law, this approach is lawful use and "insubstantial
-extraction": an unprotected mathematical formula, worked out from published
-times, plus a very small, static list of factual data points that fixes edge
-cases.
-
-- **The methods are formulas.** A method of calculation is not protected as
-  such. What is here is the arithmetic: the sun's position, the angles, the
-  margins and the high-latitude rules each authority applies. It is written
-  from scratch, not copied.
-- **The correction lists are microscopically small and static.** Each one
-  holds only the few times where the authority's own rounding falls the
-  other way: a point, a date, a prayer, a minute either way. Sweden's is 270
-  entries against 1.39 million times (0.02 %). The aim is the same for every
-  method: get the formula as close as possible, so the list that remains is
-  insubstantial.
-- **No timetable is part of this repository.** It holds no copy of any
-  authority's tables. The times are computed, for any date and any point.
-
-This is the project's position, not legal advice. The same rule applies to
-every method added here: the best formula first, and a correction list only
-for what is left.
-
-## Sweden's and Diyanet's correction lists
-
-The method reproduces Diyanet's computation; what it cannot reproduce is the
-arithmetic of Diyanet's program, which puts about one time in five thousand on
-the other side of a minute's rounding point — a fraction of a second away,
-independently from place to place and day to day. `data/corrections/sweden.json`
-lists those times (point, date, prayer, a minute either way: 270 over
-2024–2027) and `timesFor` applies them. The list covers the years the
-timetables do, and certification holds over those dates only: outside them
-`timesFor` answers with `status: 'method-only'` (or refuses, with
-`strict`). Diyanet's worldwide list
-(`data/corrections/diyanet.json`) is the same kind: 9 118 entries at 4 660 points against
-70.0 million times. Each year, once the next year's timetables are out:
-
-```sh
-npm run corrections && for a in diyanet morocco algeria indonesia; do npm run corrections -- $a; done && npm run certify
-```
-
-What Diyanet's worldwide tables add to the Swedish method:
-
-- **Isha by country:** 16° (the Congress's) in most of Europe, Russia,
-  Ukraine, Belarus, Kazakhstan, Mongolia, China, the United States and
-  Canada; 17° elsewhere. The high-latitude rules are worked at 16° either way.
-- **The takdir at midsummer:** where the dawn forms all summer but midsummer's
-  true Isha falls later than the share carried from that night, midsummer is
-  the takdir's day, with the twenty-minute ramps (from about 44.4° north).
-- **Türkiye's districts:** each prayer is computed at a point of its own in the
-  district, and the points move by a few thousandths of a degree from one
-  year's tables to the next (`data/places/diyanetTurkeyPoints.json`, a point
-  per prayer per year; Northern Cyprus the same).
-- **Past local midnight:** where the first true dawn after the summer gap falls
-  before local midnight on the table's clock (far east of a zone's meridian,
-  as at Aihui in China), there is no transition: the gap's last day is printed
-  twenty minutes after the takdir and the true times follow.
-- **Tables on their own clocks:** 192 of Diyanet's tables are printed on a
-  clock other than their place's zone — Alberta's keep summer time from 2026
-  on; Mexico's had it again in 2025; Queensland's and Western Australia's have
-  it in 2024, 2025 and 2027; Paraguay's keep the summer time the country gave
-  up in October 2024 until the end of 2025; Xinjiang's are Beijing time;
-  western Brazil's, Armenia's and some of Russia's and Mongolia's are a zone
-  or two away from their own; Alchevsk's are Moscow time with summer time.
-  For those the table's clock is read off the table itself (`clock` in
-  `data/places/diyanetWorldPoints.json`); the instants are the method's.
-- **The day's clock:** a table prints the whole day in the clock kept at noon,
-  so on the morning the clocks go forward a Fajr before the change is printed
-  in the new time.
+Times that differ from your mosque's?
+[Open a report](https://github.com/MihrabHQ/mihrab-methods/issues/new?template=times-differ.yml)
+with the city, the date, the prayer and the printed time.
 
 ## Keeping an app current
 
-`certification.json` is meant to be read by apps. For each authority it
-says whether the method is certified, the method's `revision`
-(`src/methods/revisions.ts`) and the correction list it certifies
-(`corrections`: the dates it covers and how many times it moves):
-
-```json
-"morocco": { "certified": true, "revision": 1,
-             "corrections": { "from": "2026-08-27", "to": "2026-11-11", "entries": 665 }, … }
-```
-
-An app that computes revision 1 can take any newer list certified for
-revision 1 straight from `data/corrections/<authority>.json` — no release
-needed. A higher revision means the method itself changed and its lists no
-longer fit the older code: the app should ask its user to update.
-`certified: false` means the authority has published tables the method is
-not yet on every minute of. Past a list's `to`, the method alone applies.
-
-The check done right is in the library:
+The record and the correction lists are a feed: an app that computes a
+method's revision can take any newer list certified for that revision, with
+no release.
 
 ```ts
 import { fetchLatestCorrections } from 'mihrab-methods/morocco';
 const r = await fetchLatestCorrections({ authority: 'morocco' });
-// r.status: 'current' | 'updated' | 'method-moved' | 'uncertified' | 'rejected'
+// 'current' | 'updated' | 'method-moved' (update the app) | 'uncertified' | 'rejected'
 ```
 
-It reads `certification.json`, takes a list only for the revision this
-build computes, only when it is the list the certification names (dates,
-size, and the **SHA-256** of the file as published), and puts it in force
-(`applyCorrections` restores one an app has stored). Both files have a
-published schema: `schemas/certification.schema.json` and
-`schemas/corrections.schema.json`; `npm test` validates them.
+It takes a list only for the revision the build computes, only when it is
+the list the record names, and only when its SHA-256 matches. Schemas, tags
+as fixed addresses and the details: [docs/feed.md](docs/feed.md).
 
-Addresses: `main` is the live feed (what the Mihrab app reads). Every
-release is also tagged, and the same paths under a tag are fixed for good:
-`https://raw.githubusercontent.com/MihrabHQ/mihrab-methods/v1.0.0/certification.json`.
-Pass a tag's base URL as `baseUrl` to pin.
+## More
 
-The revision is raised whenever a change to a method or to its places'
-points changes what it prints; `npm test` fails until certification.json
-names the current revision and list. `CHANGELOG.md` says what each
-revision changed in the output.
-
-## Use
-
-### As a package
-
-```sh
-npm install mihrab-methods
-```
-
-One entry point per authority, so an app ships only the data it needs
-(Indonesia's is 90 KB; Diyanet's worldwide points and list are 1.6 MB):
-
-| Import | Loads |
+| | |
 |---|---|
-| `mihrab-methods` | all five |
-| `mihrab-methods/sweden`, `/diyanet`, `/morocco`, `/algeria`, `/indonesia` | one authority: its places, list and certification |
-| `mihrab-methods/locate` | `countryAt`, `defaultAuthorityFor` — the country at a point, and the authority whose table it prays by (470 KB of outlines) |
-| `mihrab-methods/core` | the calls and types with no data (load authorities yourself) |
+| [docs/usage.md](docs/usage.md) | The API, the entry points, the HTTP server, this repository's commands and layout |
+| [docs/methods.md](docs/methods.md) | Each method in words and formulas, for ports to other languages; `test/vectors.json` to check one |
+| [docs/status.md](docs/status.md) | Per method: what is certified, what was set aside, what is not yet covered |
+| [docs/diyanet.md](docs/diyanet.md) | What Diyanet's worldwide tables add: Isha by country, midsummer, Türkiye's points, tables on their own clocks |
+| [docs/feed.md](docs/feed.md) | `certification.json` and the lists as a feed: schemas, hashes, revisions, tags |
+| [docs/legal.md](docs/legal.md) | Formulas and correction lists: why this can be used freely |
+| [CONTRIBUTING.md](CONTRIBUTING.md) | Adding an authority: 100 % or nothing |
+| [CHANGELOG.md](CHANGELOG.md) | Each version, and what each method revision changed in the output |
 
-CommonJS and ES modules, with types. Node 18+, or any bundler; nothing is
-read from disk or fetched unless you call `fetchLatestCorrections`.
+The Mihrab app computes these methods on the phone; a method that improves
+here goes back as the same file in Mihrab's `src/providers/`.
 
-```ts
-import { placesOf, placeById, nearestPlace, timesFor, timesForRange, candidateTimes, methodInfo } from 'mihrab-methods';
-import { defaultAuthorityFor } from 'mihrab-methods/locate';
-
-defaultAuthorityFor(59.33, 18.07);            // 'sweden' (null where none of the five is the authority)
-const { place, distanceKm } = nearestPlace('sweden', 59.33, 18.07)!;
-place.id;                                     // 'sweden:stockholm' — stable; place.country 'SE'
-placeById('diyanet:9146');                    // Adana
-
-timesFor(place, '2026-10-15');                // or { year: 2026, month: 10, day: 15 } — January is 1
-// {
-//   status: 'certified',                     'method-only' outside the certified dates: the method alone,
-//                                            on the printed minute all but rarely, never a minute further
-//   date: '2026-10-15', certifiedFrom: '2024-01-01', certifiedUntil: '2027-12-31', revision: 1,
-//   clock: { zone: 'Europe/Stockholm', offsetMinutes: 120, label: 'Europe/Stockholm' },
-//   times: { fajr: { instant: Date, printed: '05:09' }, sunrise: …, dhuhr: …, asr: …, maghrib: …, isha: … }
-// }
-timesFor(place, '2031-01-01', { strict: true });   // throws UncertifiedMethodError instead
-timesFor(place, '2026-10-15', { asrShadow: 2 });   // the Hanafi Asr (the tables print the standard one)
-timesForRange(place, '2026-10-01', '2026-10-31');  // a month, one DayTimes per day
-candidateTimes(place, '2026-10-15', { corrections: false }); // the formula alone — research
-methodInfo('morocco');                        // angles, margins, rounding, revision, certification, sources, spec
-```
-
-`printed` is the wall-clock minute on `clock`, which is the clock the
-authority prints the day in: the place's zone as kept at noon, or the
-table's own clock where it keeps one no zone does (Morocco's GMT+1 until
-September 2026; some of Diyanet's). An app shows `printed` and schedules
-on `instant`; nothing needs rounding or converting.
-
-### As a server
-
-```sh
-npm run serve      # http://localhost:8787
-```
-
-```
-GET /v1/times?authority=diyanet&lat=41.01&lng=28.98&date=2026-10-15
-GET /v1/times?place=algeria:27&from=2026-10-01&to=2026-10-31
-GET /v1/nearest?authority=morocco&lat=33.57&lng=-7.59
-GET /v1/authority?lat=59.33&lng=18.07
-GET /v1/places?authority=indonesia
-GET /v1/methods
-```
-
-Self-hostable, nothing stored (`tools/serve.ts`, eighty lines).
-
-### In another language
-
-`docs/methods.md` states each method in prose and formulas, and
-`test/vectors.json` is a small sample of places, dates and the times to
-expect — enough to prove a port matches, too small to be a timetable.
-
-### This repository
-
-```sh
-npm install           # NODE_ENV must not be "production", or the dev tools are skipped
-npm test              # the library, the schemas, the vectors; the table checks when the tables are present
-npm run build         # dist/ (CommonJS and ESM, with types)
-npm run verify        # every method against the reference timetables
-npm run verify -- morocco indonesia
-npm run verify -- --alone   # each method without its correction list
-npm run corrections   # rewrites Sweden's correction list (`-- diyanet`, `-- morocco`, … for the others)
-npm run certify       # rewrites certification.json — what may be used
-npm run vectors       # rewrites test/vectors.json (after a method revision)
-```
-
-The reference timetables are not part of this repository; point
-`MIHRAB_TABLES` at them (default `.tables`). Without them `candidateTimes`
-still runs, the checks and their tests skip, and `npm run certify` writes
-nothing.
-
-## Layout
-
-| Path | What |
-|---|---|
-| `src/methods/` | The methods: Sweden and Diyanet (`sweden.ts`), Morocco, Algeria, Indonesia; their revisions |
-| `src/sun/preciseSun.ts` | VSOP87 apparent sun, after Astronomy Engine: within about 0.05 s and 0.5″ of JPL's DE421 |
-| `src/core/` | The calls (`api.ts`), the computation they share (`compute.ts`), dates, clocks, the correction-list index, `fetchLatestCorrections` |
-| `src/authorities/` | Each authority's places, at the point (and Morocco's horizon) its method is computed at, with its description |
-| `src/index.ts`, `src/<authority>.ts`, `src/locate.ts`, `src/core.ts` | The package's entry points |
-| `data/places/`, `data/corrections/`, `data/locate/` | The place lists and fitted points, the correction lists, the country outlines — embedded into the code by `scripts/embed.mjs` at build time |
-| `certification.json`, `schemas/` | The 100 % gate's record, and the schemas of the files apps read |
-| `tools/verify.ts`, `tools/certify.ts`, `tools/corrections.ts` | The day-by-day check against the timetables; the certification; the correction lists |
-| `tools/vectors.ts`, `test/vectors.json`, `docs/methods.md` | For ports: the sample and the written method |
-| `tools/serve.ts` | The HTTP server |
-
-## Back into Mihrab
-
-A method that improves here goes back as the same file in Mihrab's
-`src/providers/` (and its points file in `src/providers/data/`). The app
-reads `certification.json` and the lists from this repository's `main`;
-that feed does not change shape between versions (`schemas/`).
+Mihrab and this library are independent: not affiliated with, endorsed by
+or speaking for any of the authorities whose published timetables they
+match.
 
 ## Licence
 
 [MPL-2.0](LICENSE). Use the library in any app, open or closed, on a phone
-or on a server; what the licence asks is that changes to *these files* —
-a method fitted closer to its table, a corrected point — are published
-under the same terms, so an improvement to a method reaches everyone. The
-Mihrab app itself stays AGPL-3.0; it includes this library as the MPL
-allows. Versions before 1.0.0 were AGPL-3.0-or-later.
+or on a server; what the licence asks is that changes to *these files* — a
+method fitted closer to its table, a corrected point — are published under
+the same terms, so an improvement to a method reaches everyone. The Mihrab
+app stays AGPL-3.0 and includes this library as the MPL allows. Versions
+before 1.0.0 were AGPL-3.0-or-later.

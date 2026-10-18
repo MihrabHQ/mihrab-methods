@@ -18,6 +18,7 @@ import path from 'node:path';
 import { createHash } from 'node:crypto';
 import { AUTHORITIES, type Authority, type Certification, type CheckRecord } from '../src/core/types.js';
 import { METHOD_REVISION } from '../src/methods/revisions.js';
+import { placesOf } from '../src/index.js';
 import { checkAuthority, TABLES, type CheckRun, type Result } from './verify.js';
 
 const FILE = path.join(__dirname, '..', 'certification.json');
@@ -38,6 +39,7 @@ function record(r: Result): CheckRecord {
     places: r.places,
     times: r.times,
     off: r.times - r.exact,
+    offWithoutCorrections: r.times - r.exactAlone,
     from: r.from,
     to: r.to,
     ...(r.misplaced.length || r.sourceFaults || r.copiedRows
@@ -61,7 +63,8 @@ for (const a of AUTHORITIES as readonly Authority[]) {
     checks.push(record(r));
   }
   const certified = checks.length > 0 && checks.every(c => c.times > 0 && c.off === 0);
-  out[a] = { certified, checkedAt, checks, corrections: correctionsOf(a), revision: METHOD_REVISION[a] };
+  // `places`: how many places the library offers for the authority — what an app can show, beside what was checked.
+  out[a] = { certified, checkedAt, places: placesOf(a).length, checks, corrections: correctionsOf(a), revision: METHOD_REVISION[a] };
   const summary = checks.map(c => `${c.tables}: ${c.off} of ${c.times} off`).join('; ');
   console.log(`${certified ? 'CERTIFIED  ' : 'uncertified'} ${a} — ${summary}`);
 }

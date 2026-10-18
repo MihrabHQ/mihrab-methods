@@ -76,6 +76,8 @@ export type CheckRecord = {
   times: number;
   /** Times not on the printed minute. Certified only at 0. */
   off: number;
+  /** Of the same times, how many the method alone (without its correction list) leaves off the printed minute. */
+  offWithoutCorrections?: number;
   from: string;
   to: string;
   /** What the check set aside as the source's fault, not the method's: listed so it can be judged. */
@@ -86,6 +88,8 @@ export type CheckRecord = {
 export type Certification = {
   certified: boolean;
   checkedAt: string;
+  /** How many places the library offers for the authority. */
+  places?: number;
   checks: CheckRecord[];
   /**
    * The correction list this certification is for: the dates it covers, how

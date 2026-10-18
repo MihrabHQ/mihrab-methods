@@ -26,6 +26,8 @@ jobs:
       # Without the reference timetables the table checks skip; the library,
       # the schemas and the vectors are held either way.
       - run: npm test
+      # Every figure in the README and docs is generated from certification.json.
+      - run: node scripts/readme.mjs --check
       - run: npm run build
       - name: The package installs and answers (CommonJS and ESM)
         run: |
