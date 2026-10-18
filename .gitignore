@@ -3,3 +3,7 @@ node_modules/
 __pycache__/
 *.pyc
 .tables
+dist/
+src/data/generated/
+scratch-*
+*.tgz

@@ -6,10 +6,10 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
-import { candidateTimes, placesOf, swedenCorrectionsCoverage, timesFor, isCertified, UncertifiedMethodError } from '../src/index';
-import { CORRECTIONS_FILE, pointKey, type SwedenCorrections } from '../src/methods/swedenCorrections';
+import path from 'node:path';
+import { candidateInstants, methodInfo, placesOf, pointKey, timesFor, isCertified, UncertifiedMethodError, type CorrectionsFile } from '../src/index.js';
 
-const list = JSON.parse(fs.readFileSync(CORRECTIONS_FILE, 'utf8')) as SwedenCorrections;
+const list = JSON.parse(fs.readFileSync(path.join(__dirname, '..', 'data', 'corrections', 'sweden.json'), 'utf8')) as CorrectionsFile;
 
 test('every correction is one minute, one prayer, one date inside the covered span', () => {
   const re = /^(\d{4}-\d{2}-\d{2}) (fajr|sunrise|dhuhr|asr|maghrib|isha) ([+-]1)$/;
@@ -26,7 +26,7 @@ test('every correction is one minute, one prayer, one date inside the covered sp
   }
   // a few hundred over four years: the list mends the rounding, it does not stand in for the method
   assert.ok(n < 600, `${n} corrections`);
-  assert.deepEqual(swedenCorrectionsCoverage(), { from: list.from, to: list.to });
+  assert.deepEqual(methodInfo('sweden').corrections, { from: list.from, to: list.to, entries: n });
 });
 
 test('a correction moves exactly its time by its minute', () => {
@@ -34,9 +34,9 @@ test('a correction moves exactly its time by its minute', () => {
   const [date, key, step] = entries[0].split(' ');
   const [lat, lon] = point.split(',').map(Number);
   const [y, m, d] = date.split('-').map(Number);
-  const place = { authority: 'sweden' as const, key: 'x', name: 'x', lat, lon, tz: 'Europe/Stockholm' };
-  const raw = candidateTimes(place, y, m - 1, d, 1, { corrections: false })!;
-  const fixed = candidateTimes(place, y, m - 1, d)!;
+  const place = { authority: 'sweden' as const, id: 'sweden:x', key: 'x', name: 'x', country: 'SE', lat, lon, tz: 'Europe/Stockholm' };
+  const raw = candidateInstants(place, y, m - 1, d, 1, { corrections: false })!;
+  const fixed = candidateInstants(place, y, m - 1, d)!;
   for (const k of ['fajr', 'sunrise', 'dhuhr', 'asr', 'maghrib', 'isha'] as const) {
     const delta = (fixed[k].getTime() - raw[k].getTime()) / 60_000;
     assert.equal(delta, k === key ? Number(step) : 0, `${k}`);
@@ -47,6 +47,7 @@ test('a correction moves exactly its time by its minute', () => {
 test('Sweden is served only over the dates it was certified on', () => {
   if (!isCertified('sweden')) return;
   const stockholm = placesOf('sweden').find(p => p.name === 'Stockholm')!;
-  assert.ok(timesFor(stockholm, 2026, 9, 15));
-  assert.throws(() => timesFor(stockholm, 2031, 0, 1), (e: unknown) => e instanceof UncertifiedMethodError && e.date === '2031-01-01');
+  assert.equal(timesFor(stockholm, '2026-10-15').status, 'certified');
+  assert.equal(timesFor(stockholm, '2031-01-01').status, 'method-only');
+  assert.throws(() => timesFor(stockholm, '2031-01-01', { strict: true }), (e: unknown) => e instanceof UncertifiedMethodError && e.date === '2031-01-01');
 });

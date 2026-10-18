@@ -5,8 +5,8 @@
  */
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { checkAuthority } from '../src/verify';
-import { preciseApparentSun } from '../src/index';
+import { checkAuthority } from '../tools/verify.js';
+import { preciseApparentSun } from '../src/index.js';
 
 const bars: [Parameters<typeof checkAuthority>[0], number][] = [
   ['indonesia', 0.9996], // 99.965 %

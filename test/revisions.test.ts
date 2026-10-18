@@ -1,12 +1,13 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
+import { createHash } from 'node:crypto';
 import path from 'node:path';
-import { METHOD_REVISION } from '../src/methods/revisions';
+import { METHOD_REVISION } from '../src/methods/revisions.js';
 
 const cert = JSON.parse(fs.readFileSync(path.join(__dirname, '..', 'certification.json'), 'utf8')) as Record<
   string,
-  { revision?: number; corrections?: { from: string; to: string; entries: number } }
+  { revision?: number; corrections?: { from: string; to: string; entries: number; sha256?: string } }
 >;
 
 test('certification.json names the method revision and the correction list it certifies', () => {
@@ -18,6 +19,8 @@ test('certification.json names the method revision and the correction list it ce
       points: Record<string, string[]>;
     };
     const entries = Object.values(list.points).reduce((n, e) => n + e.length, 0);
-    assert.deepEqual(cert[a]?.corrections, { from: list.from, to: list.to, entries }, `${a}: certify again after renewing its list`);
+    const { sha256, ...named } = cert[a]?.corrections ?? {};
+    assert.deepEqual(named, { from: list.from, to: list.to, entries }, `${a}: certify again after renewing its list`);
+    assert.equal(sha256, createHash('sha256').update(fs.readFileSync(path.join(__dirname, '..', 'data', 'corrections', `${a}.json`), 'utf8')).digest('hex'), `${a}: the list changed since it was certified`);
   }
 });

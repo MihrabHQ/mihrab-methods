@@ -1,0 +1,36 @@
+name: checks
+
+on:
+  push:
+    branches: [main]
+    tags: ['v*']
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node: [18, 20, 22]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node }}
+          cache: npm
+      - run: npm ci
+      - run: npm run typecheck
+      # Without the reference timetables the table checks skip; the library,
+      # the schemas and the vectors are held either way.
+      - run: npm test
+      - run: npm run build
+      - name: The package installs and answers (CommonJS and ESM)
+        run: |
+          npm pack --silent
+          mkdir -p /tmp/consumer && cd /tmp/consumer && npm init -y >/dev/null
+          npm i --silent "$GITHUB_WORKSPACE"/mihrab-methods-*.tgz
+          node -e "const m=require('mihrab-methods/algeria');const {place}=m.nearestPlace('algeria',36.75,3.06);console.log(m.timesFor(place,'2026-10-15').times.fajr.printed)"
+          node --input-type=module -e "import {places,timesFor} from 'mihrab-methods/indonesia';import {defaultAuthorityFor} from 'mihrab-methods/locate';console.log(timesFor(places[0],'2026-10-20').status, defaultAuthorityFor(-6.2,106.8))"

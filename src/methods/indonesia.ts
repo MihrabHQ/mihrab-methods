@@ -24,7 +24,7 @@
  * of a minute's edge, with no pattern a model could take
  * (`data/corrections/indonesia.json` has them).
  */
-import { preciseApparentSun } from '../sun/preciseSun';
+import { preciseApparentSun } from '../sun/preciseSun.js';
 
 const RAD = Math.PI / 180;
 const DAY_MS = 86_400_000;

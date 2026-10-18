@@ -1,0 +1,2404 @@
+{
+ "note": "A sample for ports to check against, not a timetable: the times mihrab-methods gives at these places on these dates, with the clock they are printed in. Regenerate with `npm run vectors` after a method revision.",
+ "revisions": {
+  "sweden": 1,
+  "diyanet": 1,
+  "morocco": 1,
+  "algeria": 1,
+  "indonesia": 1
+ },
+ "cases": [
+  {
+   "place": {
+    "id": "sweden:stockholm",
+    "name": "Stockholm",
+    "lat": 59.33,
+    "lon": 18.034,
+    "tz": "Europe/Stockholm"
+   },
+   "date": "2024-01-01",
+   "clock": {
+    "zone": "Europe/Stockholm",
+    "offsetMinutes": 60,
+    "label": "Europe/Stockholm"
+   },
+   "printed": {
+    "fajr": "06:05",
+    "sunrise": "08:37",
+    "dhuhr": "11:56",
+    "asr": "12:54",
+    "maghrib": "15:04",
+    "isha": "17:21"
+   },
+   "instants": {
+    "fajr": "2024-01-01T05:05:00.000Z",
+    "sunrise": "2024-01-01T07:37:00.000Z",
+    "dhuhr": "2024-01-01T10:56:00.000Z",
+    "asr": "2024-01-01T11:54:00.000Z",
+    "maghrib": "2024-01-01T14:04:00.000Z",
+    "isha": "2024-01-01T16:21:00.000Z"
+   }
+  },
+  {
+   "place": {
+    "id": "sweden:stockholm",
+    "name": "Stockholm",
+    "lat": 59.33,
+    "lon": 18.034,
+    "tz": "Europe/Stockholm"
+   },
+   "date": "2025-05-02",
+   "clock": {
+    "zone": "Europe/Stockholm",
+    "offsetMinutes": 120,
+    "label": "Europe/Stockholm"
+   },
+   "printed": {
+    "fajr": "03:04",
+    "sunrise": "04:40",
+    "dhuhr": "12:50",
+    "asr": "17:00",
+    "maghrib": "20:50",
+    "isha": "22:15"
+   },
+   "instants": {
+    "fajr": "2025-05-02T01:04:00.000Z",
+    "sunrise": "2025-05-02T02:40:00.000Z",
+    "dhuhr": "2025-05-02T10:50:00.000Z",
+    "asr": "2025-05-02T15:00:00.000Z",
+    "maghrib": "2025-05-02T18:50:00.000Z",
+    "isha": "2025-05-02T20:15:00.000Z"
+   }
+  },
+  {
+   "place": {
+    "id": "sweden:stockholm",
+    "name": "Stockholm",
+    "lat": 59.33,
+    "lon": 18.034,
+    "tz": "Europe/Stockholm"
+   },
+   "date": "2026-08-31",
+   "clock": {
+    "zone": "Europe/Stockholm",
+    "offsetMinutes": 120,
+    "label": "Europe/Stockholm"
+   },
+   "printed": {
+    "fajr": "03:31",
+    "sunrise": "05:35",
+    "dhuhr": "12:53",
+    "asr": "16:37",
+    "maghrib": "20:02",
+    "isha": "21:58"
+   },
+   "instants": {
+    "fajr": "2026-08-31T01:31:00.000Z",
+    "sunrise": "2026-08-31T03:35:00.000Z",
+    "dhuhr": "2026-08-31T10:53:00.000Z",
+    "asr": "2026-08-31T14:37:00.000Z",
+    "maghrib": "2026-08-31T18:02:00.000Z",
+    "isha": "2026-08-31T19:58:00.000Z"
+   }
+  },
+  {
+   "place": {
+    "id": "sweden:stockholm",
+    "name": "Stockholm",
+    "lat": 59.33,
+    "lon": 18.034,
+    "tz": "Europe/Stockholm"
+   },
+   "date": "2027-12-31",
+   "clock": {
+    "zone": "Europe/Stockholm",
+    "offsetMinutes": 60,
+    "label": "Europe/Stockholm"
+   },
+   "printed": {
+    "fajr": "06:05",
+    "sunrise": "08:38",
+    "dhuhr": "11:55",
+    "asr": "12:53",
+    "maghrib": "15:03",
+    "isha": "17:20"
+   },
+   "instants": {
+    "fajr": "2027-12-31T05:05:00.000Z",
+    "sunrise": "2027-12-31T07:38:00.000Z",
+    "dhuhr": "2027-12-31T10:55:00.000Z",
+    "asr": "2027-12-31T11:53:00.000Z",
+    "maghrib": "2027-12-31T14:03:00.000Z",
+    "isha": "2027-12-31T16:20:00.000Z"
+   }
+  },
+  {
+   "place": {
+    "id": "sweden:kiruna",
+    "name": "Kiruna",
+    "lat": 67.859,
+    "lon": 20.226,
+    "tz": "Europe/Stockholm"
+   },
+   "date": "2024-01-01",
+   "clock": {
+    "zone": "Europe/Stockholm",
+    "offsetMinutes": 60,
+    "label": "Europe/Stockholm"
+   },
+   "printed": {
+    "fajr": "06:18",
+    "sunrise": "09:17",
+    "dhuhr": "11:47",
+    "asr": "11:47",
+    "maghrib": "14:17",
+    "isha": "16:44"
+   },
+   "instants": {
+    "fajr": "2024-01-01T05:18:00.000Z",
+    "sunrise": "2024-01-01T08:17:00.000Z",
+    "dhuhr": "2024-01-01T10:47:00.000Z",
+    "asr": "2024-01-01T10:47:00.000Z",
+    "maghrib": "2024-01-01T13:17:00.000Z",
+    "isha": "2024-01-01T15:44:00.000Z"
+   }
+  },
+  {
+   "place": {
+    "id": "sweden:kiruna",
+    "name": "Kiruna",
+    "lat": 67.859,
+    "lon": 20.226,
+    "tz": "Europe/Stockholm"
+   },
+   "date": "2025-05-02",
+   "clock": {
+    "zone": "Europe/Stockholm",
+    "offsetMinutes": 120,
+    "label": "Europe/Stockholm"
+   },
+   "printed": {
+    "fajr": "02:14",
+    "sunrise": "03:26",
+    "dhuhr": "12:41",
+    "asr": "17:01",
+    "maghrib": "21:46",
+    "isha": "22:50"
+   },
+   "instants": {
+    "fajr": "2025-05-02T00:14:00.000Z",
+    "sunrise": "2025-05-02T01:26:00.000Z",
+    "dhuhr": "2025-05-02T10:41:00.000Z",
+    "asr": "2025-05-02T15:01:00.000Z",
+    "maghrib": "2025-05-02T19:46:00.000Z",
+    "isha": "2025-05-02T20:50:00.000Z"
+   }
+  },
+  {
+   "place": {
+    "id": "sweden:kiruna",
+    "name": "Kiruna",
+    "lat": 67.859,
+    "lon": 20.226,
+    "tz": "Europe/Stockholm"
+   },
+   "date": "2026-08-31",
+   "clock": {
+    "zone": "Europe/Stockholm",
+    "offsetMinutes": 120,
+    "label": "Europe/Stockholm"
+   },
+   "printed": {
+    "fajr": "03:13",
+    "sunrise": "04:54",
+    "dhuhr": "12:45",
+    "asr": "16:26",
+    "maghrib": "20:25",
+    "isha": "21:54"
+   },
+   "instants": {
+    "fajr": "2026-08-31T01:13:00.000Z",
+    "sunrise": "2026-08-31T02:54:00.000Z",
+    "dhuhr": "2026-08-31T10:45:00.000Z",
+    "asr": "2026-08-31T14:26:00.000Z",
+    "maghrib": "2026-08-31T18:25:00.000Z",
+    "isha": "2026-08-31T19:54:00.000Z"
+   }
+  },
+  {
+   "place": {
+    "id": "sweden:kiruna",
+    "name": "Kiruna",
+    "lat": 67.859,
+    "lon": 20.226,
+    "tz": "Europe/Stockholm"
+   },
+   "date": "2027-12-31",
+   "clock": {
+    "zone": "Europe/Stockholm",
+    "offsetMinutes": 60,
+    "label": "Europe/Stockholm"
+   },
+   "printed": {
+    "fajr": "06:18",
+    "sunrise": "09:17",
+    "dhuhr": "11:47",
+    "asr": "11:47",
+    "maghrib": "14:17",
+    "isha": "16:43"
+   },
+   "instants": {
+    "fajr": "2027-12-31T05:18:00.000Z",
+    "sunrise": "2027-12-31T08:17:00.000Z",
+    "dhuhr": "2027-12-31T10:47:00.000Z",
+    "asr": "2027-12-31T10:47:00.000Z",
+    "maghrib": "2027-12-31T13:17:00.000Z",
+    "isha": "2027-12-31T15:43:00.000Z"
+   }
+  },
+  {
+   "place": {
+    "id": "sweden:malmo",
+    "name": "Malmö",
+    "lat": 55.6,
+    "lon": 13.004,
+    "tz": "Europe/Stockholm"
+   },
+   "date": "2024-01-01",
+   "clock": {
+    "zone": "Europe/Stockholm",
+    "offsetMinutes": 60,
+    "label": "Europe/Stockholm"
+   },
+   "printed": {
+    "fajr": "06:17",
+    "sunrise": "08:30",
+    "dhuhr": "12:16",
+    "asr": "13:36",
+    "maghrib": "15:52",
+    "isha": "17:50"
+   },
+   "instants": {
+    "fajr": "2024-01-01T05:17:00.000Z",
+    "sunrise": "2024-01-01T07:30:00.000Z",
+    "dhuhr": "2024-01-01T11:16:00.000Z",
+    "asr": "2024-01-01T12:36:00.000Z",
+    "maghrib": "2024-01-01T14:52:00.000Z",
+    "isha": "2024-01-01T16:50:00.000Z"
+   }
+  },
+  {
+   "place": {
+    "id": "sweden:malmo",
+    "name": "Malmö",
+    "lat": 55.6,
+    "lon": 13.004,
+    "tz": "Europe/Stockholm"
+   },
+   "date": "2025-05-02",
+   "clock": {
+    "zone": "Europe/Stockholm",
+    "offsetMinutes": 120,
+    "label": "Europe/Stockholm"
+   },
+   "printed": {
+    "fajr": "03:32",
+    "sunrise": "05:16",
+    "dhuhr": "13:10",
+    "asr": "17:16",
+    "maghrib": "20:54",
+    "isha": "22:26"
+   },
+   "instants": {
+    "fajr": "2025-05-02T01:32:00.000Z",
+    "sunrise": "2025-05-02T03:16:00.000Z",
+    "dhuhr": "2025-05-02T11:10:00.000Z",
+    "asr": "2025-05-02T15:16:00.000Z",
+    "maghrib": "2025-05-02T18:54:00.000Z",
+    "isha": "2025-05-02T20:26:00.000Z"
+   }
+  },
+  {
+   "place": {
+    "id": "sweden:malmo",
+    "name": "Malmö",
+    "lat": 55.6,
+    "lon": 13.004,
+    "tz": "Europe/Stockholm"
+   },
+   "date": "2026-08-31",
+   "clock": {
+    "zone": "Europe/Stockholm",
+    "offsetMinutes": 120,
+    "label": "Europe/Stockholm"
+   },
+   "printed": {
+    "fajr": "03:55",
+    "sunrise": "06:04",
+    "dhuhr": "13:13",
+    "asr": "16:57",
+    "maghrib": "20:13",
+    "isha": "22:12"
+   },
+   "instants": {
+    "fajr": "2026-08-31T01:55:00.000Z",
+    "sunrise": "2026-08-31T04:04:00.000Z",
+    "dhuhr": "2026-08-31T11:13:00.000Z",
+    "asr": "2026-08-31T14:57:00.000Z",
+    "maghrib": "2026-08-31T18:13:00.000Z",
+    "isha": "2026-08-31T20:12:00.000Z"
+   }
+  },
+  {
+   "place": {
+    "id": "sweden:malmo",
+    "name": "Malmö",
+    "lat": 55.6,
+    "lon": 13.004,
+    "tz": "Europe/Stockholm"
+   },
+   "date": "2027-12-31",
+   "clock": {
+    "zone": "Europe/Stockholm",
+    "offsetMinutes": 60,
+    "label": "Europe/Stockholm"
+   },
+   "printed": {
+    "fajr": "06:17",
+    "sunrise": "08:30",
+    "dhuhr": "12:16",
+    "asr": "13:35",
+    "maghrib": "15:51",
+    "isha": "17:49"
+   },
+   "instants": {
+    "fajr": "2027-12-31T05:17:00.000Z",
+    "sunrise": "2027-12-31T07:30:00.000Z",
+    "dhuhr": "2027-12-31T11:16:00.000Z",
+    "asr": "2027-12-31T12:35:00.000Z",
+    "maghrib": "2027-12-31T14:51:00.000Z",
+    "isha": "2027-12-31T16:49:00.000Z"
+   }
+  },
+  {
+   "place": {
+    "id": "diyanet:9146",
+    "name": "ADANA",
+    "lat": 36.986,
+    "lon": 35.32,
+    "tz": "Europe/Istanbul",
+    "ishaDeg": 17,
+    "prayerPoints": {
+     "2024": [
+      [
+       36.989,
+       35.319
+      ],
+      [
+       36.986,
+       35.324
+      ],
+      [
+       37,
+       35.325
+      ],
+      [
+       36.988,
+       35.316
+      ],
+      [
+       36.987,
+       35.315
+      ],
+      [
+       36.986,
+       35.32
+      ]
+     ]
+    }
+   },
+   "date": "2024-01-01",
+   "clock": {
+    "zone": "Europe/Istanbul",
+    "offsetMinutes": 180,
+    "label": "Europe/Istanbul"
+   },
+   "printed": {
+    "fajr": "06:19",
+    "sunrise": "07:45",
+    "dhuhr": "12:47",
+    "asr": "15:18",
+    "maghrib": "17:39",
+    "isha": "19:00"
+   },
+   "instants": {
+    "fajr": "2024-01-01T03:19:00.000Z",
+    "sunrise": "2024-01-01T04:45:00.000Z",
+    "dhuhr": "2024-01-01T09:47:00.000Z",
+    "asr": "2024-01-01T12:18:00.000Z",
+    "maghrib": "2024-01-01T14:39:00.000Z",
+    "isha": "2024-01-01T16:00:00.000Z"
+   }
+  },
+  {
+   "place": {
+    "id": "diyanet:9146",
+    "name": "ADANA",
+    "lat": 36.986,
+    "lon": 35.32,
+    "tz": "Europe/Istanbul",
+    "ishaDeg": 17,
+    "prayerPoints": {
+     "2025": [
+      [
+       36.988,
+       35.319
+      ],
+      [
+       36.988,
+       35.32
+      ],
+      [
+       37,
+       35.325
+      ],
+      [
+       36.989,
+       35.316
+      ],
+      [
+       36.986,
+       35.32
+      ],
+      [
+       36.985,
+       35.32
+      ]
+     ]
+    }
+   },
+   "date": "2025-05-02",
+   "clock": {
+    "zone": "Europe/Istanbul",
+    "offsetMinutes": 180,
+    "label": "Europe/Istanbul"
+   },
+   "printed": {
+    "fajr": "04:06",
+    "sunrise": "05:36",
+    "dhuhr": "12:41",
+    "asr": "16:27",
+    "maghrib": "19:35",
+    "isha": "21:00"
+   },
+   "instants": {
+    "fajr": "2025-05-02T01:06:00.000Z",
+    "sunrise": "2025-05-02T02:36:00.000Z",
+    "dhuhr": "2025-05-02T09:41:00.000Z",
+    "asr": "2025-05-02T13:27:00.000Z",
+    "maghrib": "2025-05-02T16:35:00.000Z",
+    "isha": "2025-05-02T18:00:00.000Z"
+   }
+  },
+  {
+   "place": {
+    "id": "diyanet:9146",
+    "name": "ADANA",
+    "lat": 36.986,
+    "lon": 35.32,
+    "tz": "Europe/Istanbul",
+    "ishaDeg": 17,
+    "prayerPoints": {
+     "2026": [
+      [
+       36.989,
+       35.319
+      ],
+      [
+       36.986,
+       35.32
+      ],
+      [
+       37,
+       35.324
+      ],
+      [
+       36.99,
+       35.314
+      ],
+      [
+       36.983,
+       35.32
+      ],
+      [
+       36.985,
+       35.32
+      ]
+     ]
+    }
+   },
+   "date": "2026-08-31",
+   "clock": {
+    "zone": "Europe/Istanbul",
+    "offsetMinutes": 180,
+    "label": "Europe/Istanbul"
+   },
+   "printed": {
+    "fajr": "04:37",
+    "sunrise": "06:01",
+    "dhuhr": "12:44",
+    "asr": "16:23",
+    "maghrib": "19:17",
+    "isha": "20:35"
+   },
+   "instants": {
+    "fajr": "2026-08-31T01:37:00.000Z",
+    "sunrise": "2026-08-31T03:01:00.000Z",
+    "dhuhr": "2026-08-31T09:44:00.000Z",
+    "asr": "2026-08-31T13:23:00.000Z",
+    "maghrib": "2026-08-31T16:17:00.000Z",
+    "isha": "2026-08-31T17:35:00.000Z"
+   }
+  },
+  {
+   "place": {
+    "id": "diyanet:9146",
+    "name": "ADANA",
+    "lat": 36.986,
+    "lon": 35.32,
+    "tz": "Europe/Istanbul",
+    "ishaDeg": 17,
+    "prayerPoints": {
+     "2027": [
+      [
+       36.988,
+       35.32
+      ],
+      [
+       36.987,
+       35.32
+      ],
+      [
+       37,
+       35.325
+      ],
+      [
+       36.99,
+       35.315
+      ],
+      [
+       36.984,
+       35.32
+      ],
+      [
+       36.987,
+       35.32
+      ]
+     ]
+    }
+   },
+   "date": "2027-12-31",
+   "clock": {
+    "zone": "Europe/Istanbul",
+    "offsetMinutes": 180,
+    "label": "Europe/Istanbul"
+   },
+   "printed": {
+    "fajr": "06:19",
+    "sunrise": "07:45",
+    "dhuhr": "12:46",
+    "asr": "15:17",
+    "maghrib": "17:38",
+    "isha": "18:59"
+   },
+   "instants": {
+    "fajr": "2027-12-31T03:19:00.000Z",
+    "sunrise": "2027-12-31T04:45:00.000Z",
+    "dhuhr": "2027-12-31T09:46:00.000Z",
+    "asr": "2027-12-31T12:17:00.000Z",
+    "maghrib": "2027-12-31T14:38:00.000Z",
+    "isha": "2027-12-31T15:59:00.000Z"
+   }
+  },
+  {
+   "place": {
+    "id": "diyanet:9541",
+    "name": "ISTANBUL",
+    "lat": 41.011,
+    "lon": 28.968,
+    "tz": "Europe/Istanbul",
+    "ishaDeg": 17,
+    "prayerPoints": {
+     "2024": [
+      [
+       41.012,
+       28.968
+      ],
+      [
+       41.011,
+       28.971
+      ],
+      [
+       41,
+       28.973
+      ],
+      [
+       41.012,
+       28.963
+      ],
+      [
+       41.011,
+       28.963
+      ],
+      [
+       41.012,
+       28.968
+      ]
+     ]
+    }
+   },
+   "date": "2024-01-01",
+   "clock": {
+    "zone": "Europe/Istanbul",
+    "offsetMinutes": 180,
+    "label": "Europe/Istanbul"
+   },
+   "printed": {
+    "fajr": "06:50",
+    "sunrise": "08:22",
+    "dhuhr": "13:12",
+    "asr": "15:32",
+    "maghrib": "17:52",
+    "isha": "19:19"
+   },
+   "instants": {
+    "fajr": "2024-01-01T03:50:00.000Z",
+    "sunrise": "2024-01-01T05:22:00.000Z",
+    "dhuhr": "2024-01-01T10:12:00.000Z",
+    "asr": "2024-01-01T12:32:00.000Z",
+    "maghrib": "2024-01-01T14:52:00.000Z",
+    "isha": "2024-01-01T16:19:00.000Z"
+   }
+  },
+  {
+   "place": {
+    "id": "diyanet:9541",
+    "name": "ISTANBUL",
+    "lat": 41.011,
+    "lon": 28.968,
+    "tz": "Europe/Istanbul",
+    "ishaDeg": 17,
+    "prayerPoints": {
+     "2025": [
+      [
+       41.012,
+       28.968
+      ],
+      [
+       41.012,
+       28.968
+      ],
+      [
+       41,
+       28.973
+      ],
+      [
+       41.01,
+       28.964
+      ],
+      [
+       41.011,
+       28.968
+      ],
+      [
+       41.012,
+       28.968
+      ]
+     ]
+    }
+   },
+   "date": "2025-05-02",
+   "clock": {
+    "zone": "Europe/Istanbul",
+    "offsetMinutes": 180,
+    "label": "Europe/Istanbul"
+   },
+   "printed": {
+    "fajr": "04:15",
+    "sunrise": "05:54",
+    "dhuhr": "13:06",
+    "asr": "16:57",
+    "maghrib": "20:08",
+    "isha": "21:41"
+   },
+   "instants": {
+    "fajr": "2025-05-02T01:15:00.000Z",
+    "sunrise": "2025-05-02T02:54:00.000Z",
+    "dhuhr": "2025-05-02T10:06:00.000Z",
+    "asr": "2025-05-02T13:57:00.000Z",
+    "maghrib": "2025-05-02T17:08:00.000Z",
+    "isha": "2025-05-02T18:41:00.000Z"
+   }
+  },
+  {
+   "place": {
+    "id": "diyanet:9541",
+    "name": "ISTANBUL",
+    "lat": 41.011,
+    "lon": 28.968,
+    "tz": "Europe/Istanbul",
+    "ishaDeg": 17,
+    "prayerPoints": {
+     "2026": [
+      [
+       41.012,
+       28.968
+      ],
+      [
+       41.011,
+       28.968
+      ],
+      [
+       41,
+       28.973
+      ],
+      [
+       41.012,
+       28.963
+      ],
+      [
+       41.012,
+       28.968
+      ],
+      [
+       41.013,
+       28.968
+      ]
+     ]
+    }
+   },
+   "date": "2026-08-31",
+   "clock": {
+    "zone": "Europe/Istanbul",
+    "offsetMinutes": 180,
+    "label": "Europe/Istanbul"
+   },
+   "printed": {
+    "fajr": "04:52",
+    "sunrise": "06:22",
+    "dhuhr": "13:10",
+    "asr": "16:50",
+    "maghrib": "19:47",
+    "isha": "21:11"
+   },
+   "instants": {
+    "fajr": "2026-08-31T01:52:00.000Z",
+    "sunrise": "2026-08-31T03:22:00.000Z",
+    "dhuhr": "2026-08-31T10:10:00.000Z",
+    "asr": "2026-08-31T13:50:00.000Z",
+    "maghrib": "2026-08-31T16:47:00.000Z",
+    "isha": "2026-08-31T18:11:00.000Z"
+   }
+  },
+  {
+   "place": {
+    "id": "diyanet:9541",
+    "name": "ISTANBUL",
+    "lat": 41.011,
+    "lon": 28.968,
+    "tz": "Europe/Istanbul",
+    "ishaDeg": 17,
+    "prayerPoints": {
+     "2027": [
+      [
+       41.012,
+       28.968
+      ],
+      [
+       41.012,
+       28.968
+      ],
+      [
+       41,
+       28.973
+      ],
+      [
+       41.011,
+       28.964
+      ],
+      [
+       41.012,
+       28.968
+      ],
+      [
+       41.012,
+       28.968
+      ]
+     ]
+    }
+   },
+   "date": "2027-12-31",
+   "clock": {
+    "zone": "Europe/Istanbul",
+    "offsetMinutes": 180,
+    "label": "Europe/Istanbul"
+   },
+   "printed": {
+    "fajr": "06:50",
+    "sunrise": "08:22",
+    "dhuhr": "13:12",
+    "asr": "15:31",
+    "maghrib": "17:52",
+    "isha": "19:18"
+   },
+   "instants": {
+    "fajr": "2027-12-31T03:50:00.000Z",
+    "sunrise": "2027-12-31T05:22:00.000Z",
+    "dhuhr": "2027-12-31T10:12:00.000Z",
+    "asr": "2027-12-31T12:31:00.000Z",
+    "maghrib": "2027-12-31T14:52:00.000Z",
+    "isha": "2027-12-31T16:18:00.000Z"
+   }
+  },
+  {
+   "place": {
+    "id": "diyanet:8574",
+    "name": "BIRMINGHAM",
+    "lat": 33.524,
+    "lon": -86.817,
+    "tz": "America/Chicago",
+    "ishaDeg": 16
+   },
+   "date": "2024-01-01",
+   "clock": {
+    "zone": "America/Chicago",
+    "offsetMinutes": -360,
+    "label": "America/Chicago"
+   },
+   "printed": {
+    "fajr": "05:23",
+    "sunrise": "06:44",
+    "dhuhr": "11:55",
+    "asr": "14:35",
+    "maghrib": "16:56",
+    "isha": "18:08"
+   },
+   "instants": {
+    "fajr": "2024-01-01T11:23:00.000Z",
+    "sunrise": "2024-01-01T12:44:00.000Z",
+    "dhuhr": "2024-01-01T17:55:00.000Z",
+    "asr": "2024-01-01T20:35:00.000Z",
+    "maghrib": "2024-01-01T22:56:00.000Z",
+    "isha": "2024-01-02T00:08:00.000Z"
+   }
+  },
+  {
+   "place": {
+    "id": "diyanet:8574",
+    "name": "BIRMINGHAM",
+    "lat": 33.524,
+    "lon": -86.817,
+    "tz": "America/Chicago",
+    "ishaDeg": 16
+   },
+   "date": "2025-05-02",
+   "clock": {
+    "zone": "America/Chicago",
+    "offsetMinutes": -300,
+    "label": "America/Chicago"
+   },
+   "printed": {
+    "fajr": "04:26",
+    "sunrise": "05:51",
+    "dhuhr": "12:49",
+    "asr": "16:30",
+    "maghrib": "19:38",
+    "isha": "20:51"
+   },
+   "instants": {
+    "fajr": "2025-05-02T09:26:00.000Z",
+    "sunrise": "2025-05-02T10:51:00.000Z",
+    "dhuhr": "2025-05-02T17:49:00.000Z",
+    "asr": "2025-05-02T21:30:00.000Z",
+    "maghrib": "2025-05-03T00:38:00.000Z",
+    "isha": "2025-05-03T01:51:00.000Z"
+   }
+  },
+  {
+   "place": {
+    "id": "diyanet:8574",
+    "name": "BIRMINGHAM",
+    "lat": 33.524,
+    "lon": -86.817,
+    "tz": "America/Chicago",
+    "ishaDeg": 16
+   },
+   "date": "2026-08-31",
+   "clock": {
+    "zone": "America/Chicago",
+    "offsetMinutes": -300,
+    "label": "America/Chicago"
+   },
+   "printed": {
+    "fajr": "04:54",
+    "sunrise": "06:13",
+    "dhuhr": "12:53",
+    "asr": "16:29",
+    "maghrib": "19:22",
+    "isha": "20:31"
+   },
+   "instants": {
+    "fajr": "2026-08-31T09:54:00.000Z",
+    "sunrise": "2026-08-31T11:13:00.000Z",
+    "dhuhr": "2026-08-31T17:53:00.000Z",
+    "asr": "2026-08-31T21:29:00.000Z",
+    "maghrib": "2026-09-01T00:22:00.000Z",
+    "isha": "2026-09-01T01:31:00.000Z"
+   }
+  },
+  {
+   "place": {
+    "id": "diyanet:8574",
+    "name": "BIRMINGHAM",
+    "lat": 33.524,
+    "lon": -86.817,
+    "tz": "America/Chicago",
+    "ishaDeg": 16
+   },
+   "date": "2027-12-31",
+   "clock": {
+    "zone": "America/Chicago",
+    "offsetMinutes": -360,
+    "label": "America/Chicago"
+   },
+   "printed": {
+    "fajr": "05:22",
+    "sunrise": "06:44",
+    "dhuhr": "11:55",
+    "asr": "14:35",
+    "maghrib": "16:56",
+    "isha": "18:07"
+   },
+   "instants": {
+    "fajr": "2027-12-31T11:22:00.000Z",
+    "sunrise": "2027-12-31T12:44:00.000Z",
+    "dhuhr": "2027-12-31T17:55:00.000Z",
+    "asr": "2027-12-31T20:35:00.000Z",
+    "maghrib": "2027-12-31T22:56:00.000Z",
+    "isha": "2028-01-01T00:07:00.000Z"
+   }
+  },
+  {
+   "place": {
+    "id": "diyanet:11186",
+    "name": "AVALLANEDA",
+    "lat": -34.666,
+    "lon": -58.386,
+    "tz": "America/Argentina/Buenos_Aires",
+    "ishaDeg": 17
+   },
+   "date": "2024-01-01",
+   "clock": {
+    "zone": "America/Argentina/Buenos_Aires",
+    "offsetMinutes": -180,
+    "label": "America/Argentina/Buenos_Aires"
+   },
+   "printed": {
+    "fajr": "03:58",
+    "sunrise": "05:37",
+    "dhuhr": "13:02",
+    "asr": "16:47",
+    "maghrib": "20:17",
+    "isha": "21:48"
+   },
+   "instants": {
+    "fajr": "2024-01-01T06:58:00.000Z",
+    "sunrise": "2024-01-01T08:37:00.000Z",
+    "dhuhr": "2024-01-01T16:02:00.000Z",
+    "asr": "2024-01-01T19:47:00.000Z",
+    "maghrib": "2024-01-01T23:17:00.000Z",
+    "isha": "2024-01-02T00:48:00.000Z"
+   }
+  },
+  {
+   "place": {
+    "id": "diyanet:11186",
+    "name": "AVALLANEDA",
+    "lat": -34.666,
+    "lon": -58.386,
+    "tz": "America/Argentina/Buenos_Aires",
+    "ishaDeg": 17
+   },
+   "date": "2025-05-02",
+   "clock": {
+    "zone": "America/Argentina/Buenos_Aires",
+    "offsetMinutes": -180,
+    "label": "America/Argentina/Buenos_Aires"
+   },
+   "printed": {
+    "fajr": "06:05",
+    "sunrise": "07:23",
+    "dhuhr": "12:56",
+    "asr": "15:53",
+    "maghrib": "18:18",
+    "isha": "19:32"
+   },
+   "instants": {
+    "fajr": "2025-05-02T09:05:00.000Z",
+    "sunrise": "2025-05-02T10:23:00.000Z",
+    "dhuhr": "2025-05-02T15:56:00.000Z",
+    "asr": "2025-05-02T18:53:00.000Z",
+    "maghrib": "2025-05-02T21:18:00.000Z",
+    "isha": "2025-05-02T22:32:00.000Z"
+   }
+  },
+  {
+   "place": {
+    "id": "diyanet:11186",
+    "name": "AVALLANEDA",
+    "lat": -34.666,
+    "lon": -58.386,
+    "tz": "America/Argentina/Buenos_Aires",
+    "ishaDeg": 17
+   },
+   "date": "2026-08-31",
+   "clock": {
+    "zone": "America/Argentina/Buenos_Aires",
+    "offsetMinutes": -180,
+    "label": "America/Argentina/Buenos_Aires"
+   },
+   "printed": {
+    "fajr": "05:50",
+    "sunrise": "07:07",
+    "dhuhr": "12:59",
+    "asr": "16:10",
+    "maghrib": "18:41",
+    "isha": "19:53"
+   },
+   "instants": {
+    "fajr": "2026-08-31T08:50:00.000Z",
+    "sunrise": "2026-08-31T10:07:00.000Z",
+    "dhuhr": "2026-08-31T15:59:00.000Z",
+    "asr": "2026-08-31T19:10:00.000Z",
+    "maghrib": "2026-08-31T21:41:00.000Z",
+    "isha": "2026-08-31T22:53:00.000Z"
+   }
+  },
+  {
+   "place": {
+    "id": "diyanet:11186",
+    "name": "AVALLANEDA",
+    "lat": -34.666,
+    "lon": -58.386,
+    "tz": "America/Argentina/Buenos_Aires",
+    "ishaDeg": 17
+   },
+   "date": "2027-12-31",
+   "clock": {
+    "zone": "America/Argentina/Buenos_Aires",
+    "offsetMinutes": -180,
+    "label": "America/Argentina/Buenos_Aires"
+   },
+   "printed": {
+    "fajr": "03:57",
+    "sunrise": "05:36",
+    "dhuhr": "13:01",
+    "asr": "16:47",
+    "maghrib": "20:17",
+    "isha": "21:48"
+   },
+   "instants": {
+    "fajr": "2027-12-31T06:57:00.000Z",
+    "sunrise": "2027-12-31T08:36:00.000Z",
+    "dhuhr": "2027-12-31T16:01:00.000Z",
+    "asr": "2027-12-31T19:47:00.000Z",
+    "maghrib": "2027-12-31T23:17:00.000Z",
+    "isha": "2028-01-01T00:48:00.000Z"
+   }
+  },
+  {
+   "place": {
+    "id": "morocco:1",
+    "name": "الرباط",
+    "lat": 34.0138,
+    "lon": -6.8498,
+    "tz": "Etc/GMT",
+    "dipDeg": 0.015,
+    "dipMaghribDeg": 0.034,
+    "clock": [
+     [
+      "2020-01-01",
+      60
+     ],
+     [
+      "2026-09-17",
+      0
+     ]
+    ]
+   },
+   "date": "2026-08-27",
+   "clock": {
+    "zone": null,
+    "offsetMinutes": 60,
+    "label": "UTC+01:00"
+   },
+   "printed": {
+    "fajr": "05:24",
+    "sunrise": "06:54",
+    "dhuhr": "13:34",
+    "asr": "17:08",
+    "maghrib": "20:04",
+    "isha": "21:22"
+   },
+   "instants": {
+    "fajr": "2026-08-27T04:24:00.000Z",
+    "sunrise": "2026-08-27T05:54:00.000Z",
+    "dhuhr": "2026-08-27T12:34:00.000Z",
+    "asr": "2026-08-27T16:08:00.000Z",
+    "maghrib": "2026-08-27T19:04:00.000Z",
+    "isha": "2026-08-27T20:22:00.000Z"
+   }
+  },
+  {
+   "place": {
+    "id": "morocco:1",
+    "name": "الرباط",
+    "lat": 34.0138,
+    "lon": -6.8498,
+    "tz": "Etc/GMT",
+    "dipDeg": 0.015,
+    "dipMaghribDeg": 0.034,
+    "clock": [
+     [
+      "2020-01-01",
+      60
+     ],
+     [
+      "2026-09-17",
+      0
+     ]
+    ]
+   },
+   "date": "2026-09-21",
+   "clock": {
+    "zone": null,
+    "offsetMinutes": 0,
+    "label": "UTC+00:00"
+   },
+   "printed": {
+    "fajr": "04:45",
+    "sunrise": "06:12",
+    "dhuhr": "12:25",
+    "asr": "15:48",
+    "maghrib": "18:30",
+    "isha": "19:44"
+   },
+   "instants": {
+    "fajr": "2026-09-21T04:45:00.000Z",
+    "sunrise": "2026-09-21T06:12:00.000Z",
+    "dhuhr": "2026-09-21T12:25:00.000Z",
+    "asr": "2026-09-21T15:48:00.000Z",
+    "maghrib": "2026-09-21T18:30:00.000Z",
+    "isha": "2026-09-21T19:44:00.000Z"
+   }
+  },
+  {
+   "place": {
+    "id": "morocco:1",
+    "name": "الرباط",
+    "lat": 34.0138,
+    "lon": -6.8498,
+    "tz": "Etc/GMT",
+    "dipDeg": 0.015,
+    "dipMaghribDeg": 0.034,
+    "clock": [
+     [
+      "2020-01-01",
+      60
+     ],
+     [
+      "2026-09-17",
+      0
+     ]
+    ]
+   },
+   "date": "2026-10-17",
+   "clock": {
+    "zone": null,
+    "offsetMinutes": 0,
+    "label": "UTC+00:00"
+   },
+   "printed": {
+    "fajr": "05:05",
+    "sunrise": "06:31",
+    "dhuhr": "12:18",
+    "asr": "15:24",
+    "maghrib": "17:55",
+    "isha": "19:09"
+   },
+   "instants": {
+    "fajr": "2026-10-17T05:05:00.000Z",
+    "sunrise": "2026-10-17T06:31:00.000Z",
+    "dhuhr": "2026-10-17T12:18:00.000Z",
+    "asr": "2026-10-17T15:24:00.000Z",
+    "maghrib": "2026-10-17T17:55:00.000Z",
+    "isha": "2026-10-17T19:09:00.000Z"
+   }
+  },
+  {
+   "place": {
+    "id": "morocco:1",
+    "name": "الرباط",
+    "lat": 34.0138,
+    "lon": -6.8498,
+    "tz": "Etc/GMT",
+    "dipDeg": 0.015,
+    "dipMaghribDeg": 0.034,
+    "clock": [
+     [
+      "2020-01-01",
+      60
+     ],
+     [
+      "2026-09-17",
+      0
+     ]
+    ]
+   },
+   "date": "2026-11-11",
+   "clock": {
+    "zone": null,
+    "offsetMinutes": 0,
+    "label": "UTC+00:00"
+   },
+   "printed": {
+    "fajr": "05:25",
+    "sunrise": "06:53",
+    "dhuhr": "12:16",
+    "asr": "15:06",
+    "maghrib": "17:30",
+    "isha": "18:47"
+   },
+   "instants": {
+    "fajr": "2026-11-11T05:25:00.000Z",
+    "sunrise": "2026-11-11T06:53:00.000Z",
+    "dhuhr": "2026-11-11T12:16:00.000Z",
+    "asr": "2026-11-11T15:06:00.000Z",
+    "maghrib": "2026-11-11T17:30:00.000Z",
+    "isha": "2026-11-11T18:47:00.000Z"
+   }
+  },
+  {
+   "place": {
+    "id": "morocco:60",
+    "name": "بن سليمان",
+    "lat": 33.611,
+    "lon": -7.133,
+    "tz": "Etc/GMT",
+    "dipDeg": 0.214,
+    "dipMaghribDeg": 0.22,
+    "clock": [
+     [
+      "2020-01-01",
+      60
+     ],
+     [
+      "2026-09-17",
+      0
+     ]
+    ]
+   },
+   "date": "2026-08-27",
+   "clock": {
+    "zone": null,
+    "offsetMinutes": 60,
+    "label": "UTC+01:00"
+   },
+   "printed": {
+    "fajr": "05:26",
+    "sunrise": "06:55",
+    "dhuhr": "13:35",
+    "asr": "17:08",
+    "maghrib": "20:05",
+    "isha": "21:22"
+   },
+   "instants": {
+    "fajr": "2026-08-27T04:26:00.000Z",
+    "sunrise": "2026-08-27T05:55:00.000Z",
+    "dhuhr": "2026-08-27T12:35:00.000Z",
+    "asr": "2026-08-27T16:08:00.000Z",
+    "maghrib": "2026-08-27T19:05:00.000Z",
+    "isha": "2026-08-27T20:22:00.000Z"
+   }
+  },
+  {
+   "place": {
+    "id": "morocco:60",
+    "name": "بن سليمان",
+    "lat": 33.611,
+    "lon": -7.133,
+    "tz": "Etc/GMT",
+    "dipDeg": 0.214,
+    "dipMaghribDeg": 0.22,
+    "clock": [
+     [
+      "2020-01-01",
+      60
+     ],
+     [
+      "2026-09-17",
+      0
+     ]
+    ]
+   },
+   "date": "2026-09-21",
+   "clock": {
+    "zone": null,
+    "offsetMinutes": 0,
+    "label": "UTC+00:00"
+   },
+   "printed": {
+    "fajr": "04:47",
+    "sunrise": "06:12",
+    "dhuhr": "12:27",
+    "asr": "15:49",
+    "maghrib": "18:32",
+    "isha": "19:45"
+   },
+   "instants": {
+    "fajr": "2026-09-21T04:47:00.000Z",
+    "sunrise": "2026-09-21T06:12:00.000Z",
+    "dhuhr": "2026-09-21T12:27:00.000Z",
+    "asr": "2026-09-21T15:49:00.000Z",
+    "maghrib": "2026-09-21T18:32:00.000Z",
+    "isha": "2026-09-21T19:45:00.000Z"
+   }
+  },
+  {
+   "place": {
+    "id": "morocco:60",
+    "name": "بن سليمان",
+    "lat": 33.611,
+    "lon": -7.133,
+    "tz": "Etc/GMT",
+    "dipDeg": 0.214,
+    "dipMaghribDeg": 0.22,
+    "clock": [
+     [
+      "2020-01-01",
+      60
+     ],
+     [
+      "2026-09-17",
+      0
+     ]
+    ]
+   },
+   "date": "2026-10-17",
+   "clock": {
+    "zone": null,
+    "offsetMinutes": 0,
+    "label": "UTC+00:00"
+   },
+   "printed": {
+    "fajr": "05:07",
+    "sunrise": "06:31",
+    "dhuhr": "12:19",
+    "asr": "15:26",
+    "maghrib": "17:57",
+    "isha": "19:11"
+   },
+   "instants": {
+    "fajr": "2026-10-17T05:07:00.000Z",
+    "sunrise": "2026-10-17T06:31:00.000Z",
+    "dhuhr": "2026-10-17T12:19:00.000Z",
+    "asr": "2026-10-17T15:26:00.000Z",
+    "maghrib": "2026-10-17T17:57:00.000Z",
+    "isha": "2026-10-17T19:11:00.000Z"
+   }
+  },
+  {
+   "place": {
+    "id": "morocco:60",
+    "name": "بن سليمان",
+    "lat": 33.611,
+    "lon": -7.133,
+    "tz": "Etc/GMT",
+    "dipDeg": 0.214,
+    "dipMaghribDeg": 0.22,
+    "clock": [
+     [
+      "2020-01-01",
+      60
+     ],
+     [
+      "2026-09-17",
+      0
+     ]
+    ]
+   },
+   "date": "2026-11-11",
+   "clock": {
+    "zone": null,
+    "offsetMinutes": 0,
+    "label": "UTC+00:00"
+   },
+   "printed": {
+    "fajr": "05:26",
+    "sunrise": "06:52",
+    "dhuhr": "12:18",
+    "asr": "15:07",
+    "maghrib": "17:33",
+    "isha": "18:49"
+   },
+   "instants": {
+    "fajr": "2026-11-11T05:26:00.000Z",
+    "sunrise": "2026-11-11T06:52:00.000Z",
+    "dhuhr": "2026-11-11T12:18:00.000Z",
+    "asr": "2026-11-11T15:07:00.000Z",
+    "maghrib": "2026-11-11T17:33:00.000Z",
+    "isha": "2026-11-11T18:49:00.000Z"
+   }
+  },
+  {
+   "place": {
+    "id": "morocco:150",
+    "name": "أسا",
+    "lat": 28.558,
+    "lon": -9.45,
+    "tz": "Etc/GMT",
+    "dipDeg": 0.195,
+    "dipMaghribDeg": 0.189,
+    "clock": [
+     [
+      "2020-01-01",
+      60
+     ],
+     [
+      "2026-09-17",
+      0
+     ]
+    ]
+   },
+   "date": "2026-08-27",
+   "clock": {
+    "zone": null,
+    "offsetMinutes": 60,
+    "label": "UTC+01:00"
+   },
+   "printed": {
+    "fajr": "05:46",
+    "sunrise": "07:10",
+    "dhuhr": "13:44",
+    "asr": "17:13",
+    "maghrib": "20:09",
+    "isha": "21:22"
+   },
+   "instants": {
+    "fajr": "2026-08-27T04:46:00.000Z",
+    "sunrise": "2026-08-27T06:10:00.000Z",
+    "dhuhr": "2026-08-27T12:44:00.000Z",
+    "asr": "2026-08-27T16:13:00.000Z",
+    "maghrib": "2026-08-27T19:09:00.000Z",
+    "isha": "2026-08-27T20:22:00.000Z"
+   }
+  },
+  {
+   "place": {
+    "id": "morocco:150",
+    "name": "أسا",
+    "lat": 28.558,
+    "lon": -9.45,
+    "tz": "Etc/GMT",
+    "dipDeg": 0.195,
+    "dipMaghribDeg": 0.189,
+    "clock": [
+     [
+      "2020-01-01",
+      60
+     ],
+     [
+      "2026-09-17",
+      0
+     ]
+    ]
+   },
+   "date": "2026-09-21",
+   "clock": {
+    "zone": null,
+    "offsetMinutes": 0,
+    "label": "UTC+00:00"
+   },
+   "printed": {
+    "fajr": "05:02",
+    "sunrise": "06:22",
+    "dhuhr": "12:36",
+    "asr": "15:58",
+    "maghrib": "18:40",
+    "isha": "19:50"
+   },
+   "instants": {
+    "fajr": "2026-09-21T05:02:00.000Z",
+    "sunrise": "2026-09-21T06:22:00.000Z",
+    "dhuhr": "2026-09-21T12:36:00.000Z",
+    "asr": "2026-09-21T15:58:00.000Z",
+    "maghrib": "2026-09-21T18:40:00.000Z",
+    "isha": "2026-09-21T19:50:00.000Z"
+   }
+  },
+  {
+   "place": {
+    "id": "morocco:150",
+    "name": "أسا",
+    "lat": 28.558,
+    "lon": -9.45,
+    "tz": "Etc/GMT",
+    "dipDeg": 0.195,
+    "dipMaghribDeg": 0.189,
+    "clock": [
+     [
+      "2020-01-01",
+      60
+     ],
+     [
+      "2026-09-17",
+      0
+     ]
+    ]
+   },
+   "date": "2026-10-17",
+   "clock": {
+    "zone": null,
+    "offsetMinutes": 0,
+    "label": "UTC+00:00"
+   },
+   "printed": {
+    "fajr": "05:16",
+    "sunrise": "06:36",
+    "dhuhr": "12:28",
+    "asr": "15:39",
+    "maghrib": "18:11",
+    "isha": "19:20"
+   },
+   "instants": {
+    "fajr": "2026-10-17T05:16:00.000Z",
+    "sunrise": "2026-10-17T06:36:00.000Z",
+    "dhuhr": "2026-10-17T12:28:00.000Z",
+    "asr": "2026-10-17T15:39:00.000Z",
+    "maghrib": "2026-10-17T18:11:00.000Z",
+    "isha": "2026-10-17T19:20:00.000Z"
+   }
+  },
+  {
+   "place": {
+    "id": "morocco:150",
+    "name": "أسا",
+    "lat": 28.558,
+    "lon": -9.45,
+    "tz": "Etc/GMT",
+    "dipDeg": 0.195,
+    "dipMaghribDeg": 0.189,
+    "clock": [
+     [
+      "2020-01-01",
+      60
+     ],
+     [
+      "2026-09-17",
+      0
+     ]
+    ]
+   },
+   "date": "2026-11-11",
+   "clock": {
+    "zone": null,
+    "offsetMinutes": 0,
+    "label": "UTC+00:00"
+   },
+   "printed": {
+    "fajr": "05:31",
+    "sunrise": "06:53",
+    "dhuhr": "12:27",
+    "asr": "15:25",
+    "maghrib": "17:51",
+    "isha": "19:03"
+   },
+   "instants": {
+    "fajr": "2026-11-11T05:31:00.000Z",
+    "sunrise": "2026-11-11T06:53:00.000Z",
+    "dhuhr": "2026-11-11T12:27:00.000Z",
+    "asr": "2026-11-11T15:25:00.000Z",
+    "maghrib": "2026-11-11T17:51:00.000Z",
+    "isha": "2026-11-11T19:03:00.000Z"
+   }
+  },
+  {
+   "place": {
+    "id": "algeria:1",
+    "name": "Djelfa",
+    "lat": 34.6626,
+    "lon": 3.2551,
+    "tz": "Africa/Algiers"
+   },
+   "date": "2026-10-01",
+   "clock": {
+    "zone": "Africa/Algiers",
+    "offsetMinutes": 60,
+    "label": "Africa/Algiers"
+   },
+   "printed": {
+    "fajr": "05:18",
+    "sunrise": "06:42",
+    "dhuhr": "12:37",
+    "asr": "15:59",
+    "maghrib": "18:35",
+    "isha": "19:51"
+   },
+   "instants": {
+    "fajr": "2026-10-01T04:18:00.000Z",
+    "sunrise": "2026-10-01T05:42:00.000Z",
+    "dhuhr": "2026-10-01T11:37:00.000Z",
+    "asr": "2026-10-01T14:59:00.000Z",
+    "maghrib": "2026-10-01T17:35:00.000Z",
+    "isha": "2026-10-01T18:51:00.000Z"
+   }
+  },
+  {
+   "place": {
+    "id": "algeria:1",
+    "name": "Djelfa",
+    "lat": 34.6626,
+    "lon": 3.2551,
+    "tz": "Africa/Algiers"
+   },
+   "date": "2026-12-22",
+   "clock": {
+    "zone": "Africa/Algiers",
+    "offsetMinutes": 60,
+    "label": "Africa/Algiers"
+   },
+   "printed": {
+    "fajr": "06:21",
+    "sunrise": "07:51",
+    "dhuhr": "12:46",
+    "asr": "15:23",
+    "maghrib": "17:44",
+    "isha": "19:06"
+   },
+   "instants": {
+    "fajr": "2026-12-22T05:21:00.000Z",
+    "sunrise": "2026-12-22T06:51:00.000Z",
+    "dhuhr": "2026-12-22T11:46:00.000Z",
+    "asr": "2026-12-22T14:23:00.000Z",
+    "maghrib": "2026-12-22T16:44:00.000Z",
+    "isha": "2026-12-22T18:06:00.000Z"
+   }
+  },
+  {
+   "place": {
+    "id": "algeria:1",
+    "name": "Djelfa",
+    "lat": 34.6626,
+    "lon": 3.2551,
+    "tz": "Africa/Algiers"
+   },
+   "date": "2027-03-15",
+   "clock": {
+    "zone": "Africa/Algiers",
+    "offsetMinutes": 60,
+    "label": "Africa/Algiers"
+   },
+   "printed": {
+    "fajr": "05:35",
+    "sunrise": "06:59",
+    "dhuhr": "12:56",
+    "asr": "16:20",
+    "maghrib": "18:58",
+    "isha": "20:14"
+   },
+   "instants": {
+    "fajr": "2027-03-15T04:35:00.000Z",
+    "sunrise": "2027-03-15T05:59:00.000Z",
+    "dhuhr": "2027-03-15T11:56:00.000Z",
+    "asr": "2027-03-15T15:20:00.000Z",
+    "maghrib": "2027-03-15T17:58:00.000Z",
+    "isha": "2027-03-15T19:14:00.000Z"
+   }
+  },
+  {
+   "place": {
+    "id": "algeria:1",
+    "name": "Djelfa",
+    "lat": 34.6626,
+    "lon": 3.2551,
+    "tz": "Africa/Algiers"
+   },
+   "date": "2027-06-05",
+   "clock": {
+    "zone": "Africa/Algiers",
+    "offsetMinutes": 60,
+    "label": "Africa/Algiers"
+   },
+   "printed": {
+    "fajr": "03:50",
+    "sunrise": "05:35",
+    "dhuhr": "12:46",
+    "asr": "16:33",
+    "maghrib": "20:00",
+    "isha": "21:35"
+   },
+   "instants": {
+    "fajr": "2027-06-05T02:50:00.000Z",
+    "sunrise": "2027-06-05T04:35:00.000Z",
+    "dhuhr": "2027-06-05T11:46:00.000Z",
+    "asr": "2027-06-05T15:33:00.000Z",
+    "maghrib": "2027-06-05T19:00:00.000Z",
+    "isha": "2027-06-05T20:35:00.000Z"
+   }
+  },
+  {
+   "place": {
+    "id": "algeria:27",
+    "name": "Algiers",
+    "lat": 36.7648,
+    "lon": 3.0553,
+    "tz": "Africa/Algiers"
+   },
+   "date": "2026-10-01",
+   "clock": {
+    "zone": "Africa/Algiers",
+    "offsetMinutes": 60,
+    "label": "Africa/Algiers"
+   },
+   "printed": {
+    "fajr": "05:17",
+    "sunrise": "06:43",
+    "dhuhr": "12:38",
+    "asr": "15:59",
+    "maghrib": "18:35",
+    "isha": "19:53"
+   },
+   "instants": {
+    "fajr": "2026-10-01T04:17:00.000Z",
+    "sunrise": "2026-10-01T05:43:00.000Z",
+    "dhuhr": "2026-10-01T11:38:00.000Z",
+    "asr": "2026-10-01T14:59:00.000Z",
+    "maghrib": "2026-10-01T17:35:00.000Z",
+    "isha": "2026-10-01T18:53:00.000Z"
+   }
+  },
+  {
+   "place": {
+    "id": "algeria:27",
+    "name": "Algiers",
+    "lat": 36.7648,
+    "lon": 3.0553,
+    "tz": "Africa/Algiers"
+   },
+   "date": "2026-12-22",
+   "clock": {
+    "zone": "Africa/Algiers",
+    "offsetMinutes": 60,
+    "label": "Africa/Algiers"
+   },
+   "printed": {
+    "fajr": "06:25",
+    "sunrise": "07:58",
+    "dhuhr": "12:47",
+    "asr": "15:18",
+    "maghrib": "17:39",
+    "isha": "19:04"
+   },
+   "instants": {
+    "fajr": "2026-12-22T05:25:00.000Z",
+    "sunrise": "2026-12-22T06:58:00.000Z",
+    "dhuhr": "2026-12-22T11:47:00.000Z",
+    "asr": "2026-12-22T14:18:00.000Z",
+    "maghrib": "2026-12-22T16:39:00.000Z",
+    "isha": "2026-12-22T18:04:00.000Z"
+   }
+  },
+  {
+   "place": {
+    "id": "algeria:27",
+    "name": "Algiers",
+    "lat": 36.7648,
+    "lon": 3.0553,
+    "tz": "Africa/Algiers"
+   },
+   "date": "2027-03-15",
+   "clock": {
+    "zone": "Africa/Algiers",
+    "offsetMinutes": 60,
+    "label": "Africa/Algiers"
+   },
+   "printed": {
+    "fajr": "05:34",
+    "sunrise": "07:00",
+    "dhuhr": "12:57",
+    "asr": "16:20",
+    "maghrib": "18:58",
+    "isha": "20:17"
+   },
+   "instants": {
+    "fajr": "2027-03-15T04:34:00.000Z",
+    "sunrise": "2027-03-15T06:00:00.000Z",
+    "dhuhr": "2027-03-15T11:57:00.000Z",
+    "asr": "2027-03-15T15:20:00.000Z",
+    "maghrib": "2027-03-15T17:58:00.000Z",
+    "isha": "2027-03-15T19:17:00.000Z"
+   }
+  },
+  {
+   "place": {
+    "id": "algeria:27",
+    "name": "Algiers",
+    "lat": 36.7648,
+    "lon": 3.0553,
+    "tz": "Africa/Algiers"
+   },
+   "date": "2027-06-05",
+   "clock": {
+    "zone": "Africa/Algiers",
+    "offsetMinutes": 60,
+    "label": "Africa/Algiers"
+   },
+   "printed": {
+    "fajr": "03:40",
+    "sunrise": "05:30",
+    "dhuhr": "12:47",
+    "asr": "16:38",
+    "maghrib": "20:07",
+    "isha": "21:46"
+   },
+   "instants": {
+    "fajr": "2027-06-05T02:40:00.000Z",
+    "sunrise": "2027-06-05T04:30:00.000Z",
+    "dhuhr": "2027-06-05T11:47:00.000Z",
+    "asr": "2027-06-05T15:38:00.000Z",
+    "maghrib": "2027-06-05T19:07:00.000Z",
+    "isha": "2027-06-05T20:46:00.000Z"
+   }
+  },
+  {
+   "place": {
+    "id": "algeria:60",
+    "name": "In Salah",
+    "lat": 27.1941,
+    "lon": 2.4793,
+    "tz": "Africa/Algiers"
+   },
+   "date": "2026-10-01",
+   "clock": {
+    "zone": "Africa/Algiers",
+    "offsetMinutes": 60,
+    "label": "Africa/Algiers"
+   },
+   "printed": {
+    "fajr": "05:26",
+    "sunrise": "06:43",
+    "dhuhr": "12:40",
+    "asr": "16:04",
+    "maghrib": "18:40",
+    "isha": "19:50"
+   },
+   "instants": {
+    "fajr": "2026-10-01T04:26:00.000Z",
+    "sunrise": "2026-10-01T05:43:00.000Z",
+    "dhuhr": "2026-10-01T11:40:00.000Z",
+    "asr": "2026-10-01T15:04:00.000Z",
+    "maghrib": "2026-10-01T17:40:00.000Z",
+    "isha": "2026-10-01T18:50:00.000Z"
+   }
+  },
+  {
+   "place": {
+    "id": "algeria:60",
+    "name": "In Salah",
+    "lat": 27.1941,
+    "lon": 2.4793,
+    "tz": "Africa/Algiers"
+   },
+   "date": "2026-12-22",
+   "clock": {
+    "zone": "Africa/Algiers",
+    "offsetMinutes": 60,
+    "label": "Africa/Algiers"
+   },
+   "printed": {
+    "fajr": "06:13",
+    "sunrise": "07:36",
+    "dhuhr": "12:49",
+    "asr": "15:43",
+    "maghrib": "18:05",
+    "isha": "19:20"
+   },
+   "instants": {
+    "fajr": "2026-12-22T05:13:00.000Z",
+    "sunrise": "2026-12-22T06:36:00.000Z",
+    "dhuhr": "2026-12-22T11:49:00.000Z",
+    "asr": "2026-12-22T14:43:00.000Z",
+    "maghrib": "2026-12-22T17:05:00.000Z",
+    "isha": "2026-12-22T18:20:00.000Z"
+   }
+  },
+  {
+   "place": {
+    "id": "algeria:60",
+    "name": "In Salah",
+    "lat": 27.1941,
+    "lon": 2.4793,
+    "tz": "Africa/Algiers"
+   },
+   "date": "2027-03-15",
+   "clock": {
+    "zone": "Africa/Algiers",
+    "offsetMinutes": 60,
+    "label": "Africa/Algiers"
+   },
+   "printed": {
+    "fajr": "05:43",
+    "sunrise": "07:00",
+    "dhuhr": "13:00",
+    "asr": "16:25",
+    "maghrib": "19:02",
+    "isha": "20:12"
+   },
+   "instants": {
+    "fajr": "2027-03-15T04:43:00.000Z",
+    "sunrise": "2027-03-15T06:00:00.000Z",
+    "dhuhr": "2027-03-15T12:00:00.000Z",
+    "asr": "2027-03-15T15:25:00.000Z",
+    "maghrib": "2027-03-15T18:02:00.000Z",
+    "isha": "2027-03-15T19:12:00.000Z"
+   }
+  },
+  {
+   "place": {
+    "id": "algeria:60",
+    "name": "In Salah",
+    "lat": 27.1941,
+    "lon": 2.4793,
+    "tz": "Africa/Algiers"
+   },
+   "date": "2027-06-05",
+   "clock": {
+    "zone": "Africa/Algiers",
+    "offsetMinutes": 60,
+    "label": "Africa/Algiers"
+   },
+   "printed": {
+    "fajr": "04:25",
+    "sunrise": "05:56",
+    "dhuhr": "12:49",
+    "asr": "16:18",
+    "maghrib": "19:46",
+    "isha": "21:08"
+   },
+   "instants": {
+    "fajr": "2027-06-05T03:25:00.000Z",
+    "sunrise": "2027-06-05T04:56:00.000Z",
+    "dhuhr": "2027-06-05T11:49:00.000Z",
+    "asr": "2027-06-05T15:18:00.000Z",
+    "maghrib": "2027-06-05T18:46:00.000Z",
+    "isha": "2027-06-05T20:08:00.000Z"
+   }
+  },
+  {
+   "place": {
+    "id": "indonesia:1",
+    "name": "KAB. ACEH BARAT (Aceh)",
+    "lat": 4.16035,
+    "lon": 96.12489,
+    "tz": "Asia/Jakarta",
+    "highland": false,
+    "twilightDip": false
+   },
+   "date": "2026-10-07",
+   "clock": {
+    "zone": "Asia/Jakarta",
+    "offsetMinutes": 420,
+    "label": "Asia/Jakarta"
+   },
+   "printed": {
+    "fajr": "05:07",
+    "sunrise": "06:19",
+    "dhuhr": "12:27",
+    "asr": "15:40",
+    "maghrib": "18:28",
+    "isha": "19:37"
+   },
+   "instants": {
+    "fajr": "2026-10-06T22:07:00.000Z",
+    "sunrise": "2026-10-06T23:19:00.000Z",
+    "dhuhr": "2026-10-07T05:27:00.000Z",
+    "asr": "2026-10-07T08:40:00.000Z",
+    "maghrib": "2026-10-07T11:28:00.000Z",
+    "isha": "2026-10-07T12:37:00.000Z"
+   }
+  },
+  {
+   "place": {
+    "id": "indonesia:1",
+    "name": "KAB. ACEH BARAT (Aceh)",
+    "lat": 4.16035,
+    "lon": 96.12489,
+    "tz": "Asia/Jakarta",
+    "highland": false,
+    "twilightDip": false
+   },
+   "date": "2026-11-04",
+   "clock": {
+    "zone": "Asia/Jakarta",
+    "offsetMinutes": 420,
+    "label": "Asia/Jakarta"
+   },
+   "printed": {
+    "fajr": "05:03",
+    "sunrise": "06:17",
+    "dhuhr": "12:23",
+    "asr": "15:43",
+    "maghrib": "18:21",
+    "isha": "19:32"
+   },
+   "instants": {
+    "fajr": "2026-11-03T22:03:00.000Z",
+    "sunrise": "2026-11-03T23:17:00.000Z",
+    "dhuhr": "2026-11-04T05:23:00.000Z",
+    "asr": "2026-11-04T08:43:00.000Z",
+    "maghrib": "2026-11-04T11:21:00.000Z",
+    "isha": "2026-11-04T12:32:00.000Z"
+   }
+  },
+  {
+   "place": {
+    "id": "indonesia:1",
+    "name": "KAB. ACEH BARAT (Aceh)",
+    "lat": 4.16035,
+    "lon": 96.12489,
+    "tz": "Asia/Jakarta",
+    "highland": false,
+    "twilightDip": false
+   },
+   "date": "2026-12-03",
+   "clock": {
+    "zone": "Asia/Jakarta",
+    "offsetMinutes": 420,
+    "label": "Asia/Jakarta"
+   },
+   "printed": {
+    "fajr": "05:08",
+    "sunrise": "06:25",
+    "dhuhr": "12:29",
+    "asr": "15:51",
+    "maghrib": "18:25",
+    "isha": "19:39"
+   },
+   "instants": {
+    "fajr": "2026-12-02T22:08:00.000Z",
+    "sunrise": "2026-12-02T23:25:00.000Z",
+    "dhuhr": "2026-12-03T05:29:00.000Z",
+    "asr": "2026-12-03T08:51:00.000Z",
+    "maghrib": "2026-12-03T11:25:00.000Z",
+    "isha": "2026-12-03T12:39:00.000Z"
+   }
+  },
+  {
+   "place": {
+    "id": "indonesia:1",
+    "name": "KAB. ACEH BARAT (Aceh)",
+    "lat": 4.16035,
+    "lon": 96.12489,
+    "tz": "Asia/Jakarta",
+    "highland": false,
+    "twilightDip": false
+   },
+   "date": "2026-12-31",
+   "clock": {
+    "zone": "Asia/Jakarta",
+    "offsetMinutes": 420,
+    "label": "Asia/Jakarta"
+   },
+   "printed": {
+    "fajr": "05:21",
+    "sunrise": "06:38",
+    "dhuhr": "12:42",
+    "asr": "16:04",
+    "maghrib": "18:38",
+    "isha": "19:52"
+   },
+   "instants": {
+    "fajr": "2026-12-30T22:21:00.000Z",
+    "sunrise": "2026-12-30T23:38:00.000Z",
+    "dhuhr": "2026-12-31T05:42:00.000Z",
+    "asr": "2026-12-31T09:04:00.000Z",
+    "maghrib": "2026-12-31T11:38:00.000Z",
+    "isha": "2026-12-31T12:52:00.000Z"
+   }
+  },
+  {
+   "place": {
+    "id": "indonesia:200",
+    "name": "KAB. BLORA (Jawa Tengah)",
+    "lat": -6.969,
+    "lon": 111.41339,
+    "tz": "Asia/Jakarta",
+    "highland": false,
+    "twilightDip": false
+   },
+   "date": "2026-10-07",
+   "clock": {
+    "zone": "Asia/Jakarta",
+    "offsetMinutes": 420,
+    "label": "Asia/Jakarta"
+   },
+   "printed": {
+    "fajr": "04:01",
+    "sunrise": "05:13",
+    "dhuhr": "11:26",
+    "asr": "14:29",
+    "maghrib": "17:31",
+    "isha": "18:40"
+   },
+   "instants": {
+    "fajr": "2026-10-06T21:01:00.000Z",
+    "sunrise": "2026-10-06T22:13:00.000Z",
+    "dhuhr": "2026-10-07T04:26:00.000Z",
+    "asr": "2026-10-07T07:29:00.000Z",
+    "maghrib": "2026-10-07T10:31:00.000Z",
+    "isha": "2026-10-07T11:40:00.000Z"
+   }
+  },
+  {
+   "place": {
+    "id": "indonesia:200",
+    "name": "KAB. BLORA (Jawa Tengah)",
+    "lat": -6.969,
+    "lon": 111.41339,
+    "tz": "Asia/Jakarta",
+    "highland": false,
+    "twilightDip": false
+   },
+   "date": "2026-11-04",
+   "clock": {
+    "zone": "Asia/Jakarta",
+    "offsetMinutes": 420,
+    "label": "Asia/Jakarta"
+   },
+   "printed": {
+    "fajr": "03:48",
+    "sunrise": "05:04",
+    "dhuhr": "11:21",
+    "asr": "14:37",
+    "maghrib": "17:32",
+    "isha": "18:44"
+   },
+   "instants": {
+    "fajr": "2026-11-03T20:48:00.000Z",
+    "sunrise": "2026-11-03T22:04:00.000Z",
+    "dhuhr": "2026-11-04T04:21:00.000Z",
+    "asr": "2026-11-04T07:37:00.000Z",
+    "maghrib": "2026-11-04T10:32:00.000Z",
+    "isha": "2026-11-04T11:44:00.000Z"
+   }
+  },
+  {
+   "place": {
+    "id": "indonesia:200",
+    "name": "KAB. BLORA (Jawa Tengah)",
+    "lat": -6.969,
+    "lon": 111.41339,
+    "tz": "Asia/Jakarta",
+    "highland": false,
+    "twilightDip": false
+   },
+   "date": "2026-12-03",
+   "clock": {
+    "zone": "Asia/Jakarta",
+    "offsetMinutes": 420,
+    "label": "Asia/Jakarta"
+   },
+   "printed": {
+    "fajr": "03:47",
+    "sunrise": "05:06",
+    "dhuhr": "11:27",
+    "asr": "14:52",
+    "maghrib": "17:42",
+    "isha": "18:57"
+   },
+   "instants": {
+    "fajr": "2026-12-02T20:47:00.000Z",
+    "sunrise": "2026-12-02T22:06:00.000Z",
+    "dhuhr": "2026-12-03T04:27:00.000Z",
+    "asr": "2026-12-03T07:52:00.000Z",
+    "maghrib": "2026-12-03T10:42:00.000Z",
+    "isha": "2026-12-03T11:57:00.000Z"
+   }
+  },
+  {
+   "place": {
+    "id": "indonesia:200",
+    "name": "KAB. BLORA (Jawa Tengah)",
+    "lat": -6.969,
+    "lon": 111.41339,
+    "tz": "Asia/Jakarta",
+    "highland": false,
+    "twilightDip": false
+   },
+   "date": "2026-12-31",
+   "clock": {
+    "zone": "Asia/Jakarta",
+    "offsetMinutes": 420,
+    "label": "Asia/Jakarta"
+   },
+   "printed": {
+    "fajr": "03:58",
+    "sunrise": "05:18",
+    "dhuhr": "11:41",
+    "asr": "15:07",
+    "maghrib": "17:56",
+    "isha": "19:12"
+   },
+   "instants": {
+    "fajr": "2026-12-30T20:58:00.000Z",
+    "sunrise": "2026-12-30T22:18:00.000Z",
+    "dhuhr": "2026-12-31T04:41:00.000Z",
+    "asr": "2026-12-31T08:07:00.000Z",
+    "maghrib": "2026-12-31T10:56:00.000Z",
+    "isha": "2026-12-31T12:12:00.000Z"
+   }
+  },
+  {
+   "place": {
+    "id": "indonesia:500",
+    "name": "KAB. WAROPEN (Papua)",
+    "lat": -2.25,
+    "lon": 136.37688,
+    "tz": "Asia/Jayapura",
+    "highland": false,
+    "twilightDip": false
+   },
+   "date": "2026-10-07",
+   "clock": {
+    "zone": "Asia/Jayapura",
+    "offsetMinutes": 540,
+    "label": "Asia/Jayapura"
+   },
+   "printed": {
+    "fajr": "04:24",
+    "sunrise": "05:35",
+    "dhuhr": "11:46",
+    "asr": "14:51",
+    "maghrib": "17:50",
+    "isha": "18:58"
+   },
+   "instants": {
+    "fajr": "2026-10-06T19:24:00.000Z",
+    "sunrise": "2026-10-06T20:35:00.000Z",
+    "dhuhr": "2026-10-07T02:46:00.000Z",
+    "asr": "2026-10-07T05:51:00.000Z",
+    "maghrib": "2026-10-07T08:50:00.000Z",
+    "isha": "2026-10-07T09:58:00.000Z"
+   }
+  },
+  {
+   "place": {
+    "id": "indonesia:500",
+    "name": "KAB. WAROPEN (Papua)",
+    "lat": -2.25,
+    "lon": 136.37688,
+    "tz": "Asia/Jayapura",
+    "highland": false,
+    "twilightDip": false
+   },
+   "date": "2026-11-04",
+   "clock": {
+    "zone": "Asia/Jayapura",
+    "offsetMinutes": 540,
+    "label": "Asia/Jayapura"
+   },
+   "printed": {
+    "fajr": "04:15",
+    "sunrise": "05:29",
+    "dhuhr": "11:42",
+    "asr": "15:00",
+    "maghrib": "17:47",
+    "isha": "18:58"
+   },
+   "instants": {
+    "fajr": "2026-11-03T19:15:00.000Z",
+    "sunrise": "2026-11-03T20:29:00.000Z",
+    "dhuhr": "2026-11-04T02:42:00.000Z",
+    "asr": "2026-11-04T06:00:00.000Z",
+    "maghrib": "2026-11-04T08:47:00.000Z",
+    "isha": "2026-11-04T09:58:00.000Z"
+   }
+  },
+  {
+   "place": {
+    "id": "indonesia:500",
+    "name": "KAB. WAROPEN (Papua)",
+    "lat": -2.25,
+    "lon": 136.37688,
+    "tz": "Asia/Jayapura",
+    "highland": false,
+    "twilightDip": false
+   },
+   "date": "2026-12-03",
+   "clock": {
+    "zone": "Asia/Jayapura",
+    "offsetMinutes": 540,
+    "label": "Asia/Jayapura"
+   },
+   "printed": {
+    "fajr": "04:16",
+    "sunrise": "05:34",
+    "dhuhr": "11:48",
+    "asr": "15:12",
+    "maghrib": "17:55",
+    "isha": "19:09"
+   },
+   "instants": {
+    "fajr": "2026-12-02T19:16:00.000Z",
+    "sunrise": "2026-12-02T20:34:00.000Z",
+    "dhuhr": "2026-12-03T02:48:00.000Z",
+    "asr": "2026-12-03T06:12:00.000Z",
+    "maghrib": "2026-12-03T08:55:00.000Z",
+    "isha": "2026-12-03T10:09:00.000Z"
+   }
+  },
+  {
+   "place": {
+    "id": "indonesia:500",
+    "name": "KAB. WAROPEN (Papua)",
+    "lat": -2.25,
+    "lon": 136.37688,
+    "tz": "Asia/Jayapura",
+    "highland": false,
+    "twilightDip": false
+   },
+   "date": "2026-12-31",
+   "clock": {
+    "zone": "Asia/Jayapura",
+    "offsetMinutes": 540,
+    "label": "Asia/Jayapura"
+   },
+   "printed": {
+    "fajr": "04:28",
+    "sunrise": "05:46",
+    "dhuhr": "12:01",
+    "asr": "15:26",
+    "maghrib": "18:08",
+    "isha": "19:23"
+   },
+   "instants": {
+    "fajr": "2026-12-30T19:28:00.000Z",
+    "sunrise": "2026-12-30T20:46:00.000Z",
+    "dhuhr": "2026-12-31T03:01:00.000Z",
+    "asr": "2026-12-31T06:26:00.000Z",
+    "maghrib": "2026-12-31T09:08:00.000Z",
+    "isha": "2026-12-31T10:23:00.000Z"
+   }
+  }
+ ]
+}

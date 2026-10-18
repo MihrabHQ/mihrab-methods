@@ -13,7 +13,7 @@
  */
 import fs from 'node:fs';
 import path from 'node:path';
-import { AUTHORITIES, placesOf, candidateTimes, type Authority, type Place } from './index';
+import { AUTHORITIES, placesOf, candidateInstants, type Authority, type Place } from '../src/index.js';
 
 const ROOT = path.join(__dirname, '..');
 export const TABLES = process.env.MIHRAB_TABLES ?? path.join(ROOT, '.tables');
@@ -112,7 +112,7 @@ export function check(name: string, places: Place[], dir: string, opts: CheckOpt
         pr.copiedRows++;
         y -= 1;
       }
-      const t = candidateTimes(place, y, m - 1, d, 1, { corrections: !ALONE });
+      const t = candidateInstants(place, y, m - 1, d, 1, { corrections: !ALONE });
       if (!t) continue;
       pr.days++;
       if (!pr.from || date < pr.from) pr.from = date;
@@ -161,7 +161,7 @@ export function copiedYearsOf(place: Place, days: Record<string, string[]>, orig
     if (original?.[date]) continue;
     const [y, m, d] = date.split('-').map(Number);
     const on = (yy: number) => {
-      const t = candidateTimes(place, yy, m - 1, d, 1, { corrections: false });
+      const t = candidateInstants(place, yy, m - 1, d, 1, { corrections: false });
       return t ? KEYS.filter((k, i) => clockIn(place.tz, t[k]) === minutes(row[i + 1])).length : 0;
     };
     const s = score.get(y) ?? [0, 0];
@@ -198,7 +198,7 @@ export function checkAuthority(a: CheckRun): Result | null {
   if (a === 'sweden-diyanet') {
     const root = DIYANET_ROOT;
     const pts = JSON.parse(fs.readFileSync(path.join(ROOT, 'data/places/diyanet-sweden-points.json'), 'utf8')) as Record<string, { name: string; lat: number; lon: number }>;
-    const places: Place[] = Object.entries(pts).map(([iid, v]) => ({ authority: 'sweden', key: iid, name: v.name, lat: v.lat, lon: v.lon, tz: 'Europe/Stockholm' }));
+    const places: Place[] = Object.entries(pts).map(([iid, v]) => ({ authority: 'sweden', id: `sweden:${iid}`, key: iid, name: v.name, country: 'SE', lat: v.lat, lon: v.lon, tz: 'Europe/Stockholm' }));
     return check('Sweden — Diyanet’s own tables', places, path.join(root, 'v1/cities'));
   }
   const names: Record<Authority, string> = {

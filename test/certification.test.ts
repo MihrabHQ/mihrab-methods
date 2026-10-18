@@ -13,23 +13,23 @@ import {
   placesOf,
   timesFor,
   UncertifiedMethodError,
-} from '../src/index';
-import { checkAuthority } from '../src/verify';
+} from '../src/index.js';
+import { checkAuthority } from '../tools/verify.js';
 
 for (const a of AUTHORITIES) {
   const place = placesOf(a)[0];
 
   test(`${a}: timesFor ${isCertified(a) ? 'serves the certified method' : 'refuses the uncertified method'}`, () => {
     if (isCertified(a)) {
-      assert.deepEqual(timesFor(place, 2026, 9, 15), candidateTimes(place, 2026, 9, 15));
+      assert.deepEqual(timesFor(place, '2026-10-15'), candidateTimes(place, '2026-10-15'));
     } else {
-      assert.throws(() => timesFor(place, 2026, 9, 15), (e: unknown) => e instanceof UncertifiedMethodError && e.authority === a);
+      assert.throws(() => timesFor(place, '2026-10-15'), (e: unknown) => e instanceof UncertifiedMethodError && e.authority === a);
     }
   });
 
   test(`${a}: candidateTimes runs, certified or not`, () => {
-    const t = candidateTimes(place, 2026, 9, 15);
-    assert.ok(t && Number.isFinite(t.fajr.getTime()) && t.fajr < t.isha);
+    const t = candidateTimes(place, '2026-10-15').times;
+    assert.ok(t && Number.isFinite(t.fajr.instant.getTime()) && t.fajr.instant < t.isha.instant);
   });
 
   test(`${a}: a certification means 0 off against every table checked`, t => {

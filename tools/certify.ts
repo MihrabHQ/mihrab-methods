@@ -15,10 +15,10 @@
  */
 import fs from 'node:fs';
 import path from 'node:path';
-import { AUTHORITIES, type Authority } from './places';
-import type { Certification, CheckRecord } from './certification';
-import { METHOD_REVISION } from './methods/revisions';
-import { checkAuthority, TABLES, type CheckRun, type Result } from './verify';
+import { createHash } from 'node:crypto';
+import { AUTHORITIES, type Authority, type Certification, type CheckRecord } from '../src/core/types.js';
+import { METHOD_REVISION } from '../src/methods/revisions.js';
+import { checkAuthority, TABLES, type CheckRun, type Result } from './verify.js';
 
 const FILE = path.join(__dirname, '..', 'certification.json');
 
@@ -26,8 +26,10 @@ const FILE = path.join(__dirname, '..', 'certification.json');
 function correctionsOf(a: Authority): Certification['corrections'] {
   const f = path.join(__dirname, '..', 'data', 'corrections', `${a}.json`);
   if (!fs.existsSync(f)) return undefined;
-  const list = JSON.parse(fs.readFileSync(f, 'utf8')) as { from: string; to: string; points: Record<string, string[]> };
-  return { from: list.from, to: list.to, entries: Object.values(list.points).reduce((n, e) => n + e.length, 0) };
+  const text = fs.readFileSync(f, 'utf8');
+  const list = JSON.parse(text) as { from: string; to: string; points: Record<string, string[]> };
+  // The hash is of the file as published, so an app can check what it downloads (`fetchLatestCorrections`).
+  return { from: list.from, to: list.to, entries: Object.values(list.points).reduce((n, e) => n + e.length, 0), sha256: createHash('sha256').update(text).digest('hex') };
 }
 
 function record(r: Result): CheckRecord {

@@ -17,9 +17,16 @@
  */
 import fs from 'node:fs';
 import path from 'node:path';
-import { candidateTimes, placesOf, type Place } from './index';
-import { clockIn, copiedYearsOf, DIYANET_ROOT, KEYS, minutes, tableClock, TABLES } from './verify';
-import { ALGERIA_CORRECTIONS_FILE, CORRECTIONS_FILE, DIYANET_CORRECTIONS_FILE, INDONESIA_CORRECTIONS_FILE, MOROCCO_CORRECTIONS_FILE, pointKey, type SwedenCorrections } from './methods/swedenCorrections';
+import { candidateInstants, placesOf, pointKey, type CorrectionsFile, type Place } from '../src/index.js';
+import { clockIn, copiedYearsOf, DIYANET_ROOT, KEYS, minutes, tableClock, TABLES } from './verify.js';
+
+const DIR = path.join(__dirname, '..', 'data', 'corrections');
+const CORRECTIONS_FILE = path.join(DIR, 'sweden.json');
+const DIYANET_CORRECTIONS_FILE = path.join(DIR, 'diyanet.json');
+const MOROCCO_CORRECTIONS_FILE = path.join(DIR, 'morocco.json');
+const ALGERIA_CORRECTIONS_FILE = path.join(DIR, 'algeria.json');
+const INDONESIA_CORRECTIONS_FILE = path.join(DIR, 'indonesia.json');
+type SwedenCorrections = CorrectionsFile;
 
 const WORLD = process.argv.includes('diyanet');
 /** A national authority's own tables (Morocco, Algeria, Indonesia), at its places' points. */
@@ -44,7 +51,7 @@ const ownRow = new Set<string>();
 /** Compare one table row with the method (no corrections) on the date it is for; record the minutes. */
 function compare(place: Place, date: string, row: string[], asOf: string): void {
   const [y, m, d] = asOf.split('-').map(Number);
-  const t = candidateTimes(place, y, m - 1, d, 1, { corrections: false });
+  const t = candidateInstants(place, y, m - 1, d, 1, { corrections: false });
   if (!t) return;
   const key = pointKey(place.lat, place.lon);
   if (asOf !== date && ownRow.has(`${key} ${asOf}`)) return;
@@ -93,7 +100,7 @@ for (const [iid, v] of WORLD || MOROCCO ? [] : Object.entries(pts)) {
   const days = read(path.join(DIYANET_ROOT, 'v1/cities', `${iid}.json`));
   if (!days) continue;
   diyanetTables++;
-  const place: Place = { authority: 'sweden', key: iid, name: v.name, lat: v.lat, lon: v.lon, tz: TZ };
+  const place: Place = { authority: 'sweden', id: `sweden:${iid}`, key: iid, name: v.name, country: 'SE', lat: v.lat, lon: v.lon, tz: TZ };
   for (const [date, row] of Object.entries(days)) {
     compare(place, date, row, date);
     if (date < from) from = date;

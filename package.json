@@ -1,19 +1,179 @@
 {
   "name": "mihrab-methods",
-  "version": "0.1.0",
-  "private": true,
-  "description": "The prayer-time authorities' own methods, fitted to their published tables: Sweden (Diyanet), Morocco (Habous), Algeria (Ministry of Religious Affairs), Indonesia (Kemenag).",
+  "version": "1.0.0",
+  "description": "The prayer-time authorities' own calculation methods, each reproducing its published timetable to the minute: Sweden (Diyanet, as Islamiska Förbundet prints it), Diyanet worldwide, Morocco (Habous), Algeria (Ministry of Religious Affairs), Indonesia (Kemenag).",
   "license": "AGPL-3.0-or-later",
-  "main": "src/index.ts",
+  "author": "Hassan El Ghamri",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MihrabHQ/mihrab-methods.git"
+  },
+  "homepage": "https://github.com/MihrabHQ/mihrab-methods#readme",
+  "bugs": "https://github.com/MihrabHQ/mihrab-methods/issues",
+  "keywords": [
+    "prayer times",
+    "salah",
+    "namaz",
+    "diyanet",
+    "habous",
+    "kemenag",
+    "islamiska förbundet",
+    "adhan",
+    "mihrab"
+  ],
+  "sideEffects": [
+    "./dist/*/index.js",
+    "./dist/*/sweden.js",
+    "./dist/*/diyanet.js",
+    "./dist/*/morocco.js",
+    "./dist/*/algeria.js",
+    "./dist/*/indonesia.js",
+    "./dist/*/authorities/*.js"
+  ],
+  "engines": {
+    "node": ">=18"
+  },
+  "files": [
+    "dist",
+    "schemas",
+    "docs/methods.md",
+    "certification.json",
+    "data/corrections"
+  ],
+  "main": "./dist/cjs/index.js",
+  "module": "./dist/esm/index.js",
+  "types": "./dist/cjs/index.d.ts",
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./dist/esm/index.d.ts",
+        "default": "./dist/esm/index.js"
+      },
+      "require": {
+        "types": "./dist/cjs/index.d.ts",
+        "default": "./dist/cjs/index.js"
+      }
+    },
+    "./core": {
+      "import": {
+        "types": "./dist/esm/core.d.ts",
+        "default": "./dist/esm/core.js"
+      },
+      "require": {
+        "types": "./dist/cjs/core.d.ts",
+        "default": "./dist/cjs/core.js"
+      }
+    },
+    "./sweden": {
+      "import": {
+        "types": "./dist/esm/sweden.d.ts",
+        "default": "./dist/esm/sweden.js"
+      },
+      "require": {
+        "types": "./dist/cjs/sweden.d.ts",
+        "default": "./dist/cjs/sweden.js"
+      }
+    },
+    "./diyanet": {
+      "import": {
+        "types": "./dist/esm/diyanet.d.ts",
+        "default": "./dist/esm/diyanet.js"
+      },
+      "require": {
+        "types": "./dist/cjs/diyanet.d.ts",
+        "default": "./dist/cjs/diyanet.js"
+      }
+    },
+    "./morocco": {
+      "import": {
+        "types": "./dist/esm/morocco.d.ts",
+        "default": "./dist/esm/morocco.js"
+      },
+      "require": {
+        "types": "./dist/cjs/morocco.d.ts",
+        "default": "./dist/cjs/morocco.js"
+      }
+    },
+    "./algeria": {
+      "import": {
+        "types": "./dist/esm/algeria.d.ts",
+        "default": "./dist/esm/algeria.js"
+      },
+      "require": {
+        "types": "./dist/cjs/algeria.d.ts",
+        "default": "./dist/cjs/algeria.js"
+      }
+    },
+    "./indonesia": {
+      "import": {
+        "types": "./dist/esm/indonesia.d.ts",
+        "default": "./dist/esm/indonesia.js"
+      },
+      "require": {
+        "types": "./dist/cjs/indonesia.d.ts",
+        "default": "./dist/cjs/indonesia.js"
+      }
+    },
+    "./locate": {
+      "import": {
+        "types": "./dist/esm/locate.d.ts",
+        "default": "./dist/esm/locate.js"
+      },
+      "require": {
+        "types": "./dist/cjs/locate.d.ts",
+        "default": "./dist/cjs/locate.js"
+      }
+    },
+    "./certification.json": "./certification.json",
+    "./data/corrections/*.json": "./data/corrections/*.json",
+    "./schemas/*.json": "./schemas/*.json",
+    "./package.json": "./package.json"
+  },
+  "typesVersions": {
+    "*": {
+      "core": [
+        "./dist/cjs/core.d.ts"
+      ],
+      "sweden": [
+        "./dist/cjs/sweden.d.ts"
+      ],
+      "diyanet": [
+        "./dist/cjs/diyanet.d.ts"
+      ],
+      "morocco": [
+        "./dist/cjs/morocco.d.ts"
+      ],
+      "algeria": [
+        "./dist/cjs/algeria.d.ts"
+      ],
+      "indonesia": [
+        "./dist/cjs/indonesia.d.ts"
+      ],
+      "locate": [
+        "./dist/cjs/locate.d.ts"
+      ]
+    }
+  },
   "scripts": {
+    "embed": "node scripts/embed.mjs",
+    "build": "npm run embed && rm -rf dist && tsc -p tsconfig.build.cjs.json && tsc -p tsconfig.build.esm.json && echo '{\"type\":\"module\"}' > dist/esm/package.json",
+    "prepack": "npm run build",
+    "pretest": "npm run embed",
     "test": "tsx --test test/*.test.ts",
-    "verify": "tsx src/verify.ts",
-    "corrections": "tsx src/corrections.ts",
-    "certify": "tsx src/certify.ts",
-    "typecheck": "tsc --noEmit"
+    "pretypecheck": "npm run embed",
+    "typecheck": "tsc --noEmit",
+    "preverify": "npm run embed",
+    "verify": "tsx tools/verify.ts",
+    "precorrections": "npm run embed",
+    "corrections": "tsx tools/corrections.ts",
+    "precertify": "npm run embed",
+    "certify": "tsx tools/certify.ts",
+    "vectors": "npm run embed && tsx tools/vectors.ts",
+    "serve": "npm run embed && tsx tools/serve.ts"
   },
   "devDependencies": {
     "@types/node": "^22.10.0",
+    "ajv": "^8.20.0",
     "tsx": "^4.19.2",
     "typescript": "^5.7.2"
   }

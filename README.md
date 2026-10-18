@@ -1,9 +1,29 @@
 # mihrab-methods
 
-An open prayer-time API: the calculation methods of the national
+[![npm](https://img.shields.io/npm/v/mihrab-methods)](https://www.npmjs.com/package/mihrab-methods)
+[![checks](https://github.com/MihrabHQ/mihrab-methods/actions/workflows/ci.yml/badge.svg)](https://github.com/MihrabHQ/mihrab-methods/actions/workflows/ci.yml)
+
+An open prayer-time library: the calculation methods of the national
 authorities, implemented to reproduce their official timetables to the
 minute, free for anyone to use. Accurate prayer times shouldn't be something
 only a few apps can offer.
+
+```sh
+npm install mihrab-methods
+```
+
+```ts
+import { nearestPlace, timesFor } from 'mihrab-methods/algeria'; // or 'mihrab-methods' for all five
+
+const { place } = nearestPlace('algeria', 36.75, 3.06)!;    // Algiers
+const day = timesFor(place, '2026-10-15');
+day.status;               // 'certified' — the ministry's own printed minute
+day.clock.label;          // 'Africa/Algiers'
+day.times!.fajr;          // { instant: 2026-10-15T04:29:00.000Z, printed: '05:29' }
+```
+
+It is a library, in TypeScript, with a small server over it for everything
+else (`npm run serve`); see [Use](#use).
 
 Each method is the authority's own formula, worked out again from its
 published times, with a small, fixed correction list for the few times where the formula
@@ -30,9 +50,10 @@ A method may be used only once it reproduces **every** time of its
 authority's timetable on the printed minute — not one minute off, anywhere.
 `npm run certify` checks each method day by day and writes
 `certification.json`; `timesFor` throws `UncertifiedMethodError` for any
-method not certified there. `candidateTimes` runs a method regardless, for
-research and for the check itself — not for showing anyone their prayer
-times.
+method not certified there, and says `status: 'method-only'` for a date
+beyond the span it was checked over. `candidateTimes` runs a method
+regardless, for research and for the check itself — not for showing anyone
+their prayer times.
 
 Days the timetable itself gets wrong (another town's times under a name, a
 previous year's figures for the date, a figure that differs from the
@@ -90,9 +111,10 @@ arithmetic of Diyanet's program, which puts about one time in five thousand on
 the other side of a minute's rounding point — a fraction of a second away,
 independently from place to place and day to day. `data/corrections/sweden.json`
 lists those times (point, date, prayer, a minute either way: 270 over
-2024–2027) and `candidateTimes` applies them. The list covers the years the
-timetables do, and certification holds over those dates only: `timesFor`
-refuses a date outside them. Diyanet's worldwide list
+2024–2027) and `timesFor` applies them. The list covers the years the
+timetables do, and certification holds over those dates only: outside them
+`timesFor` answers with `status: 'method-only'` (or refuses, with
+`strict`). Diyanet's worldwide list
 (`data/corrections/diyanet.json`) is the same kind: 9 118 entries at 4 660 points against
 70.0 million times. Each year, once the next year's timetables are out:
 
@@ -142,41 +164,130 @@ says whether the method is certified, the method's `revision`
 ```
 
 An app that computes revision 1 can take any newer list certified for
-revision 1 straight from `data/corrections/<authority>.json` (check that
-the file matches what the certification names) — no release needed. A
-higher revision means the method itself changed and its lists no longer
-fit the older code: the app should ask its user to update. `certified:
-false` means the authority has published tables the method is not yet on
-every minute of. Past a list's `to`, the method alone applies.
+revision 1 straight from `data/corrections/<authority>.json` — no release
+needed. A higher revision means the method itself changed and its lists no
+longer fit the older code: the app should ask its user to update.
+`certified: false` means the authority has published tables the method is
+not yet on every minute of. Past a list's `to`, the method alone applies.
+
+The check done right is in the library:
+
+```ts
+import { fetchLatestCorrections } from 'mihrab-methods/morocco';
+const r = await fetchLatestCorrections({ authority: 'morocco' });
+// r.status: 'current' | 'updated' | 'method-moved' | 'uncertified' | 'rejected'
+```
+
+It reads `certification.json`, takes a list only for the revision this
+build computes, only when it is the list the certification names (dates,
+size, and the **SHA-256** of the file as published), and puts it in force
+(`applyCorrections` restores one an app has stored). Both files have a
+published schema: `schemas/certification.schema.json` and
+`schemas/corrections.schema.json`; `npm test` validates them.
+
+Addresses: `main` is the live feed (what the Mihrab app reads). Every
+release is also tagged, and the same paths under a tag are fixed for good:
+`https://raw.githubusercontent.com/MihrabHQ/mihrab-methods/v1.0.0/certification.json`.
+Pass a tag's base URL as `baseUrl` to pin.
 
 The revision is raised whenever a change to a method or to its places'
 points changes what it prints; `npm test` fails until certification.json
-names the current revision and list.
+names the current revision and list. `CHANGELOG.md` says what each
+revision changed in the output.
 
 ## Use
 
+### As a package
+
+```sh
+npm install mihrab-methods
+```
+
+One entry point per authority, so an app ships only the data it needs
+(Indonesia's is 100 KB; Diyanet's worldwide points and list are 1.4 MB):
+
+| Import | Loads |
+|---|---|
+| `mihrab-methods` | all five |
+| `mihrab-methods/sweden`, `/diyanet`, `/morocco`, `/algeria`, `/indonesia` | one authority: its places, list and certification |
+| `mihrab-methods/locate` | `countryAt`, `defaultAuthorityFor` — the country at a point, and the authority whose table it prays by (400 KB of outlines) |
+| `mihrab-methods/core` | the calls and types with no data (load authorities yourself) |
+
+CommonJS and ES modules, with types. Node 18+, or any bundler; nothing is
+read from disk or fetched unless you call `fetchLatestCorrections`.
+
+```ts
+import { placesOf, placeById, nearestPlace, timesFor, timesForRange, candidateTimes, methodInfo } from 'mihrab-methods';
+import { defaultAuthorityFor } from 'mihrab-methods/locate';
+
+defaultAuthorityFor(59.33, 18.07);            // 'sweden' (null where none of the five is the authority)
+const { place, distanceKm } = nearestPlace('sweden', 59.33, 18.07)!;
+place.id;                                     // 'sweden:stockholm' — stable; place.country 'SE'
+placeById('diyanet:9146');                    // Adana
+
+timesFor(place, '2026-10-15');                // or { year: 2026, month: 10, day: 15 } — January is 1
+// {
+//   status: 'certified',                     'method-only' outside the certified dates: the method alone,
+//                                            on the printed minute all but rarely, never a minute further
+//   date: '2026-10-15', certifiedFrom: '2024-01-01', certifiedUntil: '2027-12-31', revision: 1,
+//   clock: { zone: 'Europe/Stockholm', offsetMinutes: 120, label: 'Europe/Stockholm' },
+//   times: { fajr: { instant: Date, printed: '05:13' }, sunrise: …, dhuhr: …, asr: …, maghrib: …, isha: … }
+// }
+timesFor(place, '2031-01-01', { strict: true });   // throws UncertifiedMethodError instead
+timesFor(place, '2026-10-15', { asrShadow: 2 });   // the Hanafi Asr (the tables print the standard one)
+timesForRange(place, '2026-10-01', '2026-10-31');  // a month, one DayTimes per day
+candidateTimes(place, '2026-10-15', { corrections: false }); // the formula alone — research
+methodInfo('morocco');                        // angles, margins, rounding, revision, certification, sources, spec
+```
+
+`printed` is the wall-clock minute on `clock`, which is the clock the
+authority prints the day in: the place's zone as kept at noon, or the
+table's own clock where it keeps one no zone does (Morocco's GMT+1 until
+September 2026; some of Diyanet's). An app shows `printed` and schedules
+on `instant`; nothing needs rounding or converting.
+
+### As a server
+
+```sh
+npm run serve      # http://localhost:8787
+```
+
+```
+GET /v1/times?authority=diyanet&lat=41.01&lng=28.98&date=2026-10-15
+GET /v1/times?place=algeria:27&from=2026-10-01&to=2026-10-31
+GET /v1/nearest?authority=morocco&lat=33.57&lng=-7.59
+GET /v1/authority?lat=59.33&lng=18.07
+GET /v1/places?authority=indonesia
+GET /v1/methods
+```
+
+Self-hostable, nothing stored (`tools/serve.ts`, eighty lines). Under the
+AGPL a hosted copy's source must be published; this one already is.
+
+### In another language
+
+`docs/methods.md` states each method in prose and formulas, and
+`test/vectors.json` is a small sample of places, dates and the times to
+expect — enough to prove a port matches, too small to be a timetable.
+
+### This repository
+
 ```sh
 npm install           # NODE_ENV must not be "production", or the dev tools are skipped
+npm test              # the library, the schemas, the vectors; the table checks when the tables are present
+npm run build         # dist/ (CommonJS and ESM, with types)
 npm run verify        # every method against the reference timetables
 npm run verify -- morocco indonesia
 npm run verify -- --alone   # each method without its correction list
 npm run corrections   # rewrites Sweden's correction list (`-- diyanet`, `-- morocco`, … for the others)
 npm run certify       # rewrites certification.json — what may be used
-npm test
-```
-
-```ts
-import { placesOf, timesFor, candidateTimes, isCertified } from './src';
-const algiers = placesOf('algeria').find(p => p.name === 'Algiers')!;
-isCertified('algeria');               // true
-timesFor(algiers, 2026, 9, 15);       // 15 Oct 2026 (months from 0): { fajr, sunrise, dhuhr, asr, maghrib, isha }
-timesFor(algiers, 2027, 9, 15);       // throws: outside the dates certified
-candidateTimes(algiers, 2027, 9, 15); // the method regardless — research only
+npm run vectors       # rewrites test/vectors.json (after a method revision)
 ```
 
 The reference timetables are not part of this repository; point
-`MIHRAB_TABLES` at them (default `.tables`). Without them `candidateTimes` still runs, the
-checks and their tests skip, and `npm run certify` writes nothing.
+`MIHRAB_TABLES` at them (default `.tables`). Without them `candidateTimes`
+still runs, the checks and their tests skip, and `npm run certify` writes
+nothing.
 
 ## Layout
 
@@ -184,15 +295,20 @@ checks and their tests skip, and `npm run certify` writes nothing.
 |---|---|
 | `src/methods/` | The methods: Sweden and Diyanet (`sweden.ts`), Morocco, Algeria, Indonesia; their revisions |
 | `src/sun/preciseSun.ts` | VSOP87 apparent sun, after Astronomy Engine: within about 0.05 s and 0.5″ of JPL's DE421 |
-| `src/places.ts` | Every place with the point (and Morocco's horizon) its method is computed at |
-| `src/verify.ts` | Day-by-day comparison with the timetables, to the minute |
-| `src/certify.ts`, `src/certification.ts`, `certification.json` | The 100 % gate: the check's record, and what `timesFor` serves |
-| `src/corrections.ts`, `src/methods/correctionList.ts`, `data/corrections/*.json` | The correction lists (Sweden, Diyanet, Morocco, Algeria, Indonesia): written from the timetables, applied by `candidateTimes` |
-| `data/places/` | Place lists and the fitted points |
+| `src/core/` | The calls (`api.ts`), the computation they share (`compute.ts`), dates, clocks, the correction-list index, `fetchLatestCorrections` |
+| `src/authorities/` | Each authority's places, at the point (and Morocco's horizon) its method is computed at, with its description |
+| `src/index.ts`, `src/<authority>.ts`, `src/locate.ts`, `src/core.ts` | The package's entry points |
+| `data/places/`, `data/corrections/`, `data/locate/` | The place lists and fitted points, the correction lists, the country outlines — embedded into the code by `scripts/embed.mjs` at build time |
+| `certification.json`, `schemas/` | The 100 % gate's record, and the schemas of the files apps read |
+| `tools/verify.ts`, `tools/certify.ts`, `tools/corrections.ts` | The day-by-day check against the timetables; the certification; the correction lists |
+| `tools/vectors.ts`, `test/vectors.json`, `docs/methods.md` | For ports: the sample and the written method |
+| `tools/serve.ts` | The HTTP server |
 
 ## Back into Mihrab
 
 A method that improves here goes back as the same file in Mihrab's
-`src/providers/` (and its points file in `src/providers/data/`).
+`src/providers/` (and its points file in `src/providers/data/`). The app
+reads `certification.json` and the lists from this repository's `main`;
+that feed does not change shape between versions (`schemas/`).
 
 Licence: AGPL-3.0-or-later, as Mihrab.
