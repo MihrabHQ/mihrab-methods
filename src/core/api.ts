@@ -39,11 +39,12 @@ export function certificationOf(authority: Authority): Certification | null {
 export function certifiedSpan(authority: Authority): { from: string; to: string } | null {
   if (!isCertified(authority)) return null;
   const checks = certificationOf(authority)!.checks;
-  return { from: checks.map(c => c.from).sort()[0], to: checks.map(c => c.to).sort().at(-1)! };
+  const tos = checks.map(c => c.to).sort();
+  return { from: checks.map(c => c.from).sort()[0], to: tos[tos.length - 1] };
 }
 
 /** The authority's places, each at the point its method is computed at. */
-export function placesOf(authority: Authority): Place[] {
+export function placesOf(authority: Authority): readonly Place[] {
   return authorityData(authority).places;
 }
 

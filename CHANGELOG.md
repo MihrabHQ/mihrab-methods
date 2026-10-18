@@ -7,6 +7,23 @@ list only to the revision it computes. This file says what each revision
 changed in the output. Package versions follow semver for the API; a
 revision bump is at least a minor version.
 
+## 1.0.1 — 2026-10-18
+
+No method changed; every time is as in 1.0.0.
+
+- Runs in React Native and in browser bundles: `fetchLatestCorrections`
+  no longer imports `node:crypto` (a bundler for a phone or a browser
+  fails on the import itself); without WebCrypto (Hermes) it uses a
+  built-in SHA-256.
+- A zone's offset is read from its wall clock rather than from
+  `timeZoneName: 'longOffset'`, which not every runtime supports — where
+  it is missing the offset would have been silently wrong. Checked equal
+  to the old reading for every zone the places use on every day of
+  2023–2028.
+- Places are frozen: a caller moving one would have moved the
+  corrections looked up for it, for everyone.
+- README: the Stockholm example's Fajr (05:09) and the data sizes.
+
 ## 1.0.0 — 2026-10-18
 
 The first published package. No method changed: every revision stays at 1,

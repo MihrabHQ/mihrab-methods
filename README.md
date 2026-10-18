@@ -204,13 +204,13 @@ npm install mihrab-methods
 ```
 
 One entry point per authority, so an app ships only the data it needs
-(Indonesia's is 100 KB; Diyanet's worldwide points and list are 1.4 MB):
+(Indonesia's is 90 KB; Diyanet's worldwide points and list are 1.6 MB):
 
 | Import | Loads |
 |---|---|
 | `mihrab-methods` | all five |
 | `mihrab-methods/sweden`, `/diyanet`, `/morocco`, `/algeria`, `/indonesia` | one authority: its places, list and certification |
-| `mihrab-methods/locate` | `countryAt`, `defaultAuthorityFor` — the country at a point, and the authority whose table it prays by (400 KB of outlines) |
+| `mihrab-methods/locate` | `countryAt`, `defaultAuthorityFor` — the country at a point, and the authority whose table it prays by (470 KB of outlines) |
 | `mihrab-methods/core` | the calls and types with no data (load authorities yourself) |
 
 CommonJS and ES modules, with types. Node 18+, or any bundler; nothing is
@@ -231,7 +231,7 @@ timesFor(place, '2026-10-15');                // or { year: 2026, month: 10, day
 //                                            on the printed minute all but rarely, never a minute further
 //   date: '2026-10-15', certifiedFrom: '2024-01-01', certifiedUntil: '2027-12-31', revision: 1,
 //   clock: { zone: 'Europe/Stockholm', offsetMinutes: 120, label: 'Europe/Stockholm' },
-//   times: { fajr: { instant: Date, printed: '05:13' }, sunrise: …, dhuhr: …, asr: …, maghrib: …, isha: … }
+//   times: { fajr: { instant: Date, printed: '05:09' }, sunrise: …, dhuhr: …, asr: …, maghrib: …, isha: … }
 // }
 timesFor(place, '2031-01-01', { strict: true });   // throws UncertifiedMethodError instead
 timesFor(place, '2026-10-15', { asrShadow: 2 });   // the Hanafi Asr (the tables print the standard one)

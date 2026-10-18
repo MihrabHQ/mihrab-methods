@@ -88,7 +88,7 @@ export const minutes = (s: string | undefined) => {
   return m ? Number(m[1]) * 60 + Number(m[2]) : NaN;
 };
 
-export function check(name: string, places: Place[], dir: string, opts: CheckOptions = {}): Result | null {
+export function check(name: string, places: readonly Place[], dir: string, opts: CheckOptions = {}): Result | null {
   if (!fs.existsSync(dir)) return null;
   const r: Result = { name, places: 0, days: 0, times: 0, exact: 0, within1: 0, worst: 0, misses: { fajr: 0, sunrise: 0, dhuhr: 0, asr: 0, maghrib: 0, isha: 0 }, worstPlaces: [], sourceFaults: 0, copiedRows: 0, misplaced: [], from: '', to: '' };
   const perPlace = new Map<string, number>();

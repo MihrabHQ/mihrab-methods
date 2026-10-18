@@ -10,7 +10,7 @@
  * that into the authority whose table the point's community prays by, or
  * null where none of the five applies.
  *
- * Its own entry point because the outlines are 400 KB an app that already
+ * Its own entry point because the outlines are 470 KB an app that already
  * knows its country does not need.
  */
 import outlines from './data/generated/countryOutlines.js';

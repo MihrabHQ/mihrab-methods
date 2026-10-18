@@ -87,3 +87,18 @@ test('method-moved and uncertified leave the list in force', async () => {
   const r3 = await fetchLatestCorrections({ authority: 'indonesia', baseUrl: base, fetch: feed({}) });
   assert.equal(r3.status, 'rejected');
 });
+
+test('the built-in SHA-256 is the standard one (the digest a runtime without WebCrypto uses)', async () => {
+  const { sha256, utf8 } = await import('../src/core/fetchLatest.js');
+  const hexOf = (b: Uint8Array) => Buffer.from(b).toString('hex');
+  for (const text of ['', 'abc', 'a'.repeat(55), 'a'.repeat(56), 'a'.repeat(64), 'ٱللَّهِ — 😀', fs.readFileSync(path.join(ROOT, 'data/corrections/diyanet.json'), 'utf8')]) {
+    assert.equal(hexOf(sha256(utf8(text))), sha(text), JSON.stringify(text.slice(0, 20)));
+  }
+});
+
+test('places are frozen: no caller can move another’s', () => {
+  const p = placeById('algeria:1')!;
+  assert.throws(() => {
+    (p as { lat: number }).lat = 0;
+  }, TypeError);
+});

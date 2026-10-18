@@ -1,6 +1,6 @@
 {
   "name": "mihrab-methods",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "The prayer-time authorities' own calculation methods, each reproducing its published timetable to the minute: Sweden (Diyanet, as Islamiska Förbundet prints it), Diyanet worldwide, Morocco (Habous), Algeria (Ministry of Religious Affairs), Indonesia (Kemenag).",
   "license": "MPL-2.0",
   "author": "Hassan El Ghamri",

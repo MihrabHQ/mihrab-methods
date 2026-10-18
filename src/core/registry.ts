@@ -12,7 +12,7 @@ export type MethodDescription = Pick<MethodInfo, 'name' | 'method' | 'countries'
 export type AuthorityData = {
   authority: Authority;
   revision: number;
-  places: Place[];
+  places: readonly Place[];
   corrections: CorrectionList;
   certification: Certification | null;
   description: MethodDescription;
@@ -30,6 +30,10 @@ export function registerAuthority(entry: {
 }): AuthorityData {
   const have = registry.get(entry.authority);
   if (have) return have;
+  // Frozen: every caller shares these objects, and a place moved by one
+  // (`place.lat = …`) would move the corrections it is looked up by for all.
+  for (const p of entry.places) Object.freeze(p);
+  Object.freeze(entry.places);
   const data: AuthorityData = { ...entry, corrections: new CorrectionList(entry.corrections) };
   registry.set(entry.authority, data);
   return data;

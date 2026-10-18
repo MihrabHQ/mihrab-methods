@@ -6,15 +6,36 @@
  */
 import type { Place, TableClock } from './types.js';
 
-const offsetFormats = new Map<string, Intl.DateTimeFormat>();
+const formats = new Map<string, Intl.DateTimeFormat>();
 
-/** Minutes east of UTC that a zone keeps at noon UTC of a date (month 0-based). */
+/**
+ * Minutes east of UTC that a zone keeps at noon UTC of a date (month 0-based).
+ *
+ * Read from the zone's wall clock (year … minute, as every Intl has them),
+ * not from `timeZoneName: 'longOffset'`, which not every runtime supports:
+ * where it is missing the name comes back as 'GMT+1' or a zone's own
+ * abbreviation, and an offset parsed from that is silently wrong.
+ */
 export function clockOffsetAt(tz: string, year: number, month: number, day: number): number {
-  let f = offsetFormats.get(tz);
-  if (!f) offsetFormats.set(tz, (f = new Intl.DateTimeFormat('en-US', { timeZone: tz, timeZoneName: 'longOffset' })));
-  const z = f.formatToParts(new Date(Date.UTC(year, month, day, 12))).find(x => x.type === 'timeZoneName')!.value;
-  const m = /GMT([+-])(\d\d):?(\d\d)?/.exec(z);
-  return m ? (m[1] === '-' ? -1 : 1) * (Number(m[2]) * 60 + Number(m[3] ?? 0)) : 0;
+  const at = Date.UTC(year, month, day, 12);
+  let f = formats.get(tz);
+  if (!f) {
+    f = new Intl.DateTimeFormat('en-US', {
+      timeZone: tz,
+      year: 'numeric',
+      month: 'numeric',
+      day: 'numeric',
+      hour: 'numeric',
+      minute: 'numeric',
+      hourCycle: 'h23',
+    });
+    formats.set(tz, f);
+  }
+  const parts = f.formatToParts(new Date(at));
+  const n = (type: string) => Number(parts.find(p => p.type === type)?.value);
+  const wall = Date.UTC(n('year'), n('month') - 1, n('day'), n('hour') % 24, n('minute'));
+  if (!Number.isFinite(wall)) throw new RangeError(`The zone ${tz} could not be read on this runtime.`);
+  return Math.round((wall - at) / 60_000);
 }
 
 /** The clock a place's table prints a date in: its own (`Place.clock`) where it has one, else its zone's. Month 0-based. */
