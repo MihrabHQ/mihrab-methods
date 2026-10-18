@@ -7,7 +7,7 @@ list only to the revision it computes. This file says what each revision
 changed in the output. Package versions follow semver for the API; a
 revision bump is at least a minor version.
 
-## Unreleased
+## 1.0.2 — 2026-10-18
 
 No method changed.
 
