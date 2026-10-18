@@ -88,6 +88,8 @@ export type CheckRecord = {
 export type Certification = {
   certified: boolean;
   checkedAt: string;
+  /** How many places the library offers for the authority. */
+  places?: number;
   checks: CheckRecord[];
   /**
    * The correction list this certification is for: the dates it covers, how

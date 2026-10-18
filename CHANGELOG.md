@@ -7,6 +7,20 @@ list only to the revision it computes. This file says what each revision
 changed in the output. Package versions follow semver for the API; a
 revision bump is at least a minor version.
 
+## Unreleased
+
+No method changed.
+
+- `certification.json` records, for each check, how many times the method
+  alone leaves off the printed minute (`offWithoutCorrections`), so that
+  figure is generated rather than typed.
+- Every figure in the README and docs is generated from `certification.json`
+  (`scripts/readme.mjs`, checked in CI), with a certification badge drawn
+  from it.
+- The README is short; the depth moved to `docs/` (usage, feed, status,
+  Diyanet, legal) with nothing dropped. `CONTRIBUTING.md` ("100 % or
+  nothing") and a "Times differ from my mosque" issue form.
+
 ## 1.0.1 — 2026-10-18
 
 No method changed; every time is as in 1.0.0.
@@ -52,15 +66,11 @@ their shape — `certification.json` gains `corrections.sha256`.
 - Licence: MPL-2.0 (was AGPL-3.0-or-later), so any app can use the
   library while changes to its files stay public.
 - `docs/methods.md` (the methods in words and formulas) and
-  `test/vectors.json` (64 cases) for ports; `npm run serve`, a small HTTP
+  `test/vectors.json` for ports; `npm run serve`, a small HTTP
   server; a CI workflow; this changelog.
 
 ### Method revisions
 
-| Authority | Revision | Since | What it prints |
-|---|---|---|---|
-| sweden | 1 | 2026-10-15 | Diyanet's Congress method as its Swedish tables realise it (`sweden.ts`), with the 270-entry list; certified 2024–2027 |
-| diyanet | 1 | 2026-10-16 | The same, Isha by country, a point per prayer per year in Türkiye, tables on their own clocks; 8 291 places; certified 2024–2027 |
-| morocco | 1 | 2026-10-15 | Habous's method with per-city horizons and the ministry's clock; certified 27 Aug → 11 Nov 2026 |
-| algeria | 1 | 2026-10-15 | The ministry's NOAA-based method, rounding up; certified 1 Oct 2026 → 5 Jun 2027 |
-| indonesia | 1 | 2026-10-15 | Kemenag's method with margins and the highland class, Karawang's afternoon point; certified 7 Oct → 31 Dec 2026 |
+Every method is at revision 1 since its first certification (2026-10-15 for
+Sweden, Morocco, Algeria and Indonesia; Diyanet worldwide 2026-10-16). The
+figures each was certified with are in `certification.json` at the tag.

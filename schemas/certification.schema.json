@@ -37,6 +37,11 @@
         "checkedAt": {
           "$ref": "#/$defs/date"
         },
+        "places": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "How many places the library offers for the authority (the checks say how many were compared)."
+        },
         "checks": {
           "type": "array",
           "minItems": 1,

@@ -1,0 +1,65 @@
+name: Times differ from my mosque
+description: A prayer time that is not the one printed by your mosque or authority.
+title: "Times differ: <city>, <date>, <prayer>"
+labels: ["times-differ"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thank you — a report with the printed time is how a minute gets found.
+        Mihrab and mihrab-methods are independent and are not affiliated with any authority.
+  - type: input
+    id: city
+    attributes:
+      label: City
+      description: The place as the app or library names it (and the country).
+      placeholder: Malmö, Sweden
+    validations:
+      required: true
+  - type: input
+    id: date
+    attributes:
+      label: Date
+      description: The date of the time that differs (YYYY-MM-DD).
+      placeholder: 2026-10-15
+    validations:
+      required: true
+  - type: dropdown
+    id: prayer
+    attributes:
+      label: Prayer
+      options: [Fajr, Sunrise, Dhuhr, Asr, Maghrib, Isha, Several]
+    validations:
+      required: true
+  - type: input
+    id: app-time
+    attributes:
+      label: Time shown by the app or the library
+      placeholder: "17:41"
+    validations:
+      required: true
+  - type: input
+    id: printed-time
+    attributes:
+      label: Time printed
+      placeholder: "17:42"
+    validations:
+      required: true
+  - type: input
+    id: source
+    attributes:
+      label: Where the printed time comes from
+      description: The authority, the mosque, or the publication — a link or a photo of the table helps most.
+      placeholder: Islamiska Förbundet's timetable for Malmö, or my mosque's printed calendar
+    validations:
+      required: true
+  - type: dropdown
+    id: authority
+    attributes:
+      label: Source selected in Mihrab (if you use the app)
+      options: [Automatic, Sweden (Islamiska Förbundet), Diyanet, Morocco (Habous), Algeria, Indonesia (Kemenag), Other, I use the library directly]
+  - type: textarea
+    id: notes
+    attributes:
+      label: Anything else
+      description: App version, Hanafi Asr or a per-prayer offset if you set one, a screenshot.
