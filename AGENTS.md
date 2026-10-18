@@ -60,3 +60,13 @@ Report what you did not verify, and anything the maintainer must decide.
 | The check and the record | `tools/verify.ts`, `tools/certify.ts`, `certification.json` |
 | Correction lists | `tools/corrections.ts`, `data/corrections/` |
 | Generated figures | `scripts/figures.mjs`, `scripts/readme.mjs` |
+| The live feed, checked daily | `tools/feed-check.ts` (`npm run feed-check`), `.github/workflows/feed.yml` |
+
+## 5. When something goes wrong after a merge
+
+The `feed` workflow reads what installed apps read — `certification.json`
+and the correction lists on `main` — every day and after every change to
+them, and fails when an app would refuse a list or fall back to the method
+alone. A red `feed` badge in the README is the one thing here that needs
+action at once: fix or revert on a branch, then check that
+`npm run feed-check` passes before merging.

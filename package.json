@@ -169,6 +169,8 @@
     "precertify": "npm run embed",
     "certify": "tsx tools/certify.ts",
     "vectors": "npm run embed && tsx tools/vectors.ts",
+    "prefeed-check": "npm run embed",
+    "feed-check": "tsx tools/feed-check.ts",
     "readme": "node scripts/readme.mjs",
     "preflight": "npm run typecheck && npm test && node scripts/readme.mjs --check",
     "serve": "npm run embed && tsx tools/serve.ts"
