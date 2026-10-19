@@ -8,7 +8,7 @@
 **Prayer times that match the published timetable to the printed minute.**
 Each national authority's own calculation method, worked out again from its
 published times and checked day by day against its timetables: <!--fig:total.off-->0<!--/fig--> of
-<!--fig:total.times-->71,896,761<!--/fig--> times off the printed minute. Free for any app, site or
+<!--fig:total.times-->71,896,965<!--/fig--> times off the printed minute. Free for any app, site or
 mosque to use.
 
 ```sh
@@ -34,14 +34,14 @@ The full API, the HTTP server and the per-authority imports are in
 <!-- certification-table:start -->
 | Authority | Tables matched | Places | Times checked | Off the printed minute | By the method alone | Correction entries | Checked over |
 |---|---|---:|---:|---:|---:|---:|---|
-| **Sweden** | Islamiska Förbundet’s tables | 107 | 59,640 | **0** | 99.966 % | 270 | 11 Oct 2026 → 19 Nov 2027 |
+| **Sweden** | Islamiska Förbundet’s tables | 107 | 59,844 | **0** | 99.966 % | 270 | 11 Oct 2026 → 23 Nov 2027 |
 |  | Diyanet’s own tables | 159 | 1,393,794 | **0** | 99.981 % |  | 1 Jan 2024 → 31 Dec 2027 |
 | **Diyanet** | its tables worldwide | 8,132 | 69,999,603 | **0** | 99.986 % | 9,118 | 1 Jan 2024 → 31 Dec 2027 |
 | **Morocco** | Habous | 164 | 75,768 | **0** | 99.122 % | 665 | 27 Aug 2026 → 11 Nov 2026 |
 | **Algeria** | Ministry of Religious Affairs | 68 | 101,184 | **0** | 99.365 % | 642 | 1 Oct 2026 → 5 Jun 2027 |
 | **Indonesia** | Kemenag | 517 | 266,772 | **0** | 99.968 % | 84 | 7 Oct 2026 → 31 Dec 2026 |
 
-5 of 5 methods certified; 0 of 71,896,761 times off the printed minute. Last checked 18 October 2026. Generated from [`certification.json`](certification.json) by `scripts/readme.mjs`.
+5 of 5 methods certified; 0 of 71,896,965 times off the printed minute. Last checked 19 October 2026. Generated from [`certification.json`](certification.json) by `scripts/readme.mjs`.
 <!-- certification-table:end -->
 
 "By the method alone" is the formula without its correction list. The list

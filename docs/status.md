@@ -28,25 +28,25 @@ each method.
 <!-- certification-table:start -->
 | Authority | Tables matched | Places | Times checked | Off the printed minute | By the method alone | Correction entries | Checked over |
 |---|---|---:|---:|---:|---:|---:|---|
-| **Sweden** | Islamiska Förbundet’s tables | 107 | 59,640 | **0** | 99.966 % | 270 | 11 Oct 2026 → 19 Nov 2027 |
+| **Sweden** | Islamiska Förbundet’s tables | 107 | 59,844 | **0** | 99.966 % | 270 | 11 Oct 2026 → 23 Nov 2027 |
 |  | Diyanet’s own tables | 159 | 1,393,794 | **0** | 99.981 % |  | 1 Jan 2024 → 31 Dec 2027 |
 | **Diyanet** | its tables worldwide | 8,132 | 69,999,603 | **0** | 99.986 % | 9,118 | 1 Jan 2024 → 31 Dec 2027 |
 | **Morocco** | Habous | 164 | 75,768 | **0** | 99.122 % | 665 | 27 Aug 2026 → 11 Nov 2026 |
 | **Algeria** | Ministry of Religious Affairs | 68 | 101,184 | **0** | 99.365 % | 642 | 1 Oct 2026 → 5 Jun 2027 |
 | **Indonesia** | Kemenag | 517 | 266,772 | **0** | 99.968 % | 84 | 7 Oct 2026 → 31 Dec 2026 |
 
-5 of 5 methods certified; 0 of 71,896,761 times off the printed minute. Last checked 18 October 2026. Generated from [`certification.json`](../certification.json) by `scripts/readme.mjs`.
+5 of 5 methods certified; 0 of 71,896,965 times off the printed minute. Last checked 19 October 2026. Generated from [`certification.json`](../certification.json) by `scripts/readme.mjs`.
 <!-- certification-table:end -->
 
 ## Sweden
 
 Certified over <!--fig:sweden.check1.span-->1 Jan 2024 → 31 Dec 2027<!--/fig--> against Diyanet's own
 tables for Sweden (<!--fig:sweden.check1.places-->159<!--/fig--> places), and over
-<!--fig:sweden.check0.span-->11 Oct 2026 → 19 Nov 2027<!--/fig--> against Islamiska Förbundet's published tables
+<!--fig:sweden.check0.span-->11 Oct 2026 → 23 Nov 2027<!--/fig--> against Islamiska Förbundet's published tables
 (<!--fig:sweden.check0.places-->107<!--/fig--> of its towns). Set aside from Islamiska
-Förbundet's: <!--fig:sweden.check0.sourceFaults-->33,395<!--/fig--> times that differ from Diyanet's own
+Förbundet's: <!--fig:sweden.check0.sourceFaults-->33,789<!--/fig--> times that differ from Diyanet's own
 table for the day (its next year's rows repeat this year's figures), and
-<!--fig:sweden.check0.copiedRows-->646<!--/fig--> rows copied from another day. On each, the method
+<!--fig:sweden.check0.copiedRows-->654<!--/fig--> rows copied from another day. On each, the method
 gives Diyanet's own table.
 
 > **Research note, 2026-10-16** (not generated): Kiruna, printed with
