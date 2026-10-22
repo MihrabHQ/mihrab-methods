@@ -16,8 +16,11 @@ maintainer. Short on purpose; the depth is in [README.md](README.md),
 
 ## 2. Hard rules
 
-- **Branch and pull request.** Never push to `main` directly; merge only with
-  CI green and the maintainer's go-ahead.
+- **Straight to `main`.** Commit and push to `main`; no pull request unless
+  there is a reason to hold the change back (it waits on the maintainer's
+  decision, a release is being published, it comes from outside). The
+  checks pass locally before the push; CI on `main` is watched after it, and
+  a red job is fixed or reverted at once.
 - **Commits are authored by the maintainer alone** — no `Co-Authored-By`,
   session links or "Generated with …" lines, in commits or PR bodies.
 - **No timetable is ever committed**, and nothing here says how the reference
