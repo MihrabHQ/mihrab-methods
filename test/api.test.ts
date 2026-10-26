@@ -90,6 +90,12 @@ test('timesFor: the printed minute is the instant on the table’s clock, the cl
     assert.equal(t.clock.zone, null);
     assert.match(t.clock.label, /^UTC[+-]\d\d:\d\d$/);
   }
+  // Winnipeg: Diyanet's table still falls back on 1 November 2026, where
+  // tzdata 2026e keeps Manitoba on UTC−5 — the table's clock, on every runtime.
+  const winnipeg = placeById('diyanet:9078')!;
+  assert.equal(timesFor(winnipeg, '2026-12-15').clock.offsetMinutes, -360);
+  assert.equal(timesFor(winnipeg, '2026-07-15').clock.offsetMinutes, -300);
+  assert.equal(timesFor(winnipeg, '2027-01-15').clock.offsetMinutes, -360);
   const rabat = timesFor(placeById('morocco:1')!, '2026-10-20');
   assert.deepEqual(rabat.clock, { zone: null, offsetMinutes: 0, label: 'UTC+00:00' });
   const algiers = timesFor(placeById('algeria:1')!, '2026-10-20');

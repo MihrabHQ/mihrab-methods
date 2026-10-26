@@ -7,6 +7,20 @@ list only to the revision it computes. This file says what each revision
 changed in the output. Package versions follow semver for the API; a
 revision bump is at least a minor version.
 
+## Unreleased
+
+No method changed; no revision raised.
+
+- **Diyanet, Winnipeg (9078):** the table's own clock, read off the table
+  (CST in winter, CDT in summer, as Diyanet prints it). Manitoba moves to
+  permanent UTC−5 from 1 November 2026 (tzdata 2026e); Diyanet's tables for
+  Winnipeg still fall back that day. The place used `America/Winnipeg`, so a
+  runtime with tzdata 2026e printed its winters an hour later than the
+  table (1,128 times, all of them ±60 min) while one with older zone data
+  matched it — the same method, certified or not by the machine it ran on.
+  Like Alberta's and British Columbia's places, Winnipeg now prints on the
+  clock its table keeps, on every runtime. The instants are unchanged.
+
 ## 1.0.2 — 2026-10-18
 
 No method changed.
