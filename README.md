@@ -65,7 +65,9 @@ minute either way. Why that can be used freely is in
 3. **The record.** [`tools/certify.ts`](tools/certify.ts) writes
    [`certification.json`](certification.json): per authority, the tables
    checked, the times, how many are off with and without the correction
-   list, the dates, the method's revision and the list's SHA-256.
+   list, the dates, the method's revision and the list's SHA-256. The
+   tables are checked again whenever they change and every week, and each
+   check that finds a method still at 0 off dates its entry anew.
 4. **The gate.** A method is certified only at **0** off. `timesFor` refuses
    an uncertified method, and says `'method-only'` for a date past the
    checked span. Every number on this page, on the Mihrab website and in its

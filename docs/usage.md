@@ -83,6 +83,7 @@ npm run verify -- morocco indonesia
 npm run verify -- --alone   # each method without its correction list
 npm run corrections   # rewrites Sweden's correction list (`-- diyanet`, `-- morocco`, … for the others)
 npm run certify       # rewrites certification.json — what may be used
+npm run certify -- morocco   # just those methods; the others keep their entries
 npm run vectors       # rewrites test/vectors.json (after a method revision)
 ```
 

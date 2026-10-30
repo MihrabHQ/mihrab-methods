@@ -231,6 +231,20 @@ export function checkAuthority(a: CheckRun): Result | null {
   return check(names[a], placesOf(a), path.join(TABLES, a, 'v1/cities'));
 }
 
+/** The lines `npm run verify` prints for one check (`npm run certify` prints them too). */
+export function report(r: Result): string[] {
+  const pct = (n: number) => ((100 * n) / r.times).toFixed(3);
+  const lines = [
+    `\n${r.name}: ${r.places} places, ${r.days} days`,
+    `  exact ${pct(r.exact)} %  (${r.times - r.exact} of ${r.times} off) · within a minute ${pct(r.within1)} % · worst ${r.worst} min`,
+    `  off by prayer: ${KEYS.map(k => `${k} ${r.misses[k]}`).join(', ')}`,
+  ];
+  if (r.misplaced.length) lines.push(`  not counted, another town's table: ${r.misplaced.join(', ')}`);
+  if (r.sourceFaults || r.copiedRows) lines.push(`  set aside: ${r.sourceFaults} rows that differ from the authority's own; ${r.copiedRows} rows of last year's figures compared as last year`);
+  if (r.worstPlaces.length) lines.push(`  most off: ${r.worstPlaces.map(([n, c]) => `${n} ${c}`).join(', ')}`);
+  return lines;
+}
+
 if (require.main === module) {
   const asked = process.argv.slice(2).filter(a => !a.startsWith('--'));
   const list = (asked.length ? asked : [...AUTHORITIES, 'sweden-diyanet']) as CheckRun[];
@@ -240,12 +254,6 @@ if (require.main === module) {
       console.log(`${a}: no tables here — skipped`);
       continue;
     }
-    const pct = (n: number) => ((100 * n) / r.times).toFixed(3);
-    console.log(`\n${r.name}: ${r.places} places, ${r.days} days`);
-    console.log(`  exact ${pct(r.exact)} %  (${r.times - r.exact} of ${r.times} off) · within a minute ${pct(r.within1)} % · worst ${r.worst} min`);
-    console.log(`  off by prayer: ${KEYS.map(k => `${k} ${r.misses[k]}`).join(', ')}`);
-    if (r.misplaced.length) console.log(`  not counted, another town's table: ${r.misplaced.join(', ')}`);
-    if (r.sourceFaults || r.copiedRows) console.log(`  set aside: ${r.sourceFaults} rows that differ from the authority's own; ${r.copiedRows} rows of last year's figures compared as last year`);
-    if (r.worstPlaces.length) console.log(`  most off: ${r.worstPlaces.map(([n, c]) => `${n} ${c}`).join(', ')}`);
+    console.log(report(r).join('\n'));
   }
 }

@@ -5,7 +5,14 @@
  * checked against Islamiska Förbundet's timetables and, when present,
  * Diyanet's own.
  *
- *   npm run certify
+ *   npm run certify                    # every method
+ *   npm run certify -- morocco         # some: the others keep their entries
+ *
+ * With authorities named, only their entries are checked and rewritten; the
+ * rest of the record stays as it is. That is how a scheduled check that
+ * finds a method still on every printed minute moves its date forward
+ * without checking every other table again. Each check's figures are
+ * printed as `npm run verify` prints them.
  *
  * Needs the reference timetables (MIHRAB_TABLES); it refuses to run
  * without them rather than write a certification of nothing. Each entry
@@ -19,7 +26,7 @@ import { createHash } from 'node:crypto';
 import { AUTHORITIES, type Authority, type Certification, type CheckRecord } from '../src/core/types.js';
 import { METHOD_REVISION } from '../src/methods/revisions.js';
 import { placesOf } from '../src/index.js';
-import { checkAuthority, TABLES, type CheckRun, type Result } from './verify.js';
+import { checkAuthority, report, TABLES, type CheckRun, type Result } from './verify.js';
 
 const FILE = path.join(__dirname, '..', 'certification.json');
 
@@ -48,9 +55,29 @@ function record(r: Result): CheckRecord {
   };
 }
 
+// The runs named on the command line, as authorities ('sweden-diyanet' is part of Sweden's entry).
+const asked = process.argv.slice(2).filter(a => !a.startsWith('--')).map(a => (a === 'sweden-diyanet' ? 'sweden' : a));
+for (const a of asked) {
+  if (!(AUTHORITIES as readonly string[]).includes(a)) {
+    console.error(`Unknown authority: ${a}. Nothing written.`);
+    process.exit(2);
+  }
+}
+const only = asked.length ? new Set(asked) : null;
+const previous: Record<string, Certification> =
+  only && fs.existsSync(FILE) ? (JSON.parse(fs.readFileSync(FILE, 'utf8')) as Record<string, Certification>) : {};
+
 const out: Record<string, Certification> = {};
 const checkedAt = new Date().toISOString().slice(0, 10);
 for (const a of AUTHORITIES as readonly Authority[]) {
+  if (only && !only.has(a)) {
+    if (!previous[a]) {
+      console.error(`certification.json has no entry for ${a} to keep — run \`npm run certify\` for every method. Nothing written.`);
+      process.exit(1);
+    }
+    out[a] = previous[a];
+    continue;
+  }
   const runs: CheckRun[] = a === 'sweden' ? ['sweden', 'sweden-diyanet'] : [a];
   const checks: CheckRecord[] = [];
   for (const run of runs) {
@@ -60,6 +87,7 @@ for (const a of AUTHORITIES as readonly Authority[]) {
       console.error(`No tables for ${run} under ${TABLES} — set MIHRAB_TABLES. Nothing written.`);
       process.exit(1);
     }
+    console.log(report(r).join('\n'));
     checks.push(record(r));
   }
   const certified = checks.length > 0 && checks.every(c => c.times > 0 && c.off === 0);
