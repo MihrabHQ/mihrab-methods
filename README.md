@@ -8,7 +8,7 @@
 **Prayer times that match the published timetable to the printed minute.**
 Each national authority's own calculation method, worked out again from its
 published times and checked day by day against its timetables: <!--fig:total.off-->0<!--/fig--> of
-<!--fig:total.times-->71,917,047<!--/fig--> times off the printed minute. Free for any app, site or
+<!--fig:total.times-->72,013,209<!--/fig--> times off the printed minute. Free for any app, site or
 mosque to use.
 
 ```sh
@@ -39,9 +39,9 @@ The full API, the HTTP server and the per-authority imports are in
 | **Diyanet** | its tables worldwide | 8,132 | 69,999,603 | **0** | 99.986 % | 9,118 | 1 Jan 2024 → 31 Dec 2027 |
 | **Morocco** | Habous | 164 | 94,350 | **0** | 98.071 % | 1,820 | 27 Aug 2026 → 30 Nov 2026 |
 | **Algeria** | Ministry of Religious Affairs | 68 | 101,184 | **0** | 99.365 % | 642 | 1 Oct 2026 → 5 Jun 2027 |
-| **Indonesia** | Kemenag | 517 | 266,772 | **0** | 99.968 % | 84 | 7 Oct 2026 → 31 Dec 2026 |
+| **Indonesia** | Kemenag | 517 | 362,934 | **0** | 99.888 % | 405 | 7 Oct 2026 → 31 Jan 2027 |
 
-5 of 5 methods certified; 0 of 71,917,047 times off the printed minute. Last checked 2 November 2026. Generated from [`certification.json`](certification.json) by `scripts/readme.mjs`.
+5 of 5 methods certified; 0 of 72,013,209 times off the printed minute. Last checked 2 November 2026. Generated from [`certification.json`](certification.json) by `scripts/readme.mjs`.
 <!-- certification-table:end -->
 
 "By the method alone" is the formula without its correction list. The list

@@ -33,9 +33,9 @@ each method.
 | **Diyanet** | its tables worldwide | 8,132 | 69,999,603 | **0** | 99.986 % | 9,118 | 1 Jan 2024 → 31 Dec 2027 |
 | **Morocco** | Habous | 164 | 94,350 | **0** | 98.071 % | 1,820 | 27 Aug 2026 → 30 Nov 2026 |
 | **Algeria** | Ministry of Religious Affairs | 68 | 101,184 | **0** | 99.365 % | 642 | 1 Oct 2026 → 5 Jun 2027 |
-| **Indonesia** | Kemenag | 517 | 266,772 | **0** | 99.968 % | 84 | 7 Oct 2026 → 31 Dec 2026 |
+| **Indonesia** | Kemenag | 517 | 362,934 | **0** | 99.888 % | 405 | 7 Oct 2026 → 31 Jan 2027 |
 
-5 of 5 methods certified; 0 of 71,917,047 times off the printed minute. Last checked 2 November 2026. Generated from [`certification.json`](../certification.json) by `scripts/readme.mjs`.
+5 of 5 methods certified; 0 of 72,013,209 times off the printed minute. Last checked 2 November 2026. Generated from [`certification.json`](../certification.json) by `scripts/readme.mjs`.
 <!-- certification-table:end -->
 
 ## Sweden
@@ -98,9 +98,9 @@ held out).
 
 ## Indonesia
 
-Certified over <!--fig:indonesia.span-->7 Oct 2026 → 31 Dec 2026<!--/fig--> (<!--fig:indonesia.check0.places-->517<!--/fig-->
-regencies and cities): the method gives <!--fig:indonesia.alonePct-->99.968<!--/fig--> % alone, and a
-list of <!--fig:indonesia.corrections-->84<!--/fig--> corrections the rest. Karawang's Asr, Maghrib
+Certified over <!--fig:indonesia.span-->7 Oct 2026 → 31 Jan 2027<!--/fig--> (<!--fig:indonesia.check0.places-->517<!--/fig-->
+regencies and cities): the method gives <!--fig:indonesia.alonePct-->99.888<!--/fig--> % alone, and a
+list of <!--fig:indonesia.corrections-->405<!--/fig--> corrections the rest. Karawang's Asr, Maghrib
 and Isha are computed at a second point, about 2 km north-east of its first
 (its afternoon fits it, and it holds on days held out). The corrections are
 independent differences at a minute's edge, and refitting points to them
