@@ -34,6 +34,6 @@ jobs:
         if: always()
         run: |
           mkdir -p /tmp/consumer && cd /tmp/consumer && npm init -y >/dev/null
-          npm i --silent mihrab-methods@latest
+          for i in 1 2 3; do npm i --silent mihrab-methods@latest && break; [ $i = 3 ] && exit 1; sleep $((30 * i)); done
           node -e "const m=require('mihrab-methods/algeria');const {place}=m.nearestPlace('algeria',36.75,3.06);const d=m.timesFor(place,new Date().toISOString().slice(0,10));if(!/^\d\d:\d\d$/.test(d.times.fajr.printed))process.exit(1);console.log('CommonJS', d.status, d.times.fajr.printed)"
           node --input-type=module -e "import {places,timesFor} from 'mihrab-methods/indonesia';const d=timesFor(places[0],new Date().toISOString().slice(0,10));if(!d.times)process.exit(1);console.log('ESM', d.status)"
