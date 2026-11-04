@@ -4,8 +4,9 @@
 name = "mihrab-methods"
 main = "worker.ts"
 compatibility_date = "2026-10-01"
-workers_dev = true
-# The public address (elghamri.se is on the same Cloudflare account); workers.dev stays as a second one.
+# Only at its own address: the account has no workers.dev subdomain, and needs none.
+workers_dev = false
+# The public address (elghamri.se is on the same Cloudflare account).
 routes = [{ pattern = "api.mihrab.elghamri.se", custom_domain = true }]
 [observability]
 enabled = false
