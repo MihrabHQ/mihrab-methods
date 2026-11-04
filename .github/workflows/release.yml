@@ -47,6 +47,7 @@ jobs:
     timeout-minutes: 20
     outputs:
       released: ${{ steps.publish.outputs.version }}
+      checked: ${{ steps.checked.outputs.ok }}
     env:
       HAS_NPM_TOKEN: ${{ secrets.NPM_TOKEN != '' }}
     steps:
@@ -63,6 +64,9 @@ jobs:
       - run: npm test
       - run: node scripts/readme.mjs --check
       - run: npm run build
+      - name: The checks passed
+        id: checked
+        run: echo "ok=true" >> "$GITHUB_OUTPUT"
 
       - name: Does npm need a release?
         id: check
@@ -135,9 +139,10 @@ jobs:
           echo "::warning::$VERSION is on npm, but the release commit could not be pushed; the next run starts from npm's version, so nothing is published twice."
 
   api:
-    # After the checks pass, and after a release when there is one.
+    # After the checks pass — whether or not npm took a release: the API
+    # serves main, and a publish npm refused must not hold it back.
     needs: release
-    if: always() && needs.release.result == 'success' && github.event_name != 'schedule'
+    if: always() && needs.release.outputs.checked == 'true' && github.event_name != 'schedule'
     runs-on: ubuntu-latest
     timeout-minutes: 10
     env:
