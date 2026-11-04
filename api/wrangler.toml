@@ -1,0 +1,11 @@
+# The public API (api/worker.ts) on Cloudflare Workers.
+#   npx wrangler deploy -c api/wrangler.toml          (CLOUDFLARE_API_TOKEN, CLOUDFLARE_ACCOUNT_ID)
+#   npx wrangler dev -c api/wrangler.toml             (locally, http://localhost:8787)
+name = "mihrab-methods"
+main = "worker.ts"
+compatibility_date = "2026-10-01"
+workers_dev = true
+# A custom hostname, once the zone is on Cloudflare:
+# routes = [{ pattern = "api.mihrab.elghamri.se", custom_domain = true }]
+[observability]
+enabled = false

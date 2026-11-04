@@ -49,7 +49,11 @@ table's own clock where it keeps one no zone does (Morocco's GMT+1 until
 September 2026; some of Diyanet's). An app shows `printed` and schedules
 on `instant`; nothing needs rounding or converting.
 
-## As a server
+## As an HTTP API
+
+The public API serves main's methods and lists, deployed with every change
+(`api/worker.ts`, Cloudflare Workers): JSON, CORS open, nothing logged or
+stored, answers cached for an hour. Or run the same handler yourself:
 
 ```sh
 npm run serve      # http://localhost:8787
@@ -64,7 +68,9 @@ GET /v1/places?authority=indonesia
 GET /v1/methods
 ```
 
-Self-hostable, nothing stored (`tools/serve.ts`).
+`GET /` lists the routes and each method's revision and certification.
+The handler is `src/server.ts`; `tools/serve.ts` serves it on Node,
+`api/worker.ts` at the edge.
 
 ## In another language
 
@@ -105,7 +111,9 @@ nothing.
 | `certification.json`, `schemas/` | The 100 % gate's record, and the schemas of the files apps read |
 | `tools/verify.ts`, `tools/certify.ts`, `tools/corrections.ts` | The day-by-day check against the timetables; the certification; the correction lists |
 | `tools/vectors.ts`, `test/vectors.json`, `docs/methods.md` | For ports: the sample and the written method |
-| `tools/serve.ts` | The HTTP server |
+| `src/server.ts` | The HTTP API (routes and handler) |
+| `tools/serve.ts`, `api/worker.ts` | The API on Node, and at the edge |
+| `scripts/release-check.mjs` | Whether npm needs a release, and which |
 
 ## Back into Mihrab
 

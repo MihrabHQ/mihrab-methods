@@ -1,0 +1,173 @@
+name: release
+
+# npm and the public API, kept current by themselves.
+#
+# On every push to main (a method changed, the renewal published a list) and
+# daily (a certified span running out): scripts/release-check.mjs compares
+# what this checkout packs with what npm has. When a release is needed — the
+# content changed, or npm's certified span ends within 30 days while main's
+# reaches further — it bumps the version (minor for a method's new revision
+# or a new entry point, patch otherwise; never major), rolls CHANGELOG.md,
+# publishes to npm with provenance, then commits and tags the release on
+# main. The certification's daily new date alone is not a release: the live
+# feed carries it.
+#
+# The API (api/worker.ts, Cloudflare Workers) is deployed from main after
+# every push that passes the checks, so it always answers with main's
+# methods and lists.
+#
+# What it needs, set once:
+#   npm      a trusted publisher for this workflow (npmjs.com → mihrab-methods
+#            → Settings → Trusted publishing: GitHub Actions, MihrabHQ /
+#            mihrab-methods / release.yml). No token, nothing expires. Or, in
+#            its place, an NPM_TOKEN secret.
+#   the API  CLOUDFLARE_API_TOKEN and CLOUDFLARE_ACCOUNT_ID secrets (a token
+#            with "Edit Cloudflare Workers"; give it no expiry), and the
+#            API_URL variable once deployed, for the daily feed check.
+# Without them the job says so and skips that part; nothing fails.
+
+on:
+  push:
+    branches: [main]
+  schedule:
+    - cron: '41 5 * * *' # daily, after the feed check
+  workflow_dispatch:
+
+permissions:
+  contents: write # the release commit and tag
+  id-token: write # npm's trusted publishing and provenance
+
+concurrency:
+  group: release
+  cancel-in-progress: false
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    outputs:
+      released: ${{ steps.publish.outputs.version }}
+    env:
+      HAS_NPM_TOKEN: ${{ secrets.NPM_TOKEN != '' }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - name: Install
+        run: for i in 1 2 3; do npm ci --no-audit --no-fund && break; [ $i = 3 ] && exit 1; sleep $((20 * i)); done
+      - run: npm run typecheck
+      - run: npm test
+      - run: node scripts/readme.mjs --check
+      - run: npm run build
+
+      - name: Does npm need a release?
+        id: check
+        run: |
+          node scripts/release-check.mjs --json > verdict.json
+          node scripts/release-check.mjs | tee -a "$GITHUB_STEP_SUMMARY"
+          echo "release=$(node -p "require('./verdict.json').release")" >> "$GITHUB_OUTPUT"
+          echo "bump=$(node -p "require('./verdict.json').bump || ''")" >> "$GITHUB_OUTPUT"
+          echo "published=$(node -p "require('./verdict.json').published || ''")" >> "$GITHUB_OUTPUT"
+          echo "reasons=$(node -p "require('./verdict.json').reasons.join('; ')")" >> "$GITHUB_OUTPUT"
+          if [ "$(node -p "!!require('./verdict.json').blocked")" = true ]; then
+            echo "::warning::A release is held for a person: $(node -p "require('./verdict.json').reasons.join('; ')")"
+          fi
+
+      - name: The version
+        id: version
+        if: steps.check.outputs.release == 'true'
+        env:
+          BUMP: ${{ steps.check.outputs.bump }}
+          PUBLISHED: ${{ steps.check.outputs.published }}
+          REASONS: ${{ steps.check.outputs.reasons }}
+        run: |
+          # From whichever is further on, main's or npm's: a release published
+          # but not committed (the push failed) is never published twice.
+          if [ -n "$PUBLISHED" ]; then
+            higher=$(node -e "const [a,b]=process.argv.slice(1).map(v=>v.split('.').map(Number));console.log((a[0]-b[0]||a[1]-b[1]||a[2]-b[2])>=0?process.argv[1]:process.argv[2])" "$(node -p "require('./package.json').version")" "$PUBLISHED")
+            npm version "$higher" --no-git-tag-version --allow-same-version >/dev/null
+          fi
+          version=$(npm version "$BUMP" --no-git-tag-version | sed 's/^v//')
+          node scripts/changelog-release.mjs "$version" "$(date -u +%F)" "$REASONS"
+          npm run --silent build
+          echo "version=$version" >> "$GITHUB_OUTPUT"
+          echo "Releasing **$version** ($BUMP): $REASONS" | tee -a "$GITHUB_STEP_SUMMARY"
+
+      - name: Publish to npm
+        id: publish
+        if: steps.check.outputs.release == 'true'
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+          VERSION: ${{ steps.version.outputs.version }}
+        run: |
+          if [ "$HAS_NPM_TOKEN" = true ]; then
+            echo "//registry.npmjs.org/:_authToken=\${NODE_AUTH_TOKEN}" > "$HOME/.npmrc"
+          fi
+          # npm 11.5+ publishes through the trusted publisher (OIDC) with no token at all.
+          if npx -y npm@11 publish --provenance --access public; then
+            echo "version=$VERSION" >> "$GITHUB_OUTPUT"
+            echo "Published https://www.npmjs.com/package/mihrab-methods/v/$VERSION" | tee -a "$GITHUB_STEP_SUMMARY"
+          else
+            echo "::error::npm refused the publish. Set up the trusted publisher (npmjs.com → mihrab-methods → Settings → Trusted publishing: MihrabHQ / mihrab-methods / release.yml), or an NPM_TOKEN secret. Nothing was committed; the next run tries again."
+            exit 1
+          fi
+
+      - name: Commit and tag the release
+        if: steps.publish.outputs.version != ''
+        env:
+          VERSION: ${{ steps.publish.outputs.version }}
+          REASONS: ${{ steps.check.outputs.reasons }}
+        run: |
+          git config user.name 'mihrab-release-bot'
+          git config user.email 'actions@users.noreply.github.com'
+          git add package.json package-lock.json CHANGELOG.md
+          git commit -q -m "Release $VERSION" -m "$REASONS" -m "Published by $GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID"
+          git tag "v$VERSION"
+          for i in 1 2 3 4 5; do
+            git push -q origin HEAD:main && git push -q origin "v$VERSION" && exit 0
+            sleep $((10 * i))
+            git pull -q --rebase origin main
+          done
+          echo "::warning::$VERSION is on npm, but the release commit could not be pushed; the next run starts from npm's version, so nothing is published twice."
+
+  api:
+    # After the checks pass, and after a release when there is one.
+    needs: release
+    if: always() && needs.release.result == 'success' && github.event_name != 'schedule'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    env:
+      HAS_CF: ${{ secrets.CLOUDFLARE_API_TOKEN != '' && secrets.CLOUDFLARE_ACCOUNT_ID != '' }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - name: Install
+        run: for i in 1 2 3; do npm ci --no-audit --no-fund && break; [ $i = 3 ] && exit 1; sleep $((20 * i)); done
+      - name: Deploy the API
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        run: |
+          npm run --silent embed
+          if [ "$HAS_CF" != true ]; then
+            echo "::notice::The API is not deployed: set the CLOUDFLARE_API_TOKEN and CLOUDFLARE_ACCOUNT_ID secrets (see the top of release.yml)."
+            npx -y wrangler@4 deploy -c api/wrangler.toml --dry-run --outdir /tmp/worker | tail -3
+            exit 0
+          fi
+          for i in 1 2 3; do npx -y wrangler@4 deploy -c api/wrangler.toml && break; [ $i = 3 ] && exit 1; sleep $((20 * i)); done
+      - name: The API answers
+        if: vars.API_URL != '' && env.HAS_CF == 'true'
+        env:
+          API_URL: ${{ vars.API_URL }}
+        run: |
+          sleep 10
+          curl -fsS "$API_URL/v1/times?authority=morocco&lat=34.02&lng=-6.84" | node -e "let s='';process.stdin.on('data',d=>s+=d).on('end',()=>{const r=JSON.parse(s);if(!/^\d\d:\d\d$/.test(r.times?.fajr?.printed))process.exit(1);console.log('API:',r.place.name,r.date,r.status,'fajr',r.times.fajr.printed)})"

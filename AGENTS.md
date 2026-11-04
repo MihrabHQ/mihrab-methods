@@ -39,9 +39,17 @@ maintainer. Short on purpose; the depth is in [README.md](README.md),
   only" or "the first"; independent of every authority.
 - `scripts/figures.mjs` is also the Mihrab app's (synced as
   `scripts/copy/figures.js` there): after changing it, sync the app.
-- **Publishing to npm** is the maintainer's: bump `version`, tag
-  `vX.Y.Z`, `npm pack`, then `npx npm@11 publish <tgz> --access public`
-  (the account confirms with a passkey).
+- **Publishing to npm is automatic** (`.github/workflows/release.yml`):
+  on every push to main and daily, `scripts/release-check.mjs` compares the
+  package with npm's and releases when the content changed or npm's
+  certified span is about to run out — minor for a new revision or entry
+  point, patch otherwise, CHANGELOG rolled, provenance attached, then the
+  commit and tag. Don't bump `version` or tag by hand; write the CHANGELOG
+  line under "Unreleased" and push. A major version (an entry point
+  removed) is never automatic: the job holds it and says so.
+- **The public API** is `src/server.ts` at the edge (`api/worker.ts`,
+  Cloudflare Workers), deployed by the same workflow from main after every
+  green push; `tools/serve.ts` serves the same handler on Node.
 
 ## 3. Before you say you are done
 
