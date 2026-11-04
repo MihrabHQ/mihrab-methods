@@ -22,7 +22,8 @@ name: release
 #            mihrab-methods / release.yml). No token, nothing expires. Or, in
 #            its place, an NPM_TOKEN secret.
 #   the API  CLOUDFLARE_API_TOKEN and CLOUDFLARE_ACCOUNT_ID secrets (a token
-#            with "Edit Cloudflare Workers"; give it no expiry), and the
+#            with "Edit Cloudflare Workers" and, for stats.yml, "Account
+#            Analytics: Read"; give it no expiry), and the
 #            API_URL variable once deployed, for the daily feed check.
 # Without them the job says so and skips that part; nothing fails.
 
@@ -112,11 +113,21 @@ jobs:
             echo "//registry.npmjs.org/:_authToken=\${NODE_AUTH_TOKEN}" > "$HOME/.npmrc"
           fi
           # npm 11.5+ publishes through the trusted publisher (OIDC) with no token at all.
-          if npx -y npm@11 publish --provenance --access public; then
+          set +e
+          npx -y npm@11 publish --provenance --access public 2>&1 | tee publish.log
+          code=${PIPESTATUS[0]}
+          set -e
+          if [ "$code" = 0 ]; then
             echo "version=$VERSION" >> "$GITHUB_OUTPUT"
             echo "Published https://www.npmjs.com/package/mihrab-methods/v/$VERSION" | tee -a "$GITHUB_STEP_SUMMARY"
+          elif [ "$HAS_NPM_TOKEN" != true ] && grep -qE 'ENEEDAUTH|need auth|E401|OIDC token exchange|trusted publish' publish.log; then
+            # Not a failure of this repository: npm has no way in yet. Said on
+            # every run, in the summary and as a notice, until it is set up.
+            msg="$VERSION is ready but not published: npm needs this workflow as a trusted publisher (npmjs.com → mihrab-methods → Settings → Trusted publishing → GitHub Actions: MihrabHQ / mihrab-methods / release.yml), or an NPM_TOKEN secret. Nothing was committed; the next run publishes it."
+            echo "::notice title=npm not set up::$msg"
+            echo "$msg" >> "$GITHUB_STEP_SUMMARY"
           else
-            echo "::error::npm refused the publish. Set up the trusted publisher (npmjs.com → mihrab-methods → Settings → Trusted publishing: MihrabHQ / mihrab-methods / release.yml), or an NPM_TOKEN secret. Nothing was committed; the next run tries again."
+            echo "::error::npm refused the publish (see above). Nothing was committed; the next run tries again."
             exit 1
           fi
 

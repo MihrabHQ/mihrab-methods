@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="190" viewBox="0 0 760 190" role="img" aria-label="Usage: npm downloads and API requests a week">
+<style>.t{font:600 13px system-ui,-apple-system,Segoe UI,sans-serif;fill:#57606a}.m{font:11px system-ui,-apple-system,Segoe UI,sans-serif;fill:#6e7781}.a{stroke:#8c959f;stroke-opacity:.5}@media (prefers-color-scheme:dark){.t{fill:#c9d1d9}.m{fill:#8b949e}}</style>
+<text x="0" y="16" class="t">npm downloads a week</text>
+<rect x="1.0" y="36" width="42.0" height="120" rx="1.5" fill="#2f7d68"><title>week to 2026-10-20: 628</title></rect>
+<rect x="45.0" y="148" width="42.0" height="8" rx="1.5" fill="#2f7d68"><title>week to 2026-10-27: 41</title></rect>
+<rect x="89.0" y="143" width="42.0" height="13" rx="1.5" fill="#2f7d68"><title>week to 2026-11-03: 66</title></rect>
+<line x1="0" y1="156.5" x2="132.0" y2="156.5" class="a"/>
+<text x="0" y="174" class="m">2026-10-14</text>
+<text x="132.0" y="174" class="m" text-anchor="end">2026-11-03</text>
+<text x="352" y="16" class="m" text-anchor="end">highest 628</text>
+<text x="400" y="16" class="t">API requests a week</text>
+<text x="400" y="105" class="m">not deployed yet</text>
+</svg>

@@ -3,6 +3,7 @@
 [![npm](https://img.shields.io/npm/v/mihrab-methods)](https://www.npmjs.com/package/mihrab-methods)
 [![checks](https://github.com/MihrabHQ/mihrab-methods/actions/workflows/ci.yml/badge.svg)](https://github.com/MihrabHQ/mihrab-methods/actions/workflows/ci.yml)
 [![feed](https://github.com/MihrabHQ/mihrab-methods/actions/workflows/feed.yml/badge.svg)](https://github.com/MihrabHQ/mihrab-methods/actions/workflows/feed.yml)
+[![downloads](https://img.shields.io/npm/dm/mihrab-methods)](#usage)
 [![certification](docs/certification.svg)](#how-verification-works)
 
 **Prayer times that match the published timetable to the printed minute.**
@@ -92,6 +93,19 @@ const r = await fetchLatestCorrections({ authority: 'morocco' });
 It takes a list only for the revision the build computes, only when it is
 the list the record names, and only when its SHA-256 matches. Schemas, tags
 as fixed addresses and the details: [docs/feed.md](docs/feed.md).
+
+## Usage
+
+<!-- usage:start -->
+![Usage: npm downloads and API requests a week](docs/stats.svg)
+
+| | Last 7 days | Last 30 days | Since the first release |
+|---|---:|---:|---:|
+| npm downloads | 66 | 735 | 735 |
+| API requests | — | — | not deployed yet |
+
+Counts only, to 2026-11-03, updated weekly (`scripts/stats.mjs`, history in [docs/stats.json](docs/stats.json)): npm's public download counts — every install counts, CI and mirrors included — and Cloudflare's request counts for the API. No addresses, queries or places are recorded anywhere.
+<!-- usage:end -->
 
 ## More
 

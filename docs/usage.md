@@ -114,6 +114,7 @@ nothing.
 | `src/server.ts` | The HTTP API (routes and handler) |
 | `tools/serve.ts`, `api/worker.ts` | The API on Node, and at the edge |
 | `scripts/release-check.mjs` | Whether npm needs a release, and which |
+| `scripts/stats.mjs` | The usage counts (npm, the API) in the README, weekly |
 
 ## Back into Mihrab
 

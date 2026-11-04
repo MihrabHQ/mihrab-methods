@@ -1,0 +1,53 @@
+name: stats
+
+# How much the library is used, weekly: npm's download counts and the public
+# API's request counts (scripts/stats.mjs) into docs/stats.json, the chart
+# docs/stats.svg and the README's "Usage" block. Counts only.
+#
+# The API's counts need the CLOUDFLARE_API_TOKEN secret to carry "Account
+# Analytics: Read" as well as "Edit Cloudflare Workers", and
+# CLOUDFLARE_ACCOUNT_ID; without them the API's row says "not deployed yet".
+# Cloudflare keeps 30 days of counts, so a weekly run never loses a day.
+
+on:
+  schedule:
+    - cron: '23 6 * * 1' # Mondays
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: stats
+  cancel-in-progress: false
+
+jobs:
+  stats:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Count
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        run: node scripts/stats.mjs | tee -a "$GITHUB_STEP_SUMMARY"
+      - name: Commit
+        run: |
+          git add docs/stats.json docs/stats.svg README.md
+          git diff --cached --quiet && { echo 'No new counts.'; exit 0; }
+          git config user.name 'mihrab-stats-bot'
+          git config user.email 'actions@users.noreply.github.com'
+          git commit -q -m "Usage: the counts to $(node -p "require('./docs/stats.json').updated")"
+          for i in 1 2 3 4 5; do
+            git push -q origin HEAD:main && exit 0
+            sleep $((10 * i))
+            git pull -q --rebase origin main
+            # README may have moved under us (the check's figures): rewrite the block from the counts.
+            node scripts/stats.mjs --offline >/dev/null && git add README.md docs/stats.svg && { git diff --cached --quiet || git commit -q --amend --no-edit; }
+          done
+          echo '::error::Could not push the counts'
+          exit 1
