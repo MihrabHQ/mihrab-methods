@@ -37,7 +37,7 @@ The full API, the HTTP server and the per-authority imports are in
 | **Sweden** | Islamiska Förbundet’s tables | 107 | 61,344 | **0** | 99.967 % | 270 | 11 Oct 2026 → 7 Dec 2027 |
 |  | Diyanet’s own tables | 159 | 1,393,794 | **0** | 99.981 % |  | 1 Jan 2024 → 31 Dec 2027 |
 | **Diyanet** | its tables worldwide | 8,132 | 69,999,603 | **0** | 99.986 % | 9,118 | 1 Jan 2024 → 31 Dec 2027 |
-| **Morocco** | Habous | 164 | 94,350 | **0** | 98.071 % | 1,820 | 27 Aug 2026 → 30 Nov 2026 |
+| **Morocco** | Habous | 164 | 94,350 | **0** | 99.879 % | 114 | 27 Aug 2026 → 30 Nov 2026 |
 | **Algeria** | Ministry of Religious Affairs | 68 | 101,184 | **0** | 99.365 % | 642 | 1 Oct 2026 → 5 Jun 2027 |
 | **Indonesia** | Kemenag | 517 | 362,934 | **0** | 99.888 % | 405 | 7 Oct 2026 → 31 Jan 2027 |
 

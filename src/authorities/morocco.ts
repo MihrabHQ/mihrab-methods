@@ -7,6 +7,7 @@ import points from '../data/generated/moroccoMethodPoints.js';
 import corrections from '../data/generated/moroccoCorrections.js';
 import certification from '../data/generated/moroccoCertification.js';
 import { METHOD_REVISION } from '../methods/revisions.js';
+import { moroccoDipEast, moroccoDipWest } from '../methods/morocco.js';
 import { registerAuthority } from '../core/registry.js';
 import type { Place } from '../core/types.js';
 
@@ -19,7 +20,6 @@ const AUTHORITY = 'morocco' as const;
 const MOROCCO_TZ = 'Etc/GMT';
 /** The ministry's clock: GMT+1, then GMT — its tables print GMT from 17 September 2026, three days before the clocks moved. */
 export const MOROCCO_CLOCK: [string, number][] = [['2020-01-01', 60], ['2026-09-17', 0]];
-const MOROCCO_DIP_PER_SQRT_M = 0.02;
 
 function buildPlaces(): Place[] {
   return cities
@@ -30,7 +30,7 @@ function buildPlaces(): Place[] {
       const p = points[key];
       return p
         ? { ...base, lat: p[0], lon: p[1], dipDeg: p[2], ...(p.length > 3 ? { dipMaghribDeg: p[3] } : {}) }
-        : { ...base, lat: c.lat as number, lon: c.lng as number, dipDeg: MOROCCO_DIP_PER_SQRT_M * Math.sqrt(c.heightM ?? 0) };
+        : { ...base, lat: c.lat as number, lon: c.lng as number, dipDeg: moroccoDipEast(c.heightM ?? 0), dipMaghribDeg: moroccoDipWest(c.heightM ?? 0) };
     });
 }
 
@@ -43,18 +43,19 @@ export const morocco = registerAuthority({
   description: {
     name: 'Morocco — Ministry of Habous and Islamic Affairs',
     method:
-      'Meeus’s apparent sun taken at each prayer’s own moment; Fajr 19°, Isha 17°, Asr one shadow; Dhuhr five minutes after transit; sunrise 2.85 minutes before and Maghrib 3.7 minutes after the upper limb on the horizon, less each city’s own horizon dip east and west; Fajr rounded down, the rest to the nearest minute; printed on the ministry’s clock (GMT+1 until 17 September 2026, then GMT).',
+      'Meeus’s apparent sun taken at each prayer’s own moment; Fajr 19°, Isha 17°; Asr on the apparent sun — the gnomon’s shadow at noon plus one length, refraction on both altitudes; Dhuhr five minutes after transit; sunrise one minute before and Maghrib 1.8 minutes after the sun on −(34′ + s) less each city’s own horizon allowance east and west (an angle, about 0.32°–0.37° + 0.02°·√height); Fajr rounded down, the rest to the nearest minute; printed on the ministry’s clock (GMT+1 until 17 September 2026, then GMT).',
     countries: ['MA'],
     parameters: {
       fajrAngle: 19,
       ishaAngle: 17,
       asrShadow: 1,
       dhuhrAfterTransitMinutes: 5,
-      sunriseMarginMinutes: -2.85,
-      maghribMarginMinutes: 3.7,
+      sunriseMarginMinutes: -1.0,
+      maghribMarginMinutes: 1.8,
       refractionArcmin: 34,
+      asrRefraction: 'Sæmundsson from the true altitude at noon, Bennett under the apparent altitude at Asr (Meeus 16.4, 16.3)',
       sunSemidiameter: 'by the sun’s distance that day',
-      horizonDip: 'per city and per side, fitted (Place.dipDeg, Place.dipMaghribDeg); else 0.02°·√height, 0.86 of it at Maghrib',
+      horizonDip: 'per city and per side, fitted (Place.dipDeg, Place.dipMaghribDeg); else 0.32° + 0.025°·√height east, 0.37° + 0.021°·√height west',
       rounding: 'Fajr down to the minute, the rest to the nearest',
       sun: 'Meeus, apparent, with the full nutation; chapter-28 equation of time; iterated at each prayer',
     },

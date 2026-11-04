@@ -38,7 +38,7 @@ export function candidateInstants(place: Place, year: number, month: number, day
     case 'indonesia': {
       const t =
         place.authority === 'morocco'
-          ? moroccoTimes(place.lat, place.lon, year, month, day, place.dipDeg ?? 0, asrShadow, place.dipMaghribDeg)
+          ? moroccoTimes(place.lat, place.lon, year, month, day, place.dipDeg, asrShadow, place.dipMaghribDeg)
           : place.authority === 'algeria'
             ? algeriaTimes(place.lat, place.lon, year, month, day, asrShadow)
             : kemenagTimes(place.lat, place.lon, year, month, day, { highland: place.highland, twilightDip: place.twilightDip, asrShadow, afternoon: place.afternoon });

@@ -110,7 +110,11 @@ statement of it that gives the tables.
 ## Morocco
 
 `src/methods/morocco.ts`. The Ministry of Habous and Islamic Affairs, read
-off its tables for 164 cities.
+off its tables for 164 cities: 96 days of 2026 for all of them, and — through
+the Internet Archive's copies of its pages — 2014 to 2025 for Rabat, Figuig,
+Tangier, Casablanca, Laayoune and a dozen more, every month of the year. The
+ministry's program changed between 2019 and 2023 (until then Asr was the
+noon shadow on the true sun); this is the program it has used since.
 
 - The sun is **Meeus's apparent sun** with the full nutation (the mean
   elements above; apparent longitude `L0 + C − 0.00569 + Δψ`, with
@@ -118,14 +122,26 @@ off its tables for 164 cities.
   and his chapter-28 equation of time
   `E = L0 − 0.0057183 − α + Δψ cos ε`, taken at **each prayer's own
   moment** (iterated), declination and equation of time alike.
-- Fajr −19°, Isha −17°, Asr one shadow length (Shafiʿi).
+- Fajr −19°, Isha −17°, true altitudes.
 - Dhuhr five minutes after the transit.
-- Sunrise 2.85 minutes before, and Maghrib 3.7 minutes after, the sun's
-  upper limb on the horizon: altitude `−(34′ + s) − dip`, with s the sun's
-  semi-diameter for its distance that day and dip the city's own horizon
-  dip — eastward at sunrise (`Place.dipDeg`), westward at Maghrib
-  (`Place.dipMaghribDeg`), each fitted from the tables with the city's
-  point; where not fitted, `0.02°·√height(m)`, and 0.86 of it at Maghrib.
+- Asr on the **apparent** sun, by the classical rule: with δ the noon
+  declination, the noon altitude `h = 90° − |φ − δ|` is raised by
+  refraction, `h' = h + R(h)`, `R(h) = 1.02′ / tan(h + 10.3/(h + 5.11))`
+  (Sæmundsson, Meeus 16.4, h in degrees); the gnomon's shadow is `cot h'`,
+  and Asr is when the apparent sun's shadow is one length more:
+  apparent altitude `a' = arctan(1 / (1 + cot h'))`, and the true altitude
+  the hour angle is solved for, `a = a' − R'(a')`,
+  `R'(a') = 1′ / tan(a' + 7.31/(a' + 4.4))` (Bennett, Meeus 16.3), with the
+  declination at the event. Hanafi takes two lengths.
+- Sunrise one minute before, and Maghrib 1.8 minutes after, the sun on the
+  altitude `−(34′ + s) − dip`, with s the sun's semi-diameter for its
+  distance that day and dip the city's own horizon allowance — eastward at
+  sunrise (`Place.dipDeg`), westward at Maghrib (`Place.dipMaghribDeg`),
+  each fitted from the tables with the city's point. It is an angle: the
+  minutes it is worth grow towards the solstices, as the ministry's do.
+  It follows the city's height (92 % correlation), and a city not fitted
+  gets `0.32° + 0.025°·√height(m)` east and `0.37° + 0.021°·√height(m)`
+  west.
 - Fajr rounded **down** to the minute, every other time to the nearest.
 - The ministry's clock is GMT+1 until 17 September 2026 and GMT from then
   on (`Place.clock`); the zone databases still move Morocco's clock, so the

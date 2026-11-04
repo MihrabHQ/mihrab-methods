@@ -9,7 +9,30 @@ revision bump is at least a minor version.
 
 ## Unreleased
 
-No method changed; no revision raised.
+- **Morocco, revision 2.** The method was fitted on the ministry's autumn
+  tables alone; read against its pages of 2014–2025 from the Internet
+  Archive (Rabat, Figuig, Tangier, Casablanca, Laayoune and others, every
+  month) it drifted a tenth of a minute by late November and more towards
+  the solstices. Three things change in the output:
+  - **Asr** is computed on the apparent sun — the gnomon's noon shadow from
+    the refracted noon altitude, and the moment the refracted sun casts it
+    plus one length — instead of the true sun at the event. Up to 0.3 min
+    later in winter, a few seconds in summer.
+  - **Sunrise and Maghrib**: the ministry's allowance is an angle on the
+    horizon, not minutes; the fixed margins fall from −2.85/+3.7 min to
+    −1/+1.8 and every city's horizon allowance rises by about 0.3°. The
+    same minute in autumn; up to 0.2 min earlier sunrise and later Maghrib
+    near the solstices.
+  - **Every city's point** refitted on the 96 days of 2026 under the new
+    rule (and on the archive's 2023–2025 pages where it has them); the
+    unlisted city's allowance becomes `0.32° + 0.025°·√height` east and
+    `0.37° + 0.021°·√height` west.
+  The method alone now gives the ministry's printed minute for 99.88 % of
+  its 2026 tables (114 off of 94,350; was 98.07 %, 1,820 off, over the
+  same days) and 99.3 % of the archive's 2023–2026 pages, every month of
+  the year; the rest are within a second or two of a minute's edge.
+  New correction list; apps on revision 1 keep theirs and are told to
+  update.
 
 - **Diyanet, Winnipeg (9078):** the table's own clock, read off the table
   (CST in winter, CDT in summer, as Diyanet prints it). Manitoba moves to
