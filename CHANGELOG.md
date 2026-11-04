@@ -9,6 +9,10 @@ revision bump is at least a minor version.
 
 ## Unreleased
 
+No method changed; no revision raised.
+
+## 1.1.0 — 2026-11-04
+
 - **Morocco, revision 2.** The method was fitted on the ministry's autumn
   tables alone; read against its pages of 2014–2025 from the Internet
   Archive (Rabat, Figuig, Tangier, Casablanca, Laayoune and others, every
