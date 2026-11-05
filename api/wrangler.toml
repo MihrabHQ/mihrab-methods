@@ -6,7 +6,13 @@ main = "worker.ts"
 compatibility_date = "2026-10-01"
 # Only at its own address: the account has no workers.dev subdomain, and needs none.
 workers_dev = false
-# The public address (elghamri.se is on the same Cloudflare account).
-routes = [{ pattern = "api.mihrab.elghamri.se", custom_domain = true }]
+# The public address (elghamri.se is on the same Cloudflare account). One
+# level under elghamri.se, so the zone's own certificate (elghamri.se,
+# *.elghamri.se) covers it. Not api.mihrab.elghamri.se: a name two levels
+# down needs a certificate of its own, and a CA looking for CAA records
+# there climbs to mihrab.elghamri.se — a CNAME to GitHub Pages, whose CAA
+# admits none of the CAs Cloudflare issues from. It never got one, and
+# every TLS handshake failed.
+routes = [{ pattern = "mihrab-api.elghamri.se", custom_domain = true }]
 [observability]
 enabled = false
