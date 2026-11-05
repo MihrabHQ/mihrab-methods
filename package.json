@@ -28,7 +28,14 @@
     "./dist/*/morocco.js",
     "./dist/*/algeria.js",
     "./dist/*/indonesia.js",
-    "./dist/*/authorities/*.js"
+    "./dist/*/authorities/*.js",
+    "./src/index.ts",
+    "./src/sweden.ts",
+    "./src/diyanet.ts",
+    "./src/morocco.ts",
+    "./src/algeria.ts",
+    "./src/indonesia.ts",
+    "./src/authorities/*.ts"
   ],
   "engines": {
     "node": ">=18"

@@ -45,3 +45,19 @@ test('strict refuses a date outside the certified span', () => {
   assert.equal(get('/v1/times?authority=morocco&lat=34.02&lng=-6.84&date=2031-01-01&strict=1').status, 422);
   assert.equal(get('/v1/times?authority=morocco&lat=34.02&lng=-6.84&date=2031-01-01').json.status, 'method-only');
 });
+
+test('the Worker keeps the authorities: their files are marked as having side effects', async () => {
+  // api/worker.ts bundles src/, not dist/. A file the package's
+  // `sideEffects` does not list is taken as pure, so the bundler drops a
+  // bare `import './authorities/morocco.js'` — and the API answered every
+  // request with "the morocco method is not loaded" (a 500).
+  const { readFileSync, readdirSync } = await import('node:fs');
+  const listed: string[] = JSON.parse(readFileSync(new URL('../package.json', import.meta.url), 'utf8')).sideEffects;
+  const covered = (file: string) =>
+    listed.some(p => new RegExp('^' + p.replace(/[.]/g, '\\.').replace(/\*/g, '[^/]+') + '$').test(file));
+  const entries = ['index', 'sweden', 'diyanet', 'morocco', 'algeria', 'indonesia'].map(n => `./src/${n}.ts`);
+  const authorities = readdirSync(new URL('../src/authorities/', import.meta.url))
+    .filter(f => f.endsWith('.ts'))
+    .map(f => `./src/authorities/${f}`);
+  for (const f of [...entries, ...authorities]) assert.ok(covered(f), `${f} is not in sideEffects`);
+});
