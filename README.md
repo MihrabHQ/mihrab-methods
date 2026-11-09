@@ -101,10 +101,10 @@ as fixed addresses and the details: [docs/feed.md](docs/feed.md).
 
 | | Last 7 days | Last 30 days | Since the first release |
 |---|---:|---:|---:|
-| npm downloads | 66 | 735 | 735 |
-| API requests | — | — | not deployed yet |
+| npm downloads | 264 | 977 | 977 |
+| API requests | 1,900 | 1,900 | 1,900 (since 2026-11-04) |
 
-Counts only, to 2026-11-03, updated weekly (`scripts/stats.mjs`, history in [docs/stats.json](docs/stats.json)): npm's public download counts — every install counts, CI and mirrors included — and Cloudflare's request counts for the API. No addresses, queries or places are recorded anywhere.
+Counts only, to 2026-11-08, updated weekly (`scripts/stats.mjs`, history in [docs/stats.json](docs/stats.json)): npm's public download counts — every install counts, CI and mirrors included — and Cloudflare's request counts for the API. No addresses, queries or places are recorded anywhere.
 <!-- usage:end -->
 
 ## More
