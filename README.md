@@ -42,7 +42,7 @@ The full API, the HTTP server and the per-authority imports are in
 | **Algeria** | Ministry of Religious Affairs | 68 | 101,184 | **0** | 99.365 % | 642 | 1 Oct 2026 → 5 Jun 2027 |
 | **Indonesia** | Kemenag | 517 | 362,934 | **0** | 99.888 % | 405 | 7 Oct 2026 → 31 Jan 2027 |
 
-5 of 5 methods certified; 0 of 72,014,979 times off the printed minute. Last checked 4 November 2026. Generated from [`certification.json`](certification.json) by `scripts/readme.mjs`.
+5 of 5 methods certified; 0 of 72,014,979 times off the printed minute. Last checked 9 November 2026. Generated from [`certification.json`](certification.json) by `scripts/readme.mjs`.
 <!-- certification-table:end -->
 
 "By the method alone" is the formula without its correction list. The list
