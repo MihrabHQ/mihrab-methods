@@ -2,7 +2,8 @@
 /**
  * How much the library is used: npm downloads, and requests to the public
  * API — counts per day, nothing else. Written to docs/stats.json (the
- * history, kept), docs/stats.svg (the chart) and the README's usage block.
+ * history, kept), docs/stats.svg (the chart, shown at the top of the
+ * README) and the README's usage block (the table).
  *
  *   node scripts/stats.mjs                      # fetch, merge, write
  *   node scripts/stats.mjs --offline            # rewrite the chart and README from docs/stats.json
@@ -29,7 +30,10 @@ const OFFLINE = process.argv.includes('--offline');
 const day = (d) => d.toISOString().slice(0, 10);
 const addDays = (s, n) => day(new Date(Date.parse(`${s}T00:00:00Z`) + n * 864e5));
 const today = process.env.TODAY ?? day(new Date());
-const yesterday = addDays(today, -1); // a day is counted once it is over
+// A day is counted once it is over. Offline, the counts end where the
+// history does: a rewrite on a later day must not claim days it never read.
+const kept = fs.existsSync(FILE) ? JSON.parse(fs.readFileSync(FILE, 'utf8')) : null;
+const yesterday = OFFLINE && kept?.updated ? kept.updated : addDays(today, -1);
 
 async function get(url, init) {
   for (let attempt = 1; ; attempt++) {
@@ -99,41 +103,114 @@ function weekly(daily, weeks, pick = (v) => v) {
   return out;
 }
 
-/** Two small bar charts side by side: npm downloads and API requests a week, the last 26 weeks. */
+const MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+const short = (d) => `${MONTHS[Number(d.slice(5, 7)) - 1]} ${Number(d.slice(8, 10))}`;
+const esc = (t) => t.replace(/&/g, '&amp;').replace(/</g, '&lt;');
+
+/** A round step for the scale's lines: 1, 2 or 5 times a power of ten, about `n` of them up to `max`. */
+function niceStep(max, n = 3) {
+  const raw = max / n;
+  const p = 10 ** Math.floor(Math.log10(raw));
+  return [1, 2, 5, 10].map((m) => m * p).find((s) => s >= raw);
+}
+
+/**
+ * Two stacked panels on one time axis — npm downloads and API requests, a
+ * bar a day from the first release (the last 120 days at most), with the
+ * last seven days' total and the whole total over each.
+ *
+ * A day, not a week: the counts are a few weeks old, and four weekly bars
+ * said less than the days do. The panels share their dates, so a day sits
+ * at the same place in both. One day far above the rest — the first
+ * release's 628, mirrors fetching the new package — would flatten every
+ * other day to a line, so the scale stops a little over the next highest
+ * day and that one bar is drawn broken, its count written over it.
+ */
 function chart(stats) {
-  const W = 760, H = 190, pad = 34, gap = 40, panel = (W - gap) / 2;
-  // From the first week with a count (the first release), at most the last 26.
-  const weeksSince = (daily) => {
-    const first = Object.keys(daily).sort()[0];
-    return first ? Math.min(26, Math.max(1, Math.ceil((Date.parse(yesterday) - Date.parse(first) + 864e5) / (7 * 864e5)))) : 0;
-  };
+  const W = 760, left = 4, right = 44, plotW = W - left - right;
+  const panelH = 160, head = 40, plotH = 82, foot = 26;
+  const firstDay = [stats.npm.daily, stats.api?.daily ?? {}].flatMap((d) => Object.keys(d)).sort()[0] ?? yesterday;
+  const from = [firstDay, addDays(yesterday, -119)].sort().at(-1);
+  const days = [];
+  for (let d = from; d <= yesterday; d = addDays(d, 1)) days.push(d);
+  const slot = plotW / Math.max(days.length, 14);
+  const bar = Math.max(1, Math.min(slot - (slot > 6 ? 2 : 1), 22));
+  const x = (i) => left + i * slot + (slot - bar) / 2;
+
   const panels = [
-    { title: 'npm downloads a week', color: '#2f7d68', data: weekly(stats.npm.daily, weeksSince(stats.npm.daily)) },
-    { title: 'API requests a week', color: '#3f6fb5', data: stats.api ? weekly(stats.api.daily, weeksSince(stats.api.daily), (v) => v.requests) : [] },
+    { title: 'npm downloads a day', unit: 'downloads', cls: 'n', daily: stats.npm.daily, pick: (v) => v },
+    { title: 'API requests a day', unit: 'requests', cls: 'p', daily: stats.api?.daily ?? null, pick: (v) => v.requests },
   ];
   const parts = [];
-  panels.forEach((p, i) => {
-    const x0 = i * (panel + gap);
-    parts.push(`<text x="${x0}" y="16" class="t">${p.title}</text>`);
-    if (!p.data.length || p.data.every((d) => d.n === 0)) {
-      parts.push(`<text x="${x0}" y="${H / 2 + 10}" class="m">${i === 1 && !stats.api ? 'not deployed yet' : 'none yet'}</text>`);
+  panels.forEach((p, k) => {
+    const y0 = k * panelH;
+    const base = y0 + head + plotH;
+    parts.push(`<text x="${left}" y="${y0 + 16}" class="t">${p.title}</text>`);
+    if (!p.daily || !Object.keys(p.daily).length) {
+      parts.push(`<text x="${left}" y="${y0 + head + plotH / 2}" class="m">${p.daily ? 'none yet' : 'not deployed yet'}</text>`);
       return;
     }
-    const max = Math.max(...p.data.map((d) => d.n), 1);
-    const bw = (panel - 8) / Math.max(p.data.length, 8);
-    const right = x0 + bw * p.data.length;
-    const base = H - pad;
-    p.data.forEach((d, j) => {
-      const h = Math.round((d.n / max) * (base - 36));
-      parts.push(`<rect x="${(x0 + j * bw + 1).toFixed(1)}" y="${base - h}" width="${(bw - 2).toFixed(1)}" height="${Math.max(h, d.n ? 1 : 0)}" rx="1.5" fill="${p.color}"><title>week to ${d.end}: ${int(d.n)}</title></rect>`);
+    const counts = days.map((d) => (d in p.daily ? p.pick(p.daily[d]) : null));
+    const week = sum(p.daily, addDays(yesterday, -6), yesterday, p.pick);
+    const all = sum(p.daily, '0000-00-00', yesterday, p.pick);
+    parts.push(`<text x="${W - right}" y="${y0 + 16}" class="s" text-anchor="end"><tspan class="v">${int(week)}</tspan> in the last 7 days · <tspan class="v">${int(all)}</tspan> in all</text>`);
+
+    // The scale: up to the highest day, or — with one day far over the
+    // rest — a little over the next highest, that one bar broken.
+    const sorted = counts.filter((n) => n != null).sort((a, b) => b - a);
+    const [top, second = 0] = sorted;
+    const broken = top > 0 && second > 0 && top > 3 * second;
+    const step = niceStep(broken ? second * 1.15 : top || 1);
+    const max = Math.max(step, Math.ceil((broken ? second * 1.15 : top || 1) / step) * step);
+    const y = (n) => base - Math.min(1, n / max) * plotH;
+    for (let v = step; v <= max + 1e-9; v += step) {
+      parts.push(`<line x1="${left}" y1="${y(v).toFixed(1)}" x2="${W - right}" y2="${y(v).toFixed(1)}" class="g"/>`);
+      parts.push(`<text x="${W - right + 6}" y="${(y(v) + 4).toFixed(1)}" class="m">${int(v)}</text>`);
+    }
+    parts.push(`<line x1="${left}" y1="${base + 0.5}" x2="${W - right}" y2="${base + 0.5}" class="a"/>`);
+    parts.push(`<text x="${W - right + 6}" y="${base + 4}" class="m">0</text>`);
+    counts.forEach((n, i) => {
+      if (n == null) return;
+      const h = n === 0 ? 0 : Math.max(1.5, base - y(n));
+      const title = `<title>${short(days[i])}: ${int(n)} ${p.unit}</title>`;
+      if (h > 0) parts.push(`<rect x="${x(i).toFixed(1)}" y="${(base - h).toFixed(1)}" width="${bar.toFixed(1)}" height="${h.toFixed(1)}" rx="${Math.min(2, bar / 3).toFixed(1)}" class="${p.cls}">${title}</rect>`);
+      if (broken && n === top) {
+        // The break: a gap across the bar under its top, and the count.
+        const by = base - plotH + 10;
+        parts.push(`<path d="M${(x(i) - 2).toFixed(1)} ${by + 3} l${bar + 4} -5 v4 l${-(bar + 4)} 5z" class="b"/>`);
+        parts.push(`<text x="${(x(i) + bar / 2).toFixed(1)}" y="${base - plotH - 4}" class="v" text-anchor="middle">${int(n)}</text>`);
+      }
     });
-    parts.push(`<line x1="${x0}" y1="${base + 0.5}" x2="${right.toFixed(1)}" y2="${base + 0.5}" class="a"/>`);
-    parts.push(`<text x="${x0}" y="${base + 18}" class="m">${addDays(p.data[0].end, -6)}</text>`);
-    parts.push(`<text x="${right.toFixed(1)}" y="${base + 18}" class="m" text-anchor="end">${p.data.at(-1).end}</text>`);
-    parts.push(`<text x="${x0 + panel - 8}" y="16" class="m" text-anchor="end">highest ${int(max)}</text>`);
+    // The highest day otherwise: its count over its bar.
+    if (!broken && top > 0) {
+      const i = counts.indexOf(top);
+      parts.push(`<text x="${(x(i) + bar / 2).toFixed(1)}" y="${(y(top) - 5).toFixed(1)}" class="v" text-anchor="middle">${int(top)}</text>`);
+    }
+    // Before the first day counted (the API went live later): said, not blank.
+    const firstCounted = counts.findIndex((n) => n != null);
+    if (firstCounted > 3) {
+      parts.push(`<text x="${(left + firstCounted * slot / 2).toFixed(1)}" y="${base - 8}" class="m" text-anchor="middle">not live yet</text>`);
+    }
+    // The dates: each Monday, as many as fit.
+    const every = Math.max(1, Math.ceil(52 / (slot * 7)));
+    let n = 0;
+    days.forEach((d, i) => {
+      if (new Date(`${d}T00:00:00Z`).getUTCDay() !== 1) return;
+      if (n++ % every) return;
+      parts.push(`<line x1="${(left + i * slot).toFixed(1)}" y1="${base}" x2="${(left + i * slot).toFixed(1)}" y2="${base + 4}" class="a"/>`);
+      parts.push(`<text x="${(left + i * slot).toFixed(1)}" y="${base + 17}" class="m">${short(d)}</text>`);
+    });
   });
-  return `<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H}" viewBox="0 0 ${W} ${H}" role="img" aria-label="Usage: npm downloads and API requests a week">
-<style>.t{font:600 13px system-ui,-apple-system,Segoe UI,sans-serif;fill:#57606a}.m{font:11px system-ui,-apple-system,Segoe UI,sans-serif;fill:#6e7781}.a{stroke:#8c959f;stroke-opacity:.5}@media (prefers-color-scheme:dark){.t{fill:#c9d1d9}.m{fill:#8b949e}}</style>
+  // The last panel's dates are the bottom of the picture.
+  const H = (panels.length - 1) * panelH + head + plotH + foot;
+  return `<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H}" viewBox="0 0 ${W} ${H}" role="img" aria-label="${esc(`Usage, a day: npm downloads and API requests, to ${yesterday}`)}">
+<style>
+text{font-family:system-ui,-apple-system,"Segoe UI",sans-serif}
+.t{font-size:13px;font-weight:600;fill:#1f2328}.s{font-size:12px;fill:#59636e}.v{font-size:12px;font-weight:600;fill:#1f2328}
+.m{font-size:11px;fill:#59636e}.a{stroke:#8c959f}.g{stroke:#8c959f;stroke-opacity:.25}
+.n{fill:#2f7d68}.p{fill:#3f6fb5}.b{fill:#ffffff}
+@media (prefers-color-scheme:dark){.t,.v{fill:#e6edf3}.s,.m{fill:#9198a1}.a{stroke:#656c76}.g{stroke:#656c76;stroke-opacity:.4}.n{fill:#3fa58a}.p{fill:#5b8fd9}.b{fill:#0d1117}}
+</style>
 ${parts.join('\n')}
 </svg>
 `;
@@ -153,8 +230,7 @@ function block(stats) {
     rows.push('| API requests | — | — | not deployed yet |');
   }
   return [
-    '![Usage: npm downloads and API requests a week](docs/stats.svg)',
-    '',
+    // The chart itself is at the top of the README, over the install line.
     ...rows,
     '',
     `Counts only, to ${yesterday}, updated weekly (\`scripts/stats.mjs\`, history in [docs/stats.json](docs/stats.json)): npm's public download counts — every install counts, CI and mirrors included — and Cloudflare's request counts for the API. No addresses, queries or places are recorded anywhere.`,
@@ -170,7 +246,7 @@ function fillReadme(stats) {
 }
 
 async function main() {
-  const old = fs.existsSync(FILE) ? JSON.parse(fs.readFileSync(FILE, 'utf8')) : { npm: { daily: {} }, api: null };
+  const old = kept ?? { npm: { daily: {} }, api: null };
   let stats = old;
   if (!OFFLINE) {
     const first = process.env.NPM_SINCE ?? '2026-10-18'; // the first release

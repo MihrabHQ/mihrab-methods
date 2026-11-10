@@ -12,6 +12,8 @@ published times and checked day by day against its timetables: <!--fig:total.off
 <!--fig:total.times-->72,014,979<!--/fig--> times off the printed minute. Free for any app, site or
 mosque to use.
 
+[![Usage, a day: npm downloads and API requests](docs/stats.svg)](#usage)
+
 ```sh
 npm install mihrab-methods
 ```
@@ -97,8 +99,6 @@ as fixed addresses and the details: [docs/feed.md](docs/feed.md).
 ## Usage
 
 <!-- usage:start -->
-![Usage: npm downloads and API requests a week](docs/stats.svg)
-
 | | Last 7 days | Last 30 days | Since the first release |
 |---|---:|---:|---:|
 | npm downloads | 264 | 977 | 977 |

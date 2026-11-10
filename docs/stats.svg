@@ -1,18 +1,67 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="760" height="190" viewBox="0 0 760 190" role="img" aria-label="Usage: npm downloads and API requests a week">
-<style>.t{font:600 13px system-ui,-apple-system,Segoe UI,sans-serif;fill:#57606a}.m{font:11px system-ui,-apple-system,Segoe UI,sans-serif;fill:#6e7781}.a{stroke:#8c959f;stroke-opacity:.5}@media (prefers-color-scheme:dark){.t{fill:#c9d1d9}.m{fill:#8b949e}}</style>
-<text x="0" y="16" class="t">npm downloads a week</text>
-<rect x="1.0" y="36" width="42.0" height="120" rx="1.5" fill="#2f7d68"><title>week to 2026-10-18: 628</title></rect>
-<rect x="45.0" y="149" width="42.0" height="7" rx="1.5" fill="#2f7d68"><title>week to 2026-10-25: 37</title></rect>
-<rect x="89.0" y="147" width="42.0" height="9" rx="1.5" fill="#2f7d68"><title>week to 2026-11-01: 48</title></rect>
-<rect x="133.0" y="106" width="42.0" height="50" rx="1.5" fill="#2f7d68"><title>week to 2026-11-08: 264</title></rect>
-<line x1="0" y1="156.5" x2="176.0" y2="156.5" class="a"/>
-<text x="0" y="174" class="m">2026-10-12</text>
-<text x="176.0" y="174" class="m" text-anchor="end">2026-11-08</text>
-<text x="352" y="16" class="m" text-anchor="end">highest 628</text>
-<text x="400" y="16" class="t">API requests a week</text>
-<rect x="401.0" y="36" width="42.0" height="120" rx="1.5" fill="#3f6fb5"><title>week to 2026-11-08: 1,900</title></rect>
-<line x1="400" y1="156.5" x2="444.0" y2="156.5" class="a"/>
-<text x="400" y="174" class="m">2026-11-02</text>
-<text x="444.0" y="174" class="m" text-anchor="end">2026-11-08</text>
-<text x="752" y="16" class="m" text-anchor="end">highest 1,900</text>
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="308" viewBox="0 0 760 308" role="img" aria-label="Usage, a day: npm downloads and API requests, to 2026-11-08">
+<style>
+text{font-family:system-ui,-apple-system,"Segoe UI",sans-serif}
+.t{font-size:13px;font-weight:600;fill:#1f2328}.s{font-size:12px;fill:#59636e}.v{font-size:12px;font-weight:600;fill:#1f2328}
+.m{font-size:11px;fill:#59636e}.a{stroke:#8c959f}.g{stroke:#8c959f;stroke-opacity:.25}
+.n{fill:#2f7d68}.p{fill:#3f6fb5}.b{fill:#ffffff}
+@media (prefers-color-scheme:dark){.t,.v{fill:#e6edf3}.s,.m{fill:#9198a1}.a{stroke:#656c76}.g{stroke:#656c76;stroke-opacity:.4}.n{fill:#3fa58a}.p{fill:#5b8fd9}.b{fill:#0d1117}}
+</style>
+<text x="4" y="16" class="t">npm downloads a day</text>
+<text x="716" y="16" class="s" text-anchor="end"><tspan class="v">264</tspan> in the last 7 days · <tspan class="v">977</tspan> in all</text>
+<line x1="4" y1="81.0" x2="716" y2="81.0" class="g"/>
+<text x="722" y="85.0" class="m">100</text>
+<line x1="4" y1="40.0" x2="716" y2="40.0" class="g"/>
+<text x="722" y="44.0" class="m">200</text>
+<line x1="4" y1="122.5" x2="716" y2="122.5" class="a"/>
+<text x="722" y="126" class="m">0</text>
+<rect x="9.2" y="40.0" width="22.0" height="82.0" rx="2.0" class="n"><title>Oct 18: 628 downloads</title></rect>
+<path d="M7.2 53 l26 -5 v4 l-26 5z" class="b"/>
+<text x="20.2" y="36" class="v" text-anchor="middle">628</text>
+<rect x="138.6" y="120.5" width="22.0" height="1.5" rx="2.0" class="n"><title>Oct 22: 1 downloads</title></rect>
+<rect x="171.0" y="120.4" width="22.0" height="1.6" rx="2.0" class="n"><title>Oct 23: 4 downloads</title></rect>
+<rect x="203.4" y="117.1" width="22.0" height="4.9" rx="2.0" class="n"><title>Oct 24: 12 downloads</title></rect>
+<rect x="235.7" y="113.8" width="22.0" height="8.2" rx="2.0" class="n"><title>Oct 25: 20 downloads</title></rect>
+<rect x="268.1" y="120.5" width="22.0" height="1.5" rx="2.0" class="n"><title>Oct 26: 3 downloads</title></rect>
+<rect x="300.5" y="120.5" width="22.0" height="1.5" rx="2.0" class="n"><title>Oct 27: 1 downloads</title></rect>
+<rect x="332.8" y="119.1" width="22.0" height="2.9" rx="2.0" class="n"><title>Oct 28: 7 downloads</title></rect>
+<rect x="365.2" y="116.3" width="22.0" height="5.7" rx="2.0" class="n"><title>Oct 29: 14 downloads</title></rect>
+<rect x="397.5" y="118.3" width="22.0" height="3.7" rx="2.0" class="n"><title>Oct 30: 9 downloads</title></rect>
+<rect x="429.9" y="118.7" width="22.0" height="3.3" rx="2.0" class="n"><title>Oct 31: 8 downloads</title></rect>
+<rect x="462.3" y="119.5" width="22.0" height="2.5" rx="2.0" class="n"><title>Nov 1: 6 downloads</title></rect>
+<rect x="494.6" y="115.0" width="22.0" height="7.0" rx="2.0" class="n"><title>Nov 2: 17 downloads</title></rect>
+<rect x="527.0" y="120.0" width="22.0" height="2.0" rx="2.0" class="n"><title>Nov 3: 5 downloads</title></rect>
+<rect x="559.4" y="51.1" width="22.0" height="70.9" rx="2.0" class="n"><title>Nov 4: 173 downloads</title></rect>
+<rect x="591.7" y="112.2" width="22.0" height="9.8" rx="2.0" class="n"><title>Nov 5: 24 downloads</title></rect>
+<rect x="624.1" y="117.1" width="22.0" height="4.9" rx="2.0" class="n"><title>Nov 6: 12 downloads</title></rect>
+<rect x="656.5" y="113.8" width="22.0" height="8.2" rx="2.0" class="n"><title>Nov 7: 20 downloads</title></rect>
+<rect x="688.8" y="116.7" width="22.0" height="5.3" rx="2.0" class="n"><title>Nov 8: 13 downloads</title></rect>
+<line x1="36.4" y1="122" x2="36.4" y2="126" class="a"/>
+<text x="36.4" y="139" class="m">Oct 19</text>
+<line x1="262.9" y1="122" x2="262.9" y2="126" class="a"/>
+<text x="262.9" y="139" class="m">Oct 26</text>
+<line x1="489.5" y1="122" x2="489.5" y2="126" class="a"/>
+<text x="489.5" y="139" class="m">Nov 2</text>
+<text x="4" y="176" class="t">API requests a day</text>
+<text x="716" y="176" class="s" text-anchor="end"><tspan class="v">1,900</tspan> in the last 7 days · <tspan class="v">1,900</tspan> in all</text>
+<line x1="4" y1="254.7" x2="716" y2="254.7" class="g"/>
+<text x="722" y="258.7" class="m">500</text>
+<line x1="4" y1="227.3" x2="716" y2="227.3" class="g"/>
+<text x="722" y="231.3" class="m">1,000</text>
+<line x1="4" y1="200.0" x2="716" y2="200.0" class="g"/>
+<text x="722" y="204.0" class="m">1,500</text>
+<line x1="4" y1="282.5" x2="716" y2="282.5" class="a"/>
+<text x="722" y="286" class="m">0</text>
+<rect x="559.4" y="280.5" width="22.0" height="1.5" rx="2.0" class="p"><title>Nov 4: 10 requests</title></rect>
+<rect x="591.7" y="274.9" width="22.0" height="7.1" rx="2.0" class="p"><title>Nov 5: 130 requests</title></rect>
+<rect x="624.1" y="253.0" width="22.0" height="29.0" rx="2.0" class="p"><title>Nov 6: 530 requests</title></rect>
+<rect x="656.5" y="276.0" width="22.0" height="6.0" rx="2.0" class="p"><title>Nov 7: 110 requests</title></rect>
+<rect x="688.8" y="220.8" width="22.0" height="61.2" rx="2.0" class="p"><title>Nov 8: 1,120 requests</title></rect>
+<text x="699.8" y="215.8" class="v" text-anchor="middle">1,120</text>
+<text x="279.1" y="274" class="m" text-anchor="middle">not live yet</text>
+<line x1="36.4" y1="282" x2="36.4" y2="286" class="a"/>
+<text x="36.4" y="299" class="m">Oct 19</text>
+<line x1="262.9" y1="282" x2="262.9" y2="286" class="a"/>
+<text x="262.9" y="299" class="m">Oct 26</text>
+<line x1="489.5" y1="282" x2="489.5" y2="286" class="a"/>
+<text x="489.5" y="299" class="m">Nov 2</text>
 </svg>
