@@ -4,6 +4,15 @@ The methods of [mihrab-methods](../../README.md) as a Swift package
 with no dependencies beyond Foundation. See [the ports' notes](../README.md)
 for what a port does and how it is held to the reference.
 
+Add it to a project from this repository (Xcode: File → Add Package
+Dependencies, or in `Package.swift`):
+
+```swift
+.package(url: "https://github.com/MihrabHQ/mihrab-methods", from: "1.3.2")
+```
+
+A version has the same number as the npm package of that release.
+
 ```swift
 import Foundation
 import MihrabMethods

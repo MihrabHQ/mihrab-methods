@@ -5,9 +5,9 @@ name: ports
 on:
   push:
     branches: [main, 'ports/**']
-    paths: ['ports/**', 'test/vectors.json', 'data/corrections/**', '.github/workflows/ports.yml']
+    paths: ['ports/**', 'Package.swift', 'test/vectors.json', 'data/corrections/**', '.github/workflows/ports.yml']
   pull_request:
-    paths: ['ports/**', 'test/vectors.json', 'data/corrections/**', '.github/workflows/ports.yml']
+    paths: ['ports/**', 'Package.swift', 'test/vectors.json', 'data/corrections/**', '.github/workflows/ports.yml']
   workflow_dispatch:
 
 permissions:
@@ -30,6 +30,8 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - run: swift run -c release --package-path ports/swift mihrab-vectors .
+      # the package as a project installs it, from the repository's root
+      - run: swift build
 
   kotlin:
     runs-on: ubuntu-latest

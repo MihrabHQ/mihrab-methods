@@ -14,3 +14,4 @@ ports/dart/pubspec.lock
 ports/python/mihrab_methods/data/
 ports/python/dist/
 ports/python/*.egg-info/
+.build/
