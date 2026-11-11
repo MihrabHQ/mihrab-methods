@@ -9,6 +9,10 @@ revision bump is at least a minor version.
 
 ## Unreleased
 
+No method changed; no revision raised.
+
+## 1.11.0 — 2026-11-11
+
 - **Jordan, revision 1: a twelfth method.** The Ministry of Awqaf, Islamic
   Affairs and Holy Places' times for its seventeen zones, Jerusalem among
   them: `mihrab-methods/jordan`, authority `jordan`. Each zone at its own
