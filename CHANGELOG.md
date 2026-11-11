@@ -9,6 +9,10 @@ revision bump is at least a minor version.
 
 ## Unreleased
 
+No method changed; no revision raised.
+
+## 1.10.0 — 2026-11-11
+
 - **Kuwait, revision 1: an eleventh method.** The Ministry of Awqaf and
   Islamic Affairs' table for Kuwait City and 45 areas:
   `mihrab-methods/kuwait`, authority `kuwait`. One table, the same every
