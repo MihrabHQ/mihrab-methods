@@ -9,6 +9,10 @@ revision bump is at least a minor version.
 
 ## Unreleased
 
+No method changed; no revision raised.
+
+## 1.3.0 — 2026-11-11
+
 - **Türkiye Takvimi, revision 1: a sixth method.** The calendar's own
   method (namazvakti.com) for Türkiye's 81 province centres, each at the
   point and with the temkin its published year shows: `mihrab-methods/turkiyetakvimi`,
