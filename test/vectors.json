@@ -3,7 +3,7 @@
  "revisions": {
   "sweden": 1,
   "diyanet": 2,
-  "morocco": 2,
+  "morocco": 3,
   "algeria": 1,
   "indonesia": 2,
   "turkiyetakvimi": 1,
@@ -1125,10 +1125,10 @@
    "place": {
     "id": "morocco:1",
     "name": "الرباط",
-    "lat": 34.0138,
-    "lon": -6.8488,
+    "lat": 34.0151,
+    "lon": -6.8508,
     "tz": "Etc/GMT",
-    "dipDeg": 0.395,
+    "dipDeg": 0.396,
     "dipMaghribDeg": 0.421,
     "clock": [
      [
@@ -1168,10 +1168,10 @@
    "place": {
     "id": "morocco:1",
     "name": "الرباط",
-    "lat": 34.0138,
-    "lon": -6.8488,
+    "lat": 34.0151,
+    "lon": -6.8508,
     "tz": "Etc/GMT",
-    "dipDeg": 0.395,
+    "dipDeg": 0.396,
     "dipMaghribDeg": 0.421,
     "clock": [
      [
@@ -1211,10 +1211,10 @@
    "place": {
     "id": "morocco:1",
     "name": "الرباط",
-    "lat": 34.0138,
-    "lon": -6.8488,
+    "lat": 34.0151,
+    "lon": -6.8508,
     "tz": "Etc/GMT",
-    "dipDeg": 0.395,
+    "dipDeg": 0.396,
     "dipMaghribDeg": 0.421,
     "clock": [
      [
@@ -1254,10 +1254,10 @@
    "place": {
     "id": "morocco:1",
     "name": "الرباط",
-    "lat": 34.0138,
-    "lon": -6.8488,
+    "lat": 34.0151,
+    "lon": -6.8508,
     "tz": "Etc/GMT",
-    "dipDeg": 0.395,
+    "dipDeg": 0.396,
     "dipMaghribDeg": 0.421,
     "clock": [
      [
@@ -1297,11 +1297,11 @@
    "place": {
     "id": "morocco:60",
     "name": "بن سليمان",
-    "lat": 33.611,
+    "lat": 33.612,
     "lon": -7.133,
     "tz": "Etc/GMT",
     "dipDeg": 0.599,
-    "dipMaghribDeg": 0.61,
+    "dipMaghribDeg": 0.609,
     "clock": [
      [
       "2020-01-01",
@@ -1340,11 +1340,11 @@
    "place": {
     "id": "morocco:60",
     "name": "بن سليمان",
-    "lat": 33.611,
+    "lat": 33.612,
     "lon": -7.133,
     "tz": "Etc/GMT",
     "dipDeg": 0.599,
-    "dipMaghribDeg": 0.61,
+    "dipMaghribDeg": 0.609,
     "clock": [
      [
       "2020-01-01",
@@ -1383,11 +1383,11 @@
    "place": {
     "id": "morocco:60",
     "name": "بن سليمان",
-    "lat": 33.611,
+    "lat": 33.612,
     "lon": -7.133,
     "tz": "Etc/GMT",
     "dipDeg": 0.599,
-    "dipMaghribDeg": 0.61,
+    "dipMaghribDeg": 0.609,
     "clock": [
      [
       "2020-01-01",
@@ -1426,11 +1426,11 @@
    "place": {
     "id": "morocco:60",
     "name": "بن سليمان",
-    "lat": 33.611,
+    "lat": 33.612,
     "lon": -7.133,
     "tz": "Etc/GMT",
     "dipDeg": 0.599,
-    "dipMaghribDeg": 0.61,
+    "dipMaghribDeg": 0.609,
     "clock": [
      [
       "2020-01-01",
@@ -1469,10 +1469,10 @@
    "place": {
     "id": "morocco:150",
     "name": "أسا",
-    "lat": 28.571,
-    "lon": -9.452,
+    "lat": 28.564,
+    "lon": -9.451,
     "tz": "Etc/GMT",
-    "dipDeg": 0.602,
+    "dipDeg": 0.601,
     "dipMaghribDeg": 0.609,
     "clock": [
      [
@@ -1512,10 +1512,10 @@
    "place": {
     "id": "morocco:150",
     "name": "أسا",
-    "lat": 28.571,
-    "lon": -9.452,
+    "lat": 28.564,
+    "lon": -9.451,
     "tz": "Etc/GMT",
-    "dipDeg": 0.602,
+    "dipDeg": 0.601,
     "dipMaghribDeg": 0.609,
     "clock": [
      [
@@ -1555,10 +1555,10 @@
    "place": {
     "id": "morocco:150",
     "name": "أسا",
-    "lat": 28.571,
-    "lon": -9.452,
+    "lat": 28.564,
+    "lon": -9.451,
     "tz": "Etc/GMT",
-    "dipDeg": 0.602,
+    "dipDeg": 0.601,
     "dipMaghribDeg": 0.609,
     "clock": [
      [
@@ -1598,10 +1598,10 @@
    "place": {
     "id": "morocco:150",
     "name": "أسا",
-    "lat": 28.571,
-    "lon": -9.452,
+    "lat": 28.564,
+    "lon": -9.451,
     "tz": "Etc/GMT",
-    "dipDeg": 0.602,
+    "dipDeg": 0.601,
     "dipMaghribDeg": 0.609,
     "clock": [
      [

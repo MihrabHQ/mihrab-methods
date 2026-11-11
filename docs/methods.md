@@ -112,9 +112,10 @@ statement of it that gives the tables.
 `src/methods/morocco.ts`. The Ministry of Habous and Islamic Affairs, read
 off its tables for 164 cities: 96 days of 2026 for all of them, and — through
 the Internet Archive's copies of its pages — 2014 to 2025 for Rabat, Figuig,
-Tangier, Casablanca, Laayoune and a dozen more, every month of the year. The
-ministry's program changed between 2019 and 2023 (until then Asr was the
-noon shadow on the true sun); this is the program it has used since.
+Tangier, Casablanca, Laayoune and a dozen more, every month of the year,
+and the summer of 2022 for nearly every city. The ministry's program
+changed in April or May 2022 (until then Asr was the noon shadow on the
+true sun); this is the program it has used since.
 
 - The sun is **Meeus's apparent sun** with the full nutation (the mean
   elements above; apparent longitude `L0 + C − 0.00569 + Δψ`, with

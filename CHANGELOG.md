@@ -9,7 +9,16 @@ revision bump is at least a minor version.
 
 ## Unreleased
 
-No method changed; no revision raised.
+- **Morocco, revision 3.** The points of 112 of the 164 cities move a
+  little — at most 0.014° of latitude and 0.01° of horizon — refitted on
+  the ministry's summer pages of 2022 together with the 2026 tables;
+  revision 2's were fitted on autumn alone, the season that shows a city's
+  latitude least. A time moves by a minute on the days the two points round
+  differently, mostly in summer; the calculation is unchanged. On days not
+  used in the fit the refit is off a fifth less often (`docs/status.md`).
+  The correction list is rewritten for revision 3, and the method with its
+  list matches the published timetable of every listed city over the
+  certified span, as before. Ports: `REVISIONS` say `morocco: 3`.
 
 ## 1.8.0 — 2026-11-11
 

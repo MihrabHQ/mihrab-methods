@@ -31,7 +31,7 @@ each method.
 | **Sweden** | Islamiska Förbundet’s tables | 107 | 63,114 | **0** | 99.968 % | 270 | 11 Oct 2026 → 14 Dec 2027 |
 |  | Diyanet’s own tables | 159 | 1,393,794 | **0** | 99.981 % |  | 1 Jan 2024 → 31 Dec 2027 |
 | **Diyanet** | its tables worldwide | 8,318 | 71,630,078 | **0** | 99.987 % | 9,101 | 1 Jan 2024 → 31 Dec 2027 |
-| **Morocco** | Habous | 164 | 94,350 | **0** | 99.879 % | 114 | 27 Aug 2026 → 30 Nov 2026 |
+| **Morocco** | Habous | 164 | 94,350 | **0** | 99.885 % | 108 | 27 Aug 2026 → 30 Nov 2026 |
 | **Algeria** | Ministry of Religious Affairs | 68 | 101,184 | **0** | 99.365 % | 642 | 1 Oct 2026 → 5 Jun 2027 |
 | **Indonesia** | Kemenag | 517 | 362,934 | **0** | 99.935 % | 234 | 7 Oct 2026 → 31 Jan 2027 |
 | **Türkiye Takvimi** | its cities’ years | 821 | 1,812,768 | **0** | 99.952 % | 860 | 31 Dec 2025 → 2 Jan 2027 |
@@ -113,10 +113,23 @@ country.
 ## Morocco
 
 Certified over <!--fig:morocco.span-->27 Aug 2026 → 30 Nov 2026<!--/fig--> (<!--fig:morocco.check0.places-->164<!--/fig-->
-cities): the method gives <!--fig:morocco.alonePct-->99.879<!--/fig--> % alone, and a list of
-<!--fig:morocco.corrections-->114<!--/fig--> corrections the rest. Certification covers only the dates
+cities): the method gives <!--fig:morocco.alonePct-->99.885<!--/fig--> % alone, and a list of
+<!--fig:morocco.corrections-->108<!--/fig--> corrections the rest. Certification covers only the dates
 in the table: each newly published month is checked against the method, and
 its corrections are added in a new list.
+
+> **Research note, 2026-11-12** (not generated). Revision 2's points were
+> fitted on the autumn of 2026, and autumn is the season that says least
+> about a city's latitude. The ministry's pages of July and August 2022, in
+> the Internet Archive for nearly every city, are the same program in
+> summer. On those days and the rest since May 2022 revision 2 gave the
+> printed minute for 98.95 % (185 of 17,580 times off). Refitting each
+> city's point on the 2026 tables and half of those days took the misses on
+> the other half from 185 to 147, so revision 3 is the refit on all of
+> them: 112 points moved, none by more than 0.014° of latitude or 0.01° of
+> horizon, and on every day held the misses fell by half. Only Rabat has
+> every season of this program; winter and spring are still seen through
+> one city.
 
 ## Algeria
 
