@@ -9,6 +9,10 @@ revision bump is at least a minor version.
 
 ## Unreleased
 
+No method changed; no revision raised.
+
+## 1.12.0 — 2026-11-11
+
 - **Tatarstan, revision 1: a thirteenth method.** The Spiritual
   Administration of Muslims of the Republic of Tatarstan's timetable for
   forty-four places: `mihrab-methods/tatarstan`, authority `tatarstan`.
