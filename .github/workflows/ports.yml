@@ -13,6 +13,11 @@ on:
 permissions:
   contents: read
 
+# bash with pipefail: a check piped through tail still fails the step
+defaults:
+  run:
+    shell: bash
+
 jobs:
   python:
     runs-on: ubuntu-latest
