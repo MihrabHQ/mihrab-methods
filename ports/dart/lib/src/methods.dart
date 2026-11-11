@@ -1,5 +1,5 @@
 // The methods: Sweden and Diyanet (the Congress method), Morocco, Algeria,
-// Indonesia, Türkiye Takvimi and Kazakhstan. A port of src/methods/*.ts — the TypeScript is the reference,
+// Indonesia, Türkiye Takvimi, Kazakhstan and Egypt. A port of src/methods/*.ts — the TypeScript is the reference,
 // docs/methods.md says what each does, and the vector check holds this to it.
 //
 // Every function takes a civil date with the month 0-based, as the TypeScript
@@ -339,6 +339,45 @@ DayMinutes kazakhstanRawMinutes(double lat, double lon, int year, int month0, in
 /// Rounded to the nearest minute; Asr is the Hanafi one the table carries. Null where a time does not form.
 DayMinutes? kazakhstanMinutes(double lat, double lon, int year, int month0, int day) {
   final r = kazakhstanRawMinutes(lat, lon, year, month0, day);
+  return r.allFinite ? r.mapped((v) => (v + 0.5).floorToDouble()) : null;
+}
+
+// ---------------------------------------------------------------- Egypt
+
+/// Before rounding: Meeus's sun at each time's own moment; Asr's noon shadow from the declination of local noon.
+DayMinutes egyptRawMinutes(double lat, double lon, int year, int month0, int day, {double asrShadow = 1.0}) {
+  final d0 = _d0Of(year, month0, day);
+  SunPosition at(double t) => meeusApparentSun(d0 + t / 1440);
+  var noon = 720 - 4 * lon;
+  for (var i = 0; i < 3; i++) {
+    noon = 720 - 4 * lon - at(noon).eot;
+  }
+  final sp = sin(lat * rad), cp = cos(lat * rad);
+  final asrAltitude = atan(1 / (asrShadow + tan((lat * rad - at(noon).dec).abs()))) / rad;
+  double event(double altitude, double sign, double start) {
+    var t = noon + start;
+    for (var i = 0; i < 4; i++) {
+      final s = at(t);
+      final c = (sin(altitude * rad) - sp * sin(s.dec)) / (cp * cos(s.dec));
+      if (!(c.abs() <= 1)) return double.nan;
+      t = 720 - 4 * lon - s.eot + (sign * 4 * acos(c)) / rad;
+    }
+    return t;
+  }
+
+  return DayMinutes(
+    event(-19.5, -1.0, -420.0),
+    event(-0.845, -1.0, -360.0),
+    noon,
+    event(asrAltitude, 1.0, 200.0),
+    event(-0.845, 1.0, 360.0),
+    event(-17.5, 1.0, 420.0),
+  );
+}
+
+/// Rounded to the nearest minute. Null where a time does not form.
+DayMinutes? egyptMinutes(double lat, double lon, int year, int month0, int day, {double asrShadow = 1.0}) {
+  final r = egyptRawMinutes(lat, lon, year, month0, day, asrShadow: asrShadow);
   return r.allFinite ? r.mapped((v) => (v + 0.5).floorToDouble()) : null;
 }
 

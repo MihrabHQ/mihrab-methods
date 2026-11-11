@@ -4,4 +4,4 @@ library mihrab_methods;
 
 export 'src/api.dart';
 export 'src/methods.dart'
-    show CongressYear, DayMinutes, algeriaMinutes, congressIshaDeg, congressMinutes, dayKey, diyanetIshaDeg, kemenagMinutes, moroccoMinutes, takvimMinutes, takvimTemkin, kazakhstanMinutes;
+    show CongressYear, DayMinutes, algeriaMinutes, egyptMinutes, congressIshaDeg, congressMinutes, dayKey, diyanetIshaDeg, kemenagMinutes, moroccoMinutes, takvimMinutes, takvimTemkin, kazakhstanMinutes;

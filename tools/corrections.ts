@@ -30,7 +30,7 @@ type SwedenCorrections = CorrectionsFile;
 
 const WORLD = process.argv.includes('diyanet');
 /** A national authority's own tables (Morocco, Algeria, Indonesia), at its places' points. */
-const NATIONAL = (['morocco', 'algeria', 'indonesia', 'turkiyetakvimi', 'kazakhstan'] as const).find(a => process.argv.includes(a));
+const NATIONAL = (['morocco', 'algeria', 'indonesia', 'turkiyetakvimi', 'kazakhstan', 'egypt'] as const).find(a => process.argv.includes(a));
 const MOROCCO = NATIONAL !== undefined;
 const FILE =
   NATIONAL === 'morocco' ? MOROCCO_CORRECTIONS_FILE
@@ -38,6 +38,7 @@ const FILE =
   : NATIONAL === 'indonesia' ? INDONESIA_CORRECTIONS_FILE
   : NATIONAL === 'turkiyetakvimi' ? path.join(DIR, 'turkiyetakvimi.json')
   : NATIONAL === 'kazakhstan' ? path.join(DIR, 'kazakhstan.json')
+  : NATIONAL === 'egypt' ? path.join(DIR, 'egypt.json')
   : WORLD ? DIYANET_CORRECTIONS_FILE : CORRECTIONS_FILE;
 const TZ = 'Europe/Stockholm';
 const pts = JSON.parse(fs.readFileSync(path.join(__dirname, '..', 'data/places/diyanet-sweden-points.json'), 'utf8')) as Record<string, { name: string; lat: number; lon: number }>;

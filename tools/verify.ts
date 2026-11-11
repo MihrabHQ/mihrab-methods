@@ -229,6 +229,7 @@ export function checkAuthority(a: CheckRun): Result | null {
     indonesia: 'Indonesia — Kemenag',
     turkiyetakvimi: 'Türkiye Takvimi — its cities’ years',
     kazakhstan: 'Kazakhstan — the Spiritual Administration’s times',
+    egypt: 'Egypt — the Survey Authority’s times',
   };
   return check(names[a], placesOf(a), path.join(TABLES, a, 'v1/cities'));
 }

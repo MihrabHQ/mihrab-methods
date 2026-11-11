@@ -1,5 +1,5 @@
 // The methods: Sweden and Diyanet (the Congress method), Morocco, Algeria,
-// Indonesia, Türkiye Takvimi and Kazakhstan. A port of src/methods/*.ts — the TypeScript is the reference,
+// Indonesia, Türkiye Takvimi, Kazakhstan and Egypt. A port of src/methods/*.ts — the TypeScript is the reference,
 // docs/methods.md says what each does, and the vector check holds this to it.
 //
 // Every function takes a civil date with the month 0-based, as the TypeScript
@@ -349,6 +349,42 @@ func kazakhstanRawMinutes(_ lat: Double, _ lon: Double, _ year: Int, _ month0: I
 /// Rounded to the nearest minute; Asr is the Hanafi one the table carries. Nil where a time does not form.
 func kazakhstanMinutes(_ lat: Double, _ lon: Double, _ year: Int, _ month0: Int, _ day: Int) -> DayMinutes? {
     let r = kazakhstanRawMinutes(lat, lon, year, month0, day).times
+    if r.all.contains(where: { !$0.isFinite }) { return nil }
+    return r.mapped { floor($0 + 0.5) }
+}
+
+// ---------------------------------------------------------------- Egypt
+
+/// Before rounding: Meeus's sun at each time's own moment; Asr's noon shadow from the declination of local noon.
+func egyptRawMinutes(_ lat: Double, _ lon: Double, _ year: Int, _ month0: Int, _ day: Int, asrShadow: Double = 1) -> DayMinutes {
+    let d0 = d0Of(year, month0, day)
+    func at(_ t: Double) -> SunPosition { return meeusApparentSun(d0 + t / 1440) }
+    var noon = 720 - 4 * lon
+    for _ in 0..<3 { noon = 720 - 4 * lon - at(noon).eot }
+    let sp = sin(lat * RAD), cp = cos(lat * RAD)
+    let asrAltitude = atan(1 / (asrShadow + tan(abs(lat * RAD - at(noon).dec)))) / RAD
+    func event(_ altitude: Double, _ sign: Double, _ start: Double) -> Double {
+        var t = noon + start
+        for _ in 0..<4 {
+            let s = at(t)
+            let c = (sin(altitude * RAD) - sp * sin(s.dec)) / (cp * cos(s.dec))
+            if !(abs(c) <= 1) { return Double.nan }
+            t = 720 - 4 * lon - s.eot + (sign * 4 * acos(c)) / RAD
+        }
+        return t
+    }
+    return DayMinutes(
+        fajr: event(-19.5, -1, -420),
+        sunrise: event(-0.845, -1, -360),
+        dhuhr: noon,
+        asr: event(asrAltitude, 1, 200),
+        maghrib: event(-0.845, 1, 360),
+        isha: event(-17.5, 1, 420))
+}
+
+/// Rounded to the nearest minute. Nil where a time does not form.
+func egyptMinutes(_ lat: Double, _ lon: Double, _ year: Int, _ month0: Int, _ day: Int, asrShadow: Double = 1) -> DayMinutes? {
+    let r = egyptRawMinutes(lat, lon, year, month0, day, asrShadow: asrShadow)
     if r.all.contains(where: { !$0.isFinite }) { return nil }
     return r.mapped { floor($0 + 0.5) }
 }

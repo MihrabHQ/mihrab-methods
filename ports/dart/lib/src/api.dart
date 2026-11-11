@@ -9,12 +9,12 @@ import 'dart:convert';
 
 import 'methods.dart';
 
-enum Authority { sweden, diyanet, morocco, algeria, indonesia, turkiyetakvimi, kazakhstan }
+enum Authority { sweden, diyanet, morocco, algeria, indonesia, turkiyetakvimi, kazakhstan, egypt }
 
 enum Prayer { fajr, sunrise, dhuhr, asr, maghrib, isha }
 
 /// The method revisions this port reproduces. A correction list belongs to one revision.
-const Map<String, int> revisions = {'sweden': 1, 'diyanet': 2, 'morocco': 2, 'algeria': 1, 'indonesia': 2, 'turkiyetakvimi': 1, 'kazakhstan': 1};
+const Map<String, int> revisions = {'sweden': 1, 'diyanet': 2, 'morocco': 2, 'algeria': 1, 'indonesia': 2, 'turkiyetakvimi': 1, 'kazakhstan': 1, 'egypt': 1};
 
 /// One change of a table's own clock: from a date on, minutes east of UTC.
 class ClockChange {
@@ -179,6 +179,9 @@ Day? timesFor(Place place, String date, {int? zoneOffsetMinutes, CorrectionList?
       break;
     case Authority.kazakhstan:
       t = kazakhstanMinutes(place.lat, place.lon, year, month0, day);
+      break;
+    case Authority.egypt:
+      t = egyptMinutes(place.lat, place.lon, year, month0, day, asrShadow: asrShadow);
       break;
     case Authority.turkiyetakvimi:
       t = takvimMinutes(place.lat, place.lon, year, month0, day, temkin: place.temkin, asrShadow: asrShadow);

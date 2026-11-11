@@ -14,4 +14,5 @@ export const METHOD_REVISION = {
   indonesia: 2,
   turkiyetakvimi: 1,
   kazakhstan: 1,
+  egypt: 1,
 } as const;

@@ -1,5 +1,5 @@
 """The methods: Sweden and Diyanet (the Congress method), Morocco, Algeria,
-Indonesia, Türkiye Takvimi and Kazakhstan. A port of src/methods/*.ts — the TypeScript is the reference,
+Indonesia, Türkiye Takvimi, Kazakhstan and Egypt. A port of src/methods/*.ts — the TypeScript is the reference,
 docs/methods.md says what each does, and test_vectors.py holds this to it.
 
 Every function takes a civil date with the month 0-based, as the TypeScript
@@ -376,6 +376,54 @@ def kazakhstan_minutes(lat, lon, year, month0, day):
     """Rounded to the nearest minute; Asr is the Hanafi one the table carries. None where a time does not form."""
     r = kazakhstan_raw_minutes(lat, lon, year, month0, day)
     del r['sunset']
+    if not all(math.isfinite(v) for v in r.values()):
+        return None
+    return {k: math.floor(v + 0.5) for k, v in r.items()}
+
+
+# ---------------------------------------------------------------- Egypt
+
+EGYPT_FAJR = 19.5
+EGYPT_ISHA = 17.5
+EGYPT_HORIZON = 0.845
+
+
+def egypt_raw_minutes(lat, lon, year, month0, day, asr_shadow=1):
+    """Before rounding: Meeus's sun at each time's own moment; Asr's noon shadow from the declination of local noon."""
+    d0 = _d0(year, month0, day)
+
+    def at(t):
+        return meeus_apparent_sun(d0 + t / 1440)
+
+    noon = 720 - 4 * lon
+    for _ in range(3):
+        noon = 720 - 4 * lon - at(noon)[1]
+    sp, cp = math.sin(lat * RAD), math.cos(lat * RAD)
+    asr_altitude = math.atan(1 / (asr_shadow + math.tan(abs(lat * RAD - at(noon)[0])))) / RAD
+
+    def event(altitude, sign, start):
+        t = noon + start
+        for _ in range(4):
+            dec, eot = at(t)
+            c = (math.sin(altitude * RAD) - sp * math.sin(dec)) / (cp * math.cos(dec))
+            if not abs(c) <= 1:
+                return NAN
+            t = 720 - 4 * lon - eot + (sign * 4 * math.acos(c)) / RAD
+        return t
+
+    return {
+        'fajr': event(-EGYPT_FAJR, -1, -420),
+        'sunrise': event(-EGYPT_HORIZON, -1, -360),
+        'dhuhr': noon,
+        'asr': event(asr_altitude, 1, 200),
+        'maghrib': event(-EGYPT_HORIZON, 1, 360),
+        'isha': event(-EGYPT_ISHA, 1, 420),
+    }
+
+
+def egypt_minutes(lat, lon, year, month0, day, asr_shadow=1):
+    """Rounded to the nearest minute. None where a time does not form."""
+    r = egypt_raw_minutes(lat, lon, year, month0, day, asr_shadow)
     if not all(math.isfinite(v) for v in r.values()):
         return None
     return {k: math.floor(v + 0.5) for k, v in r.items()}

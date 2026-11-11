@@ -269,6 +269,25 @@ Kazakhstan's times, read off its cities from 40.8° to 54.9° N.
 - Every time rounded to the **nearest** minute.
 - The whole country is on UTC+5, and every place is printed on it.
 
+## Egypt
+
+`src/methods/egypt.ts`. The Egyptian General Authority of Survey's times,
+read off its places from 22.2° to 31.5° N.
+
+- **Meeus's apparent sun** (Morocco's), taken at each time's own moment:
+  the declination and the equation of time both, iterated four times from
+  the transit.
+- **Dhuhr** at the sun's transit.
+- **Fajr**: the sun 19.5° below the horizon. **Isha**: 17.5°.
+- **Sunrise** and **Maghrib**: the sun's centre 0.845° below the horizon.
+- **Asr**: one shadow length beyond the noon shadow — the altitude
+  `arccot(s + tan|φ − δ|)` with `δ` the declination of local noon, and the
+  hour angle from the sun at Asr itself.
+- No margin on any time.
+- Every time rounded to the **nearest** minute.
+- The whole country is on one clock, summer time included.
+- Each place is at the point its published year shows.
+
 ## Checking a port
 
 1. Take `test/vectors.json`. For each case, compute the six times at the

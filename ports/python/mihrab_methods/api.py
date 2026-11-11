@@ -17,7 +17,7 @@ from . import methods
 
 PRAYERS = ('fajr', 'sunrise', 'dhuhr', 'asr', 'maghrib', 'isha')
 #: The method revisions this port reproduces. A correction list belongs to one revision.
-REVISIONS = {'sweden': 1, 'diyanet': 2, 'morocco': 2, 'algeria': 1, 'indonesia': 2, 'turkiyetakvimi': 1, 'kazakhstan': 1}
+REVISIONS = {'sweden': 1, 'diyanet': 2, 'morocco': 2, 'algeria': 1, 'indonesia': 2, 'turkiyetakvimi': 1, 'kazakhstan': 1, 'egypt': 1}
 
 _UTC = datetime.timezone.utc
 
@@ -108,6 +108,8 @@ def minutes_for(place, date, corrections=None, asr_shadow=1):
                                     bool(place.get('twilightDip')), asr_shadow, place.get('afternoon'))
     elif a == 'kazakhstan':
         t = methods.kazakhstan_minutes(place['lat'], place['lon'], year, month0, day)
+    elif a == 'egypt':
+        t = methods.egypt_minutes(place['lat'], place['lon'], year, month0, day, asr_shadow)
     elif a == 'turkiyetakvimi':
         t = methods.takvim_minutes(place['lat'], place['lon'], year, month0, day, place.get('temkin'), asr_shadow)
     else:

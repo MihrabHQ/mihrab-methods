@@ -36,8 +36,9 @@ each method.
 | **Indonesia** | Kemenag | 517 | 362,934 | **0** | 99.935 % | 234 | 7 Oct 2026 → 31 Jan 2027 |
 | **Türkiye Takvimi** | its cities’ years | 821 | 1,812,768 | **0** | 99.952 % | 860 | 31 Dec 2025 → 2 Jan 2027 |
 | **Kazakhstan** | the Spiritual Administration’s times | 84 | 551,880 | **0** | 100.000 % | 0 | 1 Jan 2025 → 31 Dec 2027 |
+| **Egypt** | the Survey Authority’s times | 77 | 168,630 | **0** | 99.373 % | 1,056 | 1 Jan 2026 → 31 Dec 2026 |
 
-7 of 7 methods certified; 0 of 76,010,102 times off the printed minute. Last checked 9 November 2026. Generated from [`certification.json`](../certification.json) by `scripts/readme.mjs`.
+8 of 8 methods certified; 0 of 76,178,732 times off the printed minute. Last checked 9 November 2026. Generated from [`certification.json`](../certification.json) by `scripts/readme.mjs`.
 <!-- certification-table:end -->
 
 ## Sweden
@@ -217,6 +218,26 @@ table to hold a one-shadow Asr to.
 > minutes to five between 47.97° and 48.00° N in the places listed (three
 > at 47.967°, five at 48.001°); 48° is taken as the step. Five more places the Administration
 > lists have no year to check against and are left out.
+
+## Egypt
+
+Certified over <!--fig:egypt.span-->1 Jan 2026 → 31 Dec 2026<!--/fig--> (<!--fig:egypt.check0.places-->77<!--/fig-->
+cities and towns): the method gives <!--fig:egypt.alonePct-->99.373<!--/fig--> % alone, and a list of
+<!--fig:egypt.corrections-->1,056<!--/fig--> corrections the rest. The Authority publishes the
+current year, so the span goes on a year at a time.
+
+> **Research note, 2026-11-11** (not generated). The times off by the
+> method alone are spread evenly over the six prayers, Dhuhr included
+> (about 0.6 % each), and each is a single minute. No sun tried in its
+> place — NOAA's series, the precise ephemeris with or without ΔT, the
+> equation of time at a fixed hour — and no rounding by the second first
+> removes them, so they are taken as the Authority's own program's and
+> left to the list. Two things moved the fit most: Asr's noon shadow from
+> the declination of local noon (about twenty times off a year per place
+> down to two), and the equation of time at each time's own moment rather
+> than noon's. The horizon was read as 0.845°, between 0.84° and 0.85°.
+> Each place's point is fitted to its year; five more names the Authority
+> lists carry no table and are left out.
 
 ## Not here, and why
 

@@ -7,7 +7,8 @@
   "algeria": 1,
   "indonesia": 2,
   "turkiyetakvimi": 1,
-  "kazakhstan": 1
+  "kazakhstan": 1,
+  "egypt": 1
  },
  "cases": [
   {
@@ -3156,6 +3157,378 @@
     "asr": "2027-12-31T09:24:00.000Z",
     "maghrib": "2027-12-31T11:12:00.000Z",
     "isha": "2027-12-31T13:02:00.000Z"
+   }
+  },
+  {
+   "place": {
+    "id": "egypt:1",
+    "name": "القاهرة",
+    "lat": 30.075,
+    "lon": 31.2764,
+    "tz": "Africa/Cairo"
+   },
+   "date": "2026-01-01",
+   "clock": {
+    "zone": "Africa/Cairo",
+    "offsetMinutes": 120,
+    "label": "Africa/Cairo"
+   },
+   "printed": {
+    "fajr": "05:18",
+    "sunrise": "06:51",
+    "dhuhr": "11:58",
+    "asr": "14:47",
+    "maghrib": "17:06",
+    "isha": "18:29"
+   },
+   "instants": {
+    "fajr": "2026-01-01T03:18:00.000Z",
+    "sunrise": "2026-01-01T04:51:00.000Z",
+    "dhuhr": "2026-01-01T09:58:00.000Z",
+    "asr": "2026-01-01T12:47:00.000Z",
+    "maghrib": "2026-01-01T15:06:00.000Z",
+    "isha": "2026-01-01T16:29:00.000Z"
+   }
+  },
+  {
+   "place": {
+    "id": "egypt:1",
+    "name": "القاهرة",
+    "lat": 30.075,
+    "lon": 31.2764,
+    "tz": "Africa/Cairo"
+   },
+   "date": "2026-05-02",
+   "clock": {
+    "zone": "Africa/Cairo",
+    "offsetMinutes": 180,
+    "label": "Africa/Cairo"
+   },
+   "printed": {
+    "fajr": "04:36",
+    "sunrise": "06:11",
+    "dhuhr": "12:52",
+    "asr": "16:29",
+    "maghrib": "19:33",
+    "isha": "20:58"
+   },
+   "instants": {
+    "fajr": "2026-05-02T01:36:00.000Z",
+    "sunrise": "2026-05-02T03:11:00.000Z",
+    "dhuhr": "2026-05-02T09:52:00.000Z",
+    "asr": "2026-05-02T13:29:00.000Z",
+    "maghrib": "2026-05-02T16:33:00.000Z",
+    "isha": "2026-05-02T17:58:00.000Z"
+   }
+  },
+  {
+   "place": {
+    "id": "egypt:1",
+    "name": "القاهرة",
+    "lat": 30.075,
+    "lon": 31.2764,
+    "tz": "Africa/Cairo"
+   },
+   "date": "2026-09-01",
+   "clock": {
+    "zone": "Africa/Cairo",
+    "offsetMinutes": 180,
+    "label": "Africa/Cairo"
+   },
+   "printed": {
+    "fajr": "05:02",
+    "sunrise": "06:32",
+    "dhuhr": "12:55",
+    "asr": "16:29",
+    "maghrib": "19:18",
+    "isha": "20:38"
+   },
+   "instants": {
+    "fajr": "2026-09-01T02:02:00.000Z",
+    "sunrise": "2026-09-01T03:32:00.000Z",
+    "dhuhr": "2026-09-01T09:55:00.000Z",
+    "asr": "2026-09-01T13:29:00.000Z",
+    "maghrib": "2026-09-01T16:18:00.000Z",
+    "isha": "2026-09-01T17:38:00.000Z"
+   }
+  },
+  {
+   "place": {
+    "id": "egypt:1",
+    "name": "القاهرة",
+    "lat": 30.075,
+    "lon": 31.2764,
+    "tz": "Africa/Cairo"
+   },
+   "date": "2026-12-31",
+   "clock": {
+    "zone": "Africa/Cairo",
+    "offsetMinutes": 120,
+    "label": "Africa/Cairo"
+   },
+   "printed": {
+    "fajr": "05:18",
+    "sunrise": "06:51",
+    "dhuhr": "11:58",
+    "asr": "14:47",
+    "maghrib": "17:05",
+    "isha": "18:28"
+   },
+   "instants": {
+    "fajr": "2026-12-31T03:18:00.000Z",
+    "sunrise": "2026-12-31T04:51:00.000Z",
+    "dhuhr": "2026-12-31T09:58:00.000Z",
+    "asr": "2026-12-31T12:47:00.000Z",
+    "maghrib": "2026-12-31T15:05:00.000Z",
+    "isha": "2026-12-31T16:28:00.000Z"
+   }
+  },
+  {
+   "place": {
+    "id": "egypt:11",
+    "name": "أسوان",
+    "lat": 23.9316,
+    "lon": 32.9166,
+    "tz": "Africa/Cairo"
+   },
+   "date": "2026-01-01",
+   "clock": {
+    "zone": "Africa/Cairo",
+    "offsetMinutes": 120,
+    "label": "Africa/Cairo"
+   },
+   "printed": {
+    "fajr": "05:04",
+    "sunrise": "06:31",
+    "dhuhr": "11:52",
+    "asr": "14:53",
+    "maghrib": "17:13",
+    "isha": "18:31"
+   },
+   "instants": {
+    "fajr": "2026-01-01T03:04:00.000Z",
+    "sunrise": "2026-01-01T04:31:00.000Z",
+    "dhuhr": "2026-01-01T09:52:00.000Z",
+    "asr": "2026-01-01T12:53:00.000Z",
+    "maghrib": "2026-01-01T15:13:00.000Z",
+    "isha": "2026-01-01T16:31:00.000Z"
+   }
+  },
+  {
+   "place": {
+    "id": "egypt:11",
+    "name": "أسوان",
+    "lat": 23.9316,
+    "lon": 32.9166,
+    "tz": "Africa/Cairo"
+   },
+   "date": "2026-05-02",
+   "clock": {
+    "zone": "Africa/Cairo",
+    "offsetMinutes": 180,
+    "label": "Africa/Cairo"
+   },
+   "printed": {
+    "fajr": "04:45",
+    "sunrise": "06:13",
+    "dhuhr": "12:45",
+    "asr": "16:11",
+    "maghrib": "19:17",
+    "isha": "20:36"
+   },
+   "instants": {
+    "fajr": "2026-05-02T01:45:00.000Z",
+    "sunrise": "2026-05-02T03:13:00.000Z",
+    "dhuhr": "2026-05-02T09:45:00.000Z",
+    "asr": "2026-05-02T13:11:00.000Z",
+    "maghrib": "2026-05-02T16:17:00.000Z",
+    "isha": "2026-05-02T17:36:00.000Z"
+   }
+  },
+  {
+   "place": {
+    "id": "egypt:11",
+    "name": "أسوان",
+    "lat": 23.9316,
+    "lon": 32.9166,
+    "tz": "Africa/Cairo"
+   },
+   "date": "2026-09-01",
+   "clock": {
+    "zone": "Africa/Cairo",
+    "offsetMinutes": 180,
+    "label": "Africa/Cairo"
+   },
+   "printed": {
+    "fajr": "05:06",
+    "sunrise": "06:30",
+    "dhuhr": "12:48",
+    "asr": "16:16",
+    "maghrib": "19:07",
+    "isha": "20:21"
+   },
+   "instants": {
+    "fajr": "2026-09-01T02:06:00.000Z",
+    "sunrise": "2026-09-01T03:30:00.000Z",
+    "dhuhr": "2026-09-01T09:48:00.000Z",
+    "asr": "2026-09-01T13:16:00.000Z",
+    "maghrib": "2026-09-01T16:07:00.000Z",
+    "isha": "2026-09-01T17:21:00.000Z"
+   }
+  },
+  {
+   "place": {
+    "id": "egypt:11",
+    "name": "أسوان",
+    "lat": 23.9316,
+    "lon": 32.9166,
+    "tz": "Africa/Cairo"
+   },
+   "date": "2026-12-31",
+   "clock": {
+    "zone": "Africa/Cairo",
+    "offsetMinutes": 120,
+    "label": "Africa/Cairo"
+   },
+   "printed": {
+    "fajr": "05:03",
+    "sunrise": "06:31",
+    "dhuhr": "11:51",
+    "asr": "14:52",
+    "maghrib": "17:12",
+    "isha": "18:30"
+   },
+   "instants": {
+    "fajr": "2026-12-31T03:03:00.000Z",
+    "sunrise": "2026-12-31T04:31:00.000Z",
+    "dhuhr": "2026-12-31T09:51:00.000Z",
+    "asr": "2026-12-31T12:52:00.000Z",
+    "maghrib": "2026-12-31T15:12:00.000Z",
+    "isha": "2026-12-31T16:30:00.000Z"
+   }
+  },
+  {
+   "place": {
+    "id": "egypt:40",
+    "name": "واحة سيوة",
+    "lat": 29.2066,
+    "lon": 25.5291,
+    "tz": "Africa/Cairo"
+   },
+   "date": "2026-01-01",
+   "clock": {
+    "zone": "Africa/Cairo",
+    "offsetMinutes": 120,
+    "label": "Africa/Cairo"
+   },
+   "printed": {
+    "fajr": "05:40",
+    "sunrise": "07:12",
+    "dhuhr": "12:21",
+    "asr": "15:12",
+    "maghrib": "17:31",
+    "isha": "18:53"
+   },
+   "instants": {
+    "fajr": "2026-01-01T03:40:00.000Z",
+    "sunrise": "2026-01-01T05:12:00.000Z",
+    "dhuhr": "2026-01-01T10:21:00.000Z",
+    "asr": "2026-01-01T13:12:00.000Z",
+    "maghrib": "2026-01-01T15:31:00.000Z",
+    "isha": "2026-01-01T16:53:00.000Z"
+   }
+  },
+  {
+   "place": {
+    "id": "egypt:40",
+    "name": "واحة سيوة",
+    "lat": 29.2066,
+    "lon": 25.5291,
+    "tz": "Africa/Cairo"
+   },
+   "date": "2026-05-02",
+   "clock": {
+    "zone": "Africa/Cairo",
+    "offsetMinutes": 180,
+    "label": "Africa/Cairo"
+   },
+   "printed": {
+    "fajr": "05:01",
+    "sunrise": "06:35",
+    "dhuhr": "13:15",
+    "asr": "16:50",
+    "maghrib": "19:55",
+    "isha": "21:18"
+   },
+   "instants": {
+    "fajr": "2026-05-02T02:01:00.000Z",
+    "sunrise": "2026-05-02T03:35:00.000Z",
+    "dhuhr": "2026-05-02T10:15:00.000Z",
+    "asr": "2026-05-02T13:50:00.000Z",
+    "maghrib": "2026-05-02T16:55:00.000Z",
+    "isha": "2026-05-02T18:18:00.000Z"
+   }
+  },
+  {
+   "place": {
+    "id": "egypt:40",
+    "name": "واحة سيوة",
+    "lat": 29.2066,
+    "lon": 25.5291,
+    "tz": "Africa/Cairo"
+   },
+   "date": "2026-09-01",
+   "clock": {
+    "zone": "Africa/Cairo",
+    "offsetMinutes": 180,
+    "label": "Africa/Cairo"
+   },
+   "printed": {
+    "fajr": "05:26",
+    "sunrise": "06:55",
+    "dhuhr": "13:18",
+    "asr": "16:51",
+    "maghrib": "19:40",
+    "isha": "20:59"
+   },
+   "instants": {
+    "fajr": "2026-09-01T02:26:00.000Z",
+    "sunrise": "2026-09-01T03:55:00.000Z",
+    "dhuhr": "2026-09-01T10:18:00.000Z",
+    "asr": "2026-09-01T13:51:00.000Z",
+    "maghrib": "2026-09-01T16:40:00.000Z",
+    "isha": "2026-09-01T17:59:00.000Z"
+   }
+  },
+  {
+   "place": {
+    "id": "egypt:40",
+    "name": "واحة سيوة",
+    "lat": 29.2066,
+    "lon": 25.5291,
+    "tz": "Africa/Cairo"
+   },
+   "date": "2026-12-31",
+   "clock": {
+    "zone": "Africa/Cairo",
+    "offsetMinutes": 120,
+    "label": "Africa/Cairo"
+   },
+   "printed": {
+    "fajr": "05:40",
+    "sunrise": "07:12",
+    "dhuhr": "12:21",
+    "asr": "15:11",
+    "maghrib": "17:30",
+    "isha": "18:52"
+   },
+   "instants": {
+    "fajr": "2026-12-31T03:40:00.000Z",
+    "sunrise": "2026-12-31T05:12:00.000Z",
+    "dhuhr": "2026-12-31T10:21:00.000Z",
+    "asr": "2026-12-31T13:11:00.000Z",
+    "maghrib": "2026-12-31T15:30:00.000Z",
+    "isha": "2026-12-31T16:52:00.000Z"
    }
   }
  ]

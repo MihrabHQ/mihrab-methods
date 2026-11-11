@@ -173,5 +173,28 @@
       "sha256": "e3d60e566ca082f74ce9904886087b29e65d2871c5bcc02f46349d82c8994d88"
     },
     "revision": 1
+  },
+  "egypt": {
+    "certified": true,
+    "checkedAt": "2026-11-11",
+    "places": 77,
+    "checks": [
+      {
+        "tables": "Egypt — the Survey Authority’s times",
+        "places": 77,
+        "times": 168630,
+        "off": 0,
+        "offWithoutCorrections": 1056,
+        "from": "2026-01-01",
+        "to": "2026-12-31"
+      }
+    ],
+    "corrections": {
+      "from": "2026-01-01",
+      "to": "2026-12-31",
+      "entries": 1056,
+      "sha256": "f786f9d990448233355b46023e174a8073336682b67035decd209c0e19d3e4aa"
+    },
+    "revision": 1
   }
 }

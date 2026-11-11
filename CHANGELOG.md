@@ -9,7 +9,18 @@ revision bump is at least a minor version.
 
 ## Unreleased
 
-No method changed; no revision raised.
+- **Egypt, revision 1: an eighth method.** The Egyptian General Authority
+  of Survey's times for 77 cities and towns, each at the point its
+  published year shows: `mihrab-methods/egypt`, authority `egypt`. Fajr at
+  19.5°, Isha at 17.5°, sunrise and Maghrib with the sun's centre 0.845°
+  below the horizon, Asr from the noon shadow of local noon's declination,
+  no margins, every time rounded to the nearest minute, from Meeus's
+  apparent sun at each time's own moment (`docs/methods.md`). With its
+  correction list the method matches the published timetable of every
+  listed place over the certified span. `certification.json` gains an
+  `egypt` entry and `data/corrections/egypt.json` is new. In every port
+  (`egypt_minutes` / `egyptMinutes`, `REVISIONS` with `egypt: 1`). No other
+  method's output changes.
 
 ## 1.5.0 — 2026-11-11
 
