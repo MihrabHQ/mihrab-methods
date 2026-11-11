@@ -1,0 +1,70 @@
+name: publish-python
+
+# The Python port on PyPI, following npm by itself: after every run of the
+# release workflow, the version npm has (package.json at its tag) is built
+# from that tag and published if PyPI does not have it yet. The package
+# carries the correction lists and the certification of that release.
+#
+# What it needs, set once: a trusted publisher on PyPI for the project
+# mihrab-methods (GitHub: MihrabHQ / mihrab-methods / publish-python.yml,
+# environment pypi). No token.
+
+on:
+  workflow_run:
+    workflows: [release]
+    types: [completed]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  publish:
+    if: github.event_name == 'workflow_dispatch' || github.event.workflow_run.conclusion == 'success'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    environment: pypi
+    permissions:
+      contents: read
+      id-token: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+      - name: The release to publish
+        id: which
+        shell: bash
+        run: |
+          version=$(node -p "require('./package.json').version")
+          if ! git rev-parse -q --verify "refs/tags/v$version" >/dev/null; then
+            echo "No tag v$version: nothing to publish."; exit 0
+          fi
+          git checkout -q "v$version"
+          if [ ! -f ports/python/pyproject.toml ]; then
+            echo "v$version has no Python package: nothing to publish."; exit 0
+          fi
+          code=$(curl -s -o /dev/null -w '%{http_code}' "https://pypi.org/pypi/mihrab-methods/$version/json")
+          if [ "$code" = 200 ]; then
+            echo "PyPI already has $version."; exit 0
+          fi
+          echo "version=$version" >> "$GITHUB_OUTPUT"
+      - name: Check and build
+        if: steps.which.outputs.version != ''
+        shell: bash
+        env:
+          VERSION: ${{ steps.which.outputs.version }}
+        run: |
+          python3 ports/python/test_vectors.py
+          mkdir -p ports/python/mihrab_methods/data/corrections
+          cp data/corrections/*.json ports/python/mihrab_methods/data/corrections/
+          cp certification.json ports/python/mihrab_methods/data/
+          sed -i "s/^version = \"0.0.0\"$/version = \"$VERSION\"/" ports/python/pyproject.toml
+          python3 -m pip install --quiet build
+          python3 -m build ports/python --outdir dist
+          ls -l dist
+      - name: Publish to PyPI
+        if: steps.which.outputs.version != ''
+        uses: pypa/gh-action-pypi-publish@release/v1
+        with:
+          packages-dir: dist

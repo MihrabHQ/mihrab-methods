@@ -145,8 +145,15 @@ def times_for(place, date, corrections=None, asr_shadow=1):
     }
 
 
-def load_corrections(directory):
-    """Every list in a directory laid out as the repository's data/corrections."""
+#: The lists the installed package carries (those of its release); absent in a source checkout.
+BUNDLED_CORRECTIONS = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'data', 'corrections')
+
+
+def load_corrections(directory=None):
+    """Every list in a directory laid out as the repository's data/corrections;
+    with no directory, the lists the installed package carries."""
+    if directory is None:
+        directory = BUNDLED_CORRECTIONS
     out = {}
     for a in REVISIONS:
         p = os.path.join(directory, a + '.json')

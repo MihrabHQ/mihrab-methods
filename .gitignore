@@ -11,3 +11,6 @@ ports/swift/.build/
 ports/kotlin/build/
 ports/dart/.dart_tool/
 ports/dart/pubspec.lock
+ports/python/mihrab_methods/data/
+ports/python/dist/
+ports/python/*.egg-info/

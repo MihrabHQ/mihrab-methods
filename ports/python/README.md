@@ -10,10 +10,17 @@ reproduces in `mihrab_methods.REVISIONS`. A correction list belongs to one
 revision: when a method's revision is raised in the library, this port is
 behind until it is raised here too.
 
+```sh
+pip install mihrab-methods
+```
+
+The package carries the correction lists of its release; a version has the
+same number as the npm package it was built with.
+
 ```python
 from mihrab_methods import load_corrections, times_for
 
-lists = load_corrections('data/corrections')          # the repository's lists
+lists = load_corrections()          # the package's own; or a directory laid out as data/corrections
 stockholm = {'authority': 'sweden', 'lat': 59.33, 'lon': 18.034, 'tz': 'Europe/Stockholm'}
 day = times_for(stockholm, '2026-11-12', lists['sweden'])
 print(day['printed'])     # the six times as 'HH:MM' on the clock the table prints
