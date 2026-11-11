@@ -150,7 +150,8 @@ test('methodInfo describes each method', () => {
     assert.ok(i.sources.every(s => /^https:\/\//.test(s.url)));
     assert.ok(typeof i.parameters.fajrAngle === 'number');
     assert.equal(i.certified, isCertified(a));
-    assert.ok(i.corrections.entries > 0 && i.corrections.from <= i.corrections.to);
+    // Kazakhstan's method needs no corrections: its list is empty, and still names its span.
+    assert.ok((a === 'kazakhstan' ? i.corrections.entries === 0 : i.corrections.entries > 0) && i.corrections.from <= i.corrections.to);
   }
   assert.ok(methodInfo('diyanet').countries.length > 150);
 });

@@ -35,8 +35,9 @@ each method.
 | **Algeria** | Ministry of Religious Affairs | 68 | 101,184 | **0** | 99.365 % | 642 | 1 Oct 2026 → 5 Jun 2027 |
 | **Indonesia** | Kemenag | 517 | 362,934 | **0** | 99.935 % | 234 | 7 Oct 2026 → 31 Jan 2027 |
 | **Türkiye Takvimi** | its cities’ years | 821 | 1,812,768 | **0** | 99.952 % | 860 | 31 Dec 2025 → 2 Jan 2027 |
+| **Kazakhstan** | the Spiritual Administration’s times | 84 | 551,880 | **0** | 100.000 % | 0 | 1 Jan 2025 → 31 Dec 2027 |
 
-6 of 6 methods certified; 0 of 75,458,222 times off the printed minute. Last checked 9 November 2026. Generated from [`certification.json`](../certification.json) by `scripts/readme.mjs`.
+7 of 7 methods certified; 0 of 76,010,102 times off the printed minute. Last checked 9 November 2026. Generated from [`certification.json`](../certification.json) by `scripts/readme.mjs`.
 <!-- certification-table:end -->
 
 ## Sweden
@@ -200,6 +201,22 @@ shows: the calendar's own files give the point only to the arc-minute.
 > place of the list holds it to a table. A sample of 40 cities elsewhere in
 > Türkiye and 38 in the rest of the world below 60°, fitted the same way,
 > came out at about the same rate.
+
+## Kazakhstan
+
+Certified over <!--fig:kazakhstan.span-->1 Jan 2025 → 31 Dec 2027<!--/fig--> (<!--fig:kazakhstan.check0.places-->84<!--/fig-->
+cities and towns, each at the coordinates the Administration gives it):
+the method gives <!--fig:kazakhstan.alonePct-->100.000<!--/fig--> % alone, and its correction list has
+<!--fig:kazakhstan.corrections-->0<!--/fig--> entries. Asr is the Hanafi one, the only Asr the Administration
+prints; the library's Hanafi switch leaves it as it is, and there is no
+table to hold a one-shadow Asr to.
+
+> **Research note, 2026-11-11** (not generated). The method was read off
+> ten cities' year first and then run against every place: nothing was
+> fitted per place, and no point was moved. The margin steps from three
+> minutes to five between 47.97° and 48.00° N in the places listed (three
+> at 47.967°, five at 48.001°); 48° is taken as the step. Five more places the Administration
+> lists have no year to check against and are left out.
 
 ## Not here, and why
 

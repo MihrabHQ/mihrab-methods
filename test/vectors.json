@@ -6,7 +6,8 @@
   "morocco": 2,
   "algeria": 1,
   "indonesia": 2,
-  "turkiyetakvimi": 1
+  "turkiyetakvimi": 1,
+  "kazakhstan": 1
  },
  "cases": [
   {
@@ -2783,6 +2784,378 @@
     "asr": "2027-01-02T12:13:00.000Z",
     "maghrib": "2027-01-02T14:27:00.000Z",
     "isha": "2027-01-02T16:06:00.000Z"
+   }
+  },
+  {
+   "place": {
+    "id": "kazakhstan:3",
+    "name": "Астана",
+    "lat": 51.133333,
+    "lon": 71.433333,
+    "tz": "Asia/Almaty"
+   },
+   "date": "2025-01-01",
+   "clock": {
+    "zone": "Asia/Almaty",
+    "offsetMinutes": 300,
+    "label": "Asia/Almaty"
+   },
+   "printed": {
+    "fajr": "06:36",
+    "sunrise": "08:13",
+    "dhuhr": "12:23",
+    "asr": "14:36",
+    "maghrib": "16:23",
+    "isha": "18:00"
+   },
+   "instants": {
+    "fajr": "2025-01-01T01:36:00.000Z",
+    "sunrise": "2025-01-01T03:13:00.000Z",
+    "dhuhr": "2025-01-01T07:23:00.000Z",
+    "asr": "2025-01-01T09:36:00.000Z",
+    "maghrib": "2025-01-01T11:23:00.000Z",
+    "isha": "2025-01-01T13:00:00.000Z"
+   }
+  },
+  {
+   "place": {
+    "id": "kazakhstan:3",
+    "name": "Астана",
+    "lat": 51.133333,
+    "lon": 71.433333,
+    "tz": "Asia/Almaty"
+   },
+   "date": "2026-01-01",
+   "clock": {
+    "zone": "Asia/Almaty",
+    "offsetMinutes": 300,
+    "label": "Asia/Almaty"
+   },
+   "printed": {
+    "fajr": "06:36",
+    "sunrise": "08:13",
+    "dhuhr": "12:23",
+    "asr": "14:36",
+    "maghrib": "16:23",
+    "isha": "18:00"
+   },
+   "instants": {
+    "fajr": "2026-01-01T01:36:00.000Z",
+    "sunrise": "2026-01-01T03:13:00.000Z",
+    "dhuhr": "2026-01-01T07:23:00.000Z",
+    "asr": "2026-01-01T09:36:00.000Z",
+    "maghrib": "2026-01-01T11:23:00.000Z",
+    "isha": "2026-01-01T13:00:00.000Z"
+   }
+  },
+  {
+   "place": {
+    "id": "kazakhstan:3",
+    "name": "Астана",
+    "lat": 51.133333,
+    "lon": 71.433333,
+    "tz": "Asia/Almaty"
+   },
+   "date": "2026-12-31",
+   "clock": {
+    "zone": "Asia/Almaty",
+    "offsetMinutes": 300,
+    "label": "Asia/Almaty"
+   },
+   "printed": {
+    "fajr": "06:36",
+    "sunrise": "08:13",
+    "dhuhr": "12:22",
+    "asr": "14:35",
+    "maghrib": "16:21",
+    "isha": "17:59"
+   },
+   "instants": {
+    "fajr": "2026-12-31T01:36:00.000Z",
+    "sunrise": "2026-12-31T03:13:00.000Z",
+    "dhuhr": "2026-12-31T07:22:00.000Z",
+    "asr": "2026-12-31T09:35:00.000Z",
+    "maghrib": "2026-12-31T11:21:00.000Z",
+    "isha": "2026-12-31T12:59:00.000Z"
+   }
+  },
+  {
+   "place": {
+    "id": "kazakhstan:3",
+    "name": "Астана",
+    "lat": 51.133333,
+    "lon": 71.433333,
+    "tz": "Asia/Almaty"
+   },
+   "date": "2027-12-31",
+   "clock": {
+    "zone": "Asia/Almaty",
+    "offsetMinutes": 300,
+    "label": "Asia/Almaty"
+   },
+   "printed": {
+    "fajr": "06:36",
+    "sunrise": "08:13",
+    "dhuhr": "12:22",
+    "asr": "14:35",
+    "maghrib": "16:21",
+    "isha": "17:59"
+   },
+   "instants": {
+    "fajr": "2027-12-31T01:36:00.000Z",
+    "sunrise": "2027-12-31T03:13:00.000Z",
+    "dhuhr": "2027-12-31T07:22:00.000Z",
+    "asr": "2027-12-31T09:35:00.000Z",
+    "maghrib": "2027-12-31T11:21:00.000Z",
+    "isha": "2027-12-31T12:59:00.000Z"
+   }
+  },
+  {
+   "place": {
+    "id": "kazakhstan:72",
+    "name": "Алматы",
+    "lat": 43.238293,
+    "lon": 76.945465,
+    "tz": "Asia/Almaty"
+   },
+   "date": "2025-01-01",
+   "clock": {
+    "zone": "Asia/Almaty",
+    "offsetMinutes": 300,
+    "label": "Asia/Almaty"
+   },
+   "printed": {
+    "fajr": "05:59",
+    "sunrise": "07:21",
+    "dhuhr": "11:59",
+    "asr": "14:48",
+    "maghrib": "16:30",
+    "isha": "17:53"
+   },
+   "instants": {
+    "fajr": "2025-01-01T00:59:00.000Z",
+    "sunrise": "2025-01-01T02:21:00.000Z",
+    "dhuhr": "2025-01-01T06:59:00.000Z",
+    "asr": "2025-01-01T09:48:00.000Z",
+    "maghrib": "2025-01-01T11:30:00.000Z",
+    "isha": "2025-01-01T12:53:00.000Z"
+   }
+  },
+  {
+   "place": {
+    "id": "kazakhstan:72",
+    "name": "Алматы",
+    "lat": 43.238293,
+    "lon": 76.945465,
+    "tz": "Asia/Almaty"
+   },
+   "date": "2026-01-01",
+   "clock": {
+    "zone": "Asia/Almaty",
+    "offsetMinutes": 300,
+    "label": "Asia/Almaty"
+   },
+   "printed": {
+    "fajr": "05:59",
+    "sunrise": "07:21",
+    "dhuhr": "11:59",
+    "asr": "14:48",
+    "maghrib": "16:30",
+    "isha": "17:53"
+   },
+   "instants": {
+    "fajr": "2026-01-01T00:59:00.000Z",
+    "sunrise": "2026-01-01T02:21:00.000Z",
+    "dhuhr": "2026-01-01T06:59:00.000Z",
+    "asr": "2026-01-01T09:48:00.000Z",
+    "maghrib": "2026-01-01T11:30:00.000Z",
+    "isha": "2026-01-01T12:53:00.000Z"
+   }
+  },
+  {
+   "place": {
+    "id": "kazakhstan:72",
+    "name": "Алматы",
+    "lat": 43.238293,
+    "lon": 76.945465,
+    "tz": "Asia/Almaty"
+   },
+   "date": "2026-12-31",
+   "clock": {
+    "zone": "Asia/Almaty",
+    "offsetMinutes": 300,
+    "label": "Asia/Almaty"
+   },
+   "printed": {
+    "fajr": "05:58",
+    "sunrise": "07:21",
+    "dhuhr": "11:58",
+    "asr": "14:47",
+    "maghrib": "16:29",
+    "isha": "17:52"
+   },
+   "instants": {
+    "fajr": "2026-12-31T00:58:00.000Z",
+    "sunrise": "2026-12-31T02:21:00.000Z",
+    "dhuhr": "2026-12-31T06:58:00.000Z",
+    "asr": "2026-12-31T09:47:00.000Z",
+    "maghrib": "2026-12-31T11:29:00.000Z",
+    "isha": "2026-12-31T12:52:00.000Z"
+   }
+  },
+  {
+   "place": {
+    "id": "kazakhstan:72",
+    "name": "Алматы",
+    "lat": 43.238293,
+    "lon": 76.945465,
+    "tz": "Asia/Almaty"
+   },
+   "date": "2027-12-31",
+   "clock": {
+    "zone": "Asia/Almaty",
+    "offsetMinutes": 300,
+    "label": "Asia/Almaty"
+   },
+   "printed": {
+    "fajr": "05:58",
+    "sunrise": "07:21",
+    "dhuhr": "11:58",
+    "asr": "14:47",
+    "maghrib": "16:29",
+    "isha": "17:52"
+   },
+   "instants": {
+    "fajr": "2027-12-31T00:58:00.000Z",
+    "sunrise": "2027-12-31T02:21:00.000Z",
+    "dhuhr": "2027-12-31T06:58:00.000Z",
+    "asr": "2027-12-31T09:47:00.000Z",
+    "maghrib": "2027-12-31T11:29:00.000Z",
+    "isha": "2027-12-31T12:52:00.000Z"
+   }
+  },
+  {
+   "place": {
+    "id": "kazakhstan:172",
+    "name": "Мамлют",
+    "lat": 54.94112,
+    "lon": 68.546199,
+    "tz": "Asia/Almaty"
+   },
+   "date": "2025-01-01",
+   "clock": {
+    "zone": "Asia/Almaty",
+    "offsetMinutes": 300,
+    "label": "Asia/Almaty"
+   },
+   "printed": {
+    "fajr": "06:56",
+    "sunrise": "08:45",
+    "dhuhr": "12:34",
+    "asr": "14:26",
+    "maghrib": "16:14",
+    "isha": "18:03"
+   },
+   "instants": {
+    "fajr": "2025-01-01T01:56:00.000Z",
+    "sunrise": "2025-01-01T03:45:00.000Z",
+    "dhuhr": "2025-01-01T07:34:00.000Z",
+    "asr": "2025-01-01T09:26:00.000Z",
+    "maghrib": "2025-01-01T11:14:00.000Z",
+    "isha": "2025-01-01T13:03:00.000Z"
+   }
+  },
+  {
+   "place": {
+    "id": "kazakhstan:172",
+    "name": "Мамлют",
+    "lat": 54.94112,
+    "lon": 68.546199,
+    "tz": "Asia/Almaty"
+   },
+   "date": "2026-01-01",
+   "clock": {
+    "zone": "Asia/Almaty",
+    "offsetMinutes": 300,
+    "label": "Asia/Almaty"
+   },
+   "printed": {
+    "fajr": "06:56",
+    "sunrise": "08:45",
+    "dhuhr": "12:34",
+    "asr": "14:25",
+    "maghrib": "16:14",
+    "isha": "18:03"
+   },
+   "instants": {
+    "fajr": "2026-01-01T01:56:00.000Z",
+    "sunrise": "2026-01-01T03:45:00.000Z",
+    "dhuhr": "2026-01-01T07:34:00.000Z",
+    "asr": "2026-01-01T09:25:00.000Z",
+    "maghrib": "2026-01-01T11:14:00.000Z",
+    "isha": "2026-01-01T13:03:00.000Z"
+   }
+  },
+  {
+   "place": {
+    "id": "kazakhstan:172",
+    "name": "Мамлют",
+    "lat": 54.94112,
+    "lon": 68.546199,
+    "tz": "Asia/Almaty"
+   },
+   "date": "2026-12-31",
+   "clock": {
+    "zone": "Asia/Almaty",
+    "offsetMinutes": 300,
+    "label": "Asia/Almaty"
+   },
+   "printed": {
+    "fajr": "06:56",
+    "sunrise": "08:46",
+    "dhuhr": "12:34",
+    "asr": "14:24",
+    "maghrib": "16:12",
+    "isha": "18:02"
+   },
+   "instants": {
+    "fajr": "2026-12-31T01:56:00.000Z",
+    "sunrise": "2026-12-31T03:46:00.000Z",
+    "dhuhr": "2026-12-31T07:34:00.000Z",
+    "asr": "2026-12-31T09:24:00.000Z",
+    "maghrib": "2026-12-31T11:12:00.000Z",
+    "isha": "2026-12-31T13:02:00.000Z"
+   }
+  },
+  {
+   "place": {
+    "id": "kazakhstan:172",
+    "name": "Мамлют",
+    "lat": 54.94112,
+    "lon": 68.546199,
+    "tz": "Asia/Almaty"
+   },
+   "date": "2027-12-31",
+   "clock": {
+    "zone": "Asia/Almaty",
+    "offsetMinutes": 300,
+    "label": "Asia/Almaty"
+   },
+   "printed": {
+    "fajr": "06:56",
+    "sunrise": "08:46",
+    "dhuhr": "12:34",
+    "asr": "14:24",
+    "maghrib": "16:12",
+    "isha": "18:02"
+   },
+   "instants": {
+    "fajr": "2027-12-31T01:56:00.000Z",
+    "sunrise": "2027-12-31T03:46:00.000Z",
+    "dhuhr": "2027-12-31T07:34:00.000Z",
+    "asr": "2027-12-31T09:24:00.000Z",
+    "maghrib": "2027-12-31T11:12:00.000Z",
+    "isha": "2027-12-31T13:02:00.000Z"
    }
   }
  ]

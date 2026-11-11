@@ -23,6 +23,7 @@ test('withCorrections is candidateInstants with its list, at every listed time o
       }
       if (n > 200) break;
     }
-    assert.ok(n > 0, `${a}: no listed time checked`);
+    // a method that needs no corrections has an empty list, and nothing to check here
+    assert.ok(n > 0 || Object.keys(list.points).length === 0, `${a}: no listed time checked`);
   }
 });

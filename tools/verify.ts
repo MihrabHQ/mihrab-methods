@@ -228,6 +228,7 @@ export function checkAuthority(a: CheckRun): Result | null {
     algeria: 'Algeria — Ministry of Religious Affairs',
     indonesia: 'Indonesia — Kemenag',
     turkiyetakvimi: 'Türkiye Takvimi — its cities’ years',
+    kazakhstan: 'Kazakhstan — the Spiritual Administration’s times',
   };
   return check(names[a], placesOf(a), path.join(TABLES, a, 'v1/cities'));
 }

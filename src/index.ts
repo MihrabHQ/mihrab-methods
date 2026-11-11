@@ -16,6 +16,7 @@ import './authorities/morocco.js';
 import './authorities/algeria.js';
 import './authorities/indonesia.js';
 import './authorities/turkiyeTakvimi.js';
+import './authorities/kazakhstan.js';
 
 export * from './core/index.js';
 export { diyanetCountry } from './authorities/diyanet.js';

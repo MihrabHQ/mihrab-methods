@@ -9,7 +9,7 @@
  * add it to `npm run certify` (tools/certify.ts), not to type it in.
  */
 
-export const AUTHORITY_ORDER = ['sweden', 'diyanet', 'morocco', 'algeria', 'indonesia', 'turkiyetakvimi'];
+export const AUTHORITY_ORDER = ['sweden', 'diyanet', 'morocco', 'algeria', 'indonesia', 'turkiyetakvimi', 'kazakhstan'];
 
 /** Who prints the tables each method matches, in words — names, not figures. */
 export const AUTHORITY_NAMES = {
@@ -19,6 +19,7 @@ export const AUTHORITY_NAMES = {
   algeria: { short: 'Algeria', authority: 'Ministry of Religious Affairs and Wakfs' },
   indonesia: { short: 'Indonesia', authority: 'Kemenag (Ministry of Religious Affairs)' },
   turkiyetakvimi: { short: 'Türkiye Takvimi', authority: 'Türkiye Takvimi (namazvakti.com)' },
+  kazakhstan: { short: 'Kazakhstan', authority: 'Spiritual Administration of Muslims of Kazakhstan' },
 };
 
 class MissingFigure extends Error {

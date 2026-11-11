@@ -1,5 +1,5 @@
 // The methods: Sweden and Diyanet (the Congress method), Morocco, Algeria,
-// Indonesia and Türkiye Takvimi. A port of src/methods/*.ts — the TypeScript is the reference,
+// Indonesia, Türkiye Takvimi and Kazakhstan. A port of src/methods/*.ts — the TypeScript is the reference,
 // docs/methods.md says what each does, and the vector check holds this to it.
 //
 // Every function takes a civil date with the month 0-based, as the TypeScript
@@ -262,6 +262,67 @@ fun takvimRawMinutes(lat: Double, lon: Double, year: Int, month0: Int, day: Int,
 fun takvimMinutes(lat: Double, lon: Double, year: Int, month0: Int, day: Int, temkin: Double? = null, asrShadow: Double = 1.0): DayMinutes? {
     val r = takvimRawMinutes(lat, lon, year, month0, day, temkin, asrShadow).second
     return if (r.allFinite) r.mapped { ceil(it - 1e-9) } else null
+}
+
+// ---------------------------------------------------------------- Kazakhstan
+
+private fun kzFix(a: Double, b: Double): Double = a - b * floor(a / b)
+
+private fun kzJulian(year: Int, month: Int, day: Int): Double {
+    var y = year.toDouble()
+    var m = month.toDouble()
+    if (month <= 2) {
+        y -= 1
+        m += 12
+    }
+    val a = floor(y / 100)
+    val b = 2 - a + floor(a / 4)
+    return floor(365.25 * (y + 4716)) + floor(30.6001 * (m + 1)) + day + b - 1524.5
+}
+
+/** The method's sun: declination (degrees), equation of time (hours). */
+private fun kzSun(jd: Double): DoubleArray {
+    val D = jd - 2451545.0
+    val g = kzFix(357.529 + 0.98560028 * D, 360.0)
+    val q = kzFix(280.459 + 0.98564736 * D, 360.0)
+    val L = kzFix(q + 1.915 * sin(g * RAD) + 0.02 * sin(2 * g * RAD), 360.0)
+    val e = 23.439 - 0.00000036 * D
+    val ra = atan2(cos(e * RAD) * sin(L * RAD), cos(L * RAD)) / RAD / 15
+    return doubleArrayOf(asin(sin(e * RAD) * sin(L * RAD)) / RAD, q / 15 - kzFix(ra, 24.0))
+}
+
+fun kazakhstanMargin(lat: Double): Double = if (lat >= 48) 5.0 else 3.0
+
+/** Before rounding: the six times, and second the sunset the method prints beside Maghrib. */
+fun kazakhstanRawMinutes(lat: Double, lon: Double, year: Int, month0: Int, day: Int): Pair<DayMinutes, Double> {
+    val jd = kzJulian(year, month0 + 1, day) - lon / 360
+    fun midday(t: Double) = kzFix(12 - kzSun(jd + t)[1], 24.0)
+    fun at(angle: Double, t: Double, before: Boolean): Double {
+        val decl = kzSun(jd + t)[0]
+        val x = (-sin(angle * RAD) - sin(decl * RAD) * sin(lat * RAD)) / (cos(decl * RAD) * cos(lat * RAD))
+        if (!(abs(x) <= 1)) return Double.NaN
+        val h = acos(x) / RAD / 15
+        return midday(t) + (if (before) -h else h)
+    }
+    fun asrAngle(t: Double) = -atan(1 / (2 + tan(abs(lat - kzSun(jd + t)[0]) * RAD))) / RAD
+    var fajr = at(15.0, 5.0 / 24, true)
+    val sunrise = at(0.833, 6.0 / 24, true)
+    val dhuhr = midday(12.0 / 24)
+    val asr = at(asrAngle(13.0 / 24), 13.0 / 24, false)
+    val sunset = at(0.833, 18.0 / 24, false)
+    var isha = at(15.0, 18.0 / 24, false)
+    val portion = (15.0 / 60) * kzFix(sunrise - sunset, 24.0)
+    if (!fajr.isFinite() || kzFix(sunrise - fajr, 24.0) > portion) fajr = sunrise - portion
+    if (!isha.isFinite() || kzFix(isha - sunset, 24.0) > portion) isha = sunset + portion
+    val margin = kazakhstanMargin(lat)
+    fun ut(h: Double) = (h - lon / 15) * 60
+    return Pair(DayMinutes(ut(fajr), ut(sunrise) - margin, ut(dhuhr) + margin, ut(asr) + margin, ut(sunset) + margin, ut(isha)), ut(sunset))
+}
+
+/** Rounded to the nearest minute; Asr is the Hanafi one the table carries. Null where a time does not form. */
+fun kazakhstanMinutes(lat: Double, lon: Double, year: Int, month0: Int, day: Int): DayMinutes? {
+    val r = kazakhstanRawMinutes(lat, lon, year, month0, day).first
+    return if (r.allFinite) r.mapped { floor(it + 0.5) } else null
 }
 
 // ---------------------------------------------------------------- Sweden and Diyanet: the Congress method

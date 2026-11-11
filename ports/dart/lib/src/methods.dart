@@ -1,5 +1,5 @@
 // The methods: Sweden and Diyanet (the Congress method), Morocco, Algeria,
-// Indonesia and Türkiye Takvimi. A port of src/methods/*.ts — the TypeScript is the reference,
+// Indonesia, Türkiye Takvimi and Kazakhstan. A port of src/methods/*.ts — the TypeScript is the reference,
 // docs/methods.md says what each does, and the vector check holds this to it.
 //
 // Every function takes a civil date with the month 0-based, as the TypeScript
@@ -279,6 +279,67 @@ DayMinutes takvimRawMinutes(double lat, double lon, int year, int month0, int da
 DayMinutes? takvimMinutes(double lat, double lon, int year, int month0, int day, {double? temkin, double asrShadow = 1.0}) {
   final r = takvimRawMinutes(lat, lon, year, month0, day, temkin: temkin, asrShadow: asrShadow);
   return r.allFinite ? r.mapped((v) => (v - 1e-9).ceilToDouble()) : null;
+}
+
+// ---------------------------------------------------------------- Kazakhstan
+
+double _kzFix(double a, double b) => a - b * (a / b).floorToDouble();
+
+double _kzJulian(int year, int month, int day) {
+  var y = year.toDouble(), m = month.toDouble();
+  if (month <= 2) {
+    y -= 1;
+    m += 12;
+  }
+  final a = (y / 100).floorToDouble();
+  final b = 2 - a + (a / 4).floorToDouble();
+  return (365.25 * (y + 4716)).floorToDouble() + (30.6001 * (m + 1)).floorToDouble() + day + b - 1524.5;
+}
+
+/// The method's sun: [declination (degrees), equation of time (hours)].
+List<double> _kzSun(double jd) {
+  final d = jd - 2451545.0;
+  final g = _kzFix(357.529 + 0.98560028 * d, 360);
+  final q = _kzFix(280.459 + 0.98564736 * d, 360);
+  final l = _kzFix(q + 1.915 * sin(g * rad) + 0.02 * sin(2 * g * rad), 360);
+  final e = 23.439 - 0.00000036 * d;
+  final ra = atan2(cos(e * rad) * sin(l * rad), cos(l * rad)) / rad / 15;
+  return [asin(sin(e * rad) * sin(l * rad)) / rad, q / 15 - _kzFix(ra, 24)];
+}
+
+double kazakhstanMargin(double lat) => lat >= 48 ? 5.0 : 3.0;
+
+/// The six times before rounding.
+DayMinutes kazakhstanRawMinutes(double lat, double lon, int year, int month0, int day) {
+  final jd = _kzJulian(year, month0 + 1, day) - lon / 360;
+  double midday(double t) => _kzFix(12 - _kzSun(jd + t)[1], 24);
+  double at(double angle, double t, bool before) {
+    final decl = _kzSun(jd + t)[0];
+    final x = (-sin(angle * rad) - sin(decl * rad) * sin(lat * rad)) / (cos(decl * rad) * cos(lat * rad));
+    if (!(x.abs() <= 1)) return double.nan;
+    final h = acos(x) / rad / 15;
+    return midday(t) + (before ? -h : h);
+  }
+
+  double asrAngle(double t) => -atan(1 / (2 + tan((lat - _kzSun(jd + t)[0]).abs() * rad))) / rad;
+  var fajr = at(15.0, 5.0 / 24, true);
+  final sunrise = at(0.833, 6.0 / 24, true);
+  final dhuhr = midday(12.0 / 24);
+  final asr = at(asrAngle(13.0 / 24), 13.0 / 24, false);
+  final sunset = at(0.833, 18.0 / 24, false);
+  var isha = at(15.0, 18.0 / 24, false);
+  final portion = (15.0 / 60) * _kzFix(sunrise - sunset, 24);
+  if (!fajr.isFinite || _kzFix(sunrise - fajr, 24) > portion) fajr = sunrise - portion;
+  if (!isha.isFinite || _kzFix(isha - sunset, 24) > portion) isha = sunset + portion;
+  final margin = kazakhstanMargin(lat);
+  double ut(double h) => (h - lon / 15) * 60;
+  return DayMinutes(ut(fajr), ut(sunrise) - margin, ut(dhuhr) + margin, ut(asr) + margin, ut(sunset) + margin, ut(isha));
+}
+
+/// Rounded to the nearest minute; Asr is the Hanafi one the table carries. Null where a time does not form.
+DayMinutes? kazakhstanMinutes(double lat, double lon, int year, int month0, int day) {
+  final r = kazakhstanRawMinutes(lat, lon, year, month0, day);
+  return r.allFinite ? r.mapped((v) => (v + 0.5).floorToDouble()) : null;
 }
 
 // ---------------------------------------------------------------- Sweden and Diyanet: the Congress method

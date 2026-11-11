@@ -150,5 +150,28 @@
       "sha256": "edf5bd37ccd06dbcb87300a6c943353adb624a545ff6ea416a8f89715713d7bd"
     },
     "revision": 1
+  },
+  "kazakhstan": {
+    "certified": true,
+    "checkedAt": "2026-11-11",
+    "places": 84,
+    "checks": [
+      {
+        "tables": "Kazakhstan — the Spiritual Administration’s times",
+        "places": 84,
+        "times": 551880,
+        "off": 0,
+        "offWithoutCorrections": 0,
+        "from": "2025-01-01",
+        "to": "2027-12-31"
+      }
+    ],
+    "corrections": {
+      "from": "2025-01-01",
+      "to": "2027-12-31",
+      "entries": 0,
+      "sha256": "e3d60e566ca082f74ce9904886087b29e65d2871c5bcc02f46349d82c8994d88"
+    },
+    "revision": 1
   }
 }

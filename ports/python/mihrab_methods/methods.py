@@ -1,5 +1,5 @@
 """The methods: Sweden and Diyanet (the Congress method), Morocco, Algeria,
-Indonesia and Türkiye Takvimi. A port of src/methods/*.ts — the TypeScript is the reference,
+Indonesia, Türkiye Takvimi and Kazakhstan. A port of src/methods/*.ts — the TypeScript is the reference,
 docs/methods.md says what each does, and test_vectors.py holds this to it.
 
 Every function takes a civil date with the month 0-based, as the TypeScript
@@ -302,6 +302,83 @@ def takvim_minutes(lat, lon, year, month0, day, temkin=None, asr_shadow=1):
     if not all(math.isfinite(v) for v in r.values()):
         return None
     return {k: math.ceil(v - 1e-9) for k, v in r.items()}
+
+
+# ---------------------------------------------------------------- Kazakhstan
+
+def _kz_fix(a, b):
+    return a - b * math.floor(a / b)
+
+
+def _kz_julian(year, month, day):
+    if month <= 2:
+        year -= 1
+        month += 12
+    a = math.floor(year / 100)
+    b = 2 - a + math.floor(a / 4)
+    return math.floor(365.25 * (year + 4716)) + math.floor(30.6001 * (month + 1)) + day + b - 1524.5
+
+
+def _kz_sun(jd):
+    """The method's sun: declination (degrees), equation of time (hours)."""
+    D = jd - 2451545.0
+    g = _kz_fix(357.529 + 0.98560028 * D, 360)
+    q = _kz_fix(280.459 + 0.98564736 * D, 360)
+    L = _kz_fix(q + 1.915 * math.sin(g * RAD) + 0.02 * math.sin(2 * g * RAD), 360)
+    e = 23.439 - 0.00000036 * D
+    ra = math.atan2(math.cos(e * RAD) * math.sin(L * RAD), math.cos(L * RAD)) / RAD / 15
+    return math.asin(math.sin(e * RAD) * math.sin(L * RAD)) / RAD, q / 15 - _kz_fix(ra, 24)
+
+
+def kazakhstan_margin(lat):
+    return 5 if lat >= 48 else 3
+
+
+def kazakhstan_raw_minutes(lat, lon, year, month0, day):
+    """Before rounding; 'sunset' is the one the method prints beside Maghrib."""
+    jd = _kz_julian(year, month0 + 1, day) - lon / 360
+
+    def midday(t):
+        return _kz_fix(12 - _kz_sun(jd + t)[1], 24)
+
+    def at(angle, t, before):
+        decl = _kz_sun(jd + t)[0]
+        x = (-math.sin(angle * RAD) - math.sin(decl * RAD) * math.sin(lat * RAD)) / (math.cos(decl * RAD) * math.cos(lat * RAD))
+        if not abs(x) <= 1:
+            return NAN
+        h = math.acos(x) / RAD / 15
+        return midday(t) + (-h if before else h)
+
+    def asr_angle(t):
+        return -math.atan(1 / (2 + math.tan(abs(lat - _kz_sun(jd + t)[0]) * RAD))) / RAD
+
+    fajr = at(15, 5 / 24, True)
+    sunrise = at(0.833, 6 / 24, True)
+    dhuhr = midday(12 / 24)
+    asr = at(asr_angle(13 / 24), 13 / 24, False)
+    sunset = at(0.833, 18 / 24, False)
+    isha = at(15, 18 / 24, False)
+    portion = (15 / 60) * _kz_fix(sunrise - sunset, 24)
+    if not math.isfinite(fajr) or _kz_fix(sunrise - fajr, 24) > portion:
+        fajr = sunrise - portion
+    if not math.isfinite(isha) or _kz_fix(isha - sunset, 24) > portion:
+        isha = sunset + portion
+    margin = kazakhstan_margin(lat)
+
+    def ut(h):
+        return (h - lon / 15) * 60
+
+    return {'fajr': ut(fajr), 'sunrise': ut(sunrise) - margin, 'dhuhr': ut(dhuhr) + margin, 'asr': ut(asr) + margin,
+            'sunset': ut(sunset), 'maghrib': ut(sunset) + margin, 'isha': ut(isha)}
+
+
+def kazakhstan_minutes(lat, lon, year, month0, day):
+    """Rounded to the nearest minute; Asr is the Hanafi one the table carries. None where a time does not form."""
+    r = kazakhstan_raw_minutes(lat, lon, year, month0, day)
+    del r['sunset']
+    if not all(math.isfinite(v) for v in r.values()):
+        return None
+    return {k: math.floor(v + 0.5) for k, v in r.items()}
 
 
 # ---------------------------------------------------------------- Sweden and Diyanet: the Congress method

@@ -1,7 +1,7 @@
 {
   "name": "mihrab-methods",
   "version": "1.4.0",
-  "description": "The prayer-time authorities' own calculation methods, each reproducing its published timetable to the minute: Sweden (Diyanet, as Islamiska Förbundet prints it), Diyanet worldwide, Morocco (Habous), Algeria (Ministry of Religious Affairs), Indonesia (Kemenag), Türkiye Takvimi.",
+  "description": "The prayer-time authorities' own calculation methods, each reproducing its published timetable to the minute: Sweden (Diyanet, as Islamiska Förbundet prints it), Diyanet worldwide, Morocco (Habous), Algeria (Ministry of Religious Affairs), Indonesia (Kemenag), Türkiye Takvimi, Kazakhstan (Spiritual Administration).",
   "license": "MPL-2.0",
   "author": "Hassan El Ghamri",
   "repository": {
@@ -29,6 +29,7 @@
     "./dist/*/algeria.js",
     "./dist/*/indonesia.js",
     "./dist/*/turkiyetakvimi.js",
+    "./dist/*/kazakhstan.js",
     "./dist/*/authorities/*.js",
     "./src/index.ts",
     "./src/sweden.ts",
@@ -37,6 +38,7 @@
     "./src/algeria.ts",
     "./src/indonesia.ts",
     "./src/turkiyetakvimi.ts",
+    "./src/kazakhstan.ts",
     "./src/authorities/*.ts"
   ],
   "engines": {
@@ -133,6 +135,16 @@
         "default": "./dist/cjs/turkiyetakvimi.js"
       }
     },
+    "./kazakhstan": {
+      "import": {
+        "types": "./dist/esm/kazakhstan.d.ts",
+        "default": "./dist/esm/kazakhstan.js"
+      },
+      "require": {
+        "types": "./dist/cjs/kazakhstan.d.ts",
+        "default": "./dist/cjs/kazakhstan.js"
+      }
+    },
     "./locate": {
       "import": {
         "types": "./dist/esm/locate.d.ts",
@@ -170,6 +182,9 @@
       ],
       "turkiyetakvimi": [
         "./dist/cjs/turkiyetakvimi.d.ts"
+      ],
+      "kazakhstan": [
+        "./dist/cjs/kazakhstan.d.ts"
       ],
       "locate": [
         "./dist/cjs/locate.d.ts"

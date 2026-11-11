@@ -1,5 +1,5 @@
 // The methods: Sweden and Diyanet (the Congress method), Morocco, Algeria,
-// Indonesia and Türkiye Takvimi. A port of src/methods/*.ts — the TypeScript is the reference,
+// Indonesia, Türkiye Takvimi and Kazakhstan. A port of src/methods/*.ts — the TypeScript is the reference,
 // docs/methods.md says what each does, and the vector check holds this to it.
 //
 // Every function takes a civil date with the month 0-based, as the TypeScript
@@ -289,6 +289,68 @@ func takvimMinutes(_ lat: Double, _ lon: Double, _ year: Int, _ month0: Int, _ d
     let r = takvimRawMinutes(lat, lon, year, month0, day, temkin: temkin, asrShadow: asrShadow).times
     if r.all.contains(where: { !$0.isFinite }) { return nil }
     return r.mapped { ceil($0 - 1e-9) }
+}
+
+// ---------------------------------------------------------------- Kazakhstan
+
+private func kzFix(_ a: Double, _ b: Double) -> Double { return a - b * floor(a / b) }
+
+private func kzJulian(_ year: Int, _ month: Int, _ day: Int) -> Double {
+    var y = Double(year), m = Double(month)
+    if month <= 2 {
+        y -= 1
+        m += 12
+    }
+    let a = floor(y / 100)
+    let b = 2 - a + floor(a / 4)
+    return floor(365.25 * (y + 4716)) + floor(30.6001 * (m + 1)) + Double(day) + b - 1524.5
+}
+
+/// The method's sun: declination (degrees), equation of time (hours).
+private func kzSun(_ jd: Double) -> (decl: Double, eqt: Double) {
+    let D = jd - 2451545.0
+    let g = kzFix(357.529 + 0.98560028 * D, 360)
+    let q = kzFix(280.459 + 0.98564736 * D, 360)
+    let L = kzFix(q + 1.915 * sin(g * RAD) + 0.02 * sin(2 * g * RAD), 360)
+    let e = 23.439 - 0.00000036 * D
+    let ra = atan2(cos(e * RAD) * sin(L * RAD), cos(L * RAD)) / RAD / 15
+    return (asin(sin(e * RAD) * sin(L * RAD)) / RAD, q / 15 - kzFix(ra, 24))
+}
+
+public func kazakhstanMargin(_ lat: Double) -> Double { return lat >= 48 ? 5 : 3 }
+
+/// Before rounding: the six times, and the sunset the method prints beside Maghrib.
+func kazakhstanRawMinutes(_ lat: Double, _ lon: Double, _ year: Int, _ month0: Int, _ day: Int) -> (times: DayMinutes, sunset: Double) {
+    let jd = kzJulian(year, month0 + 1, day) - lon / 360
+    func midday(_ t: Double) -> Double { return kzFix(12 - kzSun(jd + t).eqt, 24) }
+    func at(_ angle: Double, _ t: Double, _ before: Bool) -> Double {
+        let decl = kzSun(jd + t).decl
+        let x = (-sin(angle * RAD) - sin(decl * RAD) * sin(lat * RAD)) / (cos(decl * RAD) * cos(lat * RAD))
+        if !(abs(x) <= 1) { return Double.nan }
+        let h = acos(x) / RAD / 15
+        return midday(t) + (before ? -h : h)
+    }
+    func asrAngle(_ t: Double) -> Double { return -atan(1 / (2 + tan(abs(lat - kzSun(jd + t).decl) * RAD))) / RAD }
+    var fajr = at(15, 5.0 / 24, true)
+    let sunrise = at(0.833, 6.0 / 24, true)
+    let dhuhr = midday(12.0 / 24)
+    let asr = at(asrAngle(13.0 / 24), 13.0 / 24, false)
+    let sunset = at(0.833, 18.0 / 24, false)
+    var isha = at(15, 18.0 / 24, false)
+    let portion = (15.0 / 60) * kzFix(sunrise - sunset, 24)
+    if !fajr.isFinite || kzFix(sunrise - fajr, 24) > portion { fajr = sunrise - portion }
+    if !isha.isFinite || kzFix(isha - sunset, 24) > portion { isha = sunset + portion }
+    let margin = kazakhstanMargin(lat)
+    func ut(_ h: Double) -> Double { return (h - lon / 15) * 60 }
+    return (DayMinutes(fajr: ut(fajr), sunrise: ut(sunrise) - margin, dhuhr: ut(dhuhr) + margin, asr: ut(asr) + margin,
+                       maghrib: ut(sunset) + margin, isha: ut(isha)), ut(sunset))
+}
+
+/// Rounded to the nearest minute; Asr is the Hanafi one the table carries. Nil where a time does not form.
+func kazakhstanMinutes(_ lat: Double, _ lon: Double, _ year: Int, _ month0: Int, _ day: Int) -> DayMinutes? {
+    let r = kazakhstanRawMinutes(lat, lon, year, month0, day).times
+    if r.all.contains(where: { !$0.isFinite }) { return nil }
+    return r.mapped { floor($0 + 0.5) }
 }
 
 // ---------------------------------------------------------------- Sweden and Diyanet: the Congress method

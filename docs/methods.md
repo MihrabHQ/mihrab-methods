@@ -240,6 +240,35 @@ cities.
 - The calendar's files give a city's point to the whole arc-minute and it
   computes at a finer one; each place is at the point its year shows.
 
+## Kazakhstan
+
+`src/methods/kazakhstan.ts`. The Spiritual Administration of Muslims of
+Kazakhstan's times, read off its cities from 40.8° to 54.9° N.
+
+- A **short series for the sun**: the mean anomaly `g = 357.529° + 0.98560028° D`
+  and the mean longitude `q = 280.459° + 0.98564736° D`, with `D` the days
+  from J2000.0; the ecliptic longitude `L = q + 1.915° sin g + 0.020° sin 2g`;
+  the obliquity `23.439° − 0.00000036° D`; the declination and the equation
+  of time from those.
+- The day is counted from **0h of the civil date at the place's own
+  meridian**: the Julian day of the date less `longitude / 360`.
+- Each time is computed **once**, with the sun taken at a fixed first guess
+  of its hour — Fajr 5h, sunrise 6h, Dhuhr 12h, Asr 13h, sunset and Isha
+  18h — and not iterated.
+- **Fajr** and **Isha**: the sun 15° below the horizon.
+- **Sunrise** and sunset: the sun 0.833° below the horizon.
+- **Asr**: two shadow lengths beyond the noon shadow (Hanafi), the one Asr
+  the Administration prints.
+- **Where Fajr would fall more than a quarter of the night before sunrise,
+  or Isha more than a quarter of the night after sunset** — or the sun does
+  not reach 15° — the quarter of the night is taken, the night being from
+  sunset to sunrise.
+- A **margin** of 3 minutes, 5 minutes from 48° N: sunrise that much
+  earlier, Dhuhr and Asr that much later, Maghrib that much after sunset.
+  None on Fajr or Isha.
+- Every time rounded to the **nearest** minute.
+- The whole country is on UTC+5, and every place is printed on it.
+
 ## Checking a port
 
 1. Take `test/vectors.json`. For each case, compute the six times at the

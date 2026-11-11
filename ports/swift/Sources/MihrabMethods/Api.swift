@@ -3,7 +3,7 @@
 import Foundation
 
 public enum Authority: String {
-    case sweden, diyanet, morocco, algeria, indonesia, turkiyetakvimi
+    case sweden, diyanet, morocco, algeria, indonesia, turkiyetakvimi, kazakhstan
 }
 
 public enum Prayer: String, CaseIterable {
@@ -11,7 +11,7 @@ public enum Prayer: String, CaseIterable {
 }
 
 /// The method revisions this port reproduces. A correction list belongs to one revision.
-public let REVISIONS: [String: Int] = ["sweden": 1, "diyanet": 2, "morocco": 2, "algeria": 1, "indonesia": 2, "turkiyetakvimi": 1]
+public let REVISIONS: [String: Int] = ["sweden": 1, "diyanet": 2, "morocco": 2, "algeria": 1, "indonesia": 2, "turkiyetakvimi": 1, "kazakhstan": 1]
 
 /// A place as the library's lists have it (data/places). Use the coordinates
 /// exactly as the list gives them: the correction lists are looked up by them.
@@ -176,6 +176,8 @@ public func timesFor(_ place: Place, _ date: String, corrections: CorrectionList
     case .indonesia:
         t = kemenagMinutes(place.lat, place.lon, year, month0, day, highland: place.highland, twilightDip: place.twilightDip,
                            asrShadow: asrShadow, afternoon: place.afternoon)
+    case .kazakhstan:
+        t = kazakhstanMinutes(place.lat, place.lon, year, month0, day)
     case .turkiyetakvimi:
         t = takvimMinutes(place.lat, place.lon, year, month0, day, temkin: place.temkin, asrShadow: asrShadow)
     }

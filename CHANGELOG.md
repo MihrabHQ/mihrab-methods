@@ -9,7 +9,19 @@ revision bump is at least a minor version.
 
 ## Unreleased
 
-No method changed; no revision raised.
+- **Kazakhstan, revision 1: a seventh method.** The Spiritual
+  Administration of Muslims of Kazakhstan's times for 84 cities and towns,
+  each at the coordinates the Administration gives it:
+  `mihrab-methods/kazakhstan`, authority `kazakhstan`. Fajr and Isha at 15°
+  with a quarter-of-the-night cap, Asr at two shadow lengths (the one Asr
+  it prints), a margin of 3 minutes (5 from 48° N), every time rounded to
+  the nearest minute, from a short series for the sun computed once per
+  time (`docs/methods.md`). The method alone matches the published
+  timetable of every listed place over the certified span; its correction
+  list is empty. `certification.json` gains a `kazakhstan` entry and
+  `data/corrections/kazakhstan.json` is new. In every port
+  (`kazakhstan_minutes` / `kazakhstanMinutes`, `REVISIONS` with
+  `kazakhstan: 1`). No other method's output changes.
 
 ## 1.4.0 — 2026-11-11
 
