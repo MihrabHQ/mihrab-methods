@@ -9,6 +9,10 @@ revision bump is at least a minor version.
 
 ## Unreleased
 
+No method changed; no revision raised.
+
+## 1.4.0 — 2026-11-11
+
 - **Diyanet, revision 2.** Fifteen places abroad are computed 0.001° (one
   of them 0.002°) from where revision 1 had them, where the table shows the
   neighbouring point is the one it is computed at. Their times move by a
