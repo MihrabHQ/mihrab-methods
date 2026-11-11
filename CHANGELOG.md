@@ -9,6 +9,10 @@ revision bump is at least a minor version.
 
 ## Unreleased
 
+No method changed; no revision raised.
+
+## 1.7.0 — 2026-11-11
+
 - **Brunei, revision 1: a ninth method.** The Ministry of Religious
   Affairs' times for Brunei's four districts: `mihrab-methods/brunei`,
   authority `brunei`. One table for the country, computed at Bandar Seri
