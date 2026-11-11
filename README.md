@@ -9,7 +9,7 @@
 **Prayer times that match the published timetable to the printed minute.**
 Each national authority's own calculation method, worked out again from its
 published times and checked day by day against its timetables: <!--fig:total.off-->0<!--/fig--> of
-<!--fig:total.times-->76,531,574<!--/fig--> times off the printed minute. Free for any app, site or
+<!--fig:total.times-->76,570,916<!--/fig--> times off the printed minute. Free for any app, site or
 mosque to use.
 
 [![Usage, a day: npm downloads and API requests](docs/stats.svg)](#usage)
@@ -51,8 +51,9 @@ The full API, the HTTP server and the per-authority imports are in
 | **Kuwait** | the Ministry’s table | 46 | 201,480 | **0** | 95.205 % | 9,660 | 1 Jan 2026 → 31 Dec 2027 |
 | **Jordan** | the Ministry’s times | 17 | 37,230 | **0** | 98.380 % | 603 | 1 Jan 2026 → 31 Dec 2026 |
 | **Tatarstan** | the Administration’s timetable | 44 | 96,360 | **0** | 98.071 % | 1,858 | 1 Jan 2026 → 31 Dec 2026 |
+| **Russia (Central Muftiate)** | the Central Muftiate’s timetables | 18 | 39,342 | **0** | 99.877 % | 48 | 1 Jan 2026 → 31 Dec 2026 |
 
-13 of 13 methods certified; 0 of 76,531,574 times off the printed minute. Last checked 9 November 2026. Generated from [`certification.json`](certification.json) by `scripts/readme.mjs`.
+14 of 14 methods certified; 0 of 76,570,916 times off the printed minute. Last checked 9 November 2026. Generated from [`certification.json`](certification.json) by `scripts/readme.mjs`.
 <!-- certification-table:end -->
 
 "By the method alone" is the formula without its correction list. The list

@@ -9,7 +9,18 @@ revision bump is at least a minor version.
 
 ## Unreleased
 
-No method changed; no revision raised.
+- **Russia's Central Muftiate, revision 1: a fourteenth method.** The
+  Central Spiritual Administration of Muslims of Russia's timetables for
+  eighteen cities: `mihrab-methods/cdum`, authority `cdum`. Kazakhstan's
+  sun and arithmetic with Fajr at 18°, Isha at 17°, Asr at two shadow
+  lengths and a margin of 2 minutes on every time; and where the twilight
+  does not form, the 45th parallel's share of the night
+  (`docs/methods.md`). With its correction list the method matches the
+  published timetable of every city over the certified span
+  (`docs/status.md`). `certification.json` gains a `cdum` entry and
+  `data/corrections/cdum.json` is new. In every port (`cdum_minutes` /
+  `cdumMinutes`, `REVISIONS` with `cdum: 1`). No other method's output
+  changes.
 
 ## 1.12.0 — 2026-11-11
 

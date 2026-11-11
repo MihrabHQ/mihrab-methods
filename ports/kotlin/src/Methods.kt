@@ -1,5 +1,5 @@
 // The methods: Sweden and Diyanet (the Congress method), Morocco, Algeria,
-// Indonesia, Türkiye Takvimi, Kazakhstan, Egypt, Brunei, Qatar, Kuwait, Jordan and Tatarstan. A port of src/methods/*.ts — the TypeScript is the reference,
+// Indonesia, Türkiye Takvimi, Kazakhstan, Egypt, Brunei, Qatar, Kuwait, Jordan, Tatarstan and Russia's Central Muftiate. A port of src/methods/*.ts — the TypeScript is the reference,
 // docs/methods.md says what each does, and the vector check holds this to it.
 //
 // Every function takes a civil date with the month 0-based, as the TypeScript
@@ -561,6 +561,49 @@ fun tatarstanMinutes(lat: Double, lon: Double, year: Int, month0: Int, day: Int,
         asr = ceil(asr),
         maghrib = maghrib,
         isha = if (dusk.isFinite()) ceil(event(-15.0, 1.0)) else maghrib + 90,
+    )
+}
+
+// ---------------------------------------------------------------- Russia: the Central Muftiate
+
+/** The six with margin and rounding, whole minutes; NaN where the sun does not reach a time's altitude. */
+private fun cdumPrinted(lat: Double, lon: Double, year: Int, month0: Int, day: Int): DayMinutes {
+    val jd = kzJulian(year, month0 + 1, day) - lon / 360
+    fun midday(t: Double) = kzFix(12 - kzSun(jd + t)[1], 24.0)
+    fun at(angle: Double, t: Double, before: Boolean): Double {
+        val decl = kzSun(jd + t)[0]
+        val x = (-sin(angle * RAD) - sin(decl * RAD) * sin(lat * RAD)) / (cos(decl * RAD) * cos(lat * RAD))
+        if (!(abs(x) <= 1)) return Double.NaN
+        val h = acos(x) / RAD / 15
+        return midday(t) + (if (before) -h else h)
+    }
+    val asrAngle = -atan(1 / (2 + tan(abs(lat - kzSun(jd + 13.0 / 24)[0]) * RAD))) / RAD
+    fun minute(h: Double, margin: Double) = floor((h - lon / 15) * 60 + margin + 0.5)
+    return DayMinutes(
+        fajr = minute(at(18.0, 5.0 / 24, true), -2.0),
+        sunrise = minute(at(0.833, 6.0 / 24, true), -2.0),
+        dhuhr = minute(midday(12.0 / 24), 2.0),
+        asr = minute(at(asrAngle, 13.0 / 24, false), 2.0),
+        maghrib = minute(at(0.833, 18.0 / 24, false), 2.0),
+        isha = minute(at(17.0, 18.0 / 24, false), 2.0),
+    )
+}
+
+/** As printed, whole minutes: Kazakhstan's sun and arithmetic, Fajr at 18° and Isha at 17°, Asr at two shadows, 2 minutes' margin on every time and the nearest minute; where the twilight does not form, the 45th parallel's share of the night, on the printed minutes, cut to the minute. Null where the sun does not rise or set. */
+fun cdumMinutes(lat: Double, lon: Double, year: Int, month0: Int, day: Int): DayMinutes? {
+    val p = cdumPrinted(lat, lon, year, month0, day)
+    if (!(p.sunrise.isFinite() && p.dhuhr.isFinite() && p.asr.isFinite() && p.maghrib.isFinite())) return null
+    if (p.fajr.isFinite() && p.isha.isFinite()) return p
+    val r = cdumPrinted(45.0, lon, year, month0, day)
+    val night = 1440 - (p.maghrib - p.sunrise)
+    val there = 1440 - (r.maghrib - r.sunrise)
+    return DayMinutes(
+        fajr = if (p.fajr.isFinite()) p.fajr else p.sunrise - ceil((r.sunrise - r.fajr) * night / there),
+        sunrise = p.sunrise,
+        dhuhr = p.dhuhr,
+        asr = p.asr,
+        maghrib = p.maghrib,
+        isha = if (p.isha.isFinite()) p.isha else p.maghrib + floor((r.isha - r.maghrib) * night / there),
     )
 }
 

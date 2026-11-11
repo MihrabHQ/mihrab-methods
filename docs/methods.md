@@ -404,6 +404,40 @@ places.
   printed sunrise on every day of the year, and the mosques' Dhuhr is a
   fixed clock time (12:00 in most districts, 11:45 to 12:15 in a few).
 
+## Russia: the Central Muftiate
+
+`src/methods/cdum.ts`. The Central Spiritual Administration of Muslims of
+Russia's yearly timetables, read off its year for eighteen cities from
+Rostov-on-Don to Saint Petersburg and Khabarovsk.
+
+- **Kazakhstan's sun and arithmetic**: the short series for the sun, the day
+  counted from 0h of the civil date at the place's own meridian, each time
+  computed once with the sun taken at a fixed first guess of its hour (Fajr
+  5h, sunrise 6h, Dhuhr 12h, Asr 13h, sunset and Isha 18h), not iterated.
+- **Fajr** 18°, **Isha** 17°; **sunrise** and **Maghrib** at −0.833°;
+  **Asr** at two shadow lengths beyond the noon shadow. The method prints
+  this Asr whatever shadow length is asked for.
+- **A margin of 2 minutes on every time**: Fajr and sunrise earlier; Dhuhr,
+  Asr, Maghrib and Isha later. Then the nearest minute.
+- **Where the twilight does not form** — the sun does not reach 18° in the
+  morning, or 17° in the evening: late April to mid-August in the north of
+  the list, never in the south of it — **the 45th parallel's share of the
+  night**. The same day's six times are computed, margins and rounding
+  included, at latitude 45° on the place's own meridian. With the night
+  taken as 1440 minutes less Maghrib-minus-sunrise, on the printed minutes
+  at both places:
+
+      Fajr = sunrise − (Fajr-to-sunrise at 45°) × night / night at 45°
+      Isha = Maghrib + (Maghrib-to-Isha at 45°) × night / night at 45°
+
+  and the time's minute is cut off, not rounded. Everything in it is a whole
+  number of minutes, so the cut is exact in any arithmetic. The morning and
+  the evening are judged each on its own: at the edge of the season one may
+  follow its angle while the other follows the parallel.
+- **Where the sun does not rise or set** the timetable prints the 45th
+  parallel's own day. No place listed is that far north, and the method
+  gives no times there.
+
 ## Checking a port
 
 1. Take `test/vectors.json`. For each case, compute the six times at the

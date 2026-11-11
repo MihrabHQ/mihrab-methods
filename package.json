@@ -1,7 +1,7 @@
 {
   "name": "mihrab-methods",
   "version": "1.12.0",
-  "description": "The prayer-time authorities' own calculation methods, each reproducing its published timetable to the minute: Sweden (Diyanet, as Islamiska Förbundet prints it), Diyanet worldwide, Morocco (Habous), Algeria (Ministry of Religious Affairs), Indonesia (Kemenag), Türkiye Takvimi, Kazakhstan (Spiritual Administration), Egypt (General Authority of Survey), Brunei (Ministry of Religious Affairs), Qatar (Qatar Calendar House), Kuwait (Ministry of Awqaf and Islamic Affairs), Jordan (Ministry of Awqaf, Islamic Affairs and Holy Places), Tatarstan (Spiritual Administration of Muslims).",
+  "description": "The prayer-time authorities' own calculation methods, each reproducing its published timetable to the minute: Sweden (Diyanet, as Islamiska Förbundet prints it), Diyanet worldwide, Morocco (Habous), Algeria (Ministry of Religious Affairs), Indonesia (Kemenag), Türkiye Takvimi, Kazakhstan (Spiritual Administration), Egypt (General Authority of Survey), Brunei (Ministry of Religious Affairs), Qatar (Qatar Calendar House), Kuwait (Ministry of Awqaf and Islamic Affairs), Jordan (Ministry of Awqaf, Islamic Affairs and Holy Places), Tatarstan (Spiritual Administration of Muslims), Russia (Central Spiritual Administration of Muslims).",
   "license": "MPL-2.0",
   "author": "Hassan El Ghamri",
   "repository": {
@@ -36,6 +36,7 @@
     "./dist/*/kuwait.js",
     "./dist/*/jordan.js",
     "./dist/*/tatarstan.js",
+    "./dist/*/cdum.js",
     "./dist/*/authorities/*.js",
     "./src/index.ts",
     "./src/sweden.ts",
@@ -51,6 +52,7 @@
     "./src/kuwait.ts",
     "./src/jordan.ts",
     "./src/tatarstan.ts",
+    "./src/cdum.ts",
     "./src/authorities/*.ts"
   ],
   "engines": {
@@ -217,6 +219,16 @@
         "default": "./dist/cjs/tatarstan.js"
       }
     },
+    "./cdum": {
+      "import": {
+        "types": "./dist/esm/cdum.d.ts",
+        "default": "./dist/esm/cdum.js"
+      },
+      "require": {
+        "types": "./dist/cjs/cdum.d.ts",
+        "default": "./dist/cjs/cdum.js"
+      }
+    },
     "./locate": {
       "import": {
         "types": "./dist/esm/locate.d.ts",
@@ -275,6 +287,9 @@
       ],
       "tatarstan": [
         "./dist/cjs/tatarstan.d.ts"
+      ],
+      "cdum": [
+        "./dist/cjs/cdum.d.ts"
       ],
       "locate": [
         "./dist/cjs/locate.d.ts"

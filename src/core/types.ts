@@ -2,8 +2,8 @@
  * The shapes the library speaks in. Nothing here computes anything.
  */
 
-export type Authority = 'sweden' | 'diyanet' | 'morocco' | 'algeria' | 'indonesia' | 'turkiyetakvimi' | 'kazakhstan' | 'egypt' | 'brunei' | 'qatar' | 'kuwait' | 'jordan' | 'tatarstan';
-export const AUTHORITIES: readonly Authority[] = ['sweden', 'diyanet', 'morocco', 'algeria', 'indonesia', 'turkiyetakvimi', 'kazakhstan', 'egypt', 'brunei', 'qatar', 'kuwait', 'jordan', 'tatarstan'];
+export type Authority = 'sweden' | 'diyanet' | 'morocco' | 'algeria' | 'indonesia' | 'turkiyetakvimi' | 'kazakhstan' | 'egypt' | 'brunei' | 'qatar' | 'kuwait' | 'jordan' | 'tatarstan' | 'cdum';
+export const AUTHORITIES: readonly Authority[] = ['sweden', 'diyanet', 'morocco', 'algeria', 'indonesia', 'turkiyetakvimi', 'kazakhstan', 'egypt', 'brunei', 'qatar', 'kuwait', 'jordan', 'tatarstan', 'cdum'];
 
 export type PrayerKey = 'fajr' | 'sunrise' | 'dhuhr' | 'asr' | 'maghrib' | 'isha';
 export const PRAYER_KEYS: readonly PrayerKey[] = ['fajr', 'sunrise', 'dhuhr', 'asr', 'maghrib', 'isha'];

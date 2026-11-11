@@ -13,7 +13,8 @@
   "qatar": 1,
   "kuwait": 1,
   "jordan": 1,
-  "tatarstan": 1
+  "tatarstan": 1,
+  "cdum": 1
  },
  "cases": [
   {
@@ -5194,6 +5195,502 @@
     "asr": "2026-12-31T10:26:00.000Z",
     "maghrib": "2026-12-31T12:13:00.000Z",
     "isha": "2026-12-31T14:06:00.000Z"
+   }
+  },
+  {
+   "place": {
+    "id": "cdum:1",
+    "name": "Moscow",
+    "lat": 55.756,
+    "lon": 37.618,
+    "tz": "Europe/Moscow"
+   },
+   "date": "2026-01-01",
+   "clock": {
+    "zone": "Europe/Moscow",
+    "offsetMinutes": 180,
+    "label": "Europe/Moscow"
+   },
+   "printed": {
+    "fajr": "06:37",
+    "sunrise": "08:57",
+    "dhuhr": "12:35",
+    "asr": "14:21",
+    "maghrib": "16:09",
+    "isha": "18:22"
+   },
+   "instants": {
+    "fajr": "2026-01-01T03:37:00.000Z",
+    "sunrise": "2026-01-01T05:57:00.000Z",
+    "dhuhr": "2026-01-01T09:35:00.000Z",
+    "asr": "2026-01-01T11:21:00.000Z",
+    "maghrib": "2026-01-01T13:09:00.000Z",
+    "isha": "2026-01-01T15:22:00.000Z"
+   }
+  },
+  {
+   "place": {
+    "id": "cdum:1",
+    "name": "Moscow",
+    "lat": 55.756,
+    "lon": 37.618,
+    "tz": "Europe/Moscow"
+   },
+   "date": "2026-05-02",
+   "clock": {
+    "zone": "Europe/Moscow",
+    "offsetMinutes": 180,
+    "label": "Europe/Moscow"
+   },
+   "printed": {
+    "fajr": "01:18",
+    "sunrise": "04:43",
+    "dhuhr": "12:29",
+    "asr": "17:41",
+    "maghrib": "20:12",
+    "isha": "23:13"
+   },
+   "instants": {
+    "fajr": "2026-05-01T22:18:00.000Z",
+    "sunrise": "2026-05-02T01:43:00.000Z",
+    "dhuhr": "2026-05-02T09:29:00.000Z",
+    "asr": "2026-05-02T14:41:00.000Z",
+    "maghrib": "2026-05-02T17:12:00.000Z",
+    "isha": "2026-05-02T20:13:00.000Z"
+   }
+  },
+  {
+   "place": {
+    "id": "cdum:1",
+    "name": "Moscow",
+    "lat": 55.756,
+    "lon": 37.618,
+    "tz": "Europe/Moscow"
+   },
+   "date": "2026-09-01",
+   "clock": {
+    "zone": "Europe/Moscow",
+    "offsetMinutes": 180,
+    "label": "Europe/Moscow"
+   },
+   "printed": {
+    "fajr": "03:06",
+    "sunrise": "05:32",
+    "dhuhr": "12:32",
+    "asr": "17:12",
+    "maghrib": "19:26",
+    "isha": "21:40"
+   },
+   "instants": {
+    "fajr": "2026-09-01T00:06:00.000Z",
+    "sunrise": "2026-09-01T02:32:00.000Z",
+    "dhuhr": "2026-09-01T09:32:00.000Z",
+    "asr": "2026-09-01T14:12:00.000Z",
+    "maghrib": "2026-09-01T16:26:00.000Z",
+    "isha": "2026-09-01T18:40:00.000Z"
+   }
+  },
+  {
+   "place": {
+    "id": "cdum:1",
+    "name": "Moscow",
+    "lat": 55.756,
+    "lon": 37.618,
+    "tz": "Europe/Moscow"
+   },
+   "date": "2026-12-31",
+   "clock": {
+    "zone": "Europe/Moscow",
+    "offsetMinutes": 180,
+    "label": "Europe/Moscow"
+   },
+   "printed": {
+    "fajr": "06:37",
+    "sunrise": "08:57",
+    "dhuhr": "12:34",
+    "asr": "14:20",
+    "maghrib": "16:08",
+    "isha": "18:21"
+   },
+   "instants": {
+    "fajr": "2026-12-31T03:37:00.000Z",
+    "sunrise": "2026-12-31T05:57:00.000Z",
+    "dhuhr": "2026-12-31T09:34:00.000Z",
+    "asr": "2026-12-31T11:20:00.000Z",
+    "maghrib": "2026-12-31T13:08:00.000Z",
+    "isha": "2026-12-31T15:21:00.000Z"
+   }
+  },
+  {
+   "place": {
+    "id": "cdum:2",
+    "name": "Saint Petersburg",
+    "lat": 59.939,
+    "lon": 30.316,
+    "tz": "Europe/Moscow"
+   },
+   "date": "2026-01-01",
+   "clock": {
+    "zone": "Europe/Moscow",
+    "offsetMinutes": 180,
+    "label": "Europe/Moscow"
+   },
+   "printed": {
+    "fajr": "07:15",
+    "sunrise": "09:58",
+    "dhuhr": "13:04",
+    "asr": "14:19",
+    "maghrib": "16:07",
+    "isha": "18:42"
+   },
+   "instants": {
+    "fajr": "2026-01-01T04:15:00.000Z",
+    "sunrise": "2026-01-01T06:58:00.000Z",
+    "dhuhr": "2026-01-01T10:04:00.000Z",
+    "asr": "2026-01-01T11:19:00.000Z",
+    "maghrib": "2026-01-01T13:07:00.000Z",
+    "isha": "2026-01-01T15:42:00.000Z"
+   }
+  },
+  {
+   "place": {
+    "id": "cdum:2",
+    "name": "Saint Petersburg",
+    "lat": 59.939,
+    "lon": 30.316,
+    "tz": "Europe/Moscow"
+   },
+   "date": "2026-05-02",
+   "clock": {
+    "zone": "Europe/Moscow",
+    "offsetMinutes": 180,
+    "label": "Europe/Moscow"
+   },
+   "printed": {
+    "fajr": "03:15",
+    "sunrise": "04:52",
+    "dhuhr": "12:58",
+    "asr": "18:16",
+    "maghrib": "21:00",
+    "isha": "22:30"
+   },
+   "instants": {
+    "fajr": "2026-05-02T00:15:00.000Z",
+    "sunrise": "2026-05-02T01:52:00.000Z",
+    "dhuhr": "2026-05-02T09:58:00.000Z",
+    "asr": "2026-05-02T15:16:00.000Z",
+    "maghrib": "2026-05-02T18:00:00.000Z",
+    "isha": "2026-05-02T19:30:00.000Z"
+   }
+  },
+  {
+   "place": {
+    "id": "cdum:2",
+    "name": "Saint Petersburg",
+    "lat": 59.939,
+    "lon": 30.316,
+    "tz": "Europe/Moscow"
+   },
+   "date": "2026-09-01",
+   "clock": {
+    "zone": "Europe/Moscow",
+    "offsetMinutes": 180,
+    "label": "Europe/Moscow"
+   },
+   "printed": {
+    "fajr": "02:52",
+    "sunrise": "05:52",
+    "dhuhr": "13:01",
+    "asr": "17:41",
+    "maghrib": "20:05",
+    "isha": "22:47"
+   },
+   "instants": {
+    "fajr": "2026-08-31T23:52:00.000Z",
+    "sunrise": "2026-09-01T02:52:00.000Z",
+    "dhuhr": "2026-09-01T10:01:00.000Z",
+    "asr": "2026-09-01T14:41:00.000Z",
+    "maghrib": "2026-09-01T17:05:00.000Z",
+    "isha": "2026-09-01T19:47:00.000Z"
+   }
+  },
+  {
+   "place": {
+    "id": "cdum:2",
+    "name": "Saint Petersburg",
+    "lat": 59.939,
+    "lon": 30.316,
+    "tz": "Europe/Moscow"
+   },
+   "date": "2026-12-31",
+   "clock": {
+    "zone": "Europe/Moscow",
+    "offsetMinutes": 180,
+    "label": "Europe/Moscow"
+   },
+   "printed": {
+    "fajr": "07:15",
+    "sunrise": "09:59",
+    "dhuhr": "13:04",
+    "asr": "14:17",
+    "maghrib": "16:05",
+    "isha": "18:41"
+   },
+   "instants": {
+    "fajr": "2026-12-31T04:15:00.000Z",
+    "sunrise": "2026-12-31T06:59:00.000Z",
+    "dhuhr": "2026-12-31T10:04:00.000Z",
+    "asr": "2026-12-31T11:17:00.000Z",
+    "maghrib": "2026-12-31T13:05:00.000Z",
+    "isha": "2026-12-31T15:41:00.000Z"
+   }
+  },
+  {
+   "place": {
+    "id": "cdum:14",
+    "name": "Rostov-on-Don",
+    "lat": 47.223,
+    "lon": 39.719,
+    "tz": "Europe/Moscow"
+   },
+   "date": "2026-01-01",
+   "clock": {
+    "zone": "Europe/Moscow",
+    "offsetMinutes": 180,
+    "label": "Europe/Moscow"
+   },
+   "printed": {
+    "fajr": "06:14",
+    "sunrise": "08:06",
+    "dhuhr": "12:27",
+    "asr": "14:59",
+    "maghrib": "16:44",
+    "isha": "18:29"
+   },
+   "instants": {
+    "fajr": "2026-01-01T03:14:00.000Z",
+    "sunrise": "2026-01-01T05:06:00.000Z",
+    "dhuhr": "2026-01-01T09:27:00.000Z",
+    "asr": "2026-01-01T11:59:00.000Z",
+    "maghrib": "2026-01-01T13:44:00.000Z",
+    "isha": "2026-01-01T15:29:00.000Z"
+   }
+  },
+  {
+   "place": {
+    "id": "cdum:14",
+    "name": "Rostov-on-Don",
+    "lat": 47.223,
+    "lon": 39.719,
+    "tz": "Europe/Moscow"
+   },
+   "date": "2026-05-02",
+   "clock": {
+    "zone": "Europe/Moscow",
+    "offsetMinutes": 180,
+    "label": "Europe/Moscow"
+   },
+   "printed": {
+    "fajr": "02:55",
+    "sunrise": "05:02",
+    "dhuhr": "12:20",
+    "asr": "17:23",
+    "maghrib": "19:35",
+    "isha": "21:33"
+   },
+   "instants": {
+    "fajr": "2026-05-01T23:55:00.000Z",
+    "sunrise": "2026-05-02T02:02:00.000Z",
+    "dhuhr": "2026-05-02T09:20:00.000Z",
+    "asr": "2026-05-02T14:23:00.000Z",
+    "maghrib": "2026-05-02T16:35:00.000Z",
+    "isha": "2026-05-02T18:33:00.000Z"
+   }
+  },
+  {
+   "place": {
+    "id": "cdum:14",
+    "name": "Rostov-on-Don",
+    "lat": 47.223,
+    "lon": 39.719,
+    "tz": "Europe/Moscow"
+   },
+   "date": "2026-09-01",
+   "clock": {
+    "zone": "Europe/Moscow",
+    "offsetMinutes": 180,
+    "label": "Europe/Moscow"
+   },
+   "printed": {
+    "fajr": "03:47",
+    "sunrise": "05:38",
+    "dhuhr": "12:23",
+    "asr": "17:03",
+    "maghrib": "19:04",
+    "isha": "20:47"
+   },
+   "instants": {
+    "fajr": "2026-09-01T00:47:00.000Z",
+    "sunrise": "2026-09-01T02:38:00.000Z",
+    "dhuhr": "2026-09-01T09:23:00.000Z",
+    "asr": "2026-09-01T14:03:00.000Z",
+    "maghrib": "2026-09-01T16:04:00.000Z",
+    "isha": "2026-09-01T17:47:00.000Z"
+   }
+  },
+  {
+   "place": {
+    "id": "cdum:14",
+    "name": "Rostov-on-Don",
+    "lat": 47.223,
+    "lon": 39.719,
+    "tz": "Europe/Moscow"
+   },
+   "date": "2026-12-31",
+   "clock": {
+    "zone": "Europe/Moscow",
+    "offsetMinutes": 180,
+    "label": "Europe/Moscow"
+   },
+   "printed": {
+    "fajr": "06:14",
+    "sunrise": "08:06",
+    "dhuhr": "12:26",
+    "asr": "14:58",
+    "maghrib": "16:43",
+    "isha": "18:28"
+   },
+   "instants": {
+    "fajr": "2026-12-31T03:14:00.000Z",
+    "sunrise": "2026-12-31T05:06:00.000Z",
+    "dhuhr": "2026-12-31T09:26:00.000Z",
+    "asr": "2026-12-31T11:58:00.000Z",
+    "maghrib": "2026-12-31T13:43:00.000Z",
+    "isha": "2026-12-31T15:28:00.000Z"
+   }
+  },
+  {
+   "place": {
+    "id": "cdum:17",
+    "name": "Khabarovsk",
+    "lat": 48.481,
+    "lon": 135.072,
+    "tz": "Asia/Vladivostok"
+   },
+   "date": "2026-01-01",
+   "clock": {
+    "zone": "Asia/Vladivostok",
+    "offsetMinutes": 600,
+    "label": "Asia/Vladivostok"
+   },
+   "printed": {
+    "fajr": "06:55",
+    "sunrise": "08:50",
+    "dhuhr": "13:05",
+    "asr": "15:32",
+    "maghrib": "17:17",
+    "isha": "19:05"
+   },
+   "instants": {
+    "fajr": "2025-12-31T20:55:00.000Z",
+    "sunrise": "2025-12-31T22:50:00.000Z",
+    "dhuhr": "2026-01-01T03:05:00.000Z",
+    "asr": "2026-01-01T05:32:00.000Z",
+    "maghrib": "2026-01-01T07:17:00.000Z",
+    "isha": "2026-01-01T09:05:00.000Z"
+   }
+  },
+  {
+   "place": {
+    "id": "cdum:17",
+    "name": "Khabarovsk",
+    "lat": 48.481,
+    "lon": 135.072,
+    "tz": "Asia/Vladivostok"
+   },
+   "date": "2026-05-02",
+   "clock": {
+    "zone": "Asia/Vladivostok",
+    "offsetMinutes": 600,
+    "label": "Asia/Vladivostok"
+   },
+   "printed": {
+    "fajr": "03:25",
+    "sunrise": "05:37",
+    "dhuhr": "12:59",
+    "asr": "18:03",
+    "maghrib": "20:17",
+    "isha": "22:20"
+   },
+   "instants": {
+    "fajr": "2026-05-01T17:25:00.000Z",
+    "sunrise": "2026-05-01T19:37:00.000Z",
+    "dhuhr": "2026-05-02T02:59:00.000Z",
+    "asr": "2026-05-02T08:03:00.000Z",
+    "maghrib": "2026-05-02T10:17:00.000Z",
+    "isha": "2026-05-02T12:20:00.000Z"
+   }
+  },
+  {
+   "place": {
+    "id": "cdum:17",
+    "name": "Khabarovsk",
+    "lat": 48.481,
+    "lon": 135.072,
+    "tz": "Asia/Vladivostok"
+   },
+   "date": "2026-09-01",
+   "clock": {
+    "zone": "Asia/Vladivostok",
+    "offsetMinutes": 600,
+    "label": "Asia/Vladivostok"
+   },
+   "printed": {
+    "fajr": "04:19",
+    "sunrise": "06:14",
+    "dhuhr": "13:02",
+    "asr": "17:42",
+    "maghrib": "19:44",
+    "isha": "21:32"
+   },
+   "instants": {
+    "fajr": "2026-08-31T18:19:00.000Z",
+    "sunrise": "2026-08-31T20:14:00.000Z",
+    "dhuhr": "2026-09-01T03:02:00.000Z",
+    "asr": "2026-09-01T07:42:00.000Z",
+    "maghrib": "2026-09-01T09:44:00.000Z",
+    "isha": "2026-09-01T11:32:00.000Z"
+   }
+  },
+  {
+   "place": {
+    "id": "cdum:17",
+    "name": "Khabarovsk",
+    "lat": 48.481,
+    "lon": 135.072,
+    "tz": "Asia/Vladivostok"
+   },
+   "date": "2026-12-31",
+   "clock": {
+    "zone": "Asia/Vladivostok",
+    "offsetMinutes": 600,
+    "label": "Asia/Vladivostok"
+   },
+   "printed": {
+    "fajr": "06:55",
+    "sunrise": "08:50",
+    "dhuhr": "13:05",
+    "asr": "15:31",
+    "maghrib": "17:16",
+    "isha": "19:04"
+   },
+   "instants": {
+    "fajr": "2026-12-30T20:55:00.000Z",
+    "sunrise": "2026-12-30T22:50:00.000Z",
+    "dhuhr": "2026-12-31T03:05:00.000Z",
+    "asr": "2026-12-31T05:31:00.000Z",
+    "maghrib": "2026-12-31T07:16:00.000Z",
+    "isha": "2026-12-31T09:04:00.000Z"
    }
   }
  ]

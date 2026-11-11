@@ -42,8 +42,9 @@ each method.
 | **Kuwait** | the Ministry’s table | 46 | 201,480 | **0** | 95.205 % | 9,660 | 1 Jan 2026 → 31 Dec 2027 |
 | **Jordan** | the Ministry’s times | 17 | 37,230 | **0** | 98.380 % | 603 | 1 Jan 2026 → 31 Dec 2026 |
 | **Tatarstan** | the Administration’s timetable | 44 | 96,360 | **0** | 98.071 % | 1,858 | 1 Jan 2026 → 31 Dec 2026 |
+| **Russia (Central Muftiate)** | the Central Muftiate’s timetables | 18 | 39,342 | **0** | 99.877 % | 48 | 1 Jan 2026 → 31 Dec 2026 |
 
-13 of 13 methods certified; 0 of 76,531,574 times off the printed minute. Last checked 9 November 2026. Generated from [`certification.json`](../certification.json) by `scripts/readme.mjs`.
+14 of 14 methods certified; 0 of 76,570,916 times off the printed minute. Last checked 9 November 2026. Generated from [`certification.json`](../certification.json) by `scripts/readme.mjs`.
 <!-- certification-table:end -->
 
 ## Sweden
@@ -360,6 +361,30 @@ places): the method gives <!--fig:tatarstan.alonePct-->98.071<!--/fig--> % alone
 > not. Asr decided the family of the program, as in Jordan: at two shadows
 > on the apparent sun it is off about one day in thirty, on the true sun
 > one day in four.
+
+## Russia: the Central Muftiate
+
+Certified over <!--fig:cdum.span-->1 Jan 2026 → 31 Dec 2026<!--/fig--> (<!--fig:cdum.check0.places-->18<!--/fig-->
+cities): the method gives <!--fig:cdum.alonePct-->99.877<!--/fig--> % alone, and a list of
+<!--fig:cdum.corrections-->48<!--/fig--> corrections the rest.
+
+> **Research note, 2026-11-12** (not generated). The Muftiate publishes
+> twenty-one cities; eighteen are here. Kazan's page follows another rule
+> (18° and 15°, no margins, fixed intervals in the white nights) and the
+> city is in the Tatarstan method from its own Administration. Ufa's
+> timetable is published as pictures. Salekhard, on the Arctic Circle,
+> follows this method through the year — its days of midnight sun are the
+> 45th parallel's own — but on five days at the edges of that season, when
+> Maghrib falls after midnight, the page prints a Fajr in the evening and an
+> Isha in the morning; a method should not give those, and the city is left
+> out rather than certified around them. What decided the family of the
+> program was sunrise: with an iterated sun one day in nine is a minute off
+> at Moscow's latitude, with the sun taken once at 6h none is. The white-night
+> rule was read from the ratio of the twilight to the night, which on any
+> one date is the same in every northern city of the list and is the 45th
+> parallel's; computed on the printed minutes and cut, it gives 2,525 of
+> the 2,533 white-night times, and the other eight follow a neighbouring
+> time that is itself on the other side of a minute.
 
 ## Not here, and why
 

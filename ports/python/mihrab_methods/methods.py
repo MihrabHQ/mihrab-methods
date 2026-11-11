@@ -1,5 +1,5 @@
 """The methods: Sweden and Diyanet (the Congress method), Morocco, Algeria,
-Indonesia, Türkiye Takvimi, Kazakhstan, Egypt, Brunei, Qatar, Kuwait, Jordan and Tatarstan. A port of src/methods/*.ts — the TypeScript is the reference,
+Indonesia, Türkiye Takvimi, Kazakhstan, Egypt, Brunei, Qatar, Kuwait, Jordan, Tatarstan and Russia's Central Muftiate. A port of src/methods/*.ts — the TypeScript is the reference,
 docs/methods.md says what each does, and test_vectors.py holds this to it.
 
 Every function takes a civil date with the month 0-based, as the TypeScript
@@ -658,6 +658,49 @@ def tatarstan_minutes(lat, lon, year, month0, day, dip_deg=0):
         'maghrib': maghrib,
         'isha': math.ceil(event(-15, 1)) if math.isfinite(dusk) else maghrib + 90,
     }
+
+
+# ---------------------------------------------------------------- Russia: the Central Muftiate
+
+
+def _cdum_printed(lat, lon, year, month0, day):
+    """The six with margin and rounding, whole minutes; NAN where the sun does not reach a time's altitude."""
+    jd = _kz_julian(year, month0 + 1, day) - lon / 360
+
+    def midday(t):
+        return _kz_fix(12 - _kz_sun(jd + t)[1], 24)
+
+    def at(angle, t, before):
+        decl = _kz_sun(jd + t)[0]
+        x = (-math.sin(angle * RAD) - math.sin(decl * RAD) * math.sin(lat * RAD)) / (math.cos(decl * RAD) * math.cos(lat * RAD))
+        if not abs(x) <= 1:
+            return NAN
+        h = math.acos(x) / RAD / 15
+        return midday(t) + (-h if before else h)
+
+    asr_angle = -math.atan(1 / (2 + math.tan(abs(lat - _kz_sun(jd + 13 / 24)[0]) * RAD))) / RAD
+
+    def minute(h, margin):
+        return math.floor((h - lon / 15) * 60 + margin + 0.5) if math.isfinite(h) else NAN
+
+    return [minute(at(18, 5 / 24, True), -2), minute(at(0.833, 6 / 24, True), -2), minute(midday(12 / 24), 2),
+            minute(at(asr_angle, 13 / 24, False), 2), minute(at(0.833, 18 / 24, False), 2), minute(at(17, 18 / 24, False), 2)]
+
+
+def cdum_minutes(lat, lon, year, month0, day):
+    """As printed, whole minutes: Kazakhstan's sun and arithmetic, Fajr at 18° and Isha at 17°, Asr at two shadows, 2 minutes' margin on every time and the nearest minute; where the twilight does not form, the 45th parallel's share of the night, on the printed minutes, cut to the minute. None where the sun does not rise or set."""
+    p = _cdum_printed(lat, lon, year, month0, day)
+    if not all(math.isfinite(v) for v in p[1:5]):
+        return None
+    fajr, isha = p[0], p[5]
+    if not (math.isfinite(fajr) and math.isfinite(isha)):
+        r = _cdum_printed(45, lon, year, month0, day)
+        night, there = 1440 - (p[4] - p[1]), 1440 - (r[4] - r[1])
+        if not math.isfinite(fajr):
+            fajr = p[1] - math.ceil((r[1] - r[0]) * night / there)
+        if not math.isfinite(isha):
+            isha = p[4] + math.floor((r[5] - r[4]) * night / there)
+    return {'fajr': fajr, 'sunrise': p[1], 'dhuhr': p[2], 'asr': p[3], 'maghrib': p[4], 'isha': isha}
 
 
 # ---------------------------------------------------------------- Sweden and Diyanet: the Congress method

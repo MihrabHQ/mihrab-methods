@@ -1,5 +1,5 @@
 // The methods: Sweden and Diyanet (the Congress method), Morocco, Algeria,
-// Indonesia, Türkiye Takvimi, Kazakhstan, Egypt, Brunei, Qatar, Kuwait, Jordan and Tatarstan. A port of src/methods/*.ts — the TypeScript is the reference,
+// Indonesia, Türkiye Takvimi, Kazakhstan, Egypt, Brunei, Qatar, Kuwait, Jordan, Tatarstan and Russia's Central Muftiate. A port of src/methods/*.ts — the TypeScript is the reference,
 // docs/methods.md says what each does, and the vector check holds this to it.
 //
 // Every function takes a civil date with the month 0-based, as the TypeScript
@@ -585,6 +585,49 @@ DayMinutes? tatarstanMinutes(double lat, double lon, int year, int month0, int d
     asr.ceilToDouble(),
     maghrib,
     dusk.isFinite ? event(-15.0, 1.0).ceilToDouble() : maghrib + 90,
+  );
+}
+
+// ---------------------------------------------------------------- Russia: the Central Muftiate
+
+/// The six with margin and rounding, whole minutes; NaN where the sun does not reach a time's altitude.
+DayMinutes _cdumPrinted(double lat, double lon, int year, int month0, int day) {
+  final jd = _kzJulian(year, month0 + 1, day) - lon / 360;
+  double midday(double t) => _kzFix(12 - _kzSun(jd + t)[1], 24);
+  double at(double angle, double t, bool before) {
+    final decl = _kzSun(jd + t)[0];
+    final x = (-sin(angle * rad) - sin(decl * rad) * sin(lat * rad)) / (cos(decl * rad) * cos(lat * rad));
+    if (!(x.abs() <= 1)) return double.nan;
+    final h = acos(x) / rad / 15;
+    return midday(t) + (before ? -h : h);
+  }
+
+  final asrAngle = -atan(1 / (2 + tan((lat - _kzSun(jd + 13.0 / 24)[0]).abs() * rad))) / rad;
+  double minute(double h, double margin) => h.isFinite ? ((h - lon / 15) * 60 + margin + 0.5).floorToDouble() : double.nan;
+  return DayMinutes(
+    minute(at(18.0, 5.0 / 24, true), -2.0),
+    minute(at(0.833, 6.0 / 24, true), -2.0),
+    minute(midday(12.0 / 24), 2.0),
+    minute(at(asrAngle, 13.0 / 24, false), 2.0),
+    minute(at(0.833, 18.0 / 24, false), 2.0),
+    minute(at(17.0, 18.0 / 24, false), 2.0),
+  );
+}
+
+/// As printed, whole minutes: Kazakhstan's sun and arithmetic, Fajr at 18° and Isha at 17°, Asr at two shadows, 2 minutes' margin on every time and the nearest minute; where the twilight does not form, the 45th parallel's share of the night, on the printed minutes, cut to the minute. Null where the sun does not rise or set.
+DayMinutes? cdumMinutes(double lat, double lon, int year, int month0, int day) {
+  final p = _cdumPrinted(lat, lon, year, month0, day);
+  if (!(p.sunrise.isFinite && p.dhuhr.isFinite && p.asr.isFinite && p.maghrib.isFinite)) return null;
+  if (p.fajr.isFinite && p.isha.isFinite) return p;
+  final r = _cdumPrinted(45.0, lon, year, month0, day);
+  final night = 1440 - (p.maghrib - p.sunrise), there = 1440 - (r.maghrib - r.sunrise);
+  return DayMinutes(
+    p.fajr.isFinite ? p.fajr : p.sunrise - ((r.sunrise - r.fajr) * night / there).ceilToDouble(),
+    p.sunrise,
+    p.dhuhr,
+    p.asr,
+    p.maghrib,
+    p.isha.isFinite ? p.isha : p.maghrib + ((r.isha - r.maghrib) * night / there).floorToDouble(),
   );
 }
 

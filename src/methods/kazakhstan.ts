@@ -55,7 +55,7 @@ const NORTH = 48;
 const GUESS = { fajr: 5, sunrise: 6, dhuhr: 12, asr: 13, sunset: 18, isha: 18 } as const;
 
 /** The Julian day of 0h UT of a civil date (month 1-based). */
-function julian(year: number, month: number, day: number): number {
+export function kazakhstanJulian(year: number, month: number, day: number): number {
   if (month <= 2) {
     year -= 1;
     month += 12;
@@ -66,7 +66,7 @@ function julian(year: number, month: number, day: number): number {
 }
 
 /** The method's sun at a Julian day: declination (degrees), equation of time (hours). */
-function sunAt(jd: number): { decl: number; eqt: number } {
+export function kazakhstanSunAt(jd: number): { decl: number; eqt: number } {
   const D = jd - 2451545.0;
   const g = fix(357.529 + 0.98560028 * D, 360);
   const q = fix(280.459 + 0.98564736 * D, 360);
@@ -92,17 +92,17 @@ export function kazakhstanRawMinutes(
   month: number,
   day: number,
 ): { fajr: number; sunrise: number; dhuhr: number; asr: number; sunset: number; maghrib: number; isha: number } {
-  const jd = julian(year, month + 1, day) - longitude / 360;
-  const midday = (t: number) => fix(12 - sunAt(jd + t).eqt, 24);
+  const jd = kazakhstanJulian(year, month + 1, day) - longitude / 360;
+  const midday = (t: number) => fix(12 - kazakhstanSunAt(jd + t).eqt, 24);
   /** Hours (local mean time) at which the sun is `angle` degrees below the horizon; NaN where it is not. */
   const at = (angle: number, t: number, before: boolean) => {
-    const { decl } = sunAt(jd + t);
+    const { decl } = kazakhstanSunAt(jd + t);
     const x = (-sin(angle) - sin(decl) * sin(latitude)) / (cos(decl) * cos(latitude));
     if (!(Math.abs(x) <= 1)) return NaN;
     const h = Math.acos(x) / RAD / 15;
     return midday(t) + (before ? -h : h);
   };
-  const asrAngle = (t: number) => -Math.atan(1 / (ASR_SHADOW + tan(Math.abs(latitude - sunAt(jd + t).decl)))) / RAD;
+  const asrAngle = (t: number) => -Math.atan(1 / (ASR_SHADOW + tan(Math.abs(latitude - kazakhstanSunAt(jd + t).decl)))) / RAD;
   let fajr = at(TWILIGHT, GUESS.fajr / 24, true);
   const sunrise = at(HORIZON, GUESS.sunrise / 24, true);
   const dhuhr = midday(GUESS.dhuhr / 24);
