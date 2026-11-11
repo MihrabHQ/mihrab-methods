@@ -1,5 +1,5 @@
 // The methods: Sweden and Diyanet (the Congress method), Morocco, Algeria,
-// Indonesia, Türkiye Takvimi, Kazakhstan, Egypt, Brunei, Qatar, Kuwait and Jordan. A port of src/methods/*.ts — the TypeScript is the reference,
+// Indonesia, Türkiye Takvimi, Kazakhstan, Egypt, Brunei, Qatar, Kuwait, Jordan and Tatarstan. A port of src/methods/*.ts — the TypeScript is the reference,
 // docs/methods.md says what each does, and the vector check holds this to it.
 //
 // Every function takes a civil date with the month 0-based, as the TypeScript
@@ -520,6 +520,48 @@ fun jordanRawMinutes(lat: Double, lon: Double, year: Int, month0: Int, day: Int,
 fun jordanMinutes(lat: Double, lon: Double, year: Int, month0: Int, day: Int, dipDeg: Double = 0.0, asrShadow: Double = 1.0, dipMaghribDeg: Double? = null, fajrMinutes: Double = 0.0): DayMinutes? {
     val r = jordanRawMinutes(lat, lon, year, month0, day, dipDeg, asrShadow, dipMaghribDeg, fajrMinutes)
     return if (r.allFinite) r.mapped { floor(it + 0.5) } else null
+}
+
+// ---------------------------------------------------------------- Tatarstan
+
+/** As printed, whole minutes: the dawn at 18° rounded down, the rest rounded up, Asr at two shadows on the apparent sun, Isha at 15°; where the 18° twilight does not form, the dawn 121 minutes before sunrise and Isha 90 after Maghrib. Null where a time does not form. */
+fun tatarstanMinutes(lat: Double, lon: Double, year: Int, month0: Int, day: Int, dipDeg: Double = 0.0): DayMinutes? {
+    val d0 = d0Of(year, month0, day)
+    fun at(t: Double) = meeusApparentSun(d0 + t / 1440)
+    var noon = 720 - 4 * lon
+    repeat(3) { noon = 720 - 4 * lon - at(noon).eot }
+    val sp = sin(lat * RAD)
+    val cp = cos(lat * RAD)
+    fun event(alt: Double, sign: Double): Double {
+        var t = noon + sign * 300
+        var forms = true
+        repeat(6) {
+            val s = at(t)
+            val c = (sin(alt * RAD) - sp * sin(s.dec)) / (cp * cos(s.dec))
+            forms = abs(c) <= 1
+            t = 720 - 4 * lon - s.eot + (sign * 4 * acos(maxOf(-1.0, minOf(1.0, c)))) / RAD
+        }
+        return if (forms) t else Double.NaN
+    }
+    val noonTrue = 90 - abs(lat - at(noon).dec / RAD)
+    val noonApparent = noonTrue + refractionFromTrue(noonTrue)
+    val asrApparent = atan(1 / (2 + 1 / tan(noonApparent * RAD))) / RAD
+    val asr = event(asrApparent - refractionFromApparent(asrApparent), 1.0)
+    val rise = event(-(0.8333 + dipDeg), -1.0)
+    val sset = event(-(0.8333 + dipDeg), 1.0)
+    if (!(rise.isFinite() && sset.isFinite() && asr.isFinite())) return null
+    val sunrise = ceil(rise)
+    val maghrib = ceil(sset)
+    val dawn = event(-18.0, -1.0)
+    val dusk = event(-18.0, 1.0)
+    return DayMinutes(
+        fajr = if (dawn.isFinite()) floor(dawn) else sunrise - 121,
+        sunrise = sunrise,
+        dhuhr = ceil(noon),
+        asr = ceil(asr),
+        maghrib = maghrib,
+        isha = if (dusk.isFinite()) ceil(event(-15.0, 1.0)) else maghrib + 90,
+    )
 }
 
 // ---------------------------------------------------------------- Sweden and Diyanet: the Congress method

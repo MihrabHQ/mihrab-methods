@@ -22,6 +22,7 @@ import './authorities/brunei.js';
 import './authorities/qatar.js';
 import './authorities/kuwait.js';
 import './authorities/jordan.js';
+import './authorities/tatarstan.js';
 
 export * from './core/index.js';
 export { diyanetCountry } from './authorities/diyanet.js';

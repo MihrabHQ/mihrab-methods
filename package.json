@@ -1,7 +1,7 @@
 {
   "name": "mihrab-methods",
   "version": "1.11.0",
-  "description": "The prayer-time authorities' own calculation methods, each reproducing its published timetable to the minute: Sweden (Diyanet, as Islamiska Förbundet prints it), Diyanet worldwide, Morocco (Habous), Algeria (Ministry of Religious Affairs), Indonesia (Kemenag), Türkiye Takvimi, Kazakhstan (Spiritual Administration), Egypt (General Authority of Survey), Brunei (Ministry of Religious Affairs), Qatar (Qatar Calendar House), Kuwait (Ministry of Awqaf and Islamic Affairs), Jordan (Ministry of Awqaf, Islamic Affairs and Holy Places).",
+  "description": "The prayer-time authorities' own calculation methods, each reproducing its published timetable to the minute: Sweden (Diyanet, as Islamiska Förbundet prints it), Diyanet worldwide, Morocco (Habous), Algeria (Ministry of Religious Affairs), Indonesia (Kemenag), Türkiye Takvimi, Kazakhstan (Spiritual Administration), Egypt (General Authority of Survey), Brunei (Ministry of Religious Affairs), Qatar (Qatar Calendar House), Kuwait (Ministry of Awqaf and Islamic Affairs), Jordan (Ministry of Awqaf, Islamic Affairs and Holy Places), Tatarstan (Spiritual Administration of Muslims).",
   "license": "MPL-2.0",
   "author": "Hassan El Ghamri",
   "repository": {
@@ -35,6 +35,7 @@
     "./dist/*/qatar.js",
     "./dist/*/kuwait.js",
     "./dist/*/jordan.js",
+    "./dist/*/tatarstan.js",
     "./dist/*/authorities/*.js",
     "./src/index.ts",
     "./src/sweden.ts",
@@ -49,6 +50,7 @@
     "./src/qatar.ts",
     "./src/kuwait.ts",
     "./src/jordan.ts",
+    "./src/tatarstan.ts",
     "./src/authorities/*.ts"
   ],
   "engines": {
@@ -205,6 +207,16 @@
         "default": "./dist/cjs/jordan.js"
       }
     },
+    "./tatarstan": {
+      "import": {
+        "types": "./dist/esm/tatarstan.d.ts",
+        "default": "./dist/esm/tatarstan.js"
+      },
+      "require": {
+        "types": "./dist/cjs/tatarstan.d.ts",
+        "default": "./dist/cjs/tatarstan.js"
+      }
+    },
     "./locate": {
       "import": {
         "types": "./dist/esm/locate.d.ts",
@@ -260,6 +272,9 @@
       ],
       "jordan": [
         "./dist/cjs/jordan.d.ts"
+      ],
+      "tatarstan": [
+        "./dist/cjs/tatarstan.d.ts"
       ],
       "locate": [
         "./dist/cjs/locate.d.ts"

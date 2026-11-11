@@ -9,12 +9,12 @@ import 'dart:convert';
 
 import 'methods.dart';
 
-enum Authority { sweden, diyanet, morocco, algeria, indonesia, turkiyetakvimi, kazakhstan, egypt, brunei, qatar, kuwait, jordan }
+enum Authority { sweden, diyanet, morocco, algeria, indonesia, turkiyetakvimi, kazakhstan, egypt, brunei, qatar, kuwait, jordan, tatarstan }
 
 enum Prayer { fajr, sunrise, dhuhr, asr, maghrib, isha }
 
 /// The method revisions this port reproduces. A correction list belongs to one revision.
-const Map<String, int> revisions = {'sweden': 1, 'diyanet': 2, 'morocco': 3, 'algeria': 1, 'indonesia': 2, 'turkiyetakvimi': 1, 'kazakhstan': 1, 'egypt': 1, 'brunei': 1, 'qatar': 1, 'kuwait': 1, 'jordan': 1};
+const Map<String, int> revisions = {'sweden': 1, 'diyanet': 2, 'morocco': 3, 'algeria': 1, 'indonesia': 2, 'turkiyetakvimi': 1, 'kazakhstan': 1, 'egypt': 1, 'brunei': 1, 'qatar': 1, 'kuwait': 1, 'jordan': 1, 'tatarstan': 1};
 
 /// One change of a table's own clock: from a date on, minutes east of UTC.
 class ClockChange {
@@ -199,6 +199,9 @@ Day? timesFor(Place place, String date, {int? zoneOffsetMinutes, CorrectionList?
     case Authority.jordan:
       t = jordanMinutes(place.lat, place.lon, year, month0, day,
           dipDeg: place.dipDeg ?? 0.0, asrShadow: asrShadow, dipMaghribDeg: place.dipMaghribDeg, fajrMinutes: place.fajrMinutes ?? 0.0);
+      break;
+    case Authority.tatarstan:
+      t = tatarstanMinutes(place.lat, place.lon, year, month0, day, dipDeg: place.dipDeg ?? 0.0);
       break;
     case Authority.turkiyetakvimi:
       t = takvimMinutes(place.lat, place.lon, year, month0, day, temkin: place.temkin, asrShadow: asrShadow);

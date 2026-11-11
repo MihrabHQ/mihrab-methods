@@ -376,6 +376,34 @@ of program as Morocco's ministry's, with Jordan's own figures.
   one length.
 - Every time rounded to the **nearest** minute.
 
+## Tatarstan
+
+`src/methods/tatarstan.ts`. The Spiritual Administration of Muslims of the
+Republic of Tatarstan's yearly timetable, read off its year for forty-four
+places.
+
+- **Meeus's apparent sun** (Morocco's) at each time's own moment, its
+  declination and equation of time iterated.
+- **The dawn** — the end of sahur, and the Fajr printed here: the sun 18°
+  below the horizon, rounded **down**.
+- **Sunrise** and **Maghrib**: the sun's centre 0.8333° below the horizon
+  and the place's small horizon allowance (`Place.dipDeg`, up to 0.017°).
+  **Dhuhr** here is the timetable's zenith column, the sun's transit.
+  **Isha**: 15°. Each rounded **up**.
+- **Asr**: two shadow lengths, on the apparent sun as Morocco's is at one —
+  the noon shadow from the refracted noon altitude, and the moment the
+  refracted sun casts it plus two lengths. Rounded up. The method prints
+  this Asr whatever shadow length is asked for.
+- **Where the 18° twilight does not form** (May to early August at these
+  latitudes): the dawn is 121 minutes before the printed sunrise, and Isha
+  90 minutes after the printed Maghrib. Each follows its own twilight — the
+  dawn the morning's, Isha the evening's — so the two rules begin and end a
+  day apart at most.
+- **Not computed here:** the timetable's two times of the mosques. The
+  morning prayer as it is read in the mosques is 91 minutes before the
+  printed sunrise on every day of the year, and the mosques' Dhuhr is a
+  fixed clock time (12:00 in most districts, 11:45 to 12:15 in a few).
+
 ## Checking a port
 
 1. Take `test/vectors.json`. For each case, compute the six times at the

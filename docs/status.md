@@ -41,8 +41,9 @@ each method.
 | **Qatar** | the Calendar House’s times | 1 | 708 | **0** | 96.186 % | 27 | 16 Jun 2026 → 11 Oct 2026 |
 | **Kuwait** | the Ministry’s table | 46 | 201,480 | **0** | 95.205 % | 9,660 | 1 Jan 2026 → 31 Dec 2027 |
 | **Jordan** | the Ministry’s times | 17 | 37,230 | **0** | 98.380 % | 603 | 1 Jan 2026 → 31 Dec 2026 |
+| **Tatarstan** | the Administration’s timetable | 44 | 96,360 | **0** | 98.071 % | 1,858 | 1 Jan 2026 → 31 Dec 2026 |
 
-12 of 12 methods certified; 0 of 76,435,214 times off the printed minute. Last checked 9 November 2026. Generated from [`certification.json`](../certification.json) by `scripts/readme.mjs`.
+13 of 13 methods certified; 0 of 76,531,574 times off the printed minute. Last checked 9 November 2026. Generated from [`certification.json`](../certification.json) by `scripts/readme.mjs`.
 <!-- certification-table:end -->
 
 ## Sweden
@@ -338,6 +339,27 @@ zones): the method gives <!--fig:jordan.alonePct-->98.380<!--/fig--> % alone, an
 > Asr settled the family of the program: with Morocco's rule on the
 > apparent sun it is off on 81 days of 6,205, with the plain shadow on
 > more than 200.
+
+## Tatarstan
+
+Certified over <!--fig:tatarstan.span-->1 Jan 2026 → 31 Dec 2026<!--/fig--> (<!--fig:tatarstan.check0.places-->44<!--/fig-->
+places): the method gives <!--fig:tatarstan.alonePct-->98.071<!--/fig--> % alone, and a list of
+<!--fig:tatarstan.corrections-->1,858<!--/fig--> corrections the rest.
+
+> **Research note, 2026-11-12** (not generated). The check is of six
+> columns of the timetable's eight: the end of sahur as Fajr, sunrise, the
+> zenith as Dhuhr, Asr, Maghrib and Isha. The other two are the mosques'
+> own: a morning prayer 91 minutes before sunrise on all 16,060 rows, and a
+> Dhuhr at a fixed clock time — 12:00 in thirty-seven districts, 11:45,
+> 11:50, 12:05 or 12:15 in six, and in one 12:05 for seven weeks of winter
+> and 12:00 otherwise. A reader in Tatarstan who follows the mosque wants
+> those two, and an app can show them from the same sunrise; they are not
+> times of the sun and are not certified here. The white-night rule is
+> exact: on every row but four the dawn is the rule's when the morning's
+> 18° twilight does not form and Isha is the rule's when the evening's does
+> not. Asr decided the family of the program, as in Jordan: at two shadows
+> on the apparent sun it is off about one day in thirty, on the true sun
+> one day in four.
 
 ## Not here, and why
 

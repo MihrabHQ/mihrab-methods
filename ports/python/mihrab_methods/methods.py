@@ -1,5 +1,5 @@
 """The methods: Sweden and Diyanet (the Congress method), Morocco, Algeria,
-Indonesia, Türkiye Takvimi, Kazakhstan, Egypt, Brunei, Qatar, Kuwait and Jordan. A port of src/methods/*.ts — the TypeScript is the reference,
+Indonesia, Türkiye Takvimi, Kazakhstan, Egypt, Brunei, Qatar, Kuwait, Jordan and Tatarstan. A port of src/methods/*.ts — the TypeScript is the reference,
 docs/methods.md says what each does, and test_vectors.py holds this to it.
 
 Every function takes a civil date with the month 0-based, as the TypeScript
@@ -614,6 +614,50 @@ def jordan_minutes(lat, lon, year, month0, day, dip_deg=0, asr_shadow=1, dip_mag
     if not all(math.isfinite(v) for v in r.values()):
         return None
     return {k: math.floor(v + 0.5) for k, v in r.items()}
+
+
+# ---------------------------------------------------------------- Tatarstan
+
+
+def tatarstan_minutes(lat, lon, year, month0, day, dip_deg=0):
+    """As printed, whole minutes: the dawn at 18° rounded down, the rest rounded up, Asr at two shadows on the apparent sun, Isha at 15°; where the 18° twilight does not form, the dawn 121 minutes before sunrise and Isha 90 after Maghrib. None where a time does not form."""
+    d0 = _d0(year, month0, day)
+
+    def at(t):
+        return meeus_apparent_sun(d0 + t / 1440)
+
+    noon = 720 - 4 * lon
+    for _ in range(3):
+        noon = 720 - 4 * lon - at(noon)[1]
+    sp, cp = math.sin(lat * RAD), math.cos(lat * RAD)
+
+    def event(alt, sign):
+        t = noon + sign * 300
+        forms = True
+        for _ in range(6):
+            dec, eot = at(t)
+            c = (math.sin(alt * RAD) - sp * math.sin(dec)) / (cp * math.cos(dec))
+            forms = abs(c) <= 1
+            t = 720 - 4 * lon - eot + (sign * 4 * math.acos(max(-1.0, min(1.0, c)))) / RAD
+        return t if forms else NAN
+
+    noon_true = 90 - abs(lat - at(noon)[0] / RAD)
+    noon_apparent = noon_true + _refraction_from_true(noon_true)
+    asr_apparent = math.atan(1 / (2 + 1 / math.tan(noon_apparent * RAD))) / RAD
+    asr = event(asr_apparent - _refraction_from_apparent(asr_apparent), 1)
+    rise, sset = event(-(0.8333 + dip_deg), -1), event(-(0.8333 + dip_deg), 1)
+    if not (math.isfinite(rise) and math.isfinite(sset) and math.isfinite(asr)):
+        return None
+    sunrise, maghrib = math.ceil(rise), math.ceil(sset)
+    dawn, dusk = event(-18, -1), event(-18, 1)
+    return {
+        'fajr': math.floor(dawn) if math.isfinite(dawn) else sunrise - 121,
+        'sunrise': sunrise,
+        'dhuhr': math.ceil(noon),
+        'asr': math.ceil(asr),
+        'maghrib': maghrib,
+        'isha': math.ceil(event(-15, 1)) if math.isfinite(dusk) else maghrib + 90,
+    }
 
 
 # ---------------------------------------------------------------- Sweden and Diyanet: the Congress method

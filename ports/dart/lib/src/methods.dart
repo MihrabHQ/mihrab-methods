@@ -1,5 +1,5 @@
 // The methods: Sweden and Diyanet (the Congress method), Morocco, Algeria,
-// Indonesia, Türkiye Takvimi, Kazakhstan, Egypt, Brunei, Qatar, Kuwait and Jordan. A port of src/methods/*.ts — the TypeScript is the reference,
+// Indonesia, Türkiye Takvimi, Kazakhstan, Egypt, Brunei, Qatar, Kuwait, Jordan and Tatarstan. A port of src/methods/*.ts — the TypeScript is the reference,
 // docs/methods.md says what each does, and the vector check holds this to it.
 //
 // Every function takes a civil date with the month 0-based, as the TypeScript
@@ -545,6 +545,47 @@ DayMinutes? jordanMinutes(double lat, double lon, int year, int month0, int day,
     {double dipDeg = 0.0, double asrShadow = 1.0, double? dipMaghribDeg, double fajrMinutes = 0.0}) {
   final r = jordanRawMinutes(lat, lon, year, month0, day, dipDeg: dipDeg, asrShadow: asrShadow, dipMaghribDeg: dipMaghribDeg, fajrMinutes: fajrMinutes);
   return r.allFinite ? r.mapped((v) => (v + 0.5).floorToDouble()) : null;
+}
+
+// ---------------------------------------------------------------- Tatarstan
+
+/// As printed, whole minutes: the dawn at 18° rounded down, the rest rounded up, Asr at two shadows on the apparent sun, Isha at 15°; where the 18° twilight does not form, the dawn 121 minutes before sunrise and Isha 90 after Maghrib. Null where a time does not form.
+DayMinutes? tatarstanMinutes(double lat, double lon, int year, int month0, int day, {double dipDeg = 0.0}) {
+  final d0 = _d0Of(year, month0, day);
+  SunPosition at(double t) => meeusApparentSun(d0 + t / 1440);
+  var noon = 720 - 4 * lon;
+  for (var i = 0; i < 3; i++) {
+    noon = 720 - 4 * lon - at(noon).eot;
+  }
+  final sp = sin(lat * rad), cp = cos(lat * rad);
+  double event(double alt, double sign) {
+    var t = noon + sign * 300;
+    var forms = true;
+    for (var i = 0; i < 6; i++) {
+      final s = at(t);
+      final c = (sin(alt * rad) - sp * sin(s.dec)) / (cp * cos(s.dec));
+      forms = c.abs() <= 1;
+      t = 720 - 4 * lon - s.eot + (sign * 4 * acos(c.clamp(-1.0, 1.0))) / rad;
+    }
+    return forms ? t : double.nan;
+  }
+
+  final noonTrue = 90 - (lat - at(noon).dec / rad).abs();
+  final noonApparent = noonTrue + _refractionFromTrue(noonTrue);
+  final asrApparent = atan(1 / (2 + 1 / tan(noonApparent * rad))) / rad;
+  final asr = event(asrApparent - _refractionFromApparent(asrApparent), 1.0);
+  final rise = event(-(0.8333 + dipDeg), -1.0), sset = event(-(0.8333 + dipDeg), 1.0);
+  if (!(rise.isFinite && sset.isFinite && asr.isFinite)) return null;
+  final sunrise = rise.ceilToDouble(), maghrib = sset.ceilToDouble();
+  final dawn = event(-18.0, -1.0), dusk = event(-18.0, 1.0);
+  return DayMinutes(
+    dawn.isFinite ? dawn.floorToDouble() : sunrise - 121,
+    sunrise,
+    noon.ceilToDouble(),
+    asr.ceilToDouble(),
+    maghrib,
+    dusk.isFinite ? event(-15.0, 1.0).ceilToDouble() : maghrib + 90,
+  );
 }
 
 // ---------------------------------------------------------------- Sweden and Diyanet: the Congress method

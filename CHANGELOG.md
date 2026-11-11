@@ -9,7 +9,18 @@ revision bump is at least a minor version.
 
 ## Unreleased
 
-No method changed; no revision raised.
+- **Tatarstan, revision 1: a thirteenth method.** The Spiritual
+  Administration of Muslims of the Republic of Tatarstan's timetable for
+  forty-four places: `mihrab-methods/tatarstan`, authority `tatarstan`.
+  The dawn at 18° rounded down; sunrise, the zenith, Asr at two shadow
+  lengths on the apparent sun, Maghrib and Isha at 15°, each rounded up;
+  and where the 18° twilight does not form, the dawn 121 minutes before
+  sunrise and Isha 90 after Maghrib (`docs/methods.md`). With its
+  correction list the method matches the published timetable of every
+  place over the certified span (`docs/status.md`). `certification.json`
+  gains a `tatarstan` entry and `data/corrections/tatarstan.json` is new.
+  In every port (`tatarstan_minutes` / `tatarstanMinutes`, `REVISIONS` with
+  `tatarstan: 1`). No other method's output changes.
 
 ## 1.11.0 — 2026-11-11
 
