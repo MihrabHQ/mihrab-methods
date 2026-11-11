@@ -12,8 +12,8 @@ minute either way: <!--fig:sweden.corrections-->270<!--/fig--> over
 dates the timetables do, and certification holds over those dates only:
 outside them `timesFor` answers with `status: 'method-only'` (or refuses,
 with `strict`). Diyanet's worldwide list (`data/corrections/diyanet.json`)
-is the same kind: <!--fig:diyanet.corrections-->9,118<!--/fig--> entries against
-<!--fig:diyanet.timesCompact-->69.9 million<!--/fig--> times. Each year, once the next year's timetables are
+is the same kind: <!--fig:diyanet.corrections-->9,357<!--/fig--> entries against
+<!--fig:diyanet.timesCompact-->71.6 million<!--/fig--> times. Each year, once the next year's timetables are
 out:
 
 ```sh

@@ -9,6 +9,11 @@ revision bump is at least a minor version.
 
 ## Unreleased
 
+- **Diyanet: 186 more places.** Places Diyanet lists that had not been
+  placed are now in the list, each at the point its table is computed at
+  (61 on a clock of their table's own), with their entries in the
+  correction list. Nothing changes for the places already there, and the
+  revision stays 1.
 - **Ports.** The five methods in Python, Swift, Kotlin and Dart under
   `ports/`, each with no dependencies beyond its standard library and each
   held to `test/vectors.json` on every push. Nothing changes in what the

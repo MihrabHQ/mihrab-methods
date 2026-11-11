@@ -30,12 +30,12 @@ each method.
 |---|---|---:|---:|---:|---:|---:|---|
 | **Sweden** | Islamiska Förbundet’s tables | 107 | 63,114 | **0** | 99.968 % | 270 | 11 Oct 2026 → 14 Dec 2027 |
 |  | Diyanet’s own tables | 159 | 1,393,794 | **0** | 99.981 % |  | 1 Jan 2024 → 31 Dec 2027 |
-| **Diyanet** | its tables worldwide | 8,132 | 69,999,603 | **0** | 99.986 % | 9,118 | 1 Jan 2024 → 31 Dec 2027 |
+| **Diyanet** | its tables worldwide | 8,318 | 71,630,078 | **0** | 99.986 % | 9,357 | 1 Jan 2024 → 31 Dec 2027 |
 | **Morocco** | Habous | 164 | 94,350 | **0** | 99.879 % | 114 | 27 Aug 2026 → 30 Nov 2026 |
 | **Algeria** | Ministry of Religious Affairs | 68 | 101,184 | **0** | 99.365 % | 642 | 1 Oct 2026 → 5 Jun 2027 |
 | **Indonesia** | Kemenag | 517 | 362,934 | **0** | 99.935 % | 234 | 7 Oct 2026 → 31 Jan 2027 |
 
-5 of 5 methods certified; 0 of 72,014,979 times off the printed minute. Last checked 9 November 2026. Generated from [`certification.json`](../certification.json) by `scripts/readme.mjs`.
+5 of 5 methods certified; 0 of 73,645,454 times off the printed minute. Last checked 9 November 2026. Generated from [`certification.json`](../certification.json) by `scripts/readme.mjs`.
 <!-- certification-table:end -->
 
 ## Sweden
@@ -54,7 +54,7 @@ gives Diyanet's own table.
 
 ## Diyanet
 
-Certified over <!--fig:diyanet.span-->1 Jan 2024 → 31 Dec 2027<!--/fig--> for <!--fig:diyanet.check0.places-->8,132<!--/fig-->
+Certified over <!--fig:diyanet.span-->1 Jan 2024 → 31 Dec 2027<!--/fig--> for <!--fig:diyanet.check0.places-->8,318<!--/fig-->
 places in Türkiye, Northern Cyprus and abroad (Sweden's are under Sweden).
 Each place is computed at a point of its own, checked to lie in the place's
 country.
@@ -76,6 +76,21 @@ country.
 > - Ping Tung City and Rilchingen-Hanweiler, each listed again at the same
 >   point (as Pingtung and Kleinblittersdorf) with a table a minute apart on
 >   two days.
+>
+> **Research note, 2026-11-11, the places not yet included** (not
+> generated). The 237 were gone through again, blind: each table's latitude
+> from its day length, its longitude and clock from its Dhuhr, then the
+> gazetteer by name and zone, then the 0.001° lattice. 186 more are now
+> included, 61 of them on a clock of their table's own. Still out:
+>
+> - 7 Diyanet serves no table for, and 22 that could not be placed;
+> - 9 the method does not follow: Lugano, Mistelbach, Zemplín, Ushuaia,
+>   Syktyvkar, Kløfta, Ukhta and Río Gallegos, and Le Pont-de-Claix, whose
+>   Fajr is 2–23 minutes from its table's between 18 May and 20 June 2026;
+> - 7 whose table is another place's than the name says (listed as Uliastay,
+>   Amur, Boro Burgaasa, Karatau, Awash, Pokachi and Velikiye Luki);
+> - 4 listed a second time at the same point as a place already included;
+> - Brazzaville and Pointe-Noire, which Diyanet lists under no country.
 >
 > **Research note, 2026-11-11** (not generated). Every place with two or
 > more corrections was tried one step of the 0.001° lattice away in each
