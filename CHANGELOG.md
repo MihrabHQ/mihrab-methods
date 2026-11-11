@@ -9,6 +9,10 @@ revision bump is at least a minor version.
 
 ## Unreleased
 
+No method changed; no revision raised.
+
+## 1.2.0 — 2026-11-11
+
 - **Indonesia, revision 2.** Two things change in the output, each by a
   fraction of a second, which moves a printed minute on about one time in
   three hundred:
