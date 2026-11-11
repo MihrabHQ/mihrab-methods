@@ -232,6 +232,7 @@ export function checkAuthority(a: CheckRun): Result | null {
     egypt: 'Egypt — the Survey Authority’s times',
     brunei: 'Brunei — the Ministry’s times',
     qatar: 'Qatar — the Calendar House’s times',
+    kuwait: 'Kuwait — the Ministry’s table',
   };
   return check(names[a], placesOf(a), path.join(TABLES, a, 'v1/cities'));
 }

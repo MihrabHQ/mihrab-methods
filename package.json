@@ -1,7 +1,7 @@
 {
   "name": "mihrab-methods",
   "version": "1.9.0",
-  "description": "The prayer-time authorities' own calculation methods, each reproducing its published timetable to the minute: Sweden (Diyanet, as Islamiska Förbundet prints it), Diyanet worldwide, Morocco (Habous), Algeria (Ministry of Religious Affairs), Indonesia (Kemenag), Türkiye Takvimi, Kazakhstan (Spiritual Administration), Egypt (General Authority of Survey), Brunei (Ministry of Religious Affairs), Qatar (Qatar Calendar House).",
+  "description": "The prayer-time authorities' own calculation methods, each reproducing its published timetable to the minute: Sweden (Diyanet, as Islamiska Förbundet prints it), Diyanet worldwide, Morocco (Habous), Algeria (Ministry of Religious Affairs), Indonesia (Kemenag), Türkiye Takvimi, Kazakhstan (Spiritual Administration), Egypt (General Authority of Survey), Brunei (Ministry of Religious Affairs), Qatar (Qatar Calendar House), Kuwait (Ministry of Awqaf and Islamic Affairs).",
   "license": "MPL-2.0",
   "author": "Hassan El Ghamri",
   "repository": {
@@ -33,6 +33,7 @@
     "./dist/*/egypt.js",
     "./dist/*/brunei.js",
     "./dist/*/qatar.js",
+    "./dist/*/kuwait.js",
     "./dist/*/authorities/*.js",
     "./src/index.ts",
     "./src/sweden.ts",
@@ -45,6 +46,7 @@
     "./src/egypt.ts",
     "./src/brunei.ts",
     "./src/qatar.ts",
+    "./src/kuwait.ts",
     "./src/authorities/*.ts"
   ],
   "engines": {
@@ -181,6 +183,16 @@
         "default": "./dist/cjs/qatar.js"
       }
     },
+    "./kuwait": {
+      "import": {
+        "types": "./dist/esm/kuwait.d.ts",
+        "default": "./dist/esm/kuwait.js"
+      },
+      "require": {
+        "types": "./dist/cjs/kuwait.d.ts",
+        "default": "./dist/cjs/kuwait.js"
+      }
+    },
     "./locate": {
       "import": {
         "types": "./dist/esm/locate.d.ts",
@@ -230,6 +242,9 @@
       ],
       "qatar": [
         "./dist/cjs/qatar.d.ts"
+      ],
+      "kuwait": [
+        "./dist/cjs/kuwait.d.ts"
       ],
       "locate": [
         "./dist/cjs/locate.d.ts"

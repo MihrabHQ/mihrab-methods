@@ -1,5 +1,5 @@
 """The methods: Sweden and Diyanet (the Congress method), Morocco, Algeria,
-Indonesia, Türkiye Takvimi, Kazakhstan, Egypt, Brunei and Qatar. A port of src/methods/*.ts — the TypeScript is the reference,
+Indonesia, Türkiye Takvimi, Kazakhstan, Egypt, Brunei, Qatar and Kuwait. A port of src/methods/*.ts — the TypeScript is the reference,
 docs/methods.md says what each does, and test_vectors.py holds this to it.
 
 Every function takes a civil date with the month 0-based, as the TypeScript
@@ -513,6 +513,55 @@ def qatar_minutes(lat, lon, year, month0, day, asr_shadow=1):
     if not all(math.isfinite(v) for v in r.values()):
         return None
     return {k: math.floor(v + 0.5) for k, v in r.items()}
+
+
+# ---------------------------------------------------------------- Kuwait
+
+KUWAIT_LAT = 29.33
+KUWAIT_LON = 48.005
+KUWAIT_TABLE_YEAR = 1978
+
+
+def kuwait_area_minutes(lon):
+    """The whole minutes an area adds to the city's table (west later, east earlier)."""
+    return math.floor((KUWAIT_LON - lon) * 4 + 0.5)
+
+
+def kuwait_raw_minutes(lon, year, month0, day, asr_shadow=1):
+    """Before rounding: Kuwait City's table — the day of 1978, whatever the year — plus the area's minutes."""
+    d0 = _d0(KUWAIT_TABLE_YEAR, month0, 28 if month0 == 1 and day == 29 else day)
+    add = kuwait_area_minutes(lon)
+
+    def at(t):
+        return meeus_apparent_sun(d0 + t / 1440)
+
+    noon = 720 - 4 * KUWAIT_LON
+    for _ in range(3):
+        noon = 720 - 4 * KUWAIT_LON - at(noon)[1]
+    sp, cp = math.sin(KUWAIT_LAT * RAD), math.cos(KUWAIT_LAT * RAD)
+    asr_altitude = math.atan(1 / (asr_shadow + math.tan(abs(KUWAIT_LAT * RAD - at(noon)[0])))) / RAD
+
+    def event(altitude, sign, start):
+        t = noon + start
+        for _ in range(4):
+            dec, eot = at(t)
+            c = (math.sin(altitude * RAD) - sp * math.sin(dec)) / (cp * math.cos(dec))
+            t = 720 - 4 * KUWAIT_LON - eot + (sign * 4 * math.acos(c)) / RAD
+        return t
+
+    return {
+        'fajr': event(-18, -1, -420) + add,
+        'sunrise': event(-0.8333, -1, -360) + add,
+        'dhuhr': noon + add,
+        'asr': event(asr_altitude, 1, 200) + 0.15 + add,
+        'maghrib': event(-0.8333, 1, 360) + add,
+        'isha': event(-17.5, 1, 420) + add,
+    }
+
+
+def kuwait_minutes(lon, year, month0, day, asr_shadow=1):
+    """Rounded to the nearest minute."""
+    return {k: math.floor(v + 0.5) for k, v in kuwait_raw_minutes(lon, year, month0, day, asr_shadow).items()}
 
 
 # ---------------------------------------------------------------- Sweden and Diyanet: the Congress method

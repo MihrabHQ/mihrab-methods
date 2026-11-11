@@ -1,7 +1,7 @@
 # mihrab-methods in Python
 
 The methods of [mihrab-methods](../../README.md) — Sweden, Diyanet,
-Morocco, Algeria, Indonesia, Türkiye Takvimi, Kazakhstan, Egypt, Brunei and Qatar — in plain Python, with no dependencies
+Morocco, Algeria, Indonesia, Türkiye Takvimi, Kazakhstan, Egypt, Brunei, Qatar and Kuwait — in plain Python, with no dependencies
 beyond the standard library (Python 3.9 or later, for `zoneinfo`).
 
 The TypeScript library is the reference. This port follows it line for
@@ -55,6 +55,6 @@ zone whose rules changed between them.
 | File | What |
 | --- | --- |
 | `mihrab_methods/sun.py` | The three positions of the sun the methods use |
-| `mihrab_methods/methods.py` | The methods: the Congress method (Sweden, Diyanet), Morocco, Algeria, Indonesia, Türkiye Takvimi, Kazakhstan, Egypt, Brunei, Qatar |
+| `mihrab_methods/methods.py` | The methods: the Congress method (Sweden, Diyanet), Morocco, Algeria, Indonesia, Türkiye Takvimi, Kazakhstan, Egypt, Brunei, Qatar, Kuwait |
 | `mihrab_methods/api.py` | Place and date in, the day out: clock, correction list, printing |
 | `test_vectors.py` | Holds the port to `test/vectors.json` |

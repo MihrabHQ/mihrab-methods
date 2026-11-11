@@ -39,8 +39,9 @@ each method.
 | **Egypt** | the Survey Authority’s times | 77 | 168,630 | **0** | 99.373 % | 1,056 | 1 Jan 2026 → 31 Dec 2026 |
 | **Brunei** | the Ministry’s times | 4 | 17,064 | **0** | 99.671 % | 56 | 9 Jan 2025 → 31 Dec 2026 |
 | **Qatar** | the Calendar House’s times | 1 | 708 | **0** | 96.186 % | 27 | 16 Jun 2026 → 11 Oct 2026 |
+| **Kuwait** | the Ministry’s table | 46 | 201,480 | **0** | 95.205 % | 9,660 | 1 Jan 2026 → 31 Dec 2027 |
 
-10 of 10 methods certified; 0 of 76,196,504 times off the printed minute. Last checked 9 November 2026. Generated from [`certification.json`](../certification.json) by `scripts/readme.mjs`.
+11 of 11 methods certified; 0 of 76,397,984 times off the printed minute. Last checked 9 November 2026. Generated from [`certification.json`](../certification.json) by `scripts/readme.mjs`.
 <!-- certification-table:end -->
 
 ## Sweden
@@ -295,6 +296,28 @@ place, Doha): the method gives <!--fig:qatar.alonePct-->96.186<!--/fig--> % alon
 > September, which a fixed margin does not follow. Doha is the only place:
 > the calendar prints Doha in full and, for Al-Shamal, Dukhan and Abu
 > Samra, minutes to add at Fajr and Maghrib only.
+
+## Kuwait
+
+Certified over <!--fig:kuwait.span-->1 Jan 2026 → 31 Dec 2027<!--/fig--> (<!--fig:kuwait.check0.places-->46<!--/fig-->
+areas): the method gives <!--fig:kuwait.alonePct-->95.205<!--/fig--> % alone, and a list of
+<!--fig:kuwait.corrections-->9,660<!--/fig--> corrections the rest. The Ministry prints one table
+for Kuwait City and the areas as minutes on it, so the 46 areas are one
+check counted 46 times — and the list is one list of 105 times a year,
+written out for each area and each year.
+
+> **Research note, 2026-11-12** (not generated). The table has no year: it
+> is 366 days, the same every year, and 29 February repeats 28 February.
+> Its Dhuhr is the transit of the sun of a year two after a leap year, and
+> of the 1970s rather than now (1974 and 1978 give 360 of 365 days; later
+> years of the same phase a few fewer, other phases far fewer), which is
+> why no present-day calculation reproduces it. With 1978's sun the
+> standard angles give Fajr and Maghrib on 357 days of 365, Dhuhr on 360,
+> sunrise and Isha on 341, and Asr on 334 — Asr only with the noon shadow
+> taken from noon's declination. The rest are a minute off with no pattern
+> found, September's Asr apart, which runs half a minute early for the
+> whole month. A table that never changes is certified once: the same list
+> serves every year, only its dates are rewritten.
 
 ## Not here, and why
 

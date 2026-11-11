@@ -9,7 +9,18 @@ revision bump is at least a minor version.
 
 ## Unreleased
 
-No method changed; no revision raised.
+- **Kuwait, revision 1: an eleventh method.** The Ministry of Awqaf and
+  Islamic Affairs' table for Kuwait City and 45 areas:
+  `mihrab-methods/kuwait`, authority `kuwait`. One table, the same every
+  year — each day's times are those of that day of 1978 at Kuwait City,
+  from Meeus's apparent sun: Fajr at 18°, Isha at 17.5°, Asr at one shadow
+  length, every time rounded to the nearest minute — and an area adds its
+  whole minutes (`docs/methods.md`). With its correction list the method
+  matches the published timetable of every area over the certified span
+  (`docs/status.md`). `certification.json` gains a `kuwait` entry and
+  `data/corrections/kuwait.json` is new. In every port (`kuwait_minutes` /
+  `kuwaitMinutes`, `REVISIONS` with `kuwait: 1`). No other method's output
+  changes.
 
 ## 1.9.0 — 2026-11-11
 

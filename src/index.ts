@@ -20,6 +20,7 @@ import './authorities/kazakhstan.js';
 import './authorities/egypt.js';
 import './authorities/brunei.js';
 import './authorities/qatar.js';
+import './authorities/kuwait.js';
 
 export * from './core/index.js';
 export { diyanetCountry } from './authorities/diyanet.js';

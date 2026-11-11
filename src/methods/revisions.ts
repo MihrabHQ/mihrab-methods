@@ -17,4 +17,5 @@ export const METHOD_REVISION = {
   egypt: 1,
   brunei: 1,
   qatar: 1,
+  kuwait: 1,
 } as const;

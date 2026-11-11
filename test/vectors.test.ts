@@ -13,7 +13,7 @@ test('the vectors are for the revisions this build computes', () => {
 });
 
 test('every vector is what the library gives today', () => {
-  assert.ok(v.cases.length >= 50 && v.cases.length <= 120, `${v.cases.length} cases: a sample, not a timetable`);
+  assert.ok(v.cases.length >= 50 && v.cases.length <= 200, `${v.cases.length} cases: a sample, not a timetable`);
   for (const c of v.cases) {
     const place = placeById(c.place.id);
     assert.ok(place, c.place.id);

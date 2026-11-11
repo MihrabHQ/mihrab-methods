@@ -1,5 +1,5 @@
 // The methods: Sweden and Diyanet (the Congress method), Morocco, Algeria,
-// Indonesia, Türkiye Takvimi, Kazakhstan, Egypt, Brunei and Qatar. A port of src/methods/*.ts — the TypeScript is the reference,
+// Indonesia, Türkiye Takvimi, Kazakhstan, Egypt, Brunei, Qatar and Kuwait. A port of src/methods/*.ts — the TypeScript is the reference,
 // docs/methods.md says what each does, and the vector check holds this to it.
 //
 // Every function takes a civil date with the month 0-based, as the TypeScript
@@ -458,6 +458,49 @@ func qatarMinutes(_ lat: Double, _ lon: Double, _ year: Int, _ month0: Int, _ da
     let r = qatarRawMinutes(lat, lon, year, month0, day, asrShadow: asrShadow)
     if r.all.contains(where: { !$0.isFinite }) { return nil }
     return r.mapped { floor($0 + 0.5) }
+}
+
+// ---------------------------------------------------------------- Kuwait
+
+let KUWAIT_LAT = 29.33
+let KUWAIT_LON = 48.005
+let KUWAIT_TABLE_YEAR = 1978
+
+/// The whole minutes an area adds to the city's table (west later, east earlier).
+func kuwaitAreaMinutes(_ lon: Double) -> Double {
+    return floor((KUWAIT_LON - lon) * 4 + 0.5)
+}
+
+/// Before rounding: Kuwait City's table — the day of 1978, whatever the year — plus the area's minutes.
+func kuwaitRawMinutes(_ lon: Double, _ year: Int, _ month0: Int, _ day: Int, asrShadow: Double = 1) -> DayMinutes {
+    let d0 = d0Of(KUWAIT_TABLE_YEAR, month0, (month0 == 1 && day == 29) ? 28 : day)
+    let add = kuwaitAreaMinutes(lon)
+    func at(_ t: Double) -> SunPosition { return meeusApparentSun(d0 + t / 1440) }
+    var noon = 720 - 4 * KUWAIT_LON
+    for _ in 0..<3 { noon = 720 - 4 * KUWAIT_LON - at(noon).eot }
+    let sp = sin(KUWAIT_LAT * RAD), cp = cos(KUWAIT_LAT * RAD)
+    let asrAltitude = atan(1 / (asrShadow + tan(abs(KUWAIT_LAT * RAD - at(noon).dec)))) / RAD
+    func event(_ altitude: Double, _ sign: Double, _ start: Double) -> Double {
+        var t = noon + start
+        for _ in 0..<4 {
+            let s = at(t)
+            let c = (sin(altitude * RAD) - sp * sin(s.dec)) / (cp * cos(s.dec))
+            t = 720 - 4 * KUWAIT_LON - s.eot + (sign * 4 * acos(c)) / RAD
+        }
+        return t
+    }
+    return DayMinutes(
+        fajr: event(-18, -1, -420) + add,
+        sunrise: event(-0.8333, -1, -360) + add,
+        dhuhr: noon + add,
+        asr: event(asrAltitude, 1, 200) + 0.15 + add,
+        maghrib: event(-0.8333, 1, 360) + add,
+        isha: event(-17.5, 1, 420) + add)
+}
+
+/// Rounded to the nearest minute.
+func kuwaitMinutes(_ lon: Double, _ year: Int, _ month0: Int, _ day: Int, asrShadow: Double = 1) -> DayMinutes? {
+    return kuwaitRawMinutes(lon, year, month0, day, asrShadow: asrShadow).mapped { floor($0 + 0.5) }
 }
 
 // ---------------------------------------------------------------- Sweden and Diyanet: the Congress method

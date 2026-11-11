@@ -242,5 +242,28 @@
       "sha256": "e6fc01f1ab8332d8e02a376474474748539b7d9edfacbd55cc36a3e1ebee6220"
     },
     "revision": 1
+  },
+  "kuwait": {
+    "certified": true,
+    "checkedAt": "2026-11-11",
+    "places": 46,
+    "checks": [
+      {
+        "tables": "Kuwait — the Ministry’s table",
+        "places": 46,
+        "times": 201480,
+        "off": 0,
+        "offWithoutCorrections": 9660,
+        "from": "2026-01-01",
+        "to": "2027-12-31"
+      }
+    ],
+    "corrections": {
+      "from": "2026-01-01",
+      "to": "2027-12-31",
+      "entries": 9660,
+      "sha256": "2238661dbbf9b59c25656ff3577415d9043de99a7e3a54f8b308139d12ed68c3"
+    },
+    "revision": 1
   }
 }

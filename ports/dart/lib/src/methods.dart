@@ -1,5 +1,5 @@
 // The methods: Sweden and Diyanet (the Congress method), Morocco, Algeria,
-// Indonesia, Türkiye Takvimi, Kazakhstan, Egypt, Brunei and Qatar. A port of src/methods/*.ts — the TypeScript is the reference,
+// Indonesia, Türkiye Takvimi, Kazakhstan, Egypt, Brunei, Qatar and Kuwait. A port of src/methods/*.ts — the TypeScript is the reference,
 // docs/methods.md says what each does, and the vector check holds this to it.
 //
 // Every function takes a civil date with the month 0-based, as the TypeScript
@@ -454,6 +454,50 @@ DayMinutes? qatarMinutes(double lat, double lon, int year, int month0, int day, 
   final r = qatarRawMinutes(lat, lon, year, month0, day, asrShadow: asrShadow);
   return r.allFinite ? r.mapped((v) => (v + 0.5).floorToDouble()) : null;
 }
+
+// ---------------------------------------------------------------- Kuwait
+
+const double kuwaitLat = 29.33;
+const double kuwaitLon = 48.005;
+const int kuwaitTableYear = 1978;
+
+/// The whole minutes an area adds to the city's table (west later, east earlier).
+double kuwaitAreaMinutes(double lon) => ((kuwaitLon - lon) * 4 + 0.5).floorToDouble();
+
+/// Before rounding: Kuwait City's table — the day of 1978, whatever the year — plus the area's minutes.
+DayMinutes kuwaitRawMinutes(double lon, int year, int month0, int day, {double asrShadow = 1.0}) {
+  final d0 = _d0Of(kuwaitTableYear, month0, (month0 == 1 && day == 29) ? 28 : day);
+  final add = kuwaitAreaMinutes(lon);
+  SunPosition at(double t) => meeusApparentSun(d0 + t / 1440);
+  var noon = 720 - 4 * kuwaitLon;
+  for (var i = 0; i < 3; i++) {
+    noon = 720 - 4 * kuwaitLon - at(noon).eot;
+  }
+  final sp = sin(kuwaitLat * rad), cp = cos(kuwaitLat * rad);
+  final asrAltitude = atan(1 / (asrShadow + tan((kuwaitLat * rad - at(noon).dec).abs()))) / rad;
+  double event(double altitude, double sign, double start) {
+    var t = noon + start;
+    for (var i = 0; i < 4; i++) {
+      final s = at(t);
+      final c = (sin(altitude * rad) - sp * sin(s.dec)) / (cp * cos(s.dec));
+      t = 720 - 4 * kuwaitLon - s.eot + (sign * 4 * acos(c)) / rad;
+    }
+    return t;
+  }
+
+  return DayMinutes(
+    event(-18.0, -1.0, -420.0) + add,
+    event(-0.8333, -1.0, -360.0) + add,
+    noon + add,
+    event(asrAltitude, 1.0, 200.0) + 0.15 + add,
+    event(-0.8333, 1.0, 360.0) + add,
+    event(-17.5, 1.0, 420.0) + add,
+  );
+}
+
+/// Rounded to the nearest minute.
+DayMinutes? kuwaitMinutes(double lon, int year, int month0, int day, {double asrShadow = 1.0}) =>
+    kuwaitRawMinutes(lon, year, month0, day, asrShadow: asrShadow).mapped((v) => (v + 0.5).floorToDouble());
 
 // ---------------------------------------------------------------- Sweden and Diyanet: the Congress method
 

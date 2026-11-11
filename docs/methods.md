@@ -328,6 +328,29 @@ as the reference for the east coast, from Al Khor to Al Wakra.
 The margins are the calendar's own, to the hundredth of a minute they can
 be read to; computed at 25.29° N, 51.53° E.
 
+## Kuwait
+
+`src/methods/kuwait.ts`. The Ministry of Awqaf and Islamic Affairs' table,
+read off the table itself.
+
+- **One table for the country, the same every year.** A day's times are
+  those of that day of **1978** — a year in the middle of a leap cycle —
+  whatever the year asked for; 29 February has 28 February's.
+- Computed at **Kuwait City** (29.33° N, 48.005° E). An area's times are
+  the city's plus **whole minutes**, from four before (Qaruh) to six after
+  (Salmy). A listed area's point carries its minutes in its longitude, a
+  quarter of a degree from the city's to the minute; areas with the same
+  minutes are told apart by a thousandth of a degree of latitude, which the
+  method does not read. The points are not where the areas are.
+- **Meeus's apparent sun** (Morocco's) at each time's own moment, its
+  declination and equation of time iterated.
+- **Fajr**: the sun 18° below the horizon. **Isha**: 17.5°.
+- **Sunrise** and **Maghrib**: the sun's centre 0.8333° below the horizon.
+- **Dhuhr**: the sun's transit.
+- **Asr**: one shadow length beyond the noon shadow, the noon shadow taken
+  from the declination of local noon; plus 0.15 minutes.
+- Every time rounded to the **nearest** minute.
+
 ## Checking a port
 
 1. Take `test/vectors.json`. For each case, compute the six times at the

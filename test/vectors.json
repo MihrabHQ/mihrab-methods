@@ -10,7 +10,8 @@
   "kazakhstan": 1,
   "egypt": 1,
   "brunei": 1,
-  "qatar": 1
+  "qatar": 1,
+  "kuwait": 1
  },
  "cases": [
   {
@@ -4027,6 +4028,378 @@
     "asr": "2026-10-11T11:42:00.000Z",
     "maghrib": "2026-10-11T14:13:00.000Z",
     "isha": "2026-10-11T15:43:00.000Z"
+   }
+  },
+  {
+   "place": {
+    "id": "kuwait:1",
+    "name": "Kuwait City",
+    "lat": 29.33,
+    "lon": 48.005,
+    "tz": "Asia/Kuwait"
+   },
+   "date": "2026-01-01",
+   "clock": {
+    "zone": "Asia/Kuwait",
+    "offsetMinutes": 180,
+    "label": "Asia/Kuwait"
+   },
+   "printed": {
+    "fajr": "05:18",
+    "sunrise": "06:42",
+    "dhuhr": "11:51",
+    "asr": "14:42",
+    "maghrib": "17:01",
+    "isha": "18:23"
+   },
+   "instants": {
+    "fajr": "2026-01-01T02:18:00.000Z",
+    "sunrise": "2026-01-01T03:42:00.000Z",
+    "dhuhr": "2026-01-01T08:51:00.000Z",
+    "asr": "2026-01-01T11:42:00.000Z",
+    "maghrib": "2026-01-01T14:01:00.000Z",
+    "isha": "2026-01-01T15:23:00.000Z"
+   }
+  },
+  {
+   "place": {
+    "id": "kuwait:1",
+    "name": "Kuwait City",
+    "lat": 29.33,
+    "lon": 48.005,
+    "tz": "Asia/Kuwait"
+   },
+   "date": "2026-09-01",
+   "clock": {
+    "zone": "Asia/Kuwait",
+    "offsetMinutes": 180,
+    "label": "Asia/Kuwait"
+   },
+   "printed": {
+    "fajr": "04:03",
+    "sunrise": "05:25",
+    "dhuhr": "11:48",
+    "asr": "15:22",
+    "maghrib": "18:11",
+    "isha": "19:30"
+   },
+   "instants": {
+    "fajr": "2026-09-01T01:03:00.000Z",
+    "sunrise": "2026-09-01T02:25:00.000Z",
+    "dhuhr": "2026-09-01T08:48:00.000Z",
+    "asr": "2026-09-01T12:22:00.000Z",
+    "maghrib": "2026-09-01T15:11:00.000Z",
+    "isha": "2026-09-01T16:30:00.000Z"
+   }
+  },
+  {
+   "place": {
+    "id": "kuwait:1",
+    "name": "Kuwait City",
+    "lat": 29.33,
+    "lon": 48.005,
+    "tz": "Asia/Kuwait"
+   },
+   "date": "2027-05-02",
+   "clock": {
+    "zone": "Asia/Kuwait",
+    "offsetMinutes": 180,
+    "label": "Asia/Kuwait"
+   },
+   "printed": {
+    "fajr": "03:40",
+    "sunrise": "05:06",
+    "dhuhr": "11:45",
+    "asr": "15:21",
+    "maghrib": "18:25",
+    "isha": "19:48"
+   },
+   "instants": {
+    "fajr": "2027-05-02T00:40:00.000Z",
+    "sunrise": "2027-05-02T02:06:00.000Z",
+    "dhuhr": "2027-05-02T08:45:00.000Z",
+    "asr": "2027-05-02T12:21:00.000Z",
+    "maghrib": "2027-05-02T15:25:00.000Z",
+    "isha": "2027-05-02T16:48:00.000Z"
+   }
+  },
+  {
+   "place": {
+    "id": "kuwait:1",
+    "name": "Kuwait City",
+    "lat": 29.33,
+    "lon": 48.005,
+    "tz": "Asia/Kuwait"
+   },
+   "date": "2027-12-31",
+   "clock": {
+    "zone": "Asia/Kuwait",
+    "offsetMinutes": 180,
+    "label": "Asia/Kuwait"
+   },
+   "printed": {
+    "fajr": "05:17",
+    "sunrise": "06:42",
+    "dhuhr": "11:51",
+    "asr": "14:41",
+    "maghrib": "17:00",
+    "isha": "18:22"
+   },
+   "instants": {
+    "fajr": "2027-12-31T02:17:00.000Z",
+    "sunrise": "2027-12-31T03:42:00.000Z",
+    "dhuhr": "2027-12-31T08:51:00.000Z",
+    "asr": "2027-12-31T11:41:00.000Z",
+    "maghrib": "2027-12-31T14:00:00.000Z",
+    "isha": "2027-12-31T15:22:00.000Z"
+   }
+  },
+  {
+   "place": {
+    "id": "kuwait:37",
+    "name": "Salmy",
+    "lat": 29.33,
+    "lon": 46.505,
+    "tz": "Asia/Kuwait"
+   },
+   "date": "2026-01-01",
+   "clock": {
+    "zone": "Asia/Kuwait",
+    "offsetMinutes": 180,
+    "label": "Asia/Kuwait"
+   },
+   "printed": {
+    "fajr": "05:24",
+    "sunrise": "06:48",
+    "dhuhr": "11:57",
+    "asr": "14:48",
+    "maghrib": "17:07",
+    "isha": "18:29"
+   },
+   "instants": {
+    "fajr": "2026-01-01T02:24:00.000Z",
+    "sunrise": "2026-01-01T03:48:00.000Z",
+    "dhuhr": "2026-01-01T08:57:00.000Z",
+    "asr": "2026-01-01T11:48:00.000Z",
+    "maghrib": "2026-01-01T14:07:00.000Z",
+    "isha": "2026-01-01T15:29:00.000Z"
+   }
+  },
+  {
+   "place": {
+    "id": "kuwait:37",
+    "name": "Salmy",
+    "lat": 29.33,
+    "lon": 46.505,
+    "tz": "Asia/Kuwait"
+   },
+   "date": "2026-09-01",
+   "clock": {
+    "zone": "Asia/Kuwait",
+    "offsetMinutes": 180,
+    "label": "Asia/Kuwait"
+   },
+   "printed": {
+    "fajr": "04:09",
+    "sunrise": "05:31",
+    "dhuhr": "11:54",
+    "asr": "15:28",
+    "maghrib": "18:17",
+    "isha": "19:36"
+   },
+   "instants": {
+    "fajr": "2026-09-01T01:09:00.000Z",
+    "sunrise": "2026-09-01T02:31:00.000Z",
+    "dhuhr": "2026-09-01T08:54:00.000Z",
+    "asr": "2026-09-01T12:28:00.000Z",
+    "maghrib": "2026-09-01T15:17:00.000Z",
+    "isha": "2026-09-01T16:36:00.000Z"
+   }
+  },
+  {
+   "place": {
+    "id": "kuwait:37",
+    "name": "Salmy",
+    "lat": 29.33,
+    "lon": 46.505,
+    "tz": "Asia/Kuwait"
+   },
+   "date": "2027-05-02",
+   "clock": {
+    "zone": "Asia/Kuwait",
+    "offsetMinutes": 180,
+    "label": "Asia/Kuwait"
+   },
+   "printed": {
+    "fajr": "03:46",
+    "sunrise": "05:12",
+    "dhuhr": "11:51",
+    "asr": "15:27",
+    "maghrib": "18:31",
+    "isha": "19:54"
+   },
+   "instants": {
+    "fajr": "2027-05-02T00:46:00.000Z",
+    "sunrise": "2027-05-02T02:12:00.000Z",
+    "dhuhr": "2027-05-02T08:51:00.000Z",
+    "asr": "2027-05-02T12:27:00.000Z",
+    "maghrib": "2027-05-02T15:31:00.000Z",
+    "isha": "2027-05-02T16:54:00.000Z"
+   }
+  },
+  {
+   "place": {
+    "id": "kuwait:37",
+    "name": "Salmy",
+    "lat": 29.33,
+    "lon": 46.505,
+    "tz": "Asia/Kuwait"
+   },
+   "date": "2027-12-31",
+   "clock": {
+    "zone": "Asia/Kuwait",
+    "offsetMinutes": 180,
+    "label": "Asia/Kuwait"
+   },
+   "printed": {
+    "fajr": "05:23",
+    "sunrise": "06:48",
+    "dhuhr": "11:57",
+    "asr": "14:47",
+    "maghrib": "17:06",
+    "isha": "18:28"
+   },
+   "instants": {
+    "fajr": "2027-12-31T02:23:00.000Z",
+    "sunrise": "2027-12-31T03:48:00.000Z",
+    "dhuhr": "2027-12-31T08:57:00.000Z",
+    "asr": "2027-12-31T11:47:00.000Z",
+    "maghrib": "2027-12-31T14:06:00.000Z",
+    "isha": "2027-12-31T15:28:00.000Z"
+   }
+  },
+  {
+   "place": {
+    "id": "kuwait:38",
+    "name": "Qaruh",
+    "lat": 29.33,
+    "lon": 49.005,
+    "tz": "Asia/Kuwait"
+   },
+   "date": "2026-01-01",
+   "clock": {
+    "zone": "Asia/Kuwait",
+    "offsetMinutes": 180,
+    "label": "Asia/Kuwait"
+   },
+   "printed": {
+    "fajr": "05:14",
+    "sunrise": "06:38",
+    "dhuhr": "11:47",
+    "asr": "14:38",
+    "maghrib": "16:57",
+    "isha": "18:19"
+   },
+   "instants": {
+    "fajr": "2026-01-01T02:14:00.000Z",
+    "sunrise": "2026-01-01T03:38:00.000Z",
+    "dhuhr": "2026-01-01T08:47:00.000Z",
+    "asr": "2026-01-01T11:38:00.000Z",
+    "maghrib": "2026-01-01T13:57:00.000Z",
+    "isha": "2026-01-01T15:19:00.000Z"
+   }
+  },
+  {
+   "place": {
+    "id": "kuwait:38",
+    "name": "Qaruh",
+    "lat": 29.33,
+    "lon": 49.005,
+    "tz": "Asia/Kuwait"
+   },
+   "date": "2026-09-01",
+   "clock": {
+    "zone": "Asia/Kuwait",
+    "offsetMinutes": 180,
+    "label": "Asia/Kuwait"
+   },
+   "printed": {
+    "fajr": "03:59",
+    "sunrise": "05:21",
+    "dhuhr": "11:44",
+    "asr": "15:18",
+    "maghrib": "18:07",
+    "isha": "19:26"
+   },
+   "instants": {
+    "fajr": "2026-09-01T00:59:00.000Z",
+    "sunrise": "2026-09-01T02:21:00.000Z",
+    "dhuhr": "2026-09-01T08:44:00.000Z",
+    "asr": "2026-09-01T12:18:00.000Z",
+    "maghrib": "2026-09-01T15:07:00.000Z",
+    "isha": "2026-09-01T16:26:00.000Z"
+   }
+  },
+  {
+   "place": {
+    "id": "kuwait:38",
+    "name": "Qaruh",
+    "lat": 29.33,
+    "lon": 49.005,
+    "tz": "Asia/Kuwait"
+   },
+   "date": "2027-05-02",
+   "clock": {
+    "zone": "Asia/Kuwait",
+    "offsetMinutes": 180,
+    "label": "Asia/Kuwait"
+   },
+   "printed": {
+    "fajr": "03:36",
+    "sunrise": "05:02",
+    "dhuhr": "11:41",
+    "asr": "15:17",
+    "maghrib": "18:21",
+    "isha": "19:44"
+   },
+   "instants": {
+    "fajr": "2027-05-02T00:36:00.000Z",
+    "sunrise": "2027-05-02T02:02:00.000Z",
+    "dhuhr": "2027-05-02T08:41:00.000Z",
+    "asr": "2027-05-02T12:17:00.000Z",
+    "maghrib": "2027-05-02T15:21:00.000Z",
+    "isha": "2027-05-02T16:44:00.000Z"
+   }
+  },
+  {
+   "place": {
+    "id": "kuwait:38",
+    "name": "Qaruh",
+    "lat": 29.33,
+    "lon": 49.005,
+    "tz": "Asia/Kuwait"
+   },
+   "date": "2027-12-31",
+   "clock": {
+    "zone": "Asia/Kuwait",
+    "offsetMinutes": 180,
+    "label": "Asia/Kuwait"
+   },
+   "printed": {
+    "fajr": "05:13",
+    "sunrise": "06:38",
+    "dhuhr": "11:47",
+    "asr": "14:37",
+    "maghrib": "16:56",
+    "isha": "18:18"
+   },
+   "instants": {
+    "fajr": "2027-12-31T02:13:00.000Z",
+    "sunrise": "2027-12-31T03:38:00.000Z",
+    "dhuhr": "2027-12-31T08:47:00.000Z",
+    "asr": "2027-12-31T11:37:00.000Z",
+    "maghrib": "2027-12-31T13:56:00.000Z",
+    "isha": "2027-12-31T15:18:00.000Z"
    }
   }
  ]
