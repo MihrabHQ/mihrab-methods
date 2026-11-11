@@ -188,3 +188,19 @@ shows: the calendar's own files give the point only to the arc-minute.
 > place of the list holds it to a table. A sample of 40 cities elsewhere in
 > Türkiye and 38 in the rest of the world below 60°, fitted the same way,
 > came out at about the same rate.
+
+## Not here, and why
+
+> **Research note, 2026-11-11** (not generated).
+>
+> - **MUIS (Singapore)** is not a method of this library and is not planned
+>   as one. Its table cannot be put on the minute by a formula: what is left
+>   after the best one is not a fraction of a second at a minute's edge but a
+>   pattern (Dhuhr drifts by up to about 0.4 minutes over half a year, the
+>   other way round the next year), so a correction list for it would cover
+>   about one time in twenty and grow with every year published. MUIS
+>   publishes its timetable itself, free to use; that is where to take it
+>   from.
+> - **JAKIM (Malaysia)**: the zone method stands at about 95 % on the
+>   minute, with whole columns in some states that no formula tried
+>   reproduces. Not added until that changes.
