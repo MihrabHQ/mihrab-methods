@@ -9,7 +9,14 @@ revision bump is at least a minor version.
 
 ## Unreleased
 
-No method changed; no revision raised.
+- **Diyanet, revision 2.** Fifteen places abroad are computed 0.001° (one
+  of them 0.002°) from where revision 1 had them, where the table shows the
+  neighbouring point is the one it is computed at. Their times move by a
+  minute on the days the two points round differently; every other place
+  prints what revision 1 printed. The correction list is rewritten for
+  revision 2 and is shorter, and the method with its list matches the
+  published timetable of every listed place over the certified span, as
+  before. Ports: `REVISIONS` say `diyanet: 2`; the calculation is unchanged.
 
 ## 1.3.2 — 2026-11-11
 
