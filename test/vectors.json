@@ -5,7 +5,7 @@
   "diyanet": 1,
   "morocco": 2,
   "algeria": 1,
-  "indonesia": 1
+  "indonesia": 2
  },
  "cases": [
   {
@@ -2008,8 +2008,8 @@
    "place": {
     "id": "indonesia:1",
     "name": "KAB. ACEH BARAT (Aceh)",
-    "lat": 4.16035,
-    "lon": 96.12489,
+    "lat": 4.158822,
+    "lon": 96.124683,
     "tz": "Asia/Jakarta",
     "highland": false,
     "twilightDip": false
@@ -2041,8 +2041,8 @@
    "place": {
     "id": "indonesia:1",
     "name": "KAB. ACEH BARAT (Aceh)",
-    "lat": 4.16035,
-    "lon": 96.12489,
+    "lat": 4.158822,
+    "lon": 96.124683,
     "tz": "Asia/Jakarta",
     "highland": false,
     "twilightDip": false
@@ -2074,8 +2074,8 @@
    "place": {
     "id": "indonesia:1",
     "name": "KAB. ACEH BARAT (Aceh)",
-    "lat": 4.16035,
-    "lon": 96.12489,
+    "lat": 4.158822,
+    "lon": 96.124683,
     "tz": "Asia/Jakarta",
     "highland": false,
     "twilightDip": false
@@ -2107,8 +2107,8 @@
    "place": {
     "id": "indonesia:1",
     "name": "KAB. ACEH BARAT (Aceh)",
-    "lat": 4.16035,
-    "lon": 96.12489,
+    "lat": 4.158822,
+    "lon": 96.124683,
     "tz": "Asia/Jakarta",
     "highland": false,
     "twilightDip": false
@@ -2140,8 +2140,8 @@
    "place": {
     "id": "indonesia:200",
     "name": "KAB. BLORA (Jawa Tengah)",
-    "lat": -6.969,
-    "lon": 111.41339,
+    "lat": -6.968892,
+    "lon": 111.412247,
     "tz": "Asia/Jakarta",
     "highland": false,
     "twilightDip": false
@@ -2173,8 +2173,8 @@
    "place": {
     "id": "indonesia:200",
     "name": "KAB. BLORA (Jawa Tengah)",
-    "lat": -6.969,
-    "lon": 111.41339,
+    "lat": -6.968892,
+    "lon": 111.412247,
     "tz": "Asia/Jakarta",
     "highland": false,
     "twilightDip": false
@@ -2206,8 +2206,8 @@
    "place": {
     "id": "indonesia:200",
     "name": "KAB. BLORA (Jawa Tengah)",
-    "lat": -6.969,
-    "lon": 111.41339,
+    "lat": -6.968892,
+    "lon": 111.412247,
     "tz": "Asia/Jakarta",
     "highland": false,
     "twilightDip": false
@@ -2239,8 +2239,8 @@
    "place": {
     "id": "indonesia:200",
     "name": "KAB. BLORA (Jawa Tengah)",
-    "lat": -6.969,
-    "lon": 111.41339,
+    "lat": -6.968892,
+    "lon": 111.412247,
     "tz": "Asia/Jakarta",
     "highland": false,
     "twilightDip": false
@@ -2272,8 +2272,8 @@
    "place": {
     "id": "indonesia:500",
     "name": "KAB. WAROPEN (Papua)",
-    "lat": -2.25,
-    "lon": 136.37688,
+    "lat": -2.245225,
+    "lon": 136.376722,
     "tz": "Asia/Jayapura",
     "highland": false,
     "twilightDip": false
@@ -2305,8 +2305,8 @@
    "place": {
     "id": "indonesia:500",
     "name": "KAB. WAROPEN (Papua)",
-    "lat": -2.25,
-    "lon": 136.37688,
+    "lat": -2.245225,
+    "lon": 136.376722,
     "tz": "Asia/Jayapura",
     "highland": false,
     "twilightDip": false
@@ -2338,8 +2338,8 @@
    "place": {
     "id": "indonesia:500",
     "name": "KAB. WAROPEN (Papua)",
-    "lat": -2.25,
-    "lon": 136.37688,
+    "lat": -2.245225,
+    "lon": 136.376722,
     "tz": "Asia/Jayapura",
     "highland": false,
     "twilightDip": false
@@ -2371,8 +2371,8 @@
    "place": {
     "id": "indonesia:500",
     "name": "KAB. WAROPEN (Papua)",
-    "lat": -2.25,
-    "lon": 136.37688,
+    "lat": -2.245225,
+    "lon": 136.376722,
     "tz": "Asia/Jayapura",
     "highland": false,
     "twilightDip": false

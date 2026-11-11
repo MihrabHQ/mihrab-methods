@@ -9,7 +9,24 @@ revision bump is at least a minor version.
 
 ## Unreleased
 
-No method changed; no revision raised.
+- **Indonesia, revision 2.** Two things change in the output, each by a
+  fraction of a second, which moves a printed minute on about one time in
+  three hundred:
+  - **The sun is taken without ΔT**, as the ministry's program takes it:
+    Universal Time for the ephemeris' own time. Every time of the day comes
+    about a fifth of a second earlier.
+  - **Each regency is computed at the ministry's own coordinates** for it,
+    not at a point fitted to its table. Karawang's second point for the
+    afternoon is gone with its fitted point; Pekajang is where the
+    ministry's program puts it (0.8° N).
+
+  Revision 1's points were fitted to October–December 2026 and hid the
+  missing ΔT inside those months: a minute off once in 3,200 times there,
+  once in 300 on January 2027. Revision 2 has nothing fitted and is the
+  same on every month: 234 corrections over the 362,934 times where
+  revision 1 needed 405.
+- `preciseApparentSun(d, deltaTSeconds?)` takes the ΔT to use (as before
+  when left out).
 
 ## 1.1.0 — 2026-11-04
 

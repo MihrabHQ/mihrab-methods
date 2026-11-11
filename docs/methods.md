@@ -180,6 +180,11 @@ cities.
   after Astronomy Engine, within 0.05 s and 0.5″ of JPL's DE421), taken at
   each prayer's own moment, iterated three times. Meeus's shorter series
   drifts by a second and leaves a minute in two hundred off.
+- **No ΔT**: the ministry's program takes the clock's Universal Time for
+  the ephemeris' own time, so its sun stands about 70 seconds behind and
+  every time of the day comes a fifth of a second early
+  (`preciseApparentSun(d, 0)`). A port that adds ΔT is a minute off on
+  about one time in two hundred.
 - Fajr −20°, Isha −18°.
 - Sunrise and Maghrib at −1°, and at −2° in the regencies the ministry
   classes as highland (`Place.highland`); in six highland regencies of Papua
@@ -189,8 +194,11 @@ cities.
   entry gives it), the hour angle from the sun at Asr (four iterations).
 - Every time rounded **up**, after a margin: +2 minutes on Fajr, Asr,
   Maghrib and Isha, +3 on Dhuhr, −3 on sunrise.
-- Each regency at its own fitted point; Karawang's Asr, Maghrib and Isha at a
-  second point about 2 km north-east (`Place.afternoon`).
+- Each regency at the **coordinates the ministry gives for it**, to a
+  hundredth of an arc-second. Nothing is fitted. One is written with a minus
+  and a hemisphere both (Pekajang, "−01° 12′ S"), and the ministry's program
+  reads it as −1° + 12′ and then south of that: 0.8° north, which is where
+  its table is computed.
 - Each regency is printed in its province's zone (WIB, WITA or WIT).
 
 ## Checking a port

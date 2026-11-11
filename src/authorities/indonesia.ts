@@ -1,6 +1,6 @@
 /**
- * Indonesia — Kemenag: every regency and city, at the point its table is
- * computed at, in the zone it is printed in.
+ * Indonesia — Kemenag: every regency and city, at the coordinates the
+ * ministry gives for it, in the zone it is printed in.
  */
 import regencies from '../data/generated/kemenagPlaces.js';
 import points from '../data/generated/kemenagMethodPoints.js';
@@ -55,7 +55,7 @@ export const indonesia = registerAuthority({
   description: {
     name: 'Indonesia — Kemenag (Ministry of Religious Affairs)',
     method:
-      'The precise apparent sun (VSOP87, as JPL’s to a tenth of a second) taken at each prayer’s own moment; Fajr 20°, Isha 18°; sunrise and Maghrib at −1° (−2° in the highland class); Asr when the shadow is its length plus the noon shadow, the noon shadow from the declination at 00:00 UT; every time rounded up after a margin of two minutes (three for Dhuhr, minus three for sunrise).',
+      'The precise apparent sun (VSOP87, as JPL’s to a tenth of a second) taken at each prayer’s own moment, without ΔT; each regency at the ministry’s own coordinates; Fajr 20°, Isha 18°; sunrise and Maghrib at −1° (−2° in the highland class); Asr when the shadow is its length plus the noon shadow, the noon shadow from the declination at 00:00 UT; every time rounded up after a margin of two minutes (three for Dhuhr, minus three for sunrise).',
     countries: ['ID'],
     parameters: {
       fajrAngle: 20,
@@ -70,7 +70,7 @@ export const indonesia = registerAuthority({
       'margin.maghrib': 2,
       'margin.isha': 2,
       rounding: 'up to the minute, after the margin',
-      sun: 'VSOP87 apparent sun (src/sun/preciseSun.ts), iterated at each prayer',
+      sun: 'VSOP87 apparent sun (src/sun/preciseSun.ts), iterated at each prayer, Universal Time taken for the ephemeris’ time (no ΔT)',
     },
     sources: [{ title: 'Kemenag — Jadwal Shalat', url: 'https://bimasislam.kemenag.go.id/jadwalshalat' }],
     spec: 'docs/methods.md#indonesia',

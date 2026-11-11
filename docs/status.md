@@ -33,7 +33,7 @@ each method.
 | **Diyanet** | its tables worldwide | 8,132 | 69,999,603 | **0** | 99.986 % | 9,118 | 1 Jan 2024 → 31 Dec 2027 |
 | **Morocco** | Habous | 164 | 94,350 | **0** | 99.879 % | 114 | 27 Aug 2026 → 30 Nov 2026 |
 | **Algeria** | Ministry of Religious Affairs | 68 | 101,184 | **0** | 99.365 % | 642 | 1 Oct 2026 → 5 Jun 2027 |
-| **Indonesia** | Kemenag | 517 | 362,934 | **0** | 99.888 % | 405 | 7 Oct 2026 → 31 Jan 2027 |
+| **Indonesia** | Kemenag | 517 | 362,934 | **0** | 99.935 % | 234 | 7 Oct 2026 → 31 Jan 2027 |
 
 5 of 5 methods certified; 0 of 72,014,979 times off the printed minute. Last checked 9 November 2026. Generated from [`certification.json`](../certification.json) by `scripts/readme.mjs`.
 <!-- certification-table:end -->
@@ -112,12 +112,28 @@ held out).
 ## Indonesia
 
 Certified over <!--fig:indonesia.span-->7 Oct 2026 → 31 Jan 2027<!--/fig--> (<!--fig:indonesia.check0.places-->517<!--/fig-->
-regencies and cities): the method gives <!--fig:indonesia.alonePct-->99.888<!--/fig--> % alone, and a
-list of <!--fig:indonesia.corrections-->405<!--/fig--> corrections the rest. Karawang's Asr, Maghrib
+regencies and cities): the method gives <!--fig:indonesia.alonePct-->99.935<!--/fig--> % alone, and a
+list of <!--fig:indonesia.corrections-->234<!--/fig--> corrections the rest. Since revision 2 nothing
+is fitted: each regency is computed at the ministry's own coordinates, with
+the sun taken without ΔT as the ministry's program takes it. The corrections
+are independent differences at a minute's edge.
+
+> **Research note, 2026-11-11** (not generated), on revision 1. Its points
+> were fitted to October–December 2026, and on those months the method
+> alone was a minute off once in 3,200 times; on January 2027, which the
+> fit had not seen, once in 300. The fitted points had taken up a fifth of
+> a second that belongs to the sun (ΔT), which no point can carry through
+> the seasons. A figure "by the method alone" over the months a method's
+> points were fitted to says less than it seems: Morocco's and Algeria's
+> points are fitted too (Morocco's against every season of 2014–2025;
+> refitting them freely to the 2026 autumn made unseen days three times
+> worse, so they stand).
+>
+> Revision 1 said: Karawang's Asr, Maghrib
 and Isha are computed at a second point, about 2 km north-east of its first
-(its afternoon fits it, and it holds on days held out). The corrections are
-independent differences at a minute's edge, and refitting points to them
-only fits noise.
+> (its afternoon fits it, and it holds on days held out). The corrections are
+> independent differences at a minute's edge, and refitting points to them
+> only fits noise.
 
 > **Research note, 2026-10-16** (not generated), on the list of 84 then:
 > median 0.2 s from the minute's edge, nine in ten under 1.3 s, the largest
