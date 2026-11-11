@@ -1,6 +1,6 @@
 # mihrab-methods in Dart
 
-The five methods of [mihrab-methods](../../README.md) in Dart, for Flutter
+The methods of [mihrab-methods](../../README.md) in Dart, for Flutter
 and the Dart VM, with no dependencies. See [the ports' notes](../README.md)
 for what a port does and how it is held to the reference.
 

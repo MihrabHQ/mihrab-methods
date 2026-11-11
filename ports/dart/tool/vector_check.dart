@@ -45,6 +45,7 @@ void main(List<String> args) {
       highland: p['highland'] == true,
       twilightDip: p['twilightDip'] == true,
       afternoon: p['afternoon'] == null ? null : _pair(p['afternoon']),
+      temkin: (p['temkin'] as num?)?.toDouble(),
     );
     final date = c['date'] as String;
     final want = c['printed'] as Map<String, dynamic>?;

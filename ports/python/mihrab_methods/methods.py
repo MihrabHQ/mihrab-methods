@@ -1,5 +1,5 @@
-"""The five methods: Sweden and Diyanet (the Congress method), Morocco, Algeria
-and Indonesia. A port of src/methods/*.ts — the TypeScript is the reference,
+"""The methods: Sweden and Diyanet (the Congress method), Morocco, Algeria,
+Indonesia and Türkiye Takvimi. A port of src/methods/*.ts — the TypeScript is the reference,
 docs/methods.md says what each does, and test_vectors.py holds this to it.
 
 Every function takes a civil date with the month 0-based, as the TypeScript
@@ -201,6 +201,104 @@ def kemenag_minutes(lat, lon, year, month0, day, highland=False, twilight_dip=Fa
         pm = kemenag_raw_minutes(afternoon[0], afternoon[1], year, month0, day, highland, twilight_dip, asr_shadow)
         for k in ('asr', 'maghrib', 'isha'):
             r[k] = pm[k]
+    if not all(math.isfinite(v) for v in r.values()):
+        return None
+    return {k: math.ceil(v - 1e-9) for k, v in r.items()}
+
+
+# ---------------------------------------------------------------- Türkiye Takvimi
+
+_SOLSTICE_DECLINATION = 23.38
+_HORIZON_MARGIN = 2
+_HOLD_SEARCH_DAYS = 200
+
+
+def takvim_temkin(lat, height_m=250):
+    """The calendar's temkin by its formula, minutes; a listed place carries its own."""
+    phi = min(abs(lat), 62) * RAD
+    dec = _SOLSTICE_DECLINATION * RAD
+    depth = 0.8416 + 0.03924 * math.sqrt(max(0, height_m))
+
+    def hour_angle(alt):
+        return math.acos(max(-1, min(1, (math.sin(alt * RAD) - math.sin(phi) * math.sin(dec)) / (math.cos(phi) * math.cos(dec)))))
+
+    return ((hour_angle(-depth) - hour_angle(0)) / RAD) * 4
+
+
+class _TakvimEvents:
+    """The sun's events of a day at a point, minutes past the day's 00:00 UT; NaN where one does not happen."""
+
+    def __init__(self, lat, lon, key):
+        self.lat, self.lon = lat, lon
+        self.d0 = key - _J2000_DAYS - 0.5
+        noon = 720 - 4 * lon
+        for _ in range(3):
+            noon = 720 - 4 * lon - self._at(noon)[1]
+        self.noon = noon
+        self.noon_dec = self._at(noon)[0]
+        self.sp, self.cp = math.sin(lat * RAD), math.cos(lat * RAD)
+
+    def _at(self, t):
+        return precise_apparent_sun(self.d0 + t / 1440)
+
+    def event(self, alt, sign, start):
+        t = start
+        for _ in range(3):
+            dec, eot = self._at(t)
+            c = (math.sin(alt * RAD) - self.sp * math.sin(dec)) / (self.cp * math.cos(dec))
+            if not abs(c) <= 1:
+                return NAN
+            t = 720 - 4 * self.lon - eot + (sign * 4 * math.acos(c)) / RAD
+        return t
+
+    def asr(self, shadow):
+        alt = math.atan(1 / (shadow + math.tan(abs(self.lat * RAD - self.noon_dec)))) / RAD
+        return self.event(alt, 1, self.noon + 200)
+
+
+def _takvim_reaches19(lat, lon, key):
+    d0 = key - _J2000_DAYS - 0.5
+
+    def lowest(d):
+        return abs(lat + precise_apparent_sun(d)[0] / RAD) - 90
+
+    return min(lowest(d0 - lon / 360), lowest(d0 + 0.5)) <= -19
+
+
+def takvim_held_night(lat, lon, key):
+    """The day whose night times stand for this one: itself, or the last before it whose night reached 19°."""
+    for i in range(_HOLD_SEARCH_DAYS + 1):
+        if _takvim_reaches19(lat, lon, key - i):
+            return key - i
+    return key
+
+
+def takvim_raw_minutes(lat, lon, year, month0, day, temkin=None, asr_shadow=1):
+    """The calendar's times before rounding: the six the library gives, and 'imsak'."""
+    if temkin is None:
+        temkin = takvim_temkin(lat)
+    key = day_key(year, month0, day)
+    today = _TakvimEvents(lat, lon, key)
+    night = takvim_held_night(lat, lon, key)
+    night_sun = today if night == key else _TakvimEvents(lat, lon, night)
+    isha_night = takvim_held_night(lat, lon, key + 1)
+    isha_day = key if isha_night == key + 1 else isha_night - 1
+    isha_sun = today if isha_day == key else _TakvimEvents(lat, lon, isha_day)
+    return {
+        'imsak': night_sun.event(-19, -1, night_sun.noon - 420) - temkin,
+        'fajr': night_sun.event(-18, -1, night_sun.noon - 420),
+        'sunrise': today.event(0, -1, today.noon - 360) - temkin - _HORIZON_MARGIN,
+        'dhuhr': today.noon + temkin,
+        'asr': today.asr(asr_shadow) + temkin,
+        'maghrib': today.event(0, 1, today.noon + 360) + temkin + _HORIZON_MARGIN,
+        'isha': isha_sun.event(-17, 1, isha_sun.noon + 420) + temkin,
+    }
+
+
+def takvim_minutes(lat, lon, year, month0, day, temkin=None, asr_shadow=1):
+    """Rounded up to the minute; Fajr is the calendar's Sabâh. None where a time does not form."""
+    r = takvim_raw_minutes(lat, lon, year, month0, day, temkin, asr_shadow)
+    del r['imsak']
     if not all(math.isfinite(v) for v in r.values()):
         return None
     return {k: math.ceil(v - 1e-9) for k, v in r.items()}

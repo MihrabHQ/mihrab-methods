@@ -9,7 +9,7 @@
 **Prayer times that match the published timetable to the printed minute.**
 Each national authority's own calculation method, worked out again from its
 published times and checked day by day against its timetables: <!--fig:total.off-->0<!--/fig--> of
-<!--fig:total.times-->73,645,454<!--/fig--> times off the printed minute. Free for any app, site or
+<!--fig:total.times-->73,824,302<!--/fig--> times off the printed minute. Free for any app, site or
 mosque to use.
 
 [![Usage, a day: npm downloads and API requests](docs/stats.svg)](#usage)
@@ -43,8 +43,9 @@ The full API, the HTTP server and the per-authority imports are in
 | **Morocco** | Habous | 164 | 94,350 | **0** | 99.879 % | 114 | 27 Aug 2026 → 30 Nov 2026 |
 | **Algeria** | Ministry of Religious Affairs | 68 | 101,184 | **0** | 99.365 % | 642 | 1 Oct 2026 → 5 Jun 2027 |
 | **Indonesia** | Kemenag | 517 | 362,934 | **0** | 99.935 % | 234 | 7 Oct 2026 → 31 Jan 2027 |
+| **Türkiye Takvimi** | its cities’ years | 81 | 178,848 | **0** | 99.970 % | 52 | 31 Dec 2025 → 2 Jan 2027 |
 
-5 of 5 methods certified; 0 of 73,645,454 times off the printed minute. Last checked 9 November 2026. Generated from [`certification.json`](certification.json) by `scripts/readme.mjs`.
+6 of 6 methods certified; 0 of 73,824,302 times off the printed minute. Last checked 9 November 2026. Generated from [`certification.json`](certification.json) by `scripts/readme.mjs`.
 <!-- certification-table:end -->
 
 "By the method alone" is the formula without its correction list. The list

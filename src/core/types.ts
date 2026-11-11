@@ -2,8 +2,8 @@
  * The shapes the library speaks in. Nothing here computes anything.
  */
 
-export type Authority = 'sweden' | 'diyanet' | 'morocco' | 'algeria' | 'indonesia';
-export const AUTHORITIES: readonly Authority[] = ['sweden', 'diyanet', 'morocco', 'algeria', 'indonesia'];
+export type Authority = 'sweden' | 'diyanet' | 'morocco' | 'algeria' | 'indonesia' | 'turkiyetakvimi';
+export const AUTHORITIES: readonly Authority[] = ['sweden', 'diyanet', 'morocco', 'algeria', 'indonesia', 'turkiyetakvimi'];
 
 export type PrayerKey = 'fajr' | 'sunrise' | 'dhuhr' | 'asr' | 'maghrib' | 'isha';
 export const PRAYER_KEYS: readonly PrayerKey[] = ['fajr', 'sunrise', 'dhuhr', 'asr', 'maghrib', 'isha'];
@@ -37,6 +37,8 @@ export type Place = {
   twilightDip?: boolean;
   /** Indonesia: where the ministry computes the regency's Asr, Maghrib and Isha, when not at its point. */
   afternoon?: readonly [number, number];
+  /** Türkiye Takvimi: the city's temkin as its table shows it, minutes with their fraction. */
+  temkin?: number;
   /** Diyanet: Isha's depression, 16° or 17° by country. */
   ishaDeg?: number;
   /**

@@ -8,6 +8,7 @@ import { congressTimes } from '../methods/sweden.js';
 import { moroccoTimes } from '../methods/morocco.js';
 import { algeriaTimes } from '../methods/algeria.js';
 import { kemenagTimes } from '../methods/indonesia.js';
+import { takvimTimes } from '../methods/turkiyeTakvimi.js';
 import { authorityData } from './registry.js';
 import { placeClockAt } from './clock.js';
 import type { Instants, Place, PrayerKey } from './types.js';
@@ -35,13 +36,16 @@ export function candidateInstants(place: Place, year: number, month: number, day
     }
     case 'morocco':
     case 'algeria':
-    case 'indonesia': {
+    case 'indonesia':
+    case 'turkiyetakvimi': {
       const t =
         place.authority === 'morocco'
           ? moroccoTimes(place.lat, place.lon, year, month, day, place.dipDeg, asrShadow, place.dipMaghribDeg)
           : place.authority === 'algeria'
             ? algeriaTimes(place.lat, place.lon, year, month, day, asrShadow)
-            : kemenagTimes(place.lat, place.lon, year, month, day, { highland: place.highland, twilightDip: place.twilightDip, asrShadow, afternoon: place.afternoon });
+            : place.authority === 'turkiyetakvimi'
+              ? takvimTimes(place.lat, place.lon, year, month, day, place.temkin, asrShadow)
+              : kemenagTimes(place.lat, place.lon, year, month, day, { highland: place.highland, twilightDip: place.twilightDip, asrShadow, afternoon: place.afternoon });
       // the correction list: the authority's few times on the other side of a minute (the standard Asr only)
       const c = !t || !fix ? undefined : fix.correction(place.lat, place.lon, year, month, day);
       if (!t || !c) return t;

@@ -1,7 +1,7 @@
 {
   "name": "mihrab-methods",
   "version": "1.2.1",
-  "description": "The prayer-time authorities' own calculation methods, each reproducing its published timetable to the minute: Sweden (Diyanet, as Islamiska Förbundet prints it), Diyanet worldwide, Morocco (Habous), Algeria (Ministry of Religious Affairs), Indonesia (Kemenag).",
+  "description": "The prayer-time authorities' own calculation methods, each reproducing its published timetable to the minute: Sweden (Diyanet, as Islamiska Förbundet prints it), Diyanet worldwide, Morocco (Habous), Algeria (Ministry of Religious Affairs), Indonesia (Kemenag), Türkiye Takvimi.",
   "license": "MPL-2.0",
   "author": "Hassan El Ghamri",
   "repository": {
@@ -28,6 +28,7 @@
     "./dist/*/morocco.js",
     "./dist/*/algeria.js",
     "./dist/*/indonesia.js",
+    "./dist/*/turkiyetakvimi.js",
     "./dist/*/authorities/*.js",
     "./src/index.ts",
     "./src/sweden.ts",
@@ -35,6 +36,7 @@
     "./src/morocco.ts",
     "./src/algeria.ts",
     "./src/indonesia.ts",
+    "./src/turkiyetakvimi.ts",
     "./src/authorities/*.ts"
   ],
   "engines": {
@@ -121,6 +123,16 @@
         "default": "./dist/cjs/indonesia.js"
       }
     },
+    "./turkiyetakvimi": {
+      "import": {
+        "types": "./dist/esm/turkiyetakvimi.d.ts",
+        "default": "./dist/esm/turkiyetakvimi.js"
+      },
+      "require": {
+        "types": "./dist/cjs/turkiyetakvimi.d.ts",
+        "default": "./dist/cjs/turkiyetakvimi.js"
+      }
+    },
     "./locate": {
       "import": {
         "types": "./dist/esm/locate.d.ts",
@@ -155,6 +167,9 @@
       ],
       "indonesia": [
         "./dist/cjs/indonesia.d.ts"
+      ],
+      "turkiyetakvimi": [
+        "./dist/cjs/turkiyetakvimi.d.ts"
       ],
       "locate": [
         "./dist/cjs/locate.d.ts"

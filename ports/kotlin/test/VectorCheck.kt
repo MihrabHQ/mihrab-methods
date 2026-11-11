@@ -141,6 +141,7 @@ fun main(args: Array<String>) {
             highland = p["highland"] == true,
             twilightDip = p["twilightDip"] == true,
             afternoon = p["afternoon"]?.let(::pair),
+            temkin = p["temkin"] as Double?,
         )
         val date = c["date"] as String
         val want = c["printed"]?.let(::obj)

@@ -201,6 +201,45 @@ cities.
   its table is computed.
 - Each regency is printed in its province's zone (WIB, WITA or WIT).
 
+## Türkiye Takvimi
+
+`src/methods/turkiyeTakvimi.ts`. The calendar's own years for its cities
+(namazvakti.com), read off cities from 42°S to 60°N.
+
+- The **precise apparent sun** of Indonesia's method — here with ΔT added
+  to Universal Time, as the ephemeris asks — taken at each event's own
+  moment: three iterations from the transit, itself iterated
+  three times.
+- A **temkin `T`** per city, in minutes with its fraction: the time the sun
+  takes on the summer solstice (declination 23.38°) at the city's latitude
+  `φ` to go from the level horizon to the city's own, `d` below it,
+  `T = 4 [ H(−d) − H(0) ]` with `cos H(a) = (sin a − sin φ sin 23.38°) / (cos φ cos 23.38°)`
+  and `d = 0.8416° + 0.03924° √h` for the height `h` the calendar gives the
+  city (250 m: 1.462°; 500 m: 1.719°). A listed place carries the `T` its
+  table shows (`Place.temkin`), which strays from the formula by a few
+  hundredths of a minute.
+- **Fajr** is the calendar's Sabâh: the sun 18° below the horizon, with no
+  temkin. (Its İmsâk, which the library does not give among the six, is the
+  sun at 19° less `T`, rounded down.)
+- **Sunrise**: the sun's centre on the level horizon (altitude 0°, no
+  refraction), less `T` and two minutes.
+- **Dhuhr**: the transit plus `T`.
+- **Asr**: the altitude `arccot(s + tan|φ − δ|)` with `δ` the declination
+  of local noon (the hour angle from the sun at Asr itself), plus `T`.
+- **Maghrib**: the sun's centre on the level horizon, plus `T` and two
+  minutes.
+- **Isha**: the sun 17° below the horizon, plus `T`.
+- Every time rounded **up** to the minute.
+- **Where the sun does not get 19° below the horizon** (north of about
+  47.5° in summer), İmsâk, Fajr and Isha are held at the times of the last
+  night it did. A night counts as reaching 19° when the sun's lowest point,
+  `|φ + δ| − 90°`, does at the declination of either the local solar
+  midnight that begins the day or 12:00 UT of the day. The certified list
+  has no place that far north; the rule is as the calendar's northern
+  cities show it, and no table here holds it.
+- The calendar's files give a city's point to the whole arc-minute and it
+  computes at a finer one; each place is at the point its year shows.
+
 ## Checking a port
 
 1. Take `test/vectors.json`. For each case, compute the six times at the

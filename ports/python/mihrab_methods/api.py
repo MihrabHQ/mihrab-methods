@@ -4,7 +4,7 @@ then its correction list — what `timesFor` does in the TypeScript library.
 A place is a dict shaped like the library's `Place` (see docs/api.md):
 `authority`, `lat`, `lon`, `tz`, and where the list has them `ishaDeg`,
 `clock`, `prayerPoints`, `dipDeg`, `dipMaghribDeg`, `highland`,
-`twilightDip`, `afternoon`.
+`twilightDip`, `afternoon`, `temkin`.
 """
 import datetime
 import json
@@ -17,7 +17,7 @@ from . import methods
 
 PRAYERS = ('fajr', 'sunrise', 'dhuhr', 'asr', 'maghrib', 'isha')
 #: The method revisions this port reproduces. A correction list belongs to one revision.
-REVISIONS = {'sweden': 1, 'diyanet': 1, 'morocco': 2, 'algeria': 1, 'indonesia': 2}
+REVISIONS = {'sweden': 1, 'diyanet': 1, 'morocco': 2, 'algeria': 1, 'indonesia': 2, 'turkiyetakvimi': 1}
 
 _UTC = datetime.timezone.utc
 
@@ -106,6 +106,8 @@ def minutes_for(place, date, corrections=None, asr_shadow=1):
     elif a == 'indonesia':
         t = methods.kemenag_minutes(place['lat'], place['lon'], year, month0, day, bool(place.get('highland')),
                                     bool(place.get('twilightDip')), asr_shadow, place.get('afternoon'))
+    elif a == 'turkiyetakvimi':
+        t = methods.takvim_minutes(place['lat'], place['lon'], year, month0, day, place.get('temkin'), asr_shadow)
     else:
         raise ValueError('unknown authority: %r' % (a,))
     if t is None:

@@ -9,8 +9,13 @@ revision bump is at least a minor version.
 
 ## Unreleased
 
-No method changed; no revision raised.
-
+- **Türkiye Takvimi, revision 1: a sixth method.** The calendar's own
+  method (namazvakti.com) for Türkiye's 81 province centres, each at the
+  point and with the temkin its published year shows: `mihrab-methods/turkiyetakvimi`,
+  authority `turkiyetakvimi`, `Place.temkin`. Fajr is the calendar's Sabâh.
+  Nothing changes for the other methods; `certification.json` gains an
+  entry and `data/corrections/turkiyetakvimi.json` is new. In every port
+  too.
 ## 1.2.1 — 2026-11-11
 
 - **Diyanet: 186 more places.** Places Diyanet lists that had not been

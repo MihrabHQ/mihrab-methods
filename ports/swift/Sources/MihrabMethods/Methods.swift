@@ -1,5 +1,5 @@
-// The five methods: Sweden and Diyanet (the Congress method), Morocco, Algeria
-// and Indonesia. A port of src/methods/*.ts — the TypeScript is the reference,
+// The methods: Sweden and Diyanet (the Congress method), Morocco, Algeria,
+// Indonesia and Türkiye Takvimi. A port of src/methods/*.ts — the TypeScript is the reference,
 // docs/methods.md says what each does, and the vector check holds this to it.
 //
 // Every function takes a civil date with the month 0-based, as the TypeScript
@@ -195,6 +195,98 @@ func kemenagMinutes(_ lat: Double, _ lon: Double, _ year: Int, _ month0: Int, _ 
         r.maghrib = pm.maghrib
         r.isha = pm.isha
     }
+    if r.all.contains(where: { !$0.isFinite }) { return nil }
+    return r.mapped { ceil($0 - 1e-9) }
+}
+
+// ---------------------------------------------------------------- Türkiye Takvimi
+
+private let TAKVIM_SOLSTICE_DECLINATION = 23.38
+private let TAKVIM_HORIZON_MARGIN = 2.0
+private let TAKVIM_HOLD_SEARCH_DAYS = 200
+
+/// The calendar's temkin by its formula, minutes; a listed place carries its own.
+public func takvimTemkin(_ lat: Double, heightM: Double = 250) -> Double {
+    let phi = min(abs(lat), 62) * RAD
+    let dec = TAKVIM_SOLSTICE_DECLINATION * RAD
+    let depth = 0.8416 + 0.03924 * max(0, heightM).squareRoot()
+    func hourAngle(_ alt: Double) -> Double {
+        return acos(max(-1, min(1, (sin(alt * RAD) - sin(phi) * sin(dec)) / (cos(phi) * cos(dec)))))
+    }
+    return ((hourAngle(-depth) - hourAngle(0)) / RAD) * 4
+}
+
+/// The sun's events of a day at a point, minutes past the day's 00:00 UT; NaN where one does not happen.
+private struct TakvimEvents {
+    let lat: Double, lon: Double, d0: Double
+    let noon: Double, noonDec: Double, sp: Double, cp: Double
+
+    init(_ lat: Double, _ lon: Double, _ key: Int) {
+        self.lat = lat
+        self.lon = lon
+        let d0 = Double(key - J2000_DAYS) - 0.5
+        self.d0 = d0
+        var n = 720 - 4 * lon
+        for _ in 0..<3 { n = 720 - 4 * lon - preciseApparentSun(d0 + n / 1440).eot }
+        noon = n
+        noonDec = preciseApparentSun(d0 + n / 1440).dec
+        sp = sin(lat * RAD)
+        cp = cos(lat * RAD)
+    }
+
+    func event(_ alt: Double, _ sign: Double, _ start: Double) -> Double {
+        var t = start
+        for _ in 0..<3 {
+            let s = preciseApparentSun(d0 + t / 1440)
+            let c = (sin(alt * RAD) - sp * sin(s.dec)) / (cp * cos(s.dec))
+            if !(abs(c) <= 1) { return Double.nan }
+            t = 720 - 4 * lon - s.eot + (sign * 4 * acos(c)) / RAD
+        }
+        return t
+    }
+
+    func asr(_ shadow: Double) -> Double {
+        return event(atan(1 / (shadow + tan(abs(lat * RAD - noonDec)))) / RAD, 1, noon + 200)
+    }
+}
+
+private func takvimReaches19(_ lat: Double, _ lon: Double, _ key: Int) -> Bool {
+    let d0 = Double(key - J2000_DAYS) - 0.5
+    func lowest(_ d: Double) -> Double { return abs(lat + preciseApparentSun(d).dec / RAD) - 90 }
+    return min(lowest(d0 - lon / 360), lowest(d0 + 0.5)) <= -19
+}
+
+/// The day whose night times stand for this one: itself, or the last before it whose night reached 19°.
+func takvimHeldNight(_ lat: Double, _ lon: Double, _ key: Int) -> Int {
+    for i in 0...TAKVIM_HOLD_SEARCH_DAYS where takvimReaches19(lat, lon, key - i) { return key - i }
+    return key
+}
+
+/// The calendar's times before rounding: the six the library gives, and İmsâk.
+func takvimRawMinutes(_ lat: Double, _ lon: Double, _ year: Int, _ month0: Int, _ day: Int,
+                      temkin: Double? = nil, asrShadow: Double = 1) -> (imsak: Double, times: DayMinutes) {
+    let T = temkin ?? takvimTemkin(lat)
+    let key = dayKey(year, month0, day)
+    let today = TakvimEvents(lat, lon, key)
+    let night = takvimHeldNight(lat, lon, key)
+    let nightSun = night == key ? today : TakvimEvents(lat, lon, night)
+    let ishaNight = takvimHeldNight(lat, lon, key + 1)
+    let ishaDay = ishaNight == key + 1 ? key : ishaNight - 1
+    let ishaSun = ishaDay == key ? today : TakvimEvents(lat, lon, ishaDay)
+    let times = DayMinutes(
+        fajr: nightSun.event(-18, -1, nightSun.noon - 420),
+        sunrise: today.event(0, -1, today.noon - 360) - T - TAKVIM_HORIZON_MARGIN,
+        dhuhr: today.noon + T,
+        asr: today.asr(asrShadow) + T,
+        maghrib: today.event(0, 1, today.noon + 360) + T + TAKVIM_HORIZON_MARGIN,
+        isha: ishaSun.event(-17, 1, ishaSun.noon + 420) + T)
+    return (nightSun.event(-19, -1, nightSun.noon - 420) - T, times)
+}
+
+/// Rounded up to the minute; Fajr is the calendar's Sabâh. Nil where a time does not form.
+func takvimMinutes(_ lat: Double, _ lon: Double, _ year: Int, _ month0: Int, _ day: Int,
+                   temkin: Double? = nil, asrShadow: Double = 1) -> DayMinutes? {
+    let r = takvimRawMinutes(lat, lon, year, month0, day, temkin: temkin, asrShadow: asrShadow).times
     if r.all.contains(where: { !$0.isFinite }) { return nil }
     return r.mapped { ceil($0 - 1e-9) }
 }

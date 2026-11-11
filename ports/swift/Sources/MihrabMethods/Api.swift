@@ -3,7 +3,7 @@
 import Foundation
 
 public enum Authority: String {
-    case sweden, diyanet, morocco, algeria, indonesia
+    case sweden, diyanet, morocco, algeria, indonesia, turkiyetakvimi
 }
 
 public enum Prayer: String, CaseIterable {
@@ -11,7 +11,7 @@ public enum Prayer: String, CaseIterable {
 }
 
 /// The method revisions this port reproduces. A correction list belongs to one revision.
-public let REVISIONS: [String: Int] = ["sweden": 1, "diyanet": 1, "morocco": 2, "algeria": 1, "indonesia": 2]
+public let REVISIONS: [String: Int] = ["sweden": 1, "diyanet": 1, "morocco": 2, "algeria": 1, "indonesia": 2, "turkiyetakvimi": 1]
 
 /// A place as the library's lists have it (data/places). Use the coordinates
 /// exactly as the list gives them: the correction lists are looked up by them.
@@ -34,6 +34,8 @@ public struct Place {
     public var highland = false
     public var twilightDip = false
     public var afternoon: (Double, Double)?
+    /// Türkiye Takvimi: the city's temkin, minutes.
+    public var temkin: Double?
 
     public init(authority: Authority, lat: Double, lon: Double, tz: String) {
         self.authority = authority
@@ -174,6 +176,8 @@ public func timesFor(_ place: Place, _ date: String, corrections: CorrectionList
     case .indonesia:
         t = kemenagMinutes(place.lat, place.lon, year, month0, day, highland: place.highland, twilightDip: place.twilightDip,
                            asrShadow: asrShadow, afternoon: place.afternoon)
+    case .turkiyetakvimi:
+        t = takvimMinutes(place.lat, place.lon, year, month0, day, temkin: place.temkin, asrShadow: asrShadow)
     }
     guard let m = t else { return nil }
     var out: [Prayer: Int] = [.fajr: Int(m.fajr), .sunrise: Int(m.sunrise), .dhuhr: Int(m.dhuhr), .asr: Int(m.asr), .maghrib: Int(m.maghrib), .isha: Int(m.isha)]

@@ -1,5 +1,5 @@
-// The five methods: Sweden and Diyanet (the Congress method), Morocco, Algeria
-// and Indonesia. A port of src/methods/*.ts — the TypeScript is the reference,
+// The methods: Sweden and Diyanet (the Congress method), Morocco, Algeria,
+// Indonesia and Türkiye Takvimi. A port of src/methods/*.ts — the TypeScript is the reference,
 // docs/methods.md says what each does, and the vector check holds this to it.
 //
 // Every function takes a civil date with the month 0-based, as the TypeScript
@@ -178,6 +178,89 @@ fun kemenagMinutes(lat: Double, lon: Double, year: Int, month0: Int, day: Int, h
         r.maghrib = pm.maghrib
         r.isha = pm.isha
     }
+    return if (r.allFinite) r.mapped { ceil(it - 1e-9) } else null
+}
+
+// ---------------------------------------------------------------- Türkiye Takvimi
+
+private const val TAKVIM_SOLSTICE_DECLINATION = 23.38
+private const val TAKVIM_HORIZON_MARGIN = 2.0
+private const val TAKVIM_HOLD_SEARCH_DAYS = 200
+
+/** The calendar's temkin by its formula, minutes; a listed place carries its own. */
+fun takvimTemkin(lat: Double, heightM: Double = 250.0): Double {
+    val phi = minOf(abs(lat), 62.0) * RAD
+    val dec = TAKVIM_SOLSTICE_DECLINATION * RAD
+    val depth = 0.8416 + 0.03924 * sqrt(maxOf(0.0, heightM))
+    fun hourAngle(alt: Double) = acos(maxOf(-1.0, minOf(1.0, (sin(alt * RAD) - sin(phi) * sin(dec)) / (cos(phi) * cos(dec)))))
+    return ((hourAngle(-depth) - hourAngle(0.0)) / RAD) * 4
+}
+
+/** The sun's events of a day at a point, minutes past the day's 00:00 UT; NaN where one does not happen. */
+private class TakvimEvents(val lat: Double, val lon: Double, key: Long) {
+    private val d0 = (key - J2000_DAYS).toDouble() - 0.5
+    val noon: Double
+    private val noonDec: Double
+    private val sp = sin(lat * RAD)
+    private val cp = cos(lat * RAD)
+
+    init {
+        var n = 720 - 4 * lon
+        repeat(3) { n = 720 - 4 * lon - preciseApparentSun(d0 + n / 1440).eot }
+        noon = n
+        noonDec = preciseApparentSun(d0 + n / 1440).dec
+    }
+
+    fun event(alt: Double, sign: Double, start: Double): Double {
+        var t = start
+        repeat(3) {
+            val s = preciseApparentSun(d0 + t / 1440)
+            val c = (sin(alt * RAD) - sp * sin(s.dec)) / (cp * cos(s.dec))
+            if (!(abs(c) <= 1)) return Double.NaN
+            t = 720 - 4 * lon - s.eot + (sign * 4 * acos(c)) / RAD
+        }
+        return t
+    }
+
+    fun asr(shadow: Double): Double = event(atan(1 / (shadow + tan(abs(lat * RAD - noonDec)))) / RAD, 1.0, noon + 200)
+}
+
+private fun takvimReaches19(lat: Double, lon: Double, key: Long): Boolean {
+    val d0 = (key - J2000_DAYS).toDouble() - 0.5
+    fun lowest(d: Double) = abs(lat + preciseApparentSun(d).dec / RAD) - 90
+    return minOf(lowest(d0 - lon / 360), lowest(d0 + 0.5)) <= -19
+}
+
+/** The day whose night times stand for this one: itself, or the last before it whose night reached 19°. */
+fun takvimHeldNight(lat: Double, lon: Double, key: Long): Long {
+    for (i in 0..TAKVIM_HOLD_SEARCH_DAYS) if (takvimReaches19(lat, lon, key - i)) return key - i
+    return key
+}
+
+/** The calendar's times before rounding: the six the library gives, and İmsâk (first). */
+fun takvimRawMinutes(lat: Double, lon: Double, year: Int, month0: Int, day: Int, temkin: Double? = null, asrShadow: Double = 1.0): Pair<Double, DayMinutes> {
+    val T = temkin ?: takvimTemkin(lat)
+    val key = dayKey(year, month0, day)
+    val today = TakvimEvents(lat, lon, key)
+    val night = takvimHeldNight(lat, lon, key)
+    val nightSun = if (night == key) today else TakvimEvents(lat, lon, night)
+    val ishaNight = takvimHeldNight(lat, lon, key + 1)
+    val ishaDay = if (ishaNight == key + 1) key else ishaNight - 1
+    val ishaSun = if (ishaDay == key) today else TakvimEvents(lat, lon, ishaDay)
+    val times = DayMinutes(
+        fajr = nightSun.event(-18.0, -1.0, nightSun.noon - 420),
+        sunrise = today.event(0.0, -1.0, today.noon - 360) - T - TAKVIM_HORIZON_MARGIN,
+        dhuhr = today.noon + T,
+        asr = today.asr(asrShadow) + T,
+        maghrib = today.event(0.0, 1.0, today.noon + 360) + T + TAKVIM_HORIZON_MARGIN,
+        isha = ishaSun.event(-17.0, 1.0, ishaSun.noon + 420) + T,
+    )
+    return Pair(nightSun.event(-19.0, -1.0, nightSun.noon - 420) - T, times)
+}
+
+/** Rounded up to the minute; Fajr is the calendar's Sabâh. Null where a time does not form. */
+fun takvimMinutes(lat: Double, lon: Double, year: Int, month0: Int, day: Int, temkin: Double? = null, asrShadow: Double = 1.0): DayMinutes? {
+    val r = takvimRawMinutes(lat, lon, year, month0, day, temkin, asrShadow).second
     return if (r.allFinite) r.mapped { ceil(it - 1e-9) } else null
 }
 

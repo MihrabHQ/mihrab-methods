@@ -11,8 +11,8 @@ an Indonesian app does not carry Diyanet's worldwide points:
 
 | Import | Loads |
 |---|---|
-| `mihrab-methods` | all five |
-| `mihrab-methods/sweden`, `/diyanet`, `/morocco`, `/algeria`, `/indonesia` | one authority: its places, list and certification |
+| `mihrab-methods` | all of them |
+| `mihrab-methods/sweden`, `/diyanet`, `/morocco`, `/algeria`, `/indonesia`, `/turkiyetakvimi` | one authority: its places, list and certification |
 | `mihrab-methods/locate` | `countryAt`, `defaultAuthorityFor` — the country at a point, and the authority whose table it prays by (the country outlines, kept apart because most apps already know their country) |
 | `mihrab-methods/core` | the calls and types with no data (load authorities yourself) |
 
@@ -23,7 +23,7 @@ read from disk or fetched unless you call `fetchLatestCorrections`.
 import { placesOf, placeById, nearestPlace, timesFor, timesForRange, candidateTimes, methodInfo } from 'mihrab-methods';
 import { defaultAuthorityFor } from 'mihrab-methods/locate';
 
-defaultAuthorityFor(59.33, 18.07);            // 'sweden' (null where none of the five is the authority)
+defaultAuthorityFor(59.33, 18.07);            // 'sweden' (null where none of them is the country's authority)
 const { place, distanceKm } = nearestPlace('sweden', 59.33, 18.07)!;
 place.id;                                     // 'sweden:stockholm' — stable; place.country 'SE'
 placeById('diyanet:9146');                    // Adana
@@ -106,7 +106,7 @@ nothing.
 
 | Path | What |
 |---|---|
-| `src/methods/` | The methods: Sweden and Diyanet (`sweden.ts`), Morocco, Algeria, Indonesia; their revisions |
+| `src/methods/` | The methods: Sweden and Diyanet (`sweden.ts`), Morocco, Algeria, Indonesia, Türkiye Takvimi; their revisions |
 | `src/sun/preciseSun.ts` | VSOP87 apparent sun, after Astronomy Engine: within about 0.05 s and 0.5″ of JPL's DE421 |
 | `src/core/` | The calls (`api.ts`), the computation they share (`compute.ts`), dates, clocks, the correction-list index, `fetchLatestCorrections` |
 | `src/authorities/` | Each authority's places, at the point (and Morocco's horizon) its method is computed at, with its description |

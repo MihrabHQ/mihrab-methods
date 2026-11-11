@@ -42,6 +42,7 @@ for c in cases {
     var place = Place(authority: Authority(rawValue: authority)!, lat: (p["lat"] as! NSNumber).doubleValue,
                       lon: (p["lon"] as! NSNumber).doubleValue, tz: p["tz"] as! String)
     place.ishaDeg = (p["ishaDeg"] as? NSNumber)?.doubleValue
+    place.temkin = (p["temkin"] as? NSNumber)?.doubleValue
     place.dipDeg = (p["dipDeg"] as? NSNumber)?.doubleValue
     place.dipMaghribDeg = (p["dipMaghribDeg"] as? NSNumber)?.doubleValue
     place.highland = (p["highland"] as? Bool) ?? false

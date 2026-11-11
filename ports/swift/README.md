@@ -1,6 +1,6 @@
 # mihrab-methods in Swift
 
-The five methods of [mihrab-methods](../../README.md) as a Swift package
+The methods of [mihrab-methods](../../README.md) as a Swift package
 with no dependencies beyond Foundation. See [the ports' notes](../README.md)
 for what a port does and how it is held to the reference.
 
@@ -18,7 +18,7 @@ if let day = timesFor(stockholm, "2026-11-12", corrections: list) {
 
 `Place` has the fields a list gives some of its places as optional
 properties (`ishaDeg`, `clock`, `prayerPoints`, `dipDeg`, `dipMaghribDeg`,
-`highland`, `twilightDip`, `afternoon`). The Congress method keeps a small
+`highland`, `twilightDip`, `afternoon`, `temkin`). The Congress method keeps a small
 cache of years; call it from one thread at a time.
 
 ## Check

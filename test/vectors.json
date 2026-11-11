@@ -5,7 +5,8 @@
   "diyanet": 1,
   "morocco": 2,
   "algeria": 1,
-  "indonesia": 2
+  "indonesia": 2,
+  "turkiyetakvimi": 1
  },
  "cases": [
   {
@@ -2398,6 +2399,390 @@
     "asr": "2027-01-31T06:32:00.000Z",
     "maghrib": "2027-01-31T09:17:00.000Z",
     "isha": "2027-01-31T10:29:00.000Z"
+   }
+  },
+  {
+   "place": {
+    "id": "turkiyetakvimi:16741",
+    "name": "İstanbul",
+    "lat": 41.000167,
+    "lon": 28.999625,
+    "tz": "Europe/Istanbul",
+    "temkin": 10.815
+   },
+   "date": "2025-12-31",
+   "clock": {
+    "zone": "Europe/Istanbul",
+    "offsetMinutes": 180,
+    "label": "Europe/Istanbul"
+   },
+   "printed": {
+    "fajr": "06:50",
+    "sunrise": "08:22",
+    "dhuhr": "13:18",
+    "asr": "15:39",
+    "maghrib": "17:54",
+    "isha": "19:30"
+   },
+   "instants": {
+    "fajr": "2025-12-31T03:50:00.000Z",
+    "sunrise": "2025-12-31T05:22:00.000Z",
+    "dhuhr": "2025-12-31T10:18:00.000Z",
+    "asr": "2025-12-31T12:39:00.000Z",
+    "maghrib": "2025-12-31T14:54:00.000Z",
+    "isha": "2025-12-31T16:30:00.000Z"
+   }
+  },
+  {
+   "place": {
+    "id": "turkiyetakvimi:16741",
+    "name": "İstanbul",
+    "lat": 41.000167,
+    "lon": 28.999625,
+    "tz": "Europe/Istanbul",
+    "temkin": 10.815
+   },
+   "date": "2026-05-02",
+   "clock": {
+    "zone": "Europe/Istanbul",
+    "offsetMinutes": 180,
+    "label": "Europe/Istanbul"
+   },
+   "printed": {
+    "fajr": "04:15",
+    "sunrise": "05:53",
+    "dhuhr": "13:12",
+    "asr": "17:04",
+    "maghrib": "20:10",
+    "isha": "21:53"
+   },
+   "instants": {
+    "fajr": "2026-05-02T01:15:00.000Z",
+    "sunrise": "2026-05-02T02:53:00.000Z",
+    "dhuhr": "2026-05-02T10:12:00.000Z",
+    "asr": "2026-05-02T14:04:00.000Z",
+    "maghrib": "2026-05-02T17:10:00.000Z",
+    "isha": "2026-05-02T18:53:00.000Z"
+   }
+  },
+  {
+   "place": {
+    "id": "turkiyetakvimi:16741",
+    "name": "İstanbul",
+    "lat": 41.000167,
+    "lon": 28.999625,
+    "tz": "Europe/Istanbul",
+    "temkin": 10.815
+   },
+   "date": "2026-09-02",
+   "clock": {
+    "zone": "Europe/Istanbul",
+    "offsetMinutes": 180,
+    "label": "Europe/Istanbul"
+   },
+   "printed": {
+    "fajr": "04:55",
+    "sunrise": "06:24",
+    "dhuhr": "13:15",
+    "asr": "16:55",
+    "maghrib": "19:44",
+    "isha": "21:17"
+   },
+   "instants": {
+    "fajr": "2026-09-02T01:55:00.000Z",
+    "sunrise": "2026-09-02T03:24:00.000Z",
+    "dhuhr": "2026-09-02T10:15:00.000Z",
+    "asr": "2026-09-02T13:55:00.000Z",
+    "maghrib": "2026-09-02T16:44:00.000Z",
+    "isha": "2026-09-02T18:17:00.000Z"
+   }
+  },
+  {
+   "place": {
+    "id": "turkiyetakvimi:16741",
+    "name": "İstanbul",
+    "lat": 41.000167,
+    "lon": 28.999625,
+    "tz": "Europe/Istanbul",
+    "temkin": 10.815
+   },
+   "date": "2027-01-02",
+   "clock": {
+    "zone": "Europe/Istanbul",
+    "offsetMinutes": 180,
+    "label": "Europe/Istanbul"
+   },
+   "printed": {
+    "fajr": "06:51",
+    "sunrise": "08:22",
+    "dhuhr": "13:19",
+    "asr": "15:40",
+    "maghrib": "17:55",
+    "isha": "19:32"
+   },
+   "instants": {
+    "fajr": "2027-01-02T03:51:00.000Z",
+    "sunrise": "2027-01-02T05:22:00.000Z",
+    "dhuhr": "2027-01-02T10:19:00.000Z",
+    "asr": "2027-01-02T12:40:00.000Z",
+    "maghrib": "2027-01-02T14:55:00.000Z",
+    "isha": "2027-01-02T16:32:00.000Z"
+   }
+  },
+  {
+   "place": {
+    "id": "turkiyetakvimi:16709",
+    "name": "Ankara",
+    "lat": 39.9333,
+    "lon": 32.849063,
+    "tz": "Europe/Istanbul",
+    "temkin": 10.5818
+   },
+   "date": "2025-12-31",
+   "clock": {
+    "zone": "Europe/Istanbul",
+    "offsetMinutes": 180,
+    "label": "Europe/Istanbul"
+   },
+   "printed": {
+    "fajr": "06:33",
+    "sunrise": "08:03",
+    "dhuhr": "13:03",
+    "asr": "15:27",
+    "maghrib": "17:41",
+    "isha": "19:16"
+   },
+   "instants": {
+    "fajr": "2025-12-31T03:33:00.000Z",
+    "sunrise": "2025-12-31T05:03:00.000Z",
+    "dhuhr": "2025-12-31T10:03:00.000Z",
+    "asr": "2025-12-31T12:27:00.000Z",
+    "maghrib": "2025-12-31T14:41:00.000Z",
+    "isha": "2025-12-31T16:16:00.000Z"
+   }
+  },
+  {
+   "place": {
+    "id": "turkiyetakvimi:16709",
+    "name": "Ankara",
+    "lat": 39.9333,
+    "lon": 32.849063,
+    "tz": "Europe/Istanbul",
+    "temkin": 10.5818
+   },
+   "date": "2026-05-02",
+   "clock": {
+    "zone": "Europe/Istanbul",
+    "offsetMinutes": 180,
+    "label": "Europe/Istanbul"
+   },
+   "printed": {
+    "fajr": "04:05",
+    "sunrise": "05:40",
+    "dhuhr": "12:57",
+    "asr": "16:47",
+    "maghrib": "19:52",
+    "isha": "21:32"
+   },
+   "instants": {
+    "fajr": "2026-05-02T01:05:00.000Z",
+    "sunrise": "2026-05-02T02:40:00.000Z",
+    "dhuhr": "2026-05-02T09:57:00.000Z",
+    "asr": "2026-05-02T13:47:00.000Z",
+    "maghrib": "2026-05-02T16:52:00.000Z",
+    "isha": "2026-05-02T18:32:00.000Z"
+   }
+  },
+  {
+   "place": {
+    "id": "turkiyetakvimi:16709",
+    "name": "Ankara",
+    "lat": 39.9333,
+    "lon": 32.849063,
+    "tz": "Europe/Istanbul",
+    "temkin": 10.5818
+   },
+   "date": "2026-09-02",
+   "clock": {
+    "zone": "Europe/Istanbul",
+    "offsetMinutes": 180,
+    "label": "Europe/Istanbul"
+   },
+   "printed": {
+    "fajr": "04:43",
+    "sunrise": "06:10",
+    "dhuhr": "12:59",
+    "asr": "16:39",
+    "maghrib": "19:27",
+    "isha": "20:59"
+   },
+   "instants": {
+    "fajr": "2026-09-02T01:43:00.000Z",
+    "sunrise": "2026-09-02T03:10:00.000Z",
+    "dhuhr": "2026-09-02T09:59:00.000Z",
+    "asr": "2026-09-02T13:39:00.000Z",
+    "maghrib": "2026-09-02T16:27:00.000Z",
+    "isha": "2026-09-02T17:59:00.000Z"
+   }
+  },
+  {
+   "place": {
+    "id": "turkiyetakvimi:16709",
+    "name": "Ankara",
+    "lat": 39.9333,
+    "lon": 32.849063,
+    "tz": "Europe/Istanbul",
+    "temkin": 10.5818
+   },
+   "date": "2027-01-02",
+   "clock": {
+    "zone": "Europe/Istanbul",
+    "offsetMinutes": 180,
+    "label": "Europe/Istanbul"
+   },
+   "printed": {
+    "fajr": "06:34",
+    "sunrise": "08:03",
+    "dhuhr": "13:04",
+    "asr": "15:28",
+    "maghrib": "17:43",
+    "isha": "19:18"
+   },
+   "instants": {
+    "fajr": "2027-01-02T03:34:00.000Z",
+    "sunrise": "2027-01-02T05:03:00.000Z",
+    "dhuhr": "2027-01-02T10:04:00.000Z",
+    "asr": "2027-01-02T12:28:00.000Z",
+    "maghrib": "2027-01-02T14:43:00.000Z",
+    "isha": "2027-01-02T16:18:00.000Z"
+   }
+  },
+  {
+   "place": {
+    "id": "turkiyetakvimi:16768",
+    "name": "Sinop",
+    "lat": 42.033133,
+    "lon": 35.14975,
+    "tz": "Europe/Istanbul",
+    "temkin": 10.9773
+   },
+   "date": "2025-12-31",
+   "clock": {
+    "zone": "Europe/Istanbul",
+    "offsetMinutes": 180,
+    "label": "Europe/Istanbul"
+   },
+   "printed": {
+    "fajr": "06:27",
+    "sunrise": "08:00",
+    "dhuhr": "12:54",
+    "asr": "15:11",
+    "maghrib": "17:26",
+    "isha": "19:04"
+   },
+   "instants": {
+    "fajr": "2025-12-31T03:27:00.000Z",
+    "sunrise": "2025-12-31T05:00:00.000Z",
+    "dhuhr": "2025-12-31T09:54:00.000Z",
+    "asr": "2025-12-31T12:11:00.000Z",
+    "maghrib": "2025-12-31T14:26:00.000Z",
+    "isha": "2025-12-31T16:04:00.000Z"
+   }
+  },
+  {
+   "place": {
+    "id": "turkiyetakvimi:16768",
+    "name": "Sinop",
+    "lat": 42.033133,
+    "lon": 35.14975,
+    "tz": "Europe/Istanbul",
+    "temkin": 10.9773
+   },
+   "date": "2026-05-02",
+   "clock": {
+    "zone": "Europe/Istanbul",
+    "offsetMinutes": 180,
+    "label": "Europe/Istanbul"
+   },
+   "printed": {
+    "fajr": "03:46",
+    "sunrise": "05:27",
+    "dhuhr": "12:48",
+    "asr": "16:41",
+    "maghrib": "19:48",
+    "isha": "21:33"
+   },
+   "instants": {
+    "fajr": "2026-05-02T00:46:00.000Z",
+    "sunrise": "2026-05-02T02:27:00.000Z",
+    "dhuhr": "2026-05-02T09:48:00.000Z",
+    "asr": "2026-05-02T13:41:00.000Z",
+    "maghrib": "2026-05-02T16:48:00.000Z",
+    "isha": "2026-05-02T18:33:00.000Z"
+   }
+  },
+  {
+   "place": {
+    "id": "turkiyetakvimi:16768",
+    "name": "Sinop",
+    "lat": 42.033133,
+    "lon": 35.14975,
+    "tz": "Europe/Istanbul",
+    "temkin": 10.9773
+   },
+   "date": "2026-09-02",
+   "clock": {
+    "zone": "Europe/Istanbul",
+    "offsetMinutes": 180,
+    "label": "Europe/Istanbul"
+   },
+   "printed": {
+    "fajr": "04:27",
+    "sunrise": "05:58",
+    "dhuhr": "12:51",
+    "asr": "16:31",
+    "maghrib": "19:21",
+    "isha": "20:56"
+   },
+   "instants": {
+    "fajr": "2026-09-02T01:27:00.000Z",
+    "sunrise": "2026-09-02T02:58:00.000Z",
+    "dhuhr": "2026-09-02T09:51:00.000Z",
+    "asr": "2026-09-02T13:31:00.000Z",
+    "maghrib": "2026-09-02T16:21:00.000Z",
+    "isha": "2026-09-02T17:56:00.000Z"
+   }
+  },
+  {
+   "place": {
+    "id": "turkiyetakvimi:16768",
+    "name": "Sinop",
+    "lat": 42.033133,
+    "lon": 35.14975,
+    "tz": "Europe/Istanbul",
+    "temkin": 10.9773
+   },
+   "date": "2027-01-02",
+   "clock": {
+    "zone": "Europe/Istanbul",
+    "offsetMinutes": 180,
+    "label": "Europe/Istanbul"
+   },
+   "printed": {
+    "fajr": "06:28",
+    "sunrise": "08:00",
+    "dhuhr": "12:55",
+    "asr": "15:13",
+    "maghrib": "17:27",
+    "isha": "19:06"
+   },
+   "instants": {
+    "fajr": "2027-01-02T03:28:00.000Z",
+    "sunrise": "2027-01-02T05:00:00.000Z",
+    "dhuhr": "2027-01-02T09:55:00.000Z",
+    "asr": "2027-01-02T12:13:00.000Z",
+    "maghrib": "2027-01-02T14:27:00.000Z",
+    "isha": "2027-01-02T16:06:00.000Z"
    }
   }
  ]

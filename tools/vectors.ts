@@ -17,6 +17,7 @@ const PICK: Record<string, string[]> = {
   morocco: ['morocco:1', 'morocco:60', 'morocco:150'],
   algeria: ['algeria:1', 'algeria:27', 'algeria:60'],
   indonesia: ['indonesia:1', 'indonesia:200', 'indonesia:500'],
+  turkiyetakvimi: ['turkiyetakvimi:16741', 'turkiyetakvimi:16709', 'turkiyetakvimi:16768'],
 };
 
 function dates(from: string, to: string): string[] {
@@ -39,7 +40,7 @@ for (const a of AUTHORITIES) {
     for (const date of dates(span.from, span.to)) {
       const t = timesFor(place, date);
       const p: Partial<Place> = { id: place.id, name: place.name, lat: place.lat, lon: place.lon, tz: place.tz };
-      for (const k of ['dipDeg', 'dipMaghribDeg', 'highland', 'twilightDip', 'afternoon', 'ishaDeg', 'clock'] as const) if (place[k] !== undefined) (p as Record<string, unknown>)[k] = place[k];
+      for (const k of ['dipDeg', 'dipMaghribDeg', 'highland', 'twilightDip', 'afternoon', 'ishaDeg', 'clock', 'temkin'] as const) if (place[k] !== undefined) (p as Record<string, unknown>)[k] = place[k];
       if (place.prayerPoints) (p as Record<string, unknown>).prayerPoints = { [date.slice(0, 4)]: place.prayerPoints[date.slice(0, 4)] ?? Object.values(place.prayerPoints)[0] };
       out.cases.push({
         place: p,

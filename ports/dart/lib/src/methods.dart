@@ -1,5 +1,5 @@
-// The five methods: Sweden and Diyanet (the Congress method), Morocco, Algeria
-// and Indonesia. A port of src/methods/*.ts — the TypeScript is the reference,
+// The methods: Sweden and Diyanet (the Congress method), Morocco, Algeria,
+// Indonesia and Türkiye Takvimi. A port of src/methods/*.ts — the TypeScript is the reference,
 // docs/methods.md says what each does, and the vector check holds this to it.
 //
 // Every function takes a civil date with the month 0-based, as the TypeScript
@@ -182,6 +182,102 @@ DayMinutes? kemenagMinutes(double lat, double lon, int year, int month0, int day
     r.maghrib = pm.maghrib;
     r.isha = pm.isha;
   }
+  return r.allFinite ? r.mapped((v) => (v - 1e-9).ceilToDouble()) : null;
+}
+
+// ---------------------------------------------------------------- Türkiye Takvimi
+
+const double _takvimSolsticeDeclination = 23.38;
+const double _takvimHorizonMargin = 2.0;
+const int _takvimHoldSearchDays = 200;
+
+/// The calendar's temkin by its formula, minutes; a listed place carries its own.
+double takvimTemkin(double lat, {double heightM = 250.0}) {
+  final phi = min(lat.abs(), 62.0) * rad;
+  const dec = _takvimSolsticeDeclination * rad;
+  final depth = 0.8416 + 0.03924 * sqrt(max(0.0, heightM));
+  double hourAngle(double alt) => acos(max(-1.0, min(1.0, (sin(alt * rad) - sin(phi) * sin(dec)) / (cos(phi) * cos(dec)))));
+  return ((hourAngle(-depth) - hourAngle(0.0)) / rad) * 4;
+}
+
+/// The sun's events of a day at a point, minutes past the day's 00:00 UT; NaN where one does not happen.
+class _TakvimEvents {
+  final double lat, lon;
+  final double _d0;
+  late final double noon;
+  late final double _noonDec;
+  late final double _sp, _cp;
+
+  _TakvimEvents(this.lat, this.lon, int key) : _d0 = (key - _j2000Days).toDouble() - 0.5 {
+    var n = 720 - 4 * lon;
+    for (var i = 0; i < 3; i++) {
+      n = 720 - 4 * lon - preciseApparentSun(_d0 + n / 1440).eot;
+    }
+    noon = n;
+    _noonDec = preciseApparentSun(_d0 + n / 1440).dec;
+    _sp = sin(lat * rad);
+    _cp = cos(lat * rad);
+  }
+
+  double event(double alt, double sign, double start) {
+    var t = start;
+    for (var i = 0; i < 3; i++) {
+      final s = preciseApparentSun(_d0 + t / 1440);
+      final c = (sin(alt * rad) - _sp * sin(s.dec)) / (_cp * cos(s.dec));
+      if (!(c.abs() <= 1)) return double.nan;
+      t = 720 - 4 * lon - s.eot + (sign * 4 * acos(c)) / rad;
+    }
+    return t;
+  }
+
+  double asr(double shadow) => event(atan(1 / (shadow + tan((lat * rad - _noonDec).abs()))) / rad, 1.0, noon + 200);
+}
+
+bool _takvimReaches19(double lat, double lon, int key) {
+  final d0 = (key - _j2000Days).toDouble() - 0.5;
+  double lowest(double d) => (lat + preciseApparentSun(d).dec / rad).abs() - 90;
+  return min(lowest(d0 - lon / 360), lowest(d0 + 0.5)) <= -19;
+}
+
+/// The day whose night times stand for this one: itself, or the last before it whose night reached 19°.
+int takvimHeldNight(double lat, double lon, int key) {
+  for (var i = 0; i <= _takvimHoldSearchDays; i++) {
+    if (_takvimReaches19(lat, lon, key - i)) return key - i;
+  }
+  return key;
+}
+
+/// The calendar's İmsâk before rounding (it is rounded down), minutes past 00:00 UT of the date.
+double takvimRawImsak(double lat, double lon, int year, int month0, int day, {double? temkin}) {
+  final key = dayKey(year, month0, day);
+  final night = takvimHeldNight(lat, lon, key);
+  final sun = _TakvimEvents(lat, lon, night);
+  return sun.event(-19.0, -1.0, sun.noon - 420) - (temkin ?? takvimTemkin(lat));
+}
+
+/// The calendar's six times before rounding.
+DayMinutes takvimRawMinutes(double lat, double lon, int year, int month0, int day, {double? temkin, double asrShadow = 1.0}) {
+  final t = temkin ?? takvimTemkin(lat);
+  final key = dayKey(year, month0, day);
+  final today = _TakvimEvents(lat, lon, key);
+  final night = takvimHeldNight(lat, lon, key);
+  final nightSun = night == key ? today : _TakvimEvents(lat, lon, night);
+  final ishaNight = takvimHeldNight(lat, lon, key + 1);
+  final ishaDay = ishaNight == key + 1 ? key : ishaNight - 1;
+  final ishaSun = ishaDay == key ? today : _TakvimEvents(lat, lon, ishaDay);
+  return DayMinutes(
+    nightSun.event(-18.0, -1.0, nightSun.noon - 420),
+    today.event(0.0, -1.0, today.noon - 360) - t - _takvimHorizonMargin,
+    today.noon + t,
+    today.asr(asrShadow) + t,
+    today.event(0.0, 1.0, today.noon + 360) + t + _takvimHorizonMargin,
+    ishaSun.event(-17.0, 1.0, ishaSun.noon + 420) + t,
+  );
+}
+
+/// Rounded up to the minute; Fajr is the calendar's Sabâh. Null where a time does not form.
+DayMinutes? takvimMinutes(double lat, double lon, int year, int month0, int day, {double? temkin, double asrShadow = 1.0}) {
+  final r = takvimRawMinutes(lat, lon, year, month0, day, temkin: temkin, asrShadow: asrShadow);
   return r.allFinite ? r.mapped((v) => (v - 1e-9).ceilToDouble()) : null;
 }
 

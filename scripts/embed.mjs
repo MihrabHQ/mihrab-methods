@@ -39,9 +39,10 @@ const FILES = {
   algeriaMethodPoints: ['data/places/algeriaMethodPoints.json', 'Record<string, [number, number]>'],
   kemenagPlaces: ['data/places/kemenagPlaces.json', '{ id: number; name: string; nameEn?: string; lat: number; lon: number }[]'],
   kemenagMethodPoints: ['data/places/kemenagMethodPoints.json', 'Record<string, number[]>'],
+  turkiyeTakvimiCities: ['data/places/turkiyeTakvimiCities.json', '{ id: number; name: string; lat: number; lon: number; temkin: number }[]'],
   countryOutlines: ['data/locate/countryOutlines.json', '{ scale: number; countries: Record<string, number[][][]> }'],
 };
-for (const a of ['sweden', 'diyanet', 'morocco', 'algeria', 'indonesia']) {
+for (const a of ['sweden', 'diyanet', 'morocco', 'algeria', 'indonesia', 'turkiyetakvimi']) {
   FILES[`${a}Corrections`] = [`data/corrections/${a}.json`, 'CorrectionsFile'];
 }
 
@@ -64,7 +65,7 @@ for (const [name, [src, type]] of Object.entries(FILES)) {
 
 // certification.json, one module per authority (an entry point carries only its own)
 const cert = JSON.parse(fs.readFileSync(path.join(ROOT, 'certification.json'), 'utf8'));
-for (const a of ['sweden', 'diyanet', 'morocco', 'algeria', 'indonesia']) {
+for (const a of ['sweden', 'diyanet', 'morocco', 'algeria', 'indonesia', 'turkiyetakvimi']) {
   write(
     `${a}Certification`,
     `import type { Certification } from '../../core/types.js';\nconst data: Certification | null = ${JSON.stringify(cert[a] ?? null)};\nexport default data;\n`,

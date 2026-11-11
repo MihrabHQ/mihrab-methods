@@ -9,12 +9,12 @@ import 'dart:convert';
 
 import 'methods.dart';
 
-enum Authority { sweden, diyanet, morocco, algeria, indonesia }
+enum Authority { sweden, diyanet, morocco, algeria, indonesia, turkiyetakvimi }
 
 enum Prayer { fajr, sunrise, dhuhr, asr, maghrib, isha }
 
 /// The method revisions this port reproduces. A correction list belongs to one revision.
-const Map<String, int> revisions = {'sweden': 1, 'diyanet': 1, 'morocco': 2, 'algeria': 1, 'indonesia': 2};
+const Map<String, int> revisions = {'sweden': 1, 'diyanet': 1, 'morocco': 2, 'algeria': 1, 'indonesia': 2, 'turkiyetakvimi': 1};
 
 /// One change of a table's own clock: from a date on, minutes east of UTC.
 class ClockChange {
@@ -46,6 +46,9 @@ class Place {
   /// Indonesia: the point [lat, lon] the afternoon's times are taken at, where the list gives one.
   final List<double>? afternoon;
 
+  /// Türkiye Takvimi: the city's temkin, minutes.
+  final double? temkin;
+
   const Place({
     required this.authority,
     required this.lat,
@@ -59,6 +62,7 @@ class Place {
     this.highland = false,
     this.twilightDip = false,
     this.afternoon,
+    this.temkin,
   });
 }
 
@@ -172,6 +176,9 @@ Day? timesFor(Place place, String date, {int? zoneOffsetMinutes, CorrectionList?
     case Authority.indonesia:
       t = kemenagMinutes(place.lat, place.lon, year, month0, day,
           highland: place.highland, twilightDip: place.twilightDip, asrShadow: asrShadow, afternoon: place.afternoon);
+      break;
+    case Authority.turkiyetakvimi:
+      t = takvimMinutes(place.lat, place.lon, year, month0, day, temkin: place.temkin, asrShadow: asrShadow);
       break;
   }
   if (t == null) return null;

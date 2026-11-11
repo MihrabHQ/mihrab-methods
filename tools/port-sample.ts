@@ -31,7 +31,7 @@ for (const a of AUTHORITIES) {
       const date = new Date(Date.UTC(2024, 0, 1) + Math.floor(random() * 1461) * 86_400_000).toISOString().slice(0, 10);
       const t = timesFor(place, date);
       const p: Record<string, unknown> = { id: place.id, lat: place.lat, lon: place.lon, tz: place.tz };
-      for (const k of ['dipDeg', 'dipMaghribDeg', 'highland', 'twilightDip', 'afternoon', 'ishaDeg', 'clock', 'prayerPoints'] as const) if (place[k] !== undefined) p[k] = place[k];
+      for (const k of ['dipDeg', 'dipMaghribDeg', 'highland', 'twilightDip', 'afternoon', 'ishaDeg', 'clock', 'prayerPoints', 'temkin'] as const) if (place[k] !== undefined) p[k] = place[k];
       cases.push({
         place: p,
         date,

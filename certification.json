@@ -127,5 +127,28 @@
       "sha256": "a3f1c30576ddddbfda6cadabe442e1bcf3fb476b018b269d7d4783edd4e39d03"
     },
     "revision": 2
+  },
+  "turkiyetakvimi": {
+    "certified": true,
+    "checkedAt": "2026-11-11",
+    "places": 81,
+    "checks": [
+      {
+        "tables": "Türkiye Takvimi — its cities’ years",
+        "places": 81,
+        "times": 178848,
+        "off": 0,
+        "offWithoutCorrections": 52,
+        "from": "2025-12-31",
+        "to": "2027-01-02"
+      }
+    ],
+    "corrections": {
+      "from": "2025-12-31",
+      "to": "2027-01-02",
+      "entries": 52,
+      "sha256": "a3059fd5aae0b0f8ddee10a2aaaf93e982ded12e652f6aa21d0a3d347a082b41"
+    },
+    "revision": 1
   }
 }

@@ -1,7 +1,7 @@
 # mihrab-methods in Python
 
-The five methods of [mihrab-methods](../../README.md) — Sweden, Diyanet,
-Morocco, Algeria and Indonesia — in plain Python, with no dependencies
+The methods of [mihrab-methods](../../README.md) — Sweden, Diyanet,
+Morocco, Algeria, Indonesia and Türkiye Takvimi — in plain Python, with no dependencies
 beyond the standard library (Python 3.9 or later, for `zoneinfo`).
 
 The TypeScript library is the reference. This port follows it line for
@@ -23,7 +23,7 @@ print(day['instants'])    # the same six times as timezone-aware datetimes
 A place is a dict shaped like the library's `Place`: `authority`, `lat`,
 `lon`, `tz`, and the fields a list gives some of its places (`ishaDeg`,
 `clock`, `prayerPoints`, `dipDeg`, `dipMaghribDeg`, `highland`,
-`twilightDip`, `afternoon`). The places themselves are in `data/places/`;
+`twilightDip`, `afternoon`, `temkin`). The places themselves are in `data/places/`;
 use the coordinates exactly as the list has them, since the correction
 lists are looked up by them.
 
@@ -48,6 +48,6 @@ zone whose rules changed between them.
 | File | What |
 | --- | --- |
 | `mihrab_methods/sun.py` | The three positions of the sun the methods use |
-| `mihrab_methods/methods.py` | The methods: the Congress method (Sweden, Diyanet), Morocco, Algeria, Indonesia |
+| `mihrab_methods/methods.py` | The methods: the Congress method (Sweden, Diyanet), Morocco, Algeria, Indonesia, Türkiye Takvimi |
 | `mihrab_methods/api.py` | Place and date in, the day out: clock, correction list, printing |
 | `test_vectors.py` | Holds the port to `test/vectors.json` |

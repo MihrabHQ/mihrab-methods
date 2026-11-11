@@ -1,6 +1,6 @@
 # mihrab-methods in Kotlin
 
-The five methods of [mihrab-methods](../../README.md) in Kotlin for the
+The methods of [mihrab-methods](../../README.md) in Kotlin for the
 JVM and Android (API 26 or later, for `java.time`), with no dependencies
 beyond the standard library: copy `src/` into a project. See
 [the ports' notes](../README.md) for what a port does and how it is held
