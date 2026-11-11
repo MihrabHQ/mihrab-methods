@@ -1,5 +1,5 @@
 """The methods: Sweden and Diyanet (the Congress method), Morocco, Algeria,
-Indonesia, Türkiye Takvimi, Kazakhstan, Egypt, Brunei, Qatar and Kuwait. A port of src/methods/*.ts — the TypeScript is the reference,
+Indonesia, Türkiye Takvimi, Kazakhstan, Egypt, Brunei, Qatar, Kuwait and Jordan. A port of src/methods/*.ts — the TypeScript is the reference,
 docs/methods.md says what each does, and test_vectors.py holds this to it.
 
 Every function takes a civil date with the month 0-based, as the TypeScript
@@ -562,6 +562,58 @@ def kuwait_raw_minutes(lon, year, month0, day, asr_shadow=1):
 def kuwait_minutes(lon, year, month0, day, asr_shadow=1):
     """Rounded to the nearest minute."""
     return {k: math.floor(v + 0.5) for k, v in kuwait_raw_minutes(lon, year, month0, day, asr_shadow).items()}
+
+
+# ---------------------------------------------------------------- Jordan
+
+
+def jordan_raw_minutes(lat, lon, year, month0, day, dip_deg=0, asr_shadow=1, dip_maghrib_deg=None, fajr_minutes=0):
+    """Before rounding: Morocco's kind of program with Jordan's figures — 18° and 18°, the zone's horizon allowances, its Fajr margin."""
+    if dip_maghrib_deg is None:
+        dip_maghrib_deg = dip_deg
+    d0 = _d0(year, month0, day)
+
+    def at(t):
+        return meeus_apparent_sun(d0 + t / 1440)
+
+    noon = 720 - 4 * lon
+    for _ in range(3):
+        noon = 720 - 4 * lon - at(noon)[1]
+    sp, cp = math.sin(lat * RAD), math.cos(lat * RAD)
+    T = (d0 + noon / 1440) / 36525
+    Ma = (357.52911 + 35999.05029 * T) * RAD
+    horizon = -(34 / 60 + 0.26667 / (1.00014 - 0.016708 * math.cos(Ma) - 0.00014 * math.cos(2 * Ma)))
+
+    def event(alt, sign, start):
+        t = start
+        for _ in range(3):
+            dec, eot = at(t)
+            c = (math.sin(alt * RAD) - sp * math.sin(dec)) / (cp * math.cos(dec))
+            if not abs(c) <= 1:
+                return NAN
+            t = 720 - 4 * lon - eot + (sign * 4 * math.acos(c)) / RAD
+        return t
+
+    noon_true = 90 - abs(lat - at(noon)[0] / RAD)
+    noon_apparent = noon_true + _refraction_from_true(noon_true)
+    asr_apparent = math.atan(1 / (asr_shadow + 1 / math.tan(noon_apparent * RAD))) / RAD
+    asr_true = asr_apparent - _refraction_from_apparent(asr_apparent)
+    return {
+        'fajr': event(-18, -1, noon - 420) + fajr_minutes,
+        'sunrise': event(horizon - dip_deg, -1, noon - 360),
+        'dhuhr': noon,
+        'asr': event(asr_true, 1, noon + 200),
+        'maghrib': event(horizon - dip_maghrib_deg, 1, noon + 360),
+        'isha': event(-18, 1, noon + 420),
+    }
+
+
+def jordan_minutes(lat, lon, year, month0, day, dip_deg=0, asr_shadow=1, dip_maghrib_deg=None, fajr_minutes=0):
+    """Rounded to the nearest minute. None where a time does not form."""
+    r = jordan_raw_minutes(lat, lon, year, month0, day, dip_deg, asr_shadow, dip_maghrib_deg, fajr_minutes)
+    if not all(math.isfinite(v) for v in r.values()):
+        return None
+    return {k: math.floor(v + 0.5) for k, v in r.items()}
 
 
 # ---------------------------------------------------------------- Sweden and Diyanet: the Congress method

@@ -9,7 +9,19 @@ revision bump is at least a minor version.
 
 ## Unreleased
 
-No method changed; no revision raised.
+- **Jordan, revision 1: a twelfth method.** The Ministry of Awqaf, Islamic
+  Affairs and Holy Places' times for its seventeen zones, Jerusalem among
+  them: `mihrab-methods/jordan`, authority `jordan`. Each zone at its own
+  point, from Meeus's apparent sun: Fajr and Isha at 18°, sunrise and
+  Maghrib with the upper limb on the horizon lowered by the zone's horizon
+  allowance east and west, Asr on the apparent sun, every time rounded to
+  the nearest minute (`docs/methods.md`). With its correction list the
+  method matches the published timetable of every zone over the certified
+  span (`docs/status.md`). `Place` gains `fajrMinutes`, a zone's margin on
+  Fajr. `certification.json` gains a `jordan` entry and
+  `data/corrections/jordan.json` is new. In every port (`jordan_minutes` /
+  `jordanMinutes`, `REVISIONS` with `jordan: 1`). No other method's output
+  changes.
 
 ## 1.10.0 — 2026-11-11
 

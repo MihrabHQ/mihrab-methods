@@ -9,12 +9,12 @@ import 'dart:convert';
 
 import 'methods.dart';
 
-enum Authority { sweden, diyanet, morocco, algeria, indonesia, turkiyetakvimi, kazakhstan, egypt, brunei, qatar, kuwait }
+enum Authority { sweden, diyanet, morocco, algeria, indonesia, turkiyetakvimi, kazakhstan, egypt, brunei, qatar, kuwait, jordan }
 
 enum Prayer { fajr, sunrise, dhuhr, asr, maghrib, isha }
 
 /// The method revisions this port reproduces. A correction list belongs to one revision.
-const Map<String, int> revisions = {'sweden': 1, 'diyanet': 2, 'morocco': 3, 'algeria': 1, 'indonesia': 2, 'turkiyetakvimi': 1, 'kazakhstan': 1, 'egypt': 1, 'brunei': 1, 'qatar': 1, 'kuwait': 1};
+const Map<String, int> revisions = {'sweden': 1, 'diyanet': 2, 'morocco': 3, 'algeria': 1, 'indonesia': 2, 'turkiyetakvimi': 1, 'kazakhstan': 1, 'egypt': 1, 'brunei': 1, 'qatar': 1, 'kuwait': 1, 'jordan': 1};
 
 /// One change of a table's own clock: from a date on, minutes east of UTC.
 class ClockChange {
@@ -41,6 +41,9 @@ class Place {
   /// Türkiye's districts: per year, the six points (fajr … isha) as [lat, lon].
   final Map<int, List<List<double>>>? prayerPoints;
   final double? dipDeg, dipMaghribDeg;
+
+  /// Jordan: the zone's margin on Fajr, minutes.
+  final double? fajrMinutes;
   final bool highland, twilightDip;
 
   /// Indonesia: the point [lat, lon] the afternoon's times are taken at, where the list gives one.
@@ -59,6 +62,7 @@ class Place {
     this.prayerPoints,
     this.dipDeg,
     this.dipMaghribDeg,
+    this.fajrMinutes,
     this.highland = false,
     this.twilightDip = false,
     this.afternoon,
@@ -191,6 +195,10 @@ Day? timesFor(Place place, String date, {int? zoneOffsetMinutes, CorrectionList?
       break;
     case Authority.kuwait:
       t = kuwaitMinutes(place.lon, year, month0, day, asrShadow: asrShadow);
+      break;
+    case Authority.jordan:
+      t = jordanMinutes(place.lat, place.lon, year, month0, day,
+          dipDeg: place.dipDeg ?? 0.0, asrShadow: asrShadow, dipMaghribDeg: place.dipMaghribDeg, fajrMinutes: place.fajrMinutes ?? 0.0);
       break;
     case Authority.turkiyetakvimi:
       t = takvimMinutes(place.lat, place.lon, year, month0, day, temkin: place.temkin, asrShadow: asrShadow);

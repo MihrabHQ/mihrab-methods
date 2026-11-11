@@ -265,5 +265,28 @@
       "sha256": "2238661dbbf9b59c25656ff3577415d9043de99a7e3a54f8b308139d12ed68c3"
     },
     "revision": 1
+  },
+  "jordan": {
+    "certified": true,
+    "checkedAt": "2026-11-11",
+    "places": 17,
+    "checks": [
+      {
+        "tables": "Jordan — the Ministry’s times",
+        "places": 17,
+        "times": 37230,
+        "off": 0,
+        "offWithoutCorrections": 603,
+        "from": "2026-01-01",
+        "to": "2026-12-31"
+      }
+    ],
+    "corrections": {
+      "from": "2026-01-01",
+      "to": "2026-12-31",
+      "entries": 603,
+      "sha256": "c7394f9141a43803ae8758f533aa48487efb9d9932c71532812d53d27dfc2bf2"
+    },
+    "revision": 1
   }
 }

@@ -1,7 +1,7 @@
 {
   "name": "mihrab-methods",
   "version": "1.10.0",
-  "description": "The prayer-time authorities' own calculation methods, each reproducing its published timetable to the minute: Sweden (Diyanet, as Islamiska Förbundet prints it), Diyanet worldwide, Morocco (Habous), Algeria (Ministry of Religious Affairs), Indonesia (Kemenag), Türkiye Takvimi, Kazakhstan (Spiritual Administration), Egypt (General Authority of Survey), Brunei (Ministry of Religious Affairs), Qatar (Qatar Calendar House), Kuwait (Ministry of Awqaf and Islamic Affairs).",
+  "description": "The prayer-time authorities' own calculation methods, each reproducing its published timetable to the minute: Sweden (Diyanet, as Islamiska Förbundet prints it), Diyanet worldwide, Morocco (Habous), Algeria (Ministry of Religious Affairs), Indonesia (Kemenag), Türkiye Takvimi, Kazakhstan (Spiritual Administration), Egypt (General Authority of Survey), Brunei (Ministry of Religious Affairs), Qatar (Qatar Calendar House), Kuwait (Ministry of Awqaf and Islamic Affairs), Jordan (Ministry of Awqaf, Islamic Affairs and Holy Places).",
   "license": "MPL-2.0",
   "author": "Hassan El Ghamri",
   "repository": {
@@ -34,6 +34,7 @@
     "./dist/*/brunei.js",
     "./dist/*/qatar.js",
     "./dist/*/kuwait.js",
+    "./dist/*/jordan.js",
     "./dist/*/authorities/*.js",
     "./src/index.ts",
     "./src/sweden.ts",
@@ -47,6 +48,7 @@
     "./src/brunei.ts",
     "./src/qatar.ts",
     "./src/kuwait.ts",
+    "./src/jordan.ts",
     "./src/authorities/*.ts"
   ],
   "engines": {
@@ -193,6 +195,16 @@
         "default": "./dist/cjs/kuwait.js"
       }
     },
+    "./jordan": {
+      "import": {
+        "types": "./dist/esm/jordan.d.ts",
+        "default": "./dist/esm/jordan.js"
+      },
+      "require": {
+        "types": "./dist/cjs/jordan.d.ts",
+        "default": "./dist/cjs/jordan.js"
+      }
+    },
     "./locate": {
       "import": {
         "types": "./dist/esm/locate.d.ts",
@@ -245,6 +257,9 @@
       ],
       "kuwait": [
         "./dist/cjs/kuwait.d.ts"
+      ],
+      "jordan": [
+        "./dist/cjs/jordan.d.ts"
       ],
       "locate": [
         "./dist/cjs/locate.d.ts"

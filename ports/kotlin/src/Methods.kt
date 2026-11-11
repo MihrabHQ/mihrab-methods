@@ -1,5 +1,5 @@
 // The methods: Sweden and Diyanet (the Congress method), Morocco, Algeria,
-// Indonesia, Türkiye Takvimi, Kazakhstan, Egypt, Brunei, Qatar and Kuwait. A port of src/methods/*.ts — the TypeScript is the reference,
+// Indonesia, Türkiye Takvimi, Kazakhstan, Egypt, Brunei, Qatar, Kuwait and Jordan. A port of src/methods/*.ts — the TypeScript is the reference,
 // docs/methods.md says what each does, and the vector check holds this to it.
 //
 // Every function takes a civil date with the month 0-based, as the TypeScript
@@ -477,6 +477,50 @@ fun kuwaitRawMinutes(lon: Double, year: Int, month0: Int, day: Int, asrShadow: D
 /** Rounded to the nearest minute. */
 fun kuwaitMinutes(lon: Double, year: Int, month0: Int, day: Int, asrShadow: Double = 1.0): DayMinutes? =
     kuwaitRawMinutes(lon, year, month0, day, asrShadow).mapped { floor(it + 0.5) }
+
+// ---------------------------------------------------------------- Jordan
+
+/** Before rounding: Morocco's kind of program with Jordan's figures — 18° and 18°, the zone's horizon allowances, its Fajr margin. */
+fun jordanRawMinutes(lat: Double, lon: Double, year: Int, month0: Int, day: Int, dipDeg: Double = 0.0, asrShadow: Double = 1.0, dipMaghribDeg: Double? = null, fajrMinutes: Double = 0.0): DayMinutes {
+    val dipMaghrib = dipMaghribDeg ?: dipDeg
+    val d0 = d0Of(year, month0, day)
+    fun at(t: Double) = meeusApparentSun(d0 + t / 1440)
+    var noon = 720 - 4 * lon
+    repeat(3) { noon = 720 - 4 * lon - at(noon).eot }
+    val sp = sin(lat * RAD)
+    val cp = cos(lat * RAD)
+    val T = (d0 + noon / 1440) / 36525
+    val Ma = (357.52911 + 35999.05029 * T) * RAD
+    val horizon = -(34.0 / 60 + 0.26667 / (1.00014 - 0.016708 * cos(Ma) - 0.00014 * cos(2 * Ma)))
+    fun event(alt: Double, sign: Double, start: Double): Double {
+        var t = start
+        repeat(3) {
+            val s = at(t)
+            val c = (sin(alt * RAD) - sp * sin(s.dec)) / (cp * cos(s.dec))
+            if (!(abs(c) <= 1)) return Double.NaN
+            t = 720 - 4 * lon - s.eot + (sign * 4 * acos(c)) / RAD
+        }
+        return t
+    }
+    val noonTrue = 90 - abs(lat - at(noon).dec / RAD)
+    val noonApparent = noonTrue + refractionFromTrue(noonTrue)
+    val asrApparent = atan(1 / (asrShadow + 1 / tan(noonApparent * RAD))) / RAD
+    val asrTrue = asrApparent - refractionFromApparent(asrApparent)
+    return DayMinutes(
+        fajr = event(-18.0, -1.0, noon - 420) + fajrMinutes,
+        sunrise = event(horizon - dipDeg, -1.0, noon - 360),
+        dhuhr = noon,
+        asr = event(asrTrue, 1.0, noon + 200),
+        maghrib = event(horizon - dipMaghrib, 1.0, noon + 360),
+        isha = event(-18.0, 1.0, noon + 420),
+    )
+}
+
+/** Rounded to the nearest minute. Null where a time does not form. */
+fun jordanMinutes(lat: Double, lon: Double, year: Int, month0: Int, day: Int, dipDeg: Double = 0.0, asrShadow: Double = 1.0, dipMaghribDeg: Double? = null, fajrMinutes: Double = 0.0): DayMinutes? {
+    val r = jordanRawMinutes(lat, lon, year, month0, day, dipDeg, asrShadow, dipMaghribDeg, fajrMinutes)
+    return if (r.allFinite) r.mapped { floor(it + 0.5) } else null
+}
 
 // ---------------------------------------------------------------- Sweden and Diyanet: the Congress method
 

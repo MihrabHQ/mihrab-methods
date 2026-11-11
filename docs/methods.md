@@ -351,6 +351,31 @@ read off the table itself.
   from the declination of local noon; plus 0.15 minutes.
 - Every time rounded to the **nearest** minute.
 
+## Jordan
+
+`src/methods/jordan.ts`. The Ministry of Awqaf, Islamic Affairs and Holy
+Places' times, read off its year for seventeen zones. It is the same kind
+of program as Morocco's ministry's, with Jordan's own figures.
+
+- Each zone is computed **at its own point**; none is another zone's times
+  plus minutes. Jerusalem is one of the zones, printed like the rest on
+  Jordan's clock (UTC+3 all year).
+- **Meeus's apparent sun** (Morocco's) at each time's own moment, its
+  declination and equation of time iterated.
+- **Fajr** and **Isha**: the sun 18° below the horizon. A zone's Fajr is
+  earlier by that zone's own margin, between nothing and a minute
+  (`Place.fajrMinutes`).
+- **Sunrise** and **Maghrib**: the sun's upper limb on the horizon — 34′ of
+  refraction and the semi-diameter for the sun's distance that day —
+  lowered by the zone's horizon allowance, one eastward (`Place.dipDeg`)
+  and one westward (`Place.dipMaghribDeg`): about 0.15° in the Jordan
+  Valley, 0.8° to 1.6° on the plateau. No minutes are added.
+- **Dhuhr**: the sun's transit.
+- **Asr**: on the apparent sun, as Morocco's — the noon shadow from the
+  refracted noon altitude, and the moment the refracted sun casts it plus
+  one length.
+- Every time rounded to the **nearest** minute.
+
 ## Checking a port
 
 1. Take `test/vectors.json`. For each case, compute the six times at the

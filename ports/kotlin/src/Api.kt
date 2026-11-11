@@ -9,12 +9,12 @@ import java.time.LocalDate
 import java.time.ZoneId
 import java.time.ZoneOffset
 
-enum class Authority { sweden, diyanet, morocco, algeria, indonesia, turkiyetakvimi, kazakhstan, egypt, brunei, qatar, kuwait }
+enum class Authority { sweden, diyanet, morocco, algeria, indonesia, turkiyetakvimi, kazakhstan, egypt, brunei, qatar, kuwait, jordan }
 
 enum class Prayer { fajr, sunrise, dhuhr, asr, maghrib, isha }
 
 /** The method revisions this port reproduces. A correction list belongs to one revision. */
-val REVISIONS: Map<String, Int> = mapOf("sweden" to 1, "diyanet" to 2, "morocco" to 3, "algeria" to 1, "indonesia" to 2, "turkiyetakvimi" to 1, "kazakhstan" to 1, "egypt" to 1, "brunei" to 1, "qatar" to 1, "kuwait" to 1)
+val REVISIONS: Map<String, Int> = mapOf("sweden" to 1, "diyanet" to 2, "morocco" to 3, "algeria" to 1, "indonesia" to 2, "turkiyetakvimi" to 1, "kazakhstan" to 1, "egypt" to 1, "brunei" to 1, "qatar" to 1, "kuwait" to 1, "jordan" to 1)
 
 /**
  * A place as the library's lists have it (data/places). Use the coordinates
@@ -34,6 +34,8 @@ class Place(
     val prayerPoints: Map<Int, List<Pair<Double, Double>>>? = null,
     val dipDeg: Double? = null,
     val dipMaghribDeg: Double? = null,
+    /** Jordan: the zone's margin on Fajr, minutes. */
+    val fajrMinutes: Double? = null,
     val highland: Boolean = false,
     val twilightDip: Boolean = false,
     val afternoon: Pair<Double, Double>? = null,
@@ -142,6 +144,7 @@ fun timesFor(place: Place, date: String, corrections: CorrectionList? = null, as
         Authority.brunei -> bruneiMinutes(place.lon, year, month0, day, asrShadow)
         Authority.qatar -> qatarMinutes(place.lat, place.lon, year, month0, day, asrShadow)
         Authority.kuwait -> kuwaitMinutes(place.lon, year, month0, day, asrShadow)
+        Authority.jordan -> jordanMinutes(place.lat, place.lon, year, month0, day, place.dipDeg ?: 0.0, asrShadow, place.dipMaghribDeg, place.fajrMinutes ?: 0.0)
         Authority.turkiyetakvimi -> takvimMinutes(place.lat, place.lon, year, month0, day, place.temkin, asrShadow)
     } ?: return null
     val out = linkedMapOf(

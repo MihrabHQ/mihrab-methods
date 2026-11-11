@@ -138,6 +138,7 @@ fun main(args: Array<String>) {
             prayerPoints = p["prayerPoints"]?.let { pp -> obj(pp).entries.associate { it.key.toInt() to arr(it.value).map(::pair) } },
             dipDeg = p["dipDeg"] as Double?,
             dipMaghribDeg = p["dipMaghribDeg"] as Double?,
+            fajrMinutes = p["fajrMinutes"] as Double?,
             highland = p["highland"] == true,
             twilightDip = p["twilightDip"] == true,
             afternoon = p["afternoon"]?.let(::pair),

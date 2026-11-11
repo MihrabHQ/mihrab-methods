@@ -40,8 +40,9 @@ each method.
 | **Brunei** | the Ministry’s times | 4 | 17,064 | **0** | 99.671 % | 56 | 9 Jan 2025 → 31 Dec 2026 |
 | **Qatar** | the Calendar House’s times | 1 | 708 | **0** | 96.186 % | 27 | 16 Jun 2026 → 11 Oct 2026 |
 | **Kuwait** | the Ministry’s table | 46 | 201,480 | **0** | 95.205 % | 9,660 | 1 Jan 2026 → 31 Dec 2027 |
+| **Jordan** | the Ministry’s times | 17 | 37,230 | **0** | 98.380 % | 603 | 1 Jan 2026 → 31 Dec 2026 |
 
-11 of 11 methods certified; 0 of 76,397,984 times off the printed minute. Last checked 9 November 2026. Generated from [`certification.json`](../certification.json) by `scripts/readme.mjs`.
+12 of 12 methods certified; 0 of 76,435,214 times off the printed minute. Last checked 9 November 2026. Generated from [`certification.json`](../certification.json) by `scripts/readme.mjs`.
 <!-- certification-table:end -->
 
 ## Sweden
@@ -318,6 +319,25 @@ written out for each area and each year.
 > found, September's Asr apart, which runs half a minute early for the
 > whole month. A table that never changes is certified once: the same list
 > serves every year, only its dates are rewritten.
+
+## Jordan
+
+Certified over <!--fig:jordan.span-->1 Jan 2026 → 31 Dec 2026<!--/fig--> (<!--fig:jordan.check0.places-->17<!--/fig-->
+zones): the method gives <!--fig:jordan.alonePct-->98.380<!--/fig--> % alone, and a list of
+<!--fig:jordan.corrections-->603<!--/fig--> corrections the rest.
+
+> **Research note, 2026-11-12** (not generated). A quarter of the list is
+> one prayer in one zone: Aqaba's Maghrib (148 of its 365 days). Against
+> the computed sunset it is 3.7 minutes later in winter and 5.1 in summer,
+> which is neither a fixed angle nor fixed minutes — it follows the sun's
+> bearing, the way a real skyline to the west would, and a single horizon
+> allowance cannot. Aqaba's sunrise shows nothing of the kind. Without it
+> the method alone is at 99.0 %. Each zone's Fajr margin is read off its
+> own year (nothing in the Valley, Azraq, Ma'an, Aqaba and Ruwayshid; a
+> minute at Umm al-Qutan); no rule common to the zones was found for it.
+> Asr settled the family of the program: with Morocco's rule on the
+> apparent sun it is off on 81 days of 6,205, with the plain shadow on
+> more than 200.
 
 ## Not here, and why
 

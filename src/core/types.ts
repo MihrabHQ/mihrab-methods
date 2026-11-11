@@ -2,8 +2,8 @@
  * The shapes the library speaks in. Nothing here computes anything.
  */
 
-export type Authority = 'sweden' | 'diyanet' | 'morocco' | 'algeria' | 'indonesia' | 'turkiyetakvimi' | 'kazakhstan' | 'egypt' | 'brunei' | 'qatar' | 'kuwait';
-export const AUTHORITIES: readonly Authority[] = ['sweden', 'diyanet', 'morocco', 'algeria', 'indonesia', 'turkiyetakvimi', 'kazakhstan', 'egypt', 'brunei', 'qatar', 'kuwait'];
+export type Authority = 'sweden' | 'diyanet' | 'morocco' | 'algeria' | 'indonesia' | 'turkiyetakvimi' | 'kazakhstan' | 'egypt' | 'brunei' | 'qatar' | 'kuwait' | 'jordan';
+export const AUTHORITIES: readonly Authority[] = ['sweden', 'diyanet', 'morocco', 'algeria', 'indonesia', 'turkiyetakvimi', 'kazakhstan', 'egypt', 'brunei', 'qatar', 'kuwait', 'jordan'];
 
 export type PrayerKey = 'fajr' | 'sunrise' | 'dhuhr' | 'asr' | 'maghrib' | 'isha';
 export const PRAYER_KEYS: readonly PrayerKey[] = ['fajr', 'sunrise', 'dhuhr', 'asr', 'maghrib', 'isha'];
@@ -31,6 +31,8 @@ export type Place = {
   dipDeg?: number;
   /** Morocco: the horizon's dip westward, at Maghrib (fitted per city). */
   dipMaghribDeg?: number;
+  /** Jordan: the zone's margin on Fajr, minutes (negative: earlier). */
+  fajrMinutes?: number;
   /** Indonesia: Kemenag's highland class (sunrise and Maghrib at −2°). */
   highland?: boolean;
   /** Indonesia: the highland degree on Fajr and Isha too (six regencies of Papua). */

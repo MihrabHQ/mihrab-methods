@@ -11,7 +11,8 @@
   "egypt": 1,
   "brunei": 1,
   "qatar": 1,
-  "kuwait": 1
+  "kuwait": 1,
+  "jordan": 1
  },
  "cases": [
   {
@@ -4400,6 +4401,414 @@
     "asr": "2027-12-31T11:37:00.000Z",
     "maghrib": "2027-12-31T13:56:00.000Z",
     "isha": "2027-12-31T15:18:00.000Z"
+   }
+  },
+  {
+   "place": {
+    "id": "jordan:1",
+    "name": "Amman, Balqa, Zarqa, Madaba",
+    "lat": 32.017,
+    "lon": 35.832,
+    "tz": "Asia/Amman",
+    "dipDeg": 1.375,
+    "dipMaghribDeg": 1.24,
+    "fajrMinutes": -0.65
+   },
+   "date": "2026-01-01",
+   "clock": {
+    "zone": "Asia/Amman",
+    "offsetMinutes": 180,
+    "label": "Asia/Amman"
+   },
+   "printed": {
+    "fajr": "06:09",
+    "sunrise": "07:30",
+    "dhuhr": "12:40",
+    "asr": "15:25",
+    "maghrib": "17:50",
+    "isha": "19:10"
+   },
+   "instants": {
+    "fajr": "2026-01-01T03:09:00.000Z",
+    "sunrise": "2026-01-01T04:30:00.000Z",
+    "dhuhr": "2026-01-01T09:40:00.000Z",
+    "asr": "2026-01-01T12:25:00.000Z",
+    "maghrib": "2026-01-01T14:50:00.000Z",
+    "isha": "2026-01-01T16:10:00.000Z"
+   }
+  },
+  {
+   "place": {
+    "id": "jordan:1",
+    "name": "Amman, Balqa, Zarqa, Madaba",
+    "lat": 32.017,
+    "lon": 35.832,
+    "tz": "Asia/Amman",
+    "dipDeg": 1.375,
+    "dipMaghribDeg": 1.24,
+    "fajrMinutes": -0.65
+   },
+   "date": "2026-05-02",
+   "clock": {
+    "zone": "Asia/Amman",
+    "offsetMinutes": 180,
+    "label": "Asia/Amman"
+   },
+   "printed": {
+    "fajr": "04:20",
+    "sunrise": "05:43",
+    "dhuhr": "12:34",
+    "asr": "16:14",
+    "maghrib": "19:24",
+    "isha": "20:48"
+   },
+   "instants": {
+    "fajr": "2026-05-02T01:20:00.000Z",
+    "sunrise": "2026-05-02T02:43:00.000Z",
+    "dhuhr": "2026-05-02T09:34:00.000Z",
+    "asr": "2026-05-02T13:14:00.000Z",
+    "maghrib": "2026-05-02T16:24:00.000Z",
+    "isha": "2026-05-02T17:48:00.000Z"
+   }
+  },
+  {
+   "place": {
+    "id": "jordan:1",
+    "name": "Amman, Balqa, Zarqa, Madaba",
+    "lat": 32.017,
+    "lon": 35.832,
+    "tz": "Asia/Amman",
+    "dipDeg": 1.375,
+    "dipMaghribDeg": 1.24,
+    "fajrMinutes": -0.65
+   },
+   "date": "2026-09-01",
+   "clock": {
+    "zone": "Asia/Amman",
+    "offsetMinutes": 180,
+    "label": "Asia/Amman"
+   },
+   "printed": {
+    "fajr": "04:47",
+    "sunrise": "06:05",
+    "dhuhr": "12:37",
+    "asr": "16:12",
+    "maghrib": "19:07",
+    "isha": "20:25"
+   },
+   "instants": {
+    "fajr": "2026-09-01T01:47:00.000Z",
+    "sunrise": "2026-09-01T03:05:00.000Z",
+    "dhuhr": "2026-09-01T09:37:00.000Z",
+    "asr": "2026-09-01T13:12:00.000Z",
+    "maghrib": "2026-09-01T16:07:00.000Z",
+    "isha": "2026-09-01T17:25:00.000Z"
+   }
+  },
+  {
+   "place": {
+    "id": "jordan:1",
+    "name": "Amman, Balqa, Zarqa, Madaba",
+    "lat": 32.017,
+    "lon": 35.832,
+    "tz": "Asia/Amman",
+    "dipDeg": 1.375,
+    "dipMaghribDeg": 1.24,
+    "fajrMinutes": -0.65
+   },
+   "date": "2026-12-31",
+   "clock": {
+    "zone": "Asia/Amman",
+    "offsetMinutes": 180,
+    "label": "Asia/Amman"
+   },
+   "printed": {
+    "fajr": "06:09",
+    "sunrise": "07:30",
+    "dhuhr": "12:40",
+    "asr": "15:24",
+    "maghrib": "17:49",
+    "isha": "19:10"
+   },
+   "instants": {
+    "fajr": "2026-12-31T03:09:00.000Z",
+    "sunrise": "2026-12-31T04:30:00.000Z",
+    "dhuhr": "2026-12-31T09:40:00.000Z",
+    "asr": "2026-12-31T12:24:00.000Z",
+    "maghrib": "2026-12-31T14:49:00.000Z",
+    "isha": "2026-12-31T16:10:00.000Z"
+   }
+  },
+  {
+   "place": {
+    "id": "jordan:6",
+    "name": "Aqaba",
+    "lat": 29.526,
+    "lon": 35.019,
+    "tz": "Asia/Amman",
+    "dipDeg": 0.507,
+    "dipMaghribDeg": 0.84,
+    "fajrMinutes": 0
+   },
+   "date": "2026-01-01",
+   "clock": {
+    "zone": "Asia/Amman",
+    "offsetMinutes": 180,
+    "label": "Asia/Amman"
+   },
+   "printed": {
+    "fajr": "06:10",
+    "sunrise": "07:32",
+    "dhuhr": "12:43",
+    "asr": "15:34",
+    "maghrib": "17:56",
+    "isha": "19:17"
+   },
+   "instants": {
+    "fajr": "2026-01-01T03:10:00.000Z",
+    "sunrise": "2026-01-01T04:32:00.000Z",
+    "dhuhr": "2026-01-01T09:43:00.000Z",
+    "asr": "2026-01-01T12:34:00.000Z",
+    "maghrib": "2026-01-01T14:56:00.000Z",
+    "isha": "2026-01-01T16:17:00.000Z"
+   }
+  },
+  {
+   "place": {
+    "id": "jordan:6",
+    "name": "Aqaba",
+    "lat": 29.526,
+    "lon": 35.019,
+    "tz": "Asia/Amman",
+    "dipDeg": 0.507,
+    "dipMaghribDeg": 0.84,
+    "fajrMinutes": 0
+   },
+   "date": "2026-05-02",
+   "clock": {
+    "zone": "Asia/Amman",
+    "offsetMinutes": 180,
+    "label": "Asia/Amman"
+   },
+   "printed": {
+    "fajr": "04:31",
+    "sunrise": "05:55",
+    "dhuhr": "12:37",
+    "asr": "16:13",
+    "maghrib": "19:22",
+    "isha": "20:44"
+   },
+   "instants": {
+    "fajr": "2026-05-02T01:31:00.000Z",
+    "sunrise": "2026-05-02T02:55:00.000Z",
+    "dhuhr": "2026-05-02T09:37:00.000Z",
+    "asr": "2026-05-02T13:13:00.000Z",
+    "maghrib": "2026-05-02T16:22:00.000Z",
+    "isha": "2026-05-02T17:44:00.000Z"
+   }
+  },
+  {
+   "place": {
+    "id": "jordan:6",
+    "name": "Aqaba",
+    "lat": 29.526,
+    "lon": 35.019,
+    "tz": "Asia/Amman",
+    "dipDeg": 0.507,
+    "dipMaghribDeg": 0.84,
+    "fajrMinutes": 0
+   },
+   "date": "2026-09-01",
+   "clock": {
+    "zone": "Asia/Amman",
+    "offsetMinutes": 180,
+    "label": "Asia/Amman"
+   },
+   "printed": {
+    "fajr": "04:55",
+    "sunrise": "06:15",
+    "dhuhr": "12:40",
+    "asr": "16:13",
+    "maghrib": "19:06",
+    "isha": "20:24"
+   },
+   "instants": {
+    "fajr": "2026-09-01T01:55:00.000Z",
+    "sunrise": "2026-09-01T03:15:00.000Z",
+    "dhuhr": "2026-09-01T09:40:00.000Z",
+    "asr": "2026-09-01T13:13:00.000Z",
+    "maghrib": "2026-09-01T16:06:00.000Z",
+    "isha": "2026-09-01T17:24:00.000Z"
+   }
+  },
+  {
+   "place": {
+    "id": "jordan:6",
+    "name": "Aqaba",
+    "lat": 29.526,
+    "lon": 35.019,
+    "tz": "Asia/Amman",
+    "dipDeg": 0.507,
+    "dipMaghribDeg": 0.84,
+    "fajrMinutes": 0
+   },
+   "date": "2026-12-31",
+   "clock": {
+    "zone": "Asia/Amman",
+    "offsetMinutes": 180,
+    "label": "Asia/Amman"
+   },
+   "printed": {
+    "fajr": "06:09",
+    "sunrise": "07:32",
+    "dhuhr": "12:43",
+    "asr": "15:33",
+    "maghrib": "17:55",
+    "isha": "19:16"
+   },
+   "instants": {
+    "fajr": "2026-12-31T03:09:00.000Z",
+    "sunrise": "2026-12-31T04:32:00.000Z",
+    "dhuhr": "2026-12-31T09:43:00.000Z",
+    "asr": "2026-12-31T12:33:00.000Z",
+    "maghrib": "2026-12-31T14:55:00.000Z",
+    "isha": "2026-12-31T16:16:00.000Z"
+   }
+  },
+  {
+   "place": {
+    "id": "jordan:13",
+    "name": "Central Valleys",
+    "lat": 31.892,
+    "lon": 35.618,
+    "tz": "Asia/Amman",
+    "dipDeg": 0.152,
+    "dipMaghribDeg": 0.155,
+    "fajrMinutes": 0.02
+   },
+   "date": "2026-01-01",
+   "clock": {
+    "zone": "Asia/Amman",
+    "offsetMinutes": 180,
+    "label": "Asia/Amman"
+   },
+   "printed": {
+    "fajr": "06:11",
+    "sunrise": "07:37",
+    "dhuhr": "12:41",
+    "asr": "15:26",
+    "maghrib": "17:45",
+    "isha": "19:11"
+   },
+   "instants": {
+    "fajr": "2026-01-01T03:11:00.000Z",
+    "sunrise": "2026-01-01T04:37:00.000Z",
+    "dhuhr": "2026-01-01T09:41:00.000Z",
+    "asr": "2026-01-01T12:26:00.000Z",
+    "maghrib": "2026-01-01T14:45:00.000Z",
+    "isha": "2026-01-01T16:11:00.000Z"
+   }
+  },
+  {
+   "place": {
+    "id": "jordan:13",
+    "name": "Central Valleys",
+    "lat": 31.892,
+    "lon": 35.618,
+    "tz": "Asia/Amman",
+    "dipDeg": 0.152,
+    "dipMaghribDeg": 0.155,
+    "fajrMinutes": 0.02
+   },
+   "date": "2026-05-02",
+   "clock": {
+    "zone": "Asia/Amman",
+    "offsetMinutes": 180,
+    "label": "Asia/Amman"
+   },
+   "printed": {
+    "fajr": "04:22",
+    "sunrise": "05:50",
+    "dhuhr": "12:35",
+    "asr": "16:14",
+    "maghrib": "19:19",
+    "isha": "20:48"
+   },
+   "instants": {
+    "fajr": "2026-05-02T01:22:00.000Z",
+    "sunrise": "2026-05-02T02:50:00.000Z",
+    "dhuhr": "2026-05-02T09:35:00.000Z",
+    "asr": "2026-05-02T13:14:00.000Z",
+    "maghrib": "2026-05-02T16:19:00.000Z",
+    "isha": "2026-05-02T17:48:00.000Z"
+   }
+  },
+  {
+   "place": {
+    "id": "jordan:13",
+    "name": "Central Valleys",
+    "lat": 31.892,
+    "lon": 35.618,
+    "tz": "Asia/Amman",
+    "dipDeg": 0.152,
+    "dipMaghribDeg": 0.155,
+    "fajrMinutes": 0.02
+   },
+   "date": "2026-09-01",
+   "clock": {
+    "zone": "Asia/Amman",
+    "offsetMinutes": 180,
+    "label": "Asia/Amman"
+   },
+   "printed": {
+    "fajr": "04:48",
+    "sunrise": "06:12",
+    "dhuhr": "12:38",
+    "asr": "16:13",
+    "maghrib": "19:03",
+    "isha": "20:26"
+   },
+   "instants": {
+    "fajr": "2026-09-01T01:48:00.000Z",
+    "sunrise": "2026-09-01T03:12:00.000Z",
+    "dhuhr": "2026-09-01T09:38:00.000Z",
+    "asr": "2026-09-01T13:13:00.000Z",
+    "maghrib": "2026-09-01T16:03:00.000Z",
+    "isha": "2026-09-01T17:26:00.000Z"
+   }
+  },
+  {
+   "place": {
+    "id": "jordan:13",
+    "name": "Central Valleys",
+    "lat": 31.892,
+    "lon": 35.618,
+    "tz": "Asia/Amman",
+    "dipDeg": 0.152,
+    "dipMaghribDeg": 0.155,
+    "fajrMinutes": 0.02
+   },
+   "date": "2026-12-31",
+   "clock": {
+    "zone": "Asia/Amman",
+    "offsetMinutes": 180,
+    "label": "Asia/Amman"
+   },
+   "printed": {
+    "fajr": "06:10",
+    "sunrise": "07:37",
+    "dhuhr": "12:40",
+    "asr": "15:25",
+    "maghrib": "17:44",
+    "isha": "19:11"
+   },
+   "instants": {
+    "fajr": "2026-12-31T03:10:00.000Z",
+    "sunrise": "2026-12-31T04:37:00.000Z",
+    "dhuhr": "2026-12-31T09:40:00.000Z",
+    "asr": "2026-12-31T12:25:00.000Z",
+    "maghrib": "2026-12-31T14:44:00.000Z",
+    "isha": "2026-12-31T16:11:00.000Z"
    }
   }
  ]

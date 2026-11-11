@@ -42,6 +42,7 @@ void main(List<String> args) {
           ?.map((k, v) => MapEntry(int.parse(k), (v as List<dynamic>).map(_pair).toList())),
       dipDeg: (p['dipDeg'] as num?)?.toDouble(),
       dipMaghribDeg: (p['dipMaghribDeg'] as num?)?.toDouble(),
+      fajrMinutes: (p['fajrMinutes'] as num?)?.toDouble(),
       highland: p['highland'] == true,
       twilightDip: p['twilightDip'] == true,
       afternoon: p['afternoon'] == null ? null : _pair(p['afternoon']),

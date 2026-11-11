@@ -3,7 +3,7 @@ then its correction list — what `timesFor` does in the TypeScript library.
 
 A place is a dict shaped like the library's `Place` (see docs/api.md):
 `authority`, `lat`, `lon`, `tz`, and where the list has them `ishaDeg`,
-`clock`, `prayerPoints`, `dipDeg`, `dipMaghribDeg`, `highland`,
+`clock`, `prayerPoints`, `dipDeg`, `dipMaghribDeg`, `fajrMinutes`, `highland`,
 `twilightDip`, `afternoon`, `temkin`.
 """
 import datetime
@@ -17,7 +17,7 @@ from . import methods
 
 PRAYERS = ('fajr', 'sunrise', 'dhuhr', 'asr', 'maghrib', 'isha')
 #: The method revisions this port reproduces. A correction list belongs to one revision.
-REVISIONS = {'sweden': 1, 'diyanet': 2, 'morocco': 3, 'algeria': 1, 'indonesia': 2, 'turkiyetakvimi': 1, 'kazakhstan': 1, 'egypt': 1, 'brunei': 1, 'qatar': 1, 'kuwait': 1}
+REVISIONS = {'sweden': 1, 'diyanet': 2, 'morocco': 3, 'algeria': 1, 'indonesia': 2, 'turkiyetakvimi': 1, 'kazakhstan': 1, 'egypt': 1, 'brunei': 1, 'qatar': 1, 'kuwait': 1, 'jordan': 1}
 
 _UTC = datetime.timezone.utc
 
@@ -116,6 +116,9 @@ def minutes_for(place, date, corrections=None, asr_shadow=1):
         t = methods.qatar_minutes(place['lat'], place['lon'], year, month0, day, asr_shadow)
     elif a == 'kuwait':
         t = methods.kuwait_minutes(place['lon'], year, month0, day, asr_shadow)
+    elif a == 'jordan':
+        t = methods.jordan_minutes(place['lat'], place['lon'], year, month0, day, place.get('dipDeg') or 0, asr_shadow,
+                                   place.get('dipMaghribDeg'), place.get('fajrMinutes') or 0)
     elif a == 'turkiyetakvimi':
         t = methods.takvim_minutes(place['lat'], place['lon'], year, month0, day, place.get('temkin'), asr_shadow)
     else:

@@ -3,7 +3,7 @@
 import Foundation
 
 public enum Authority: String {
-    case sweden, diyanet, morocco, algeria, indonesia, turkiyetakvimi, kazakhstan, egypt, brunei, qatar, kuwait
+    case sweden, diyanet, morocco, algeria, indonesia, turkiyetakvimi, kazakhstan, egypt, brunei, qatar, kuwait, jordan
 }
 
 public enum Prayer: String, CaseIterable {
@@ -11,7 +11,7 @@ public enum Prayer: String, CaseIterable {
 }
 
 /// The method revisions this port reproduces. A correction list belongs to one revision.
-public let REVISIONS: [String: Int] = ["sweden": 1, "diyanet": 2, "morocco": 3, "algeria": 1, "indonesia": 2, "turkiyetakvimi": 1, "kazakhstan": 1, "egypt": 1, "brunei": 1, "qatar": 1, "kuwait": 1]
+public let REVISIONS: [String: Int] = ["sweden": 1, "diyanet": 2, "morocco": 3, "algeria": 1, "indonesia": 2, "turkiyetakvimi": 1, "kazakhstan": 1, "egypt": 1, "brunei": 1, "qatar": 1, "kuwait": 1, "jordan": 1]
 
 /// A place as the library's lists have it (data/places). Use the coordinates
 /// exactly as the list gives them: the correction lists are looked up by them.
@@ -30,6 +30,8 @@ public struct Place {
     /// Morocco.
     public var dipDeg: Double?
     public var dipMaghribDeg: Double?
+    /// Jordan: the zone's margin on Fajr, minutes.
+    public var fajrMinutes: Double?
     /// Indonesia.
     public var highland = false
     public var twilightDip = false
@@ -186,6 +188,8 @@ public func timesFor(_ place: Place, _ date: String, corrections: CorrectionList
         t = qatarMinutes(place.lat, place.lon, year, month0, day, asrShadow: asrShadow)
     case .kuwait:
         t = kuwaitMinutes(place.lon, year, month0, day, asrShadow: asrShadow)
+    case .jordan:
+        t = jordanMinutes(place.lat, place.lon, year, month0, day, dipDeg: place.dipDeg ?? 0, asrShadow: asrShadow, dipMaghribDeg: place.dipMaghribDeg, fajrMinutes: place.fajrMinutes ?? 0)
     case .turkiyetakvimi:
         t = takvimMinutes(place.lat, place.lon, year, month0, day, temkin: place.temkin, asrShadow: asrShadow)
     }

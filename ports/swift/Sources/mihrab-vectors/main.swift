@@ -45,6 +45,7 @@ for c in cases {
     place.temkin = (p["temkin"] as? NSNumber)?.doubleValue
     place.dipDeg = (p["dipDeg"] as? NSNumber)?.doubleValue
     place.dipMaghribDeg = (p["dipMaghribDeg"] as? NSNumber)?.doubleValue
+    place.fajrMinutes = (p["fajrMinutes"] as? NSNumber)?.doubleValue
     place.highland = (p["highland"] as? Bool) ?? false
     place.twilightDip = (p["twilightDip"] as? Bool) ?? false
     if let a = p["afternoon"] { place.afternoon = pair(a) }
