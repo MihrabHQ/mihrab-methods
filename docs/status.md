@@ -157,6 +157,17 @@ and Isha are computed at a second point, about 2 km north-east of its first
 each newly published month is checked against the method, and its
 corrections are added in a new list.
 
+> **Research note, 2026-11-11, eleven earlier months** (not generated).
+> Revision 2 was run, without its list, against the ministry's tables for
+> November 2025 → September 2026, which it had never seen: 1,036,068 times,
+> never more than a minute off, and month by month off 0.03–0.14 % of the
+> time, as over the certified months. The exception is two days, 21 and 22
+> March 2026, when a third of the ministry's own times are a minute later
+> than on the days around them, in every prayer and across the country. A
+> small yearly wave fitted to what is left halves it on the months it was
+> fitted to and does nothing for the months after, so the method was left
+> as it is.
+
 ## Türkiye Takvimi
 
 Certified over <!--fig:turkiyetakvimi.span-->31 Dec 2025 → 2 Jan 2027<!--/fig--> (<!--fig:turkiyetakvimi.check0.places-->81<!--/fig-->
