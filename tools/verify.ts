@@ -230,6 +230,7 @@ export function checkAuthority(a: CheckRun): Result | null {
     turkiyetakvimi: 'Türkiye Takvimi — its cities’ years',
     kazakhstan: 'Kazakhstan — the Spiritual Administration’s times',
     egypt: 'Egypt — the Survey Authority’s times',
+    brunei: 'Brunei — the Ministry’s times',
   };
   return check(names[a], placesOf(a), path.join(TABLES, a, 'v1/cities'));
 }

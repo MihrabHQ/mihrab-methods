@@ -8,7 +8,8 @@
   "indonesia": 2,
   "turkiyetakvimi": 1,
   "kazakhstan": 1,
-  "egypt": 1
+  "egypt": 1,
+  "brunei": 1
  },
  "cases": [
   {
@@ -3529,6 +3530,378 @@
     "asr": "2026-12-31T13:11:00.000Z",
     "maghrib": "2026-12-31T15:30:00.000Z",
     "isha": "2026-12-31T16:52:00.000Z"
+   }
+  },
+  {
+   "place": {
+    "id": "brunei:1",
+    "name": "Brunei-Muara",
+    "lat": 4.892,
+    "lon": 114.9355,
+    "tz": "Asia/Brunei"
+   },
+   "date": "2025-01-09",
+   "clock": {
+    "zone": "Asia/Brunei",
+    "offsetMinutes": 480,
+    "label": "Asia/Brunei"
+   },
+   "printed": {
+    "fajr": "05:09",
+    "sunrise": "06:32",
+    "dhuhr": "12:28",
+    "asr": "15:50",
+    "maghrib": "18:23",
+    "isha": "19:37"
+   },
+   "instants": {
+    "fajr": "2025-01-08T21:09:00.000Z",
+    "sunrise": "2025-01-08T22:32:00.000Z",
+    "dhuhr": "2025-01-09T04:28:00.000Z",
+    "asr": "2025-01-09T07:50:00.000Z",
+    "maghrib": "2025-01-09T10:23:00.000Z",
+    "isha": "2025-01-09T11:37:00.000Z"
+   }
+  },
+  {
+   "place": {
+    "id": "brunei:1",
+    "name": "Brunei-Muara",
+    "lat": 4.892,
+    "lon": 114.9355,
+    "tz": "Asia/Brunei"
+   },
+   "date": "2025-09-06",
+   "clock": {
+    "zone": "Asia/Brunei",
+    "offsetMinutes": 480,
+    "label": "Asia/Brunei"
+   },
+   "printed": {
+    "fajr": "04:56",
+    "sunrise": "06:13",
+    "dhuhr": "12:20",
+    "asr": "15:23",
+    "maghrib": "18:24",
+    "isha": "19:34"
+   },
+   "instants": {
+    "fajr": "2025-09-05T20:56:00.000Z",
+    "sunrise": "2025-09-05T22:13:00.000Z",
+    "dhuhr": "2025-09-06T04:20:00.000Z",
+    "asr": "2025-09-06T07:23:00.000Z",
+    "maghrib": "2025-09-06T10:24:00.000Z",
+    "isha": "2025-09-06T11:34:00.000Z"
+   }
+  },
+  {
+   "place": {
+    "id": "brunei:1",
+    "name": "Brunei-Muara",
+    "lat": 4.892,
+    "lon": 114.9355,
+    "tz": "Asia/Brunei"
+   },
+   "date": "2026-05-05",
+   "clock": {
+    "zone": "Asia/Brunei",
+    "offsetMinutes": 480,
+    "label": "Asia/Brunei"
+   },
+   "printed": {
+    "fajr": "04:47",
+    "sunrise": "06:08",
+    "dhuhr": "12:18",
+    "asr": "15:37",
+    "maghrib": "18:26",
+    "isha": "19:38"
+   },
+   "instants": {
+    "fajr": "2026-05-04T20:47:00.000Z",
+    "sunrise": "2026-05-04T22:08:00.000Z",
+    "dhuhr": "2026-05-05T04:18:00.000Z",
+    "asr": "2026-05-05T07:37:00.000Z",
+    "maghrib": "2026-05-05T10:26:00.000Z",
+    "isha": "2026-05-05T11:38:00.000Z"
+   }
+  },
+  {
+   "place": {
+    "id": "brunei:1",
+    "name": "Brunei-Muara",
+    "lat": 4.892,
+    "lon": 114.9355,
+    "tz": "Asia/Brunei"
+   },
+   "date": "2026-12-31",
+   "clock": {
+    "zone": "Asia/Brunei",
+    "offsetMinutes": 480,
+    "label": "Asia/Brunei"
+   },
+   "printed": {
+    "fajr": "05:04",
+    "sunrise": "06:28",
+    "dhuhr": "12:24",
+    "asr": "15:46",
+    "maghrib": "18:18",
+    "isha": "19:33"
+   },
+   "instants": {
+    "fajr": "2026-12-30T21:04:00.000Z",
+    "sunrise": "2026-12-30T22:28:00.000Z",
+    "dhuhr": "2026-12-31T04:24:00.000Z",
+    "asr": "2026-12-31T07:46:00.000Z",
+    "maghrib": "2026-12-31T10:18:00.000Z",
+    "isha": "2026-12-31T11:33:00.000Z"
+   }
+  },
+  {
+   "place": {
+    "id": "brunei:3",
+    "name": "Tutong",
+    "lat": 4.803,
+    "lon": 114.6855,
+    "tz": "Asia/Brunei"
+   },
+   "date": "2025-01-09",
+   "clock": {
+    "zone": "Asia/Brunei",
+    "offsetMinutes": 480,
+    "label": "Asia/Brunei"
+   },
+   "printed": {
+    "fajr": "05:10",
+    "sunrise": "06:33",
+    "dhuhr": "12:29",
+    "asr": "15:51",
+    "maghrib": "18:24",
+    "isha": "19:38"
+   },
+   "instants": {
+    "fajr": "2025-01-08T21:10:00.000Z",
+    "sunrise": "2025-01-08T22:33:00.000Z",
+    "dhuhr": "2025-01-09T04:29:00.000Z",
+    "asr": "2025-01-09T07:51:00.000Z",
+    "maghrib": "2025-01-09T10:24:00.000Z",
+    "isha": "2025-01-09T11:38:00.000Z"
+   }
+  },
+  {
+   "place": {
+    "id": "brunei:3",
+    "name": "Tutong",
+    "lat": 4.803,
+    "lon": 114.6855,
+    "tz": "Asia/Brunei"
+   },
+   "date": "2025-09-06",
+   "clock": {
+    "zone": "Asia/Brunei",
+    "offsetMinutes": 480,
+    "label": "Asia/Brunei"
+   },
+   "printed": {
+    "fajr": "04:57",
+    "sunrise": "06:14",
+    "dhuhr": "12:21",
+    "asr": "15:24",
+    "maghrib": "18:25",
+    "isha": "19:35"
+   },
+   "instants": {
+    "fajr": "2025-09-05T20:57:00.000Z",
+    "sunrise": "2025-09-05T22:14:00.000Z",
+    "dhuhr": "2025-09-06T04:21:00.000Z",
+    "asr": "2025-09-06T07:24:00.000Z",
+    "maghrib": "2025-09-06T10:25:00.000Z",
+    "isha": "2025-09-06T11:35:00.000Z"
+   }
+  },
+  {
+   "place": {
+    "id": "brunei:3",
+    "name": "Tutong",
+    "lat": 4.803,
+    "lon": 114.6855,
+    "tz": "Asia/Brunei"
+   },
+   "date": "2026-05-05",
+   "clock": {
+    "zone": "Asia/Brunei",
+    "offsetMinutes": 480,
+    "label": "Asia/Brunei"
+   },
+   "printed": {
+    "fajr": "04:48",
+    "sunrise": "06:09",
+    "dhuhr": "12:19",
+    "asr": "15:38",
+    "maghrib": "18:27",
+    "isha": "19:39"
+   },
+   "instants": {
+    "fajr": "2026-05-04T20:48:00.000Z",
+    "sunrise": "2026-05-04T22:09:00.000Z",
+    "dhuhr": "2026-05-05T04:19:00.000Z",
+    "asr": "2026-05-05T07:38:00.000Z",
+    "maghrib": "2026-05-05T10:27:00.000Z",
+    "isha": "2026-05-05T11:39:00.000Z"
+   }
+  },
+  {
+   "place": {
+    "id": "brunei:3",
+    "name": "Tutong",
+    "lat": 4.803,
+    "lon": 114.6855,
+    "tz": "Asia/Brunei"
+   },
+   "date": "2026-12-31",
+   "clock": {
+    "zone": "Asia/Brunei",
+    "offsetMinutes": 480,
+    "label": "Asia/Brunei"
+   },
+   "printed": {
+    "fajr": "05:05",
+    "sunrise": "06:29",
+    "dhuhr": "12:25",
+    "asr": "15:47",
+    "maghrib": "18:19",
+    "isha": "19:34"
+   },
+   "instants": {
+    "fajr": "2026-12-30T21:05:00.000Z",
+    "sunrise": "2026-12-30T22:29:00.000Z",
+    "dhuhr": "2026-12-31T04:25:00.000Z",
+    "asr": "2026-12-31T07:47:00.000Z",
+    "maghrib": "2026-12-31T10:19:00.000Z",
+    "isha": "2026-12-31T11:34:00.000Z"
+   }
+  },
+  {
+   "place": {
+    "id": "brunei:4",
+    "name": "Belait",
+    "lat": 4.584,
+    "lon": 114.1855,
+    "tz": "Asia/Brunei"
+   },
+   "date": "2025-01-09",
+   "clock": {
+    "zone": "Asia/Brunei",
+    "offsetMinutes": 480,
+    "label": "Asia/Brunei"
+   },
+   "printed": {
+    "fajr": "05:12",
+    "sunrise": "06:35",
+    "dhuhr": "12:31",
+    "asr": "15:53",
+    "maghrib": "18:26",
+    "isha": "19:40"
+   },
+   "instants": {
+    "fajr": "2025-01-08T21:12:00.000Z",
+    "sunrise": "2025-01-08T22:35:00.000Z",
+    "dhuhr": "2025-01-09T04:31:00.000Z",
+    "asr": "2025-01-09T07:53:00.000Z",
+    "maghrib": "2025-01-09T10:26:00.000Z",
+    "isha": "2025-01-09T11:40:00.000Z"
+   }
+  },
+  {
+   "place": {
+    "id": "brunei:4",
+    "name": "Belait",
+    "lat": 4.584,
+    "lon": 114.1855,
+    "tz": "Asia/Brunei"
+   },
+   "date": "2025-09-06",
+   "clock": {
+    "zone": "Asia/Brunei",
+    "offsetMinutes": 480,
+    "label": "Asia/Brunei"
+   },
+   "printed": {
+    "fajr": "04:59",
+    "sunrise": "06:16",
+    "dhuhr": "12:23",
+    "asr": "15:26",
+    "maghrib": "18:27",
+    "isha": "19:37"
+   },
+   "instants": {
+    "fajr": "2025-09-05T20:59:00.000Z",
+    "sunrise": "2025-09-05T22:16:00.000Z",
+    "dhuhr": "2025-09-06T04:23:00.000Z",
+    "asr": "2025-09-06T07:26:00.000Z",
+    "maghrib": "2025-09-06T10:27:00.000Z",
+    "isha": "2025-09-06T11:37:00.000Z"
+   }
+  },
+  {
+   "place": {
+    "id": "brunei:4",
+    "name": "Belait",
+    "lat": 4.584,
+    "lon": 114.1855,
+    "tz": "Asia/Brunei"
+   },
+   "date": "2026-05-05",
+   "clock": {
+    "zone": "Asia/Brunei",
+    "offsetMinutes": 480,
+    "label": "Asia/Brunei"
+   },
+   "printed": {
+    "fajr": "04:50",
+    "sunrise": "06:11",
+    "dhuhr": "12:21",
+    "asr": "15:40",
+    "maghrib": "18:29",
+    "isha": "19:41"
+   },
+   "instants": {
+    "fajr": "2026-05-04T20:50:00.000Z",
+    "sunrise": "2026-05-04T22:11:00.000Z",
+    "dhuhr": "2026-05-05T04:21:00.000Z",
+    "asr": "2026-05-05T07:40:00.000Z",
+    "maghrib": "2026-05-05T10:29:00.000Z",
+    "isha": "2026-05-05T11:41:00.000Z"
+   }
+  },
+  {
+   "place": {
+    "id": "brunei:4",
+    "name": "Belait",
+    "lat": 4.584,
+    "lon": 114.1855,
+    "tz": "Asia/Brunei"
+   },
+   "date": "2026-12-31",
+   "clock": {
+    "zone": "Asia/Brunei",
+    "offsetMinutes": 480,
+    "label": "Asia/Brunei"
+   },
+   "printed": {
+    "fajr": "05:07",
+    "sunrise": "06:31",
+    "dhuhr": "12:27",
+    "asr": "15:49",
+    "maghrib": "18:21",
+    "isha": "19:36"
+   },
+   "instants": {
+    "fajr": "2026-12-30T21:07:00.000Z",
+    "sunrise": "2026-12-30T22:31:00.000Z",
+    "dhuhr": "2026-12-31T04:27:00.000Z",
+    "asr": "2026-12-31T07:49:00.000Z",
+    "maghrib": "2026-12-31T10:21:00.000Z",
+    "isha": "2026-12-31T11:36:00.000Z"
    }
   }
  ]

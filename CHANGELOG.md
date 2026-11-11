@@ -9,7 +9,19 @@ revision bump is at least a minor version.
 
 ## Unreleased
 
-No method changed; no revision raised.
+- **Brunei, revision 1: a ninth method.** The Ministry of Religious
+  Affairs' times for Brunei's four districts: `mihrab-methods/brunei`,
+  authority `brunei`. One table for the country, computed at Bandar Seri
+  Begawan from Meeus's apparent sun taken once for the day (0h UT): Fajr at
+  20°, Isha at 18°, Dhuhr 1.06 minutes after the transit, Asr at one shadow
+  length, every time rounded to the nearest minute; Tutong adds a minute
+  and Belait three (`docs/methods.md`). With its correction list the method
+  matches the published timetable of every district over the certified
+  span, on the days the Ministry's list prints soundly (`docs/status.md`).
+  `certification.json` gains a `brunei` entry and
+  `data/corrections/brunei.json` is new. In every port (`brunei_minutes` /
+  `bruneiMinutes`, `REVISIONS` with `brunei: 1`). No other method's output
+  changes.
 
 ## 1.6.0 — 2026-11-11
 

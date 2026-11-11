@@ -1,5 +1,5 @@
 // The methods: Sweden and Diyanet (the Congress method), Morocco, Algeria,
-// Indonesia, Türkiye Takvimi, Kazakhstan and Egypt. A port of src/methods/*.ts — the TypeScript is the reference,
+// Indonesia, Türkiye Takvimi, Kazakhstan, Egypt and Brunei. A port of src/methods/*.ts — the TypeScript is the reference,
 // docs/methods.md says what each does, and the vector check holds this to it.
 //
 // Every function takes a civil date with the month 0-based, as the TypeScript
@@ -380,6 +380,40 @@ DayMinutes? egyptMinutes(double lat, double lon, int year, int month0, int day, 
   final r = egyptRawMinutes(lat, lon, year, month0, day, asrShadow: asrShadow);
   return r.allFinite ? r.mapped((v) => (v + 0.5).floorToDouble()) : null;
 }
+
+// ---------------------------------------------------------------- Brunei
+
+const double bruneiLat = 4.892;
+const double bruneiLon = 114.9355;
+
+/// The whole minutes a district adds to the capital's table: those its longitude lies west of the capital's.
+double bruneiDistrictMinutes(double lon) => max(0.0, ((bruneiLon - lon) * 4 + 0.5).floorToDouble());
+
+/// Before rounding: the capital's table from Meeus's sun at 0h UT of the date, plus the district's minutes.
+DayMinutes bruneiRawMinutes(double lon, int year, int month0, int day, {double asrShadow = 1.0}) {
+  final s = meeusApparentSun(_d0Of(year, month0, day));
+  final add = bruneiDistrictMinutes(lon);
+  final transit = 720 - 4 * bruneiLon - s.eot;
+  final sp = sin(bruneiLat * rad), cp = cos(bruneiLat * rad);
+  double event(double altitude, double sign) {
+    final c = (sin(altitude * rad) - sp * sin(s.dec)) / (cp * cos(s.dec));
+    return transit + (sign * 4 * acos(c)) / rad;
+  }
+
+  final asrAltitude = atan(1 / (asrShadow + tan((bruneiLat * rad - s.dec).abs()))) / rad;
+  return DayMinutes(
+    event(-20.0, -1.0) + add,
+    event(-0.833, -1.0) + add,
+    transit + 1.06 + add,
+    event(asrAltitude, 1.0) + add,
+    event(-0.833, 1.0) + add,
+    event(-18.0, 1.0) + add,
+  );
+}
+
+/// Rounded to the nearest minute.
+DayMinutes? bruneiMinutes(double lon, int year, int month0, int day, {double asrShadow = 1.0}) =>
+    bruneiRawMinutes(lon, year, month0, day, asrShadow: asrShadow).mapped((v) => (v + 0.5).floorToDouble());
 
 // ---------------------------------------------------------------- Sweden and Diyanet: the Congress method
 

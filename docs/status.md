@@ -37,8 +37,9 @@ each method.
 | **Türkiye Takvimi** | its cities’ years | 821 | 1,812,768 | **0** | 99.952 % | 860 | 31 Dec 2025 → 2 Jan 2027 |
 | **Kazakhstan** | the Spiritual Administration’s times | 84 | 551,880 | **0** | 100.000 % | 0 | 1 Jan 2025 → 31 Dec 2027 |
 | **Egypt** | the Survey Authority’s times | 77 | 168,630 | **0** | 99.373 % | 1,056 | 1 Jan 2026 → 31 Dec 2026 |
+| **Brunei** | the Ministry’s times | 4 | 17,064 | **0** | 99.671 % | 56 | 9 Jan 2025 → 31 Dec 2026 |
 
-8 of 8 methods certified; 0 of 76,178,732 times off the printed minute. Last checked 9 November 2026. Generated from [`certification.json`](../certification.json) by `scripts/readme.mjs`.
+9 of 9 methods certified; 0 of 76,195,796 times off the printed minute. Last checked 9 November 2026. Generated from [`certification.json`](../certification.json) by `scripts/readme.mjs`.
 <!-- certification-table:end -->
 
 ## Sweden
@@ -238,6 +239,28 @@ current year, so the span goes on a year at a time.
 > than noon's. The horizon was read as 0.845°, between 0.84° and 0.85°.
 > Each place's point is fitted to its year; five more names the Authority
 > lists carry no table and are left out.
+
+## Brunei
+
+Certified over <!--fig:brunei.span-->9 Jan 2025 → 31 Dec 2026<!--/fig--> (<!--fig:brunei.check0.places-->4<!--/fig-->
+districts): the method gives <!--fig:brunei.alonePct-->99.671<!--/fig--> % alone, and a list of
+<!--fig:brunei.corrections-->56<!--/fig--> corrections the rest. The Ministry prints one table
+for the country and the districts as minutes on it, so the four districts
+are one check counted four times.
+
+> **Research note, 2026-11-11** (not generated). The Ministry's published
+> list is entered by hand and carries slips: days with a figure that cannot
+> be read as a time or that puts the day's times out of order, three dates
+> entered twice, and a few days whose figure on one prayer stands more than
+> two minutes from both the day before and the day after. Those days —
+> eleven over the two years — are left out of the check and are not taught
+> to the correction list: the method is held to the days the list prints
+> soundly. What the sound days show: the sun is taken once for the day, at
+> 0h UT (with it at each time's own moment the afternoon and evening times
+> are off about one day in nine; taken once, one in three hundred); and
+> Dhuhr is 1.06 minutes after the transit, not a whole minute (55 days off
+> with a whole one, four with 1.06). The first eight days of January 2025
+> are not in the list.
 
 ## Not here, and why
 

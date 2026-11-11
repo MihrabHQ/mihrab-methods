@@ -1,5 +1,5 @@
 // The methods: Sweden and Diyanet (the Congress method), Morocco, Algeria,
-// Indonesia, Türkiye Takvimi, Kazakhstan and Egypt. A port of src/methods/*.ts — the TypeScript is the reference,
+// Indonesia, Türkiye Takvimi, Kazakhstan, Egypt and Brunei. A port of src/methods/*.ts — the TypeScript is the reference,
 // docs/methods.md says what each does, and the vector check holds this to it.
 //
 // Every function takes a civil date with the month 0-based, as the TypeScript
@@ -387,6 +387,41 @@ func egyptMinutes(_ lat: Double, _ lon: Double, _ year: Int, _ month0: Int, _ da
     let r = egyptRawMinutes(lat, lon, year, month0, day, asrShadow: asrShadow)
     if r.all.contains(where: { !$0.isFinite }) { return nil }
     return r.mapped { floor($0 + 0.5) }
+}
+
+// ---------------------------------------------------------------- Brunei
+
+let BRUNEI_LAT = 4.892
+let BRUNEI_LON = 114.9355
+
+/// The whole minutes a district adds to the capital's table: those its longitude lies west of the capital's.
+func bruneiDistrictMinutes(_ lon: Double) -> Double {
+    return max(0, floor((BRUNEI_LON - lon) * 4 + 0.5))
+}
+
+/// Before rounding: the capital's table from Meeus's sun at 0h UT of the date, plus the district's minutes.
+func bruneiRawMinutes(_ lon: Double, _ year: Int, _ month0: Int, _ day: Int, asrShadow: Double = 1) -> DayMinutes {
+    let s = meeusApparentSun(d0Of(year, month0, day))
+    let add = bruneiDistrictMinutes(lon)
+    let transit = 720 - 4 * BRUNEI_LON - s.eot
+    let sp = sin(BRUNEI_LAT * RAD), cp = cos(BRUNEI_LAT * RAD)
+    func event(_ altitude: Double, _ sign: Double) -> Double {
+        let c = (sin(altitude * RAD) - sp * sin(s.dec)) / (cp * cos(s.dec))
+        return transit + (sign * 4 * acos(c)) / RAD
+    }
+    let asrAltitude = atan(1 / (asrShadow + tan(abs(BRUNEI_LAT * RAD - s.dec)))) / RAD
+    return DayMinutes(
+        fajr: event(-20, -1) + add,
+        sunrise: event(-0.833, -1) + add,
+        dhuhr: transit + 1.06 + add,
+        asr: event(asrAltitude, 1) + add,
+        maghrib: event(-0.833, 1) + add,
+        isha: event(-18, 1) + add)
+}
+
+/// Rounded to the nearest minute.
+func bruneiMinutes(_ lon: Double, _ year: Int, _ month0: Int, _ day: Int, asrShadow: Double = 1) -> DayMinutes? {
+    return bruneiRawMinutes(lon, year, month0, day, asrShadow: asrShadow).mapped { floor($0 + 0.5) }
 }
 
 // ---------------------------------------------------------------- Sweden and Diyanet: the Congress method

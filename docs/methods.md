@@ -288,6 +288,25 @@ read off its places from 22.2° to 31.5° N.
 - The whole country is on one clock, summer time included.
 - Each place is at the point its published year shows.
 
+## Brunei
+
+`src/methods/brunei.ts`. The Ministry of Religious Affairs' times, read off
+its published years.
+
+- **One table for the country**, computed at Bandar Seri Begawan
+  (4.892° N, 114.9355° E). A district's times are that table's plus whole
+  minutes — Tutong one, Belait three, Brunei-Muara and Temburong none: the
+  minutes its seat lies west of the capital, four to a degree, rounded. A
+  listed district's point carries them in its longitude.
+- **Meeus's apparent sun** (Morocco's) taken **once for the day**, at 0h
+  Universal Time of the civil date: that declination and equation of time
+  serve every time of the day, and nothing is iterated.
+- **Dhuhr**: 1.06 minutes after the sun's transit.
+- **Fajr**: the sun 20° below the horizon. **Isha**: 18°.
+- **Sunrise** and **Maghrib**: the sun's centre 0.833° below the horizon.
+- **Asr**: one shadow length beyond the noon shadow.
+- Every time rounded to the **nearest** minute.
+
 ## Checking a port
 
 1. Take `test/vectors.json`. For each case, compute the six times at the

@@ -1,7 +1,7 @@
 {
   "name": "mihrab-methods",
   "version": "1.6.0",
-  "description": "The prayer-time authorities' own calculation methods, each reproducing its published timetable to the minute: Sweden (Diyanet, as Islamiska Förbundet prints it), Diyanet worldwide, Morocco (Habous), Algeria (Ministry of Religious Affairs), Indonesia (Kemenag), Türkiye Takvimi, Kazakhstan (Spiritual Administration), Egypt (General Authority of Survey).",
+  "description": "The prayer-time authorities' own calculation methods, each reproducing its published timetable to the minute: Sweden (Diyanet, as Islamiska Förbundet prints it), Diyanet worldwide, Morocco (Habous), Algeria (Ministry of Religious Affairs), Indonesia (Kemenag), Türkiye Takvimi, Kazakhstan (Spiritual Administration), Egypt (General Authority of Survey), Brunei (Ministry of Religious Affairs).",
   "license": "MPL-2.0",
   "author": "Hassan El Ghamri",
   "repository": {
@@ -31,6 +31,7 @@
     "./dist/*/turkiyetakvimi.js",
     "./dist/*/kazakhstan.js",
     "./dist/*/egypt.js",
+    "./dist/*/brunei.js",
     "./dist/*/authorities/*.js",
     "./src/index.ts",
     "./src/sweden.ts",
@@ -41,6 +42,7 @@
     "./src/turkiyetakvimi.ts",
     "./src/kazakhstan.ts",
     "./src/egypt.ts",
+    "./src/brunei.ts",
     "./src/authorities/*.ts"
   ],
   "engines": {
@@ -157,6 +159,16 @@
         "default": "./dist/cjs/egypt.js"
       }
     },
+    "./brunei": {
+      "import": {
+        "types": "./dist/esm/brunei.d.ts",
+        "default": "./dist/esm/brunei.js"
+      },
+      "require": {
+        "types": "./dist/cjs/brunei.d.ts",
+        "default": "./dist/cjs/brunei.js"
+      }
+    },
     "./locate": {
       "import": {
         "types": "./dist/esm/locate.d.ts",
@@ -200,6 +212,9 @@
       ],
       "egypt": [
         "./dist/cjs/egypt.d.ts"
+      ],
+      "brunei": [
+        "./dist/cjs/brunei.d.ts"
       ],
       "locate": [
         "./dist/cjs/locate.d.ts"

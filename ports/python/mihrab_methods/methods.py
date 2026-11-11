@@ -1,5 +1,5 @@
 """The methods: Sweden and Diyanet (the Congress method), Morocco, Algeria,
-Indonesia, Türkiye Takvimi, Kazakhstan and Egypt. A port of src/methods/*.ts — the TypeScript is the reference,
+Indonesia, Türkiye Takvimi, Kazakhstan, Egypt and Brunei. A port of src/methods/*.ts — the TypeScript is the reference,
 docs/methods.md says what each does, and test_vectors.py holds this to it.
 
 Every function takes a civil date with the month 0-based, as the TypeScript
@@ -427,6 +427,45 @@ def egypt_minutes(lat, lon, year, month0, day, asr_shadow=1):
     if not all(math.isfinite(v) for v in r.values()):
         return None
     return {k: math.floor(v + 0.5) for k, v in r.items()}
+
+
+# ---------------------------------------------------------------- Brunei
+
+BRUNEI_LAT = 4.892
+BRUNEI_LON = 114.9355
+BRUNEI_DHUHR_AFTER_TRANSIT = 1.06
+
+
+def brunei_district_minutes(lon):
+    """The whole minutes a district adds to the capital's table: those its longitude lies west of the capital's."""
+    return max(0, math.floor((BRUNEI_LON - lon) * 4 + 0.5))
+
+
+def brunei_raw_minutes(lon, year, month0, day, asr_shadow=1):
+    """Before rounding: the capital's table from Meeus's sun at 0h UT of the date, plus the district's minutes."""
+    dec, eot = meeus_apparent_sun(_d0(year, month0, day))
+    add = brunei_district_minutes(lon)
+    transit = 720 - 4 * BRUNEI_LON - eot
+    sp, cp = math.sin(BRUNEI_LAT * RAD), math.cos(BRUNEI_LAT * RAD)
+
+    def event(altitude, sign):
+        c = (math.sin(altitude * RAD) - sp * math.sin(dec)) / (cp * math.cos(dec))
+        return transit + (sign * 4 * math.acos(c)) / RAD
+
+    asr_altitude = math.atan(1 / (asr_shadow + math.tan(abs(BRUNEI_LAT * RAD - dec)))) / RAD
+    return {
+        'fajr': event(-20, -1) + add,
+        'sunrise': event(-0.833, -1) + add,
+        'dhuhr': transit + BRUNEI_DHUHR_AFTER_TRANSIT + add,
+        'asr': event(asr_altitude, 1) + add,
+        'maghrib': event(-0.833, 1) + add,
+        'isha': event(-18, 1) + add,
+    }
+
+
+def brunei_minutes(lon, year, month0, day, asr_shadow=1):
+    """Rounded to the nearest minute."""
+    return {k: math.floor(v + 0.5) for k, v in brunei_raw_minutes(lon, year, month0, day, asr_shadow).items()}
 
 
 # ---------------------------------------------------------------- Sweden and Diyanet: the Congress method

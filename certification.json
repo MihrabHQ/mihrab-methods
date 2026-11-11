@@ -196,5 +196,28 @@
       "sha256": "f786f9d990448233355b46023e174a8073336682b67035decd209c0e19d3e4aa"
     },
     "revision": 1
+  },
+  "brunei": {
+    "certified": true,
+    "checkedAt": "2026-11-11",
+    "places": 4,
+    "checks": [
+      {
+        "tables": "Brunei — the Ministry’s times",
+        "places": 4,
+        "times": 17064,
+        "off": 0,
+        "offWithoutCorrections": 56,
+        "from": "2025-01-09",
+        "to": "2026-12-31"
+      }
+    ],
+    "corrections": {
+      "from": "2025-01-09",
+      "to": "2026-12-31",
+      "entries": 56,
+      "sha256": "a4f8313391631cc3442c3c5bef715755f2be27766853e94f5a2ece39fbb31ab7"
+    },
+    "revision": 1
   }
 }
