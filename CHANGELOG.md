@@ -9,6 +9,10 @@ revision bump is at least a minor version.
 
 ## Unreleased
 
+No method changed; no revision raised.
+
+## 1.9.0 — 2026-11-11
+
 - **Morocco, revision 3.** The points of 112 of the 164 cities move a
   little — at most 0.014° of latitude and 0.01° of horizon — refitted on
   the ministry's summer pages of 2022 together with the 2026 tables;
