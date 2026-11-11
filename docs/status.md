@@ -76,6 +76,19 @@ country.
 > - Ping Tung City and Rilchingen-Hanweiler, each listed again at the same
 >   point (as Pingtung and Kleinblittersdorf) with a table a minute apart on
 >   two days.
+>
+> **Research note, 2026-11-11** (not generated). Every place with two or
+> more corrections was tried one step of the 0.001° lattice away in each
+> direction (2,086 places). Fifteen sit a step from where their table is
+> computed, and moving them takes 256 corrections off the list: Logoysk
+> 55 → 13 times off by the method alone, Alchevsk 35 → 2, Changchun 31 → 1,
+> Nuuk 28 → 1, Bad Dürrheim 34 → 11, Keshan 26 → 10, Okazaki 15 → 0, Playa
+> del Carmen 12 → 0, Sandgate 12 → 1, Gosnells 12 → 1, Al Fayyum 10 → 0,
+> Ayr 9 → 0, Guaymas 7 → 0, Mérida 6 → 1, Ciudad Delicias 5 → 0. The other
+> 2,071 are where they should be. The fifteen are for Diyanet's next
+> revision: moving a point changes what the method prints there, and a
+> revision raised for fifteen places would ask every reader of Diyanet's
+> times to update for nothing they would see.
 
 ## Morocco
 
