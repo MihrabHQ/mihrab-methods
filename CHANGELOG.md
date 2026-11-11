@@ -9,7 +9,19 @@ revision bump is at least a minor version.
 
 ## Unreleased
 
-No method changed; no revision raised.
+- **Qatar, revision 1: a tenth method.** The Qatar Calendar House's times
+  for Doha: `mihrab-methods/qatar`, authority `qatar`. Meeus's apparent sun
+  at each time's own moment; Fajr at 18°, sunrise and Maghrib from the
+  sun's centre 0.8333° below the horizon, Asr at one shadow length, each
+  with the calendar's own margin and rounded to the nearest minute; Isha
+  ninety minutes after Maghrib (`docs/methods.md`). With its correction
+  list the method matches the published timetable of the Qatar Calendar
+  House over the certified span, which is short: the calendar's times
+  changed with 1448 AH and only that year's months are this method's
+  (`docs/status.md`). `certification.json` gains a `qatar` entry and
+  `data/corrections/qatar.json` is new. In every port (`qatar_minutes` /
+  `qatarMinutes`, `REVISIONS` with `qatar: 1`). No other method's output
+  changes.
 
 ## 1.7.0 — 2026-11-11
 

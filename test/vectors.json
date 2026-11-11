@@ -9,7 +9,8 @@
   "turkiyetakvimi": 1,
   "kazakhstan": 1,
   "egypt": 1,
-  "brunei": 1
+  "brunei": 1,
+  "qatar": 1
  },
  "cases": [
   {
@@ -3902,6 +3903,130 @@
     "asr": "2026-12-31T07:49:00.000Z",
     "maghrib": "2026-12-31T10:21:00.000Z",
     "isha": "2026-12-31T11:36:00.000Z"
+   }
+  },
+  {
+   "place": {
+    "id": "qatar:3",
+    "name": "Doha",
+    "lat": 25.29,
+    "lon": 51.53,
+    "tz": "Asia/Qatar"
+   },
+   "date": "2026-06-16",
+   "clock": {
+    "zone": "Asia/Qatar",
+    "offsetMinutes": 180,
+    "label": "Asia/Qatar"
+   },
+   "printed": {
+    "fajr": "03:13",
+    "sunrise": "04:43",
+    "dhuhr": "11:36",
+    "asr": "14:58",
+    "maghrib": "18:28",
+    "isha": "19:58"
+   },
+   "instants": {
+    "fajr": "2026-06-16T00:13:00.000Z",
+    "sunrise": "2026-06-16T01:43:00.000Z",
+    "dhuhr": "2026-06-16T08:36:00.000Z",
+    "asr": "2026-06-16T11:58:00.000Z",
+    "maghrib": "2026-06-16T15:28:00.000Z",
+    "isha": "2026-06-16T16:58:00.000Z"
+   }
+  },
+  {
+   "place": {
+    "id": "qatar:3",
+    "name": "Doha",
+    "lat": 25.29,
+    "lon": 51.53,
+    "tz": "Asia/Qatar"
+   },
+   "date": "2026-07-25",
+   "clock": {
+    "zone": "Asia/Qatar",
+    "offsetMinutes": 180,
+    "label": "Asia/Qatar"
+   },
+   "printed": {
+    "fajr": "03:31",
+    "sunrise": "04:57",
+    "dhuhr": "11:41",
+    "asr": "15:08",
+    "maghrib": "18:25",
+    "isha": "19:55"
+   },
+   "instants": {
+    "fajr": "2026-07-25T00:31:00.000Z",
+    "sunrise": "2026-07-25T01:57:00.000Z",
+    "dhuhr": "2026-07-25T08:41:00.000Z",
+    "asr": "2026-07-25T12:08:00.000Z",
+    "maghrib": "2026-07-25T15:25:00.000Z",
+    "isha": "2026-07-25T16:55:00.000Z"
+   }
+  },
+  {
+   "place": {
+    "id": "qatar:3",
+    "name": "Doha",
+    "lat": 25.29,
+    "lon": 51.53,
+    "tz": "Asia/Qatar"
+   },
+   "date": "2026-09-02",
+   "clock": {
+    "zone": "Asia/Qatar",
+    "offsetMinutes": 180,
+    "label": "Asia/Qatar"
+   },
+   "printed": {
+    "fajr": "03:55",
+    "sunrise": "05:15",
+    "dhuhr": "11:35",
+    "asr": "15:04",
+    "maghrib": "17:54",
+    "isha": "19:24"
+   },
+   "instants": {
+    "fajr": "2026-09-02T00:55:00.000Z",
+    "sunrise": "2026-09-02T02:15:00.000Z",
+    "dhuhr": "2026-09-02T08:35:00.000Z",
+    "asr": "2026-09-02T12:04:00.000Z",
+    "maghrib": "2026-09-02T14:54:00.000Z",
+    "isha": "2026-09-02T16:24:00.000Z"
+   }
+  },
+  {
+   "place": {
+    "id": "qatar:3",
+    "name": "Doha",
+    "lat": 25.29,
+    "lon": 51.53,
+    "tz": "Asia/Qatar"
+   },
+   "date": "2026-10-11",
+   "clock": {
+    "zone": "Asia/Qatar",
+    "offsetMinutes": 180,
+    "label": "Asia/Qatar"
+   },
+   "printed": {
+    "fajr": "04:13",
+    "sunrise": "05:30",
+    "dhuhr": "11:22",
+    "asr": "14:42",
+    "maghrib": "17:13",
+    "isha": "18:43"
+   },
+   "instants": {
+    "fajr": "2026-10-11T01:13:00.000Z",
+    "sunrise": "2026-10-11T02:30:00.000Z",
+    "dhuhr": "2026-10-11T08:22:00.000Z",
+    "asr": "2026-10-11T11:42:00.000Z",
+    "maghrib": "2026-10-11T14:13:00.000Z",
+    "isha": "2026-10-11T15:43:00.000Z"
    }
   }
  ]

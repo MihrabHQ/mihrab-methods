@@ -9,12 +9,12 @@ import java.time.LocalDate
 import java.time.ZoneId
 import java.time.ZoneOffset
 
-enum class Authority { sweden, diyanet, morocco, algeria, indonesia, turkiyetakvimi, kazakhstan, egypt, brunei }
+enum class Authority { sweden, diyanet, morocco, algeria, indonesia, turkiyetakvimi, kazakhstan, egypt, brunei, qatar }
 
 enum class Prayer { fajr, sunrise, dhuhr, asr, maghrib, isha }
 
 /** The method revisions this port reproduces. A correction list belongs to one revision. */
-val REVISIONS: Map<String, Int> = mapOf("sweden" to 1, "diyanet" to 2, "morocco" to 2, "algeria" to 1, "indonesia" to 2, "turkiyetakvimi" to 1, "kazakhstan" to 1, "egypt" to 1, "brunei" to 1)
+val REVISIONS: Map<String, Int> = mapOf("sweden" to 1, "diyanet" to 2, "morocco" to 2, "algeria" to 1, "indonesia" to 2, "turkiyetakvimi" to 1, "kazakhstan" to 1, "egypt" to 1, "brunei" to 1, "qatar" to 1)
 
 /**
  * A place as the library's lists have it (data/places). Use the coordinates
@@ -140,6 +140,7 @@ fun timesFor(place: Place, date: String, corrections: CorrectionList? = null, as
         Authority.kazakhstan -> kazakhstanMinutes(place.lat, place.lon, year, month0, day)
         Authority.egypt -> egyptMinutes(place.lat, place.lon, year, month0, day, asrShadow)
         Authority.brunei -> bruneiMinutes(place.lon, year, month0, day, asrShadow)
+        Authority.qatar -> qatarMinutes(place.lat, place.lon, year, month0, day, asrShadow)
         Authority.turkiyetakvimi -> takvimMinutes(place.lat, place.lon, year, month0, day, place.temkin, asrShadow)
     } ?: return null
     val out = linkedMapOf(

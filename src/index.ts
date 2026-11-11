@@ -19,6 +19,7 @@ import './authorities/turkiyeTakvimi.js';
 import './authorities/kazakhstan.js';
 import './authorities/egypt.js';
 import './authorities/brunei.js';
+import './authorities/qatar.js';
 
 export * from './core/index.js';
 export { diyanetCountry } from './authorities/diyanet.js';

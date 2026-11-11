@@ -307,6 +307,26 @@ its published years.
 - **Asr**: one shadow length beyond the noon shadow.
 - Every time rounded to the **nearest** minute.
 
+## Qatar
+
+`src/methods/qatar.ts`. The Qatar Calendar House's times for Doha, read off
+its calendar from 1448 AH on — the year its times changed; the earlier
+years are another method and are not this one. The House gives Doha's times
+as the reference for the east coast, from Al Khor to Al Wakra.
+
+- **Meeus's apparent sun** (Morocco's) at each time's own moment, its
+  declination and equation of time iterated.
+- **Fajr**: the sun 18° below the horizon, less 1.12 minutes.
+- **Sunrise**: the sun's centre 0.8333° below the horizon, less 0.10.
+- **Dhuhr**: 0.95 minutes after the sun's transit.
+- **Asr**: one shadow length beyond the noon shadow, plus 0.87 minutes.
+- **Maghrib**: sunset (the same 0.8333°) plus 2.02 minutes.
+- Each of those rounded to the **nearest** minute.
+- **Isha**: ninety minutes after the Maghrib printed.
+
+The margins are the calendar's own, to the hundredth of a minute they can
+be read to; computed at 25.29° N, 51.53° E.
+
 ## Checking a port
 
 1. Take `test/vectors.json`. For each case, compute the six times at the

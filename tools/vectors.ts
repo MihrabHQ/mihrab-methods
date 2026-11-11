@@ -21,6 +21,7 @@ const PICK: Record<string, string[]> = {
   kazakhstan: ['kazakhstan:3', 'kazakhstan:72', 'kazakhstan:172'],
   egypt: ['egypt:1', 'egypt:11', 'egypt:40'],
   brunei: ['brunei:1', 'brunei:3', 'brunei:4'],
+  qatar: ['qatar:3'],
 };
 
 function dates(from: string, to: string): string[] {

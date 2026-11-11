@@ -12,6 +12,7 @@ import { takvimTimes } from '../methods/turkiyeTakvimi.js';
 import { kazakhstanTimes } from '../methods/kazakhstan.js';
 import { egyptTimes } from '../methods/egypt.js';
 import { bruneiTimes } from '../methods/brunei.js';
+import { qatarTimes } from '../methods/qatar.js';
 import { authorityData } from './registry.js';
 import { placeClockAt } from './clock.js';
 import type { Instants, Place, PrayerKey } from './types.js';
@@ -43,7 +44,8 @@ export function candidateInstants(place: Place, year: number, month: number, day
     case 'turkiyetakvimi':
     case 'kazakhstan':
     case 'egypt':
-    case 'brunei': {
+    case 'brunei':
+    case 'qatar': {
       const t =
         place.authority === 'morocco'
           ? moroccoTimes(place.lat, place.lon, year, month, day, place.dipDeg, asrShadow, place.dipMaghribDeg)
@@ -55,6 +57,8 @@ export function candidateInstants(place: Place, year: number, month: number, day
               ? egyptTimes(place.lat, place.lon, year, month, day, asrShadow)
             : place.authority === 'brunei'
               ? bruneiTimes(place.lon, year, month, day, asrShadow)
+            : place.authority === 'qatar'
+              ? qatarTimes(place.lat, place.lon, year, month, day, asrShadow)
             : place.authority === 'turkiyetakvimi'
               ? takvimTimes(place.lat, place.lon, year, month, day, place.temkin, asrShadow)
               : kemenagTimes(place.lat, place.lon, year, month, day, { highland: place.highland, twilightDip: place.twilightDip, asrShadow, afternoon: place.afternoon });

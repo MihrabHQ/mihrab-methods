@@ -1,5 +1,5 @@
 """The methods: Sweden and Diyanet (the Congress method), Morocco, Algeria,
-Indonesia, Türkiye Takvimi, Kazakhstan, Egypt and Brunei. A port of src/methods/*.ts — the TypeScript is the reference,
+Indonesia, Türkiye Takvimi, Kazakhstan, Egypt, Brunei and Qatar. A port of src/methods/*.ts — the TypeScript is the reference,
 docs/methods.md says what each does, and test_vectors.py holds this to it.
 
 Every function takes a civil date with the month 0-based, as the TypeScript
@@ -466,6 +466,53 @@ def brunei_raw_minutes(lon, year, month0, day, asr_shadow=1):
 def brunei_minutes(lon, year, month0, day, asr_shadow=1):
     """Rounded to the nearest minute."""
     return {k: math.floor(v + 0.5) for k, v in brunei_raw_minutes(lon, year, month0, day, asr_shadow).items()}
+
+
+# ---------------------------------------------------------------- Qatar
+
+QATAR_FAJR = 18
+QATAR_HORIZON = 0.8333
+QATAR_MARGIN = {'fajr': -1.12, 'sunrise': -0.1, 'dhuhr': 0.95, 'asr': 0.87, 'maghrib': 2.02}
+QATAR_ISHA_AFTER_MAGHRIB = 90
+
+
+def qatar_raw_minutes(lat, lon, year, month0, day, asr_shadow=1):
+    """Before rounding: Meeus's sun at each time's own moment, the calendar's margins; Isha ninety minutes on the rounded Maghrib."""
+    d0 = _d0(year, month0, day)
+    sp, cp = math.sin(lat * RAD), math.cos(lat * RAD)
+
+    def event(altitude, sign, asr=False):
+        t = 720 - 4 * lon
+        for _ in range(4):
+            dec, eot = meeus_apparent_sun(d0 + t / 1440)
+            transit = 720 - 4 * lon - eot
+            if sign == 0:
+                t = transit
+                continue
+            a = math.atan(1 / (asr_shadow + math.tan(abs(lat * RAD - dec)))) / RAD if asr else altitude
+            c = (math.sin(a * RAD) - sp * math.sin(dec)) / (cp * math.cos(dec))
+            if not abs(c) <= 1:
+                return NAN
+            t = transit + (sign * 4 * math.acos(c)) / RAD
+        return t
+
+    maghrib = event(-QATAR_HORIZON, 1) + QATAR_MARGIN['maghrib']
+    return {
+        'fajr': event(-QATAR_FAJR, -1) + QATAR_MARGIN['fajr'],
+        'sunrise': event(-QATAR_HORIZON, -1) + QATAR_MARGIN['sunrise'],
+        'dhuhr': event(0, 0) + QATAR_MARGIN['dhuhr'],
+        'asr': event(0, 1, True) + QATAR_MARGIN['asr'],
+        'maghrib': maghrib,
+        'isha': math.floor(maghrib + 0.5) + QATAR_ISHA_AFTER_MAGHRIB if math.isfinite(maghrib) else NAN,
+    }
+
+
+def qatar_minutes(lat, lon, year, month0, day, asr_shadow=1):
+    """Rounded to the nearest minute. None where a time does not form."""
+    r = qatar_raw_minutes(lat, lon, year, month0, day, asr_shadow)
+    if not all(math.isfinite(v) for v in r.values()):
+        return None
+    return {k: math.floor(v + 0.5) for k, v in r.items()}
 
 
 # ---------------------------------------------------------------- Sweden and Diyanet: the Congress method

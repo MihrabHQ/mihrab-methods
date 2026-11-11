@@ -9,7 +9,7 @@
 **Prayer times that match the published timetable to the printed minute.**
 Each national authority's own calculation method, worked out again from its
 published times and checked day by day against its timetables: <!--fig:total.off-->0<!--/fig--> of
-<!--fig:total.times-->76,195,796<!--/fig--> times off the printed minute. Free for any app, site or
+<!--fig:total.times-->76,196,504<!--/fig--> times off the printed minute. Free for any app, site or
 mosque to use.
 
 [![Usage, a day: npm downloads and API requests](docs/stats.svg)](#usage)
@@ -47,8 +47,9 @@ The full API, the HTTP server and the per-authority imports are in
 | **Kazakhstan** | the Spiritual Administration’s times | 84 | 551,880 | **0** | 100.000 % | 0 | 1 Jan 2025 → 31 Dec 2027 |
 | **Egypt** | the Survey Authority’s times | 77 | 168,630 | **0** | 99.373 % | 1,056 | 1 Jan 2026 → 31 Dec 2026 |
 | **Brunei** | the Ministry’s times | 4 | 17,064 | **0** | 99.671 % | 56 | 9 Jan 2025 → 31 Dec 2026 |
+| **Qatar** | the Calendar House’s times | 1 | 708 | **0** | 96.186 % | 27 | 16 Jun 2026 → 11 Oct 2026 |
 
-9 of 9 methods certified; 0 of 76,195,796 times off the printed minute. Last checked 9 November 2026. Generated from [`certification.json`](certification.json) by `scripts/readme.mjs`.
+10 of 10 methods certified; 0 of 76,196,504 times off the printed minute. Last checked 9 November 2026. Generated from [`certification.json`](certification.json) by `scripts/readme.mjs`.
 <!-- certification-table:end -->
 
 "By the method alone" is the formula without its correction list. The list

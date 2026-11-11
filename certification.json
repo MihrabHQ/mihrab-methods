@@ -219,5 +219,28 @@
       "sha256": "a4f8313391631cc3442c3c5bef715755f2be27766853e94f5a2ece39fbb31ab7"
     },
     "revision": 1
+  },
+  "qatar": {
+    "certified": true,
+    "checkedAt": "2026-11-11",
+    "places": 1,
+    "checks": [
+      {
+        "tables": "Qatar — the Calendar House’s times",
+        "places": 1,
+        "times": 708,
+        "off": 0,
+        "offWithoutCorrections": 27,
+        "from": "2026-06-16",
+        "to": "2026-10-11"
+      }
+    ],
+    "corrections": {
+      "from": "2026-06-16",
+      "to": "2026-10-11",
+      "entries": 27,
+      "sha256": "e6fc01f1ab8332d8e02a376474474748539b7d9edfacbd55cc36a3e1ebee6220"
+    },
+    "revision": 1
   }
 }

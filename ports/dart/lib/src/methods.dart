@@ -1,5 +1,5 @@
 // The methods: Sweden and Diyanet (the Congress method), Morocco, Algeria,
-// Indonesia, Türkiye Takvimi, Kazakhstan, Egypt and Brunei. A port of src/methods/*.ts — the TypeScript is the reference,
+// Indonesia, Türkiye Takvimi, Kazakhstan, Egypt, Brunei and Qatar. A port of src/methods/*.ts — the TypeScript is the reference,
 // docs/methods.md says what each does, and the vector check holds this to it.
 //
 // Every function takes a civil date with the month 0-based, as the TypeScript
@@ -414,6 +414,46 @@ DayMinutes bruneiRawMinutes(double lon, int year, int month0, int day, {double a
 /// Rounded to the nearest minute.
 DayMinutes? bruneiMinutes(double lon, int year, int month0, int day, {double asrShadow = 1.0}) =>
     bruneiRawMinutes(lon, year, month0, day, asrShadow: asrShadow).mapped((v) => (v + 0.5).floorToDouble());
+
+// ---------------------------------------------------------------- Qatar
+
+/// Before rounding: Meeus's sun at each time's own moment, the calendar's margins; Isha ninety minutes on the rounded Maghrib.
+DayMinutes qatarRawMinutes(double lat, double lon, int year, int month0, int day, {double asrShadow = 1.0}) {
+  final d0 = _d0Of(year, month0, day);
+  final sp = sin(lat * rad), cp = cos(lat * rad);
+  double event(double altitude, double sign, {bool asr = false}) {
+    var t = 720 - 4 * lon;
+    for (var i = 0; i < 4; i++) {
+      final s = meeusApparentSun(d0 + t / 1440);
+      final transit = 720 - 4 * lon - s.eot;
+      if (sign == 0) {
+        t = transit;
+        continue;
+      }
+      final a = asr ? atan(1 / (asrShadow + tan((lat * rad - s.dec).abs()))) / rad : altitude;
+      final c = (sin(a * rad) - sp * sin(s.dec)) / (cp * cos(s.dec));
+      if (!(c.abs() <= 1)) return double.nan;
+      t = transit + (sign * 4 * acos(c)) / rad;
+    }
+    return t;
+  }
+
+  final maghrib = event(-0.8333, 1.0) + 2.02;
+  return DayMinutes(
+    event(-18.0, -1.0) - 1.12,
+    event(-0.8333, -1.0) - 0.1,
+    event(0.0, 0.0) + 0.95,
+    event(0.0, 1.0, asr: true) + 0.87,
+    maghrib,
+    (maghrib + 0.5).floorToDouble() + 90,
+  );
+}
+
+/// Rounded to the nearest minute. Null where a time does not form.
+DayMinutes? qatarMinutes(double lat, double lon, int year, int month0, int day, {double asrShadow = 1.0}) {
+  final r = qatarRawMinutes(lat, lon, year, month0, day, asrShadow: asrShadow);
+  return r.allFinite ? r.mapped((v) => (v + 0.5).floorToDouble()) : null;
+}
 
 // ---------------------------------------------------------------- Sweden and Diyanet: the Congress method
 

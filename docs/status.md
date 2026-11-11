@@ -38,8 +38,9 @@ each method.
 | **Kazakhstan** | the Spiritual Administration’s times | 84 | 551,880 | **0** | 100.000 % | 0 | 1 Jan 2025 → 31 Dec 2027 |
 | **Egypt** | the Survey Authority’s times | 77 | 168,630 | **0** | 99.373 % | 1,056 | 1 Jan 2026 → 31 Dec 2026 |
 | **Brunei** | the Ministry’s times | 4 | 17,064 | **0** | 99.671 % | 56 | 9 Jan 2025 → 31 Dec 2026 |
+| **Qatar** | the Calendar House’s times | 1 | 708 | **0** | 96.186 % | 27 | 16 Jun 2026 → 11 Oct 2026 |
 
-9 of 9 methods certified; 0 of 76,195,796 times off the printed minute. Last checked 9 November 2026. Generated from [`certification.json`](../certification.json) by `scripts/readme.mjs`.
+10 of 10 methods certified; 0 of 76,196,504 times off the printed minute. Last checked 9 November 2026. Generated from [`certification.json`](../certification.json) by `scripts/readme.mjs`.
 <!-- certification-table:end -->
 
 ## Sweden
@@ -261,6 +262,26 @@ are one check counted four times.
 > Dhuhr is 1.06 minutes after the transit, not a whole minute (55 days off
 > with a whole one, four with 1.06). The first eight days of January 2025
 > are not in the list.
+
+## Qatar
+
+Certified over <!--fig:qatar.span-->16 Jun 2026 → 11 Oct 2026<!--/fig--> (<!--fig:qatar.check0.places-->1<!--/fig-->
+place, Doha): the method gives <!--fig:qatar.alonePct-->96.186<!--/fig--> % alone, and a list of
+<!--fig:qatar.corrections-->27<!--/fig--> corrections the rest.
+
+> **Research note, 2026-11-12** (not generated). The span is short, and
+> that is the thing to know about this method: the House changed its times
+> with its 1448 calendar (Dhuhr and Asr moved a minute later, and the
+> calendar carries a note about a new study), so only the months of 1448
+> printed so far are this method's — 118 days, mid-June to mid-October.
+> The margins were read from those days alone; winter has not been seen,
+> and a margin that is slightly off would show there as more corrections
+> and be refitted as a new revision. Nearly all of the days off are
+> Maghrib's (and Isha's with it, being Maghrib plus ninety): its distance
+> from the computed sunset drifts by about half a minute between June and
+> September, which a fixed margin does not follow. Doha is the only place:
+> the calendar prints Doha in full and, for Al-Shamal, Dukhan and Abu
+> Samra, minutes to add at Fajr and Maghrib only.
 
 ## Not here, and why
 

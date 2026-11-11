@@ -1,5 +1,5 @@
 // The methods: Sweden and Diyanet (the Congress method), Morocco, Algeria,
-// Indonesia, Türkiye Takvimi, Kazakhstan, Egypt and Brunei. A port of src/methods/*.ts — the TypeScript is the reference,
+// Indonesia, Türkiye Takvimi, Kazakhstan, Egypt, Brunei and Qatar. A port of src/methods/*.ts — the TypeScript is the reference,
 // docs/methods.md says what each does, and the vector check holds this to it.
 //
 // Every function takes a civil date with the month 0-based, as the TypeScript
@@ -395,6 +395,46 @@ fun bruneiRawMinutes(lon: Double, year: Int, month0: Int, day: Int, asrShadow: D
 /** Rounded to the nearest minute. */
 fun bruneiMinutes(lon: Double, year: Int, month0: Int, day: Int, asrShadow: Double = 1.0): DayMinutes? =
     bruneiRawMinutes(lon, year, month0, day, asrShadow).mapped { floor(it + 0.5) }
+
+// ---------------------------------------------------------------- Qatar
+
+/** Before rounding: Meeus's sun at each time's own moment, the calendar's margins; Isha ninety minutes on the rounded Maghrib. */
+fun qatarRawMinutes(lat: Double, lon: Double, year: Int, month0: Int, day: Int, asrShadow: Double = 1.0): DayMinutes {
+    val d0 = d0Of(year, month0, day)
+    val sp = sin(lat * RAD)
+    val cp = cos(lat * RAD)
+    fun event(altitude: Double, sign: Double, asr: Boolean = false): Double {
+        var t = 720 - 4 * lon
+        repeat(4) {
+            val s = meeusApparentSun(d0 + t / 1440)
+            val transit = 720 - 4 * lon - s.eot
+            if (sign == 0.0) {
+                t = transit
+            } else {
+                val a = if (asr) atan(1 / (asrShadow + tan(abs(lat * RAD - s.dec)))) / RAD else altitude
+                val c = (sin(a * RAD) - sp * sin(s.dec)) / (cp * cos(s.dec))
+                if (!(abs(c) <= 1)) return Double.NaN
+                t = transit + (sign * 4 * acos(c)) / RAD
+            }
+        }
+        return t
+    }
+    val maghrib = event(-0.8333, 1.0) + 2.02
+    return DayMinutes(
+        fajr = event(-18.0, -1.0) - 1.12,
+        sunrise = event(-0.8333, -1.0) - 0.1,
+        dhuhr = event(0.0, 0.0) + 0.95,
+        asr = event(0.0, 1.0, true) + 0.87,
+        maghrib = maghrib,
+        isha = floor(maghrib + 0.5) + 90,
+    )
+}
+
+/** Rounded to the nearest minute. Null where a time does not form. */
+fun qatarMinutes(lat: Double, lon: Double, year: Int, month0: Int, day: Int, asrShadow: Double = 1.0): DayMinutes? {
+    val r = qatarRawMinutes(lat, lon, year, month0, day, asrShadow)
+    return if (r.allFinite) r.mapped { floor(it + 0.5) } else null
+}
 
 // ---------------------------------------------------------------- Sweden and Diyanet: the Congress method
 

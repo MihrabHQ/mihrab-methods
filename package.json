@@ -1,7 +1,7 @@
 {
   "name": "mihrab-methods",
   "version": "1.7.0",
-  "description": "The prayer-time authorities' own calculation methods, each reproducing its published timetable to the minute: Sweden (Diyanet, as Islamiska Förbundet prints it), Diyanet worldwide, Morocco (Habous), Algeria (Ministry of Religious Affairs), Indonesia (Kemenag), Türkiye Takvimi, Kazakhstan (Spiritual Administration), Egypt (General Authority of Survey), Brunei (Ministry of Religious Affairs).",
+  "description": "The prayer-time authorities' own calculation methods, each reproducing its published timetable to the minute: Sweden (Diyanet, as Islamiska Förbundet prints it), Diyanet worldwide, Morocco (Habous), Algeria (Ministry of Religious Affairs), Indonesia (Kemenag), Türkiye Takvimi, Kazakhstan (Spiritual Administration), Egypt (General Authority of Survey), Brunei (Ministry of Religious Affairs), Qatar (Qatar Calendar House).",
   "license": "MPL-2.0",
   "author": "Hassan El Ghamri",
   "repository": {
@@ -32,6 +32,7 @@
     "./dist/*/kazakhstan.js",
     "./dist/*/egypt.js",
     "./dist/*/brunei.js",
+    "./dist/*/qatar.js",
     "./dist/*/authorities/*.js",
     "./src/index.ts",
     "./src/sweden.ts",
@@ -43,6 +44,7 @@
     "./src/kazakhstan.ts",
     "./src/egypt.ts",
     "./src/brunei.ts",
+    "./src/qatar.ts",
     "./src/authorities/*.ts"
   ],
   "engines": {
@@ -169,6 +171,16 @@
         "default": "./dist/cjs/brunei.js"
       }
     },
+    "./qatar": {
+      "import": {
+        "types": "./dist/esm/qatar.d.ts",
+        "default": "./dist/esm/qatar.js"
+      },
+      "require": {
+        "types": "./dist/cjs/qatar.d.ts",
+        "default": "./dist/cjs/qatar.js"
+      }
+    },
     "./locate": {
       "import": {
         "types": "./dist/esm/locate.d.ts",
@@ -215,6 +227,9 @@
       ],
       "brunei": [
         "./dist/cjs/brunei.d.ts"
+      ],
+      "qatar": [
+        "./dist/cjs/qatar.d.ts"
       ],
       "locate": [
         "./dist/cjs/locate.d.ts"
