@@ -9,6 +9,10 @@ revision bump is at least a minor version.
 
 ## Unreleased
 
+No method changed; no revision raised.
+
+## 1.8.0 — 2026-11-11
+
 - **Qatar, revision 1: a tenth method.** The Qatar Calendar House's times
   for Doha: `mihrab-methods/qatar`, authority `qatar`. Meeus's apparent sun
   at each time's own moment; Fajr at 18°, sunrise and Maghrib from the
