@@ -1,0 +1,8 @@
+name: mihrab_methods
+description: The prayer-time methods of five authorities, ported from the mihrab-methods TypeScript library and held to its test vectors.
+version: 1.1.0
+repository: https://github.com/MihrabHQ/mihrab-methods
+publish_to: none
+
+environment:
+  sdk: '>=2.17.0 <4.0.0'

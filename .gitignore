@@ -7,3 +7,7 @@ dist/
 src/data/generated/
 scratch-*
 *.tgz
+ports/swift/.build/
+ports/kotlin/build/
+ports/dart/.dart_tool/
+ports/dart/pubspec.lock

@@ -1,0 +1,42 @@
+name: ports
+
+# Every port is held to test/vectors.json, the sample the TypeScript library
+# writes for them: a change to a method that a port did not follow fails here.
+on:
+  push:
+    branches: [main, 'ports/**']
+    paths: ['ports/**', 'test/vectors.json', 'data/corrections/**', '.github/workflows/ports.yml']
+  pull_request:
+    paths: ['ports/**', 'test/vectors.json', 'data/corrections/**', '.github/workflows/ports.yml']
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  python:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: python3 ports/python/test_vectors.py
+
+  swift:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: swift run -c release --package-path ports/swift mihrab-vectors .
+
+  kotlin:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: kotlinc ports/kotlin/src ports/kotlin/test -include-runtime -nowarn -d /tmp/mihrab-methods.jar
+      - run: java -jar /tmp/mihrab-methods.jar .
+
+  dart:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dart-lang/setup-dart@v1
+      - run: dart analyze --fatal-warnings ports/dart
+      - run: dart run ports/dart/tool/vector_check.dart .

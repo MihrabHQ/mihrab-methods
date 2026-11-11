@@ -113,6 +113,7 @@ Counts only, to 2026-11-08, updated weekly (`scripts/stats.mjs`, history in [doc
 |---|---|
 | [docs/usage.md](docs/usage.md) | The API, the entry points, the HTTP server, this repository's commands and layout |
 | [docs/methods.md](docs/methods.md) | Each method in words and formulas, for ports to other languages; `test/vectors.json` to check one |
+| [ports/](ports/README.md) | The methods in Python, Swift, Kotlin and Dart, each held to `test/vectors.json` |
 | [docs/status.md](docs/status.md) | Per method: what is certified, what was set aside, what is not yet covered |
 | [docs/diyanet.md](docs/diyanet.md) | What Diyanet's worldwide tables add: Isha by country, midsummer, Türkiye's points, tables on their own clocks |
 | [docs/feed.md](docs/feed.md) | `certification.json` and the lists as a feed: schemas, hashes, revisions, tags |

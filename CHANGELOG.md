@@ -9,7 +9,10 @@ revision bump is at least a minor version.
 
 ## Unreleased
 
-No method changed; no revision raised.
+- **Ports.** The five methods in Python, Swift, Kotlin and Dart under
+  `ports/`, each with no dependencies beyond its standard library and each
+  held to `test/vectors.json` on every push. Nothing changes in what the
+  library prints.
 
 ## 1.2.0 — 2026-11-11
 

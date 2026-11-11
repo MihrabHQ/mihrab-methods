@@ -32,7 +32,9 @@ maintainer. Short on purpose; the depth is in [README.md](README.md),
   rounding — raises its revision (`src/methods/revisions.ts`), needs a new
   correction list and `npm run certify` at 0 off, `npm run vectors`, and a
   `CHANGELOG.md` line saying what changed in the output. Then copy the method
-  into the Mihrab app with the same revision.
+  into the Mihrab app with the same revision, and make the same change in
+  every port under `ports/` (each names its revisions; `ports.yml` fails a
+  port that was missed).
 - **No hand-typed figures.** Write `<!--fig:<key>-->…<!--/fig-->` and run
   `npm run readme`; a figure the record lacks belongs in `tools/certify.ts`.
   Wording: "matches the published timetable of …", never "official"; no "the

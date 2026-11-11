@@ -78,6 +78,9 @@ The handler is `src/server.ts`; `tools/serve.ts` serves it on Node,
 `test/vectors.json` is a small sample of places, dates and the times to
 expect — enough to prove a port matches, too small to be a timetable.
 
+[`ports/`](../ports/README.md) has the methods in Python, Swift, Kotlin and
+Dart, each with no dependencies and each held to that sample on every push.
+
 ## This repository
 
 ```sh
@@ -111,6 +114,7 @@ nothing.
 | `certification.json`, `schemas/` | The 100 % gate's record, and the schemas of the files apps read |
 | `tools/verify.ts`, `tools/certify.ts`, `tools/corrections.ts` | The day-by-day check against the timetables; the certification; the correction lists |
 | `tools/vectors.ts`, `test/vectors.json`, `docs/methods.md` | For ports: the sample and the written method |
+| `ports/` | The methods in Python, Swift, Kotlin and Dart, and each one's check against the sample |
 | `src/server.ts` | The HTTP API (routes and handler) |
 | `tools/serve.ts`, `api/worker.ts` | The API on Node, and at the edge |
 | `scripts/release-check.mjs` | Whether npm needs a release, and which |

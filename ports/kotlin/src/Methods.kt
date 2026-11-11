@@ -1,0 +1,543 @@
+// The five methods: Sweden and Diyanet (the Congress method), Morocco, Algeria
+// and Indonesia. A port of src/methods/*.ts — the TypeScript is the reference,
+// docs/methods.md says what each does, and the vector check holds this to it.
+//
+// Every function takes a civil date with the month 0-based, as the TypeScript
+// does, and gives minutes past 00:00 UT of that date.
+package mihrab.methods
+
+import java.lang.StrictMath.abs
+import java.lang.StrictMath.acos
+import java.lang.StrictMath.asin
+import java.lang.StrictMath.atan
+import java.lang.StrictMath.atan2
+import java.lang.StrictMath.ceil
+import java.lang.StrictMath.cos
+import java.lang.StrictMath.floor
+import java.lang.StrictMath.sin
+import java.lang.StrictMath.sqrt
+import java.lang.StrictMath.tan
+import java.time.LocalDate
+
+/** Whole days since 1970-01-01 of a civil date; a day past the month's end rolls over, as Date.UTC does. */
+fun dayKey(year: Int, month0: Int, day: Int): Long = LocalDate.of(year, month0 + 1, 1).toEpochDay() + day - 1
+
+internal fun yearOf(key: Long): Int = LocalDate.ofEpochDay(key).year
+
+private const val J2000_DAYS = 10957L
+
+/** Days from J2000.0 (noon) of the date's 00:00 UT. */
+private fun d0Of(year: Int, month0: Int, day: Int): Double = (dayKey(year, month0, day) - J2000_DAYS).toDouble() - 0.5
+
+class DayMinutes(var fajr: Double, var sunrise: Double, var dhuhr: Double, var asr: Double, var maghrib: Double, var isha: Double) {
+    internal val allFinite: Boolean get() = doubleArrayOf(fajr, sunrise, dhuhr, asr, maghrib, isha).all { it.isFinite() }
+    internal fun mapped(f: (Double) -> Double) = DayMinutes(f(fajr), f(sunrise), f(dhuhr), f(asr), f(maghrib), f(isha))
+}
+
+// ---------------------------------------------------------------- Morocco
+
+const val MOROCCO_SUNRISE_MARGIN = -1.0
+const val MOROCCO_MAGHRIB_MARGIN = 1.8
+
+fun moroccoDipEast(heightM: Double): Double = 0.32 + 0.025 * sqrt(maxOf(heightM, 0.0))
+fun moroccoDipWest(heightM: Double): Double = 0.37 + 0.021 * sqrt(maxOf(heightM, 0.0))
+
+private fun refractionFromTrue(h: Double) = (1.02 / tan((h + 10.3 / (h + 5.11)) * RAD)) / 60
+private fun refractionFromApparent(h: Double) = (1 / tan((h + 7.31 / (h + 4.4)) * RAD)) / 60
+
+fun moroccoRawMinutes(lat: Double, lon: Double, year: Int, month0: Int, day: Int, dipDeg: Double? = null, asrShadow: Double = 1.0, dipMaghribDeg: Double? = null): DayMinutes {
+    val dip = dipDeg ?: moroccoDipEast(0.0)
+    val dipMaghrib = dipMaghribDeg ?: (dip + (moroccoDipWest(0.0) - moroccoDipEast(0.0)))
+    val d0 = d0Of(year, month0, day)
+    fun at(t: Double) = meeusApparentSun(d0 + t / 1440)
+    var noon = 720 - 4 * lon
+    repeat(3) { noon = 720 - 4 * lon - at(noon).eot }
+    val sp = sin(lat * RAD)
+    val cp = cos(lat * RAD)
+    val T = (d0 + noon / 1440) / 36525
+    val Ma = (357.52911 + 35999.05029 * T) * RAD
+    val horizon = -(34.0 / 60 + 0.26667 / (1.00014 - 0.016708 * cos(Ma) - 0.00014 * cos(2 * Ma)))
+    fun event(alt: Double, sign: Double, start: Double): Double {
+        var t = start
+        repeat(3) {
+            val s = at(t)
+            val c = (sin(alt * RAD) - sp * sin(s.dec)) / (cp * cos(s.dec))
+            if (!(abs(c) <= 1)) return Double.NaN
+            t = 720 - 4 * lon - s.eot + (sign * 4 * acos(c)) / RAD
+        }
+        return t
+    }
+    val noonDec = at(noon).dec
+    val noonTrue = 90 - abs(lat - noonDec / RAD)
+    val noonApparent = noonTrue + refractionFromTrue(noonTrue)
+    val asrApparent = atan(1 / (asrShadow + 1 / tan(noonApparent * RAD))) / RAD
+    val asrTrue = asrApparent - refractionFromApparent(asrApparent)
+    return DayMinutes(
+        fajr = event(-19.0, -1.0, noon - 420) - 0.5,
+        sunrise = event(horizon - dip, -1.0, noon - 360) + MOROCCO_SUNRISE_MARGIN,
+        dhuhr = noon + 5,
+        asr = event(asrTrue, 1.0, noon + 200),
+        maghrib = event(horizon - dipMaghrib, 1.0, noon + 360) + MOROCCO_MAGHRIB_MARGIN,
+        isha = event(-17.0, 1.0, noon + 420),
+    )
+}
+
+/** On the minute; null where a time does not form. */
+fun moroccoMinutes(lat: Double, lon: Double, year: Int, month0: Int, day: Int, dipDeg: Double? = null, asrShadow: Double = 1.0, dipMaghribDeg: Double? = null): DayMinutes? {
+    val r = moroccoRawMinutes(lat, lon, year, month0, day, dipDeg, asrShadow, dipMaghribDeg)
+    return if (r.allFinite) r.mapped { floor(it + 0.5) } else null
+}
+
+// ---------------------------------------------------------------- Algeria
+
+/** The six events before rounding; `maghrib` here is the sunset. */
+fun algeriaRawMinutes(lat: Double, lon: Double, year: Int, month0: Int, day: Int, asrShadow: Double = 1.0): DayMinutes {
+    val d0 = d0Of(year, month0, day)
+    fun at(t: Double) = noaaSun(d0 + t / 1440)
+    var noon = 720 - 4 * lon
+    repeat(3) { noon = 720 - 4 * lon - at(noon).eot }
+    val transit = 720 - 4 * lon - at(noon).eot
+    val sp = sin(lat * RAD)
+    val cp = cos(lat * RAD)
+    fun event(altitudeOf: (Double) -> Double, sign: Double, start: Double): Double {
+        var t = start
+        repeat(3) {
+            val dec = at(t).dec
+            val c = (sin(altitudeOf(dec) * RAD) - sp * sin(dec)) / (cp * cos(dec))
+            if (!(abs(c) <= 1)) return Double.NaN
+            t = transit + (sign * 4 * acos(c)) / RAD
+        }
+        return t
+    }
+    val asrAltitude = { dec: Double -> atan(1 / (asrShadow + tan((lat - dec / RAD) * RAD))) / RAD }
+    return DayMinutes(
+        fajr = event({ -18.0 }, -1.0, noon - 420),
+        sunrise = event({ -0.833 }, -1.0, noon - 360),
+        dhuhr = noon,
+        asr = event(asrAltitude, 1.0, noon + 200),
+        maghrib = event({ -0.833 }, 1.0, noon + 360),
+        isha = event({ -17.0 }, 1.0, noon + 420),
+    )
+}
+
+/** Rounded up to the minute, Maghrib three minutes after sunset; null where a time does not form. */
+fun algeriaMinutes(lat: Double, lon: Double, year: Int, month0: Int, day: Int, asrShadow: Double = 1.0): DayMinutes? {
+    val r = algeriaRawMinutes(lat, lon, year, month0, day, asrShadow)
+    if (!r.allFinite) return null
+    r.maghrib += 3
+    return r.mapped { ceil(it - 1e-9) }
+}
+
+// ---------------------------------------------------------------- Indonesia
+
+fun kemenagRawMinutes(lat: Double, lon: Double, year: Int, month0: Int, day: Int, highland: Boolean = false, twilightDip: Boolean = false, asrShadow: Double = 1.0): DayMinutes {
+    val d0 = d0Of(year, month0, day)
+    // the ministry's program takes Universal Time for the ephemeris' time: no ΔT
+    fun at(t: Double) = preciseApparentSun(d0 + t / 1440, 0.0)
+    var noon = 720 - 4 * lon
+    repeat(3) { noon = 720 - 4 * lon - at(noon).eot }
+    val sp = sin(lat * RAD)
+    val cp = cos(lat * RAD)
+    fun hourAngle(alt: Double, dec: Double): Double {
+        val c = (sin(alt * RAD) - sp * sin(dec)) / (cp * cos(dec))
+        return if (abs(c) <= 1) (4 * acos(c)) / RAD else Double.NaN
+    }
+    fun event(alt: Double, sign: Double, start: Double): Double {
+        var t = start
+        repeat(3) {
+            val s = at(t)
+            t = 720 - 4 * lon - s.eot + sign * hourAngle(alt, s.dec)
+            if (!t.isFinite()) return Double.NaN
+        }
+        return t
+    }
+    val twilight = if (twilightDip) 1.0 else 0.0
+    val horizon = if (highland) -2.0 else -1.0
+    val shadowDec = at(0.0).dec
+    val asrAlt = atan(1 / (asrShadow + tan(abs(lat * RAD - shadowDec)))) / RAD
+    var asr = noon + 200
+    repeat(4) {
+        val s = at(asr)
+        asr = 720 - 4 * lon - s.eot + hourAngle(asrAlt, s.dec)
+    }
+    return DayMinutes(
+        fajr = event(-20 - twilight, -1.0, noon - 420) + 2,
+        sunrise = event(horizon, -1.0, noon - 360) + -3,
+        dhuhr = noon + 3,
+        asr = asr + 2,
+        maghrib = event(horizon, 1.0, noon + 360) + 2,
+        isha = event(-18 - twilight, 1.0, noon + 420) + 2,
+    )
+}
+
+fun kemenagMinutes(lat: Double, lon: Double, year: Int, month0: Int, day: Int, highland: Boolean = false, twilightDip: Boolean = false, asrShadow: Double = 1.0, afternoon: Pair<Double, Double>? = null): DayMinutes? {
+    val r = kemenagRawMinutes(lat, lon, year, month0, day, highland, twilightDip, asrShadow)
+    if (afternoon != null) {
+        val pm = kemenagRawMinutes(afternoon.first, afternoon.second, year, month0, day, highland, twilightDip, asrShadow)
+        r.asr = pm.asr
+        r.maghrib = pm.maghrib
+        r.isha = pm.isha
+    }
+    return if (r.allFinite) r.mapped { ceil(it - 1e-9) } else null
+}
+
+// ---------------------------------------------------------------- Sweden and Diyanet: the Congress method
+
+private const val RISE_SET = -0.833
+private const val FAJR_ANGLE = -18.0
+const val CONGRESS_ISHA_DEG = 16.0
+const val DIYANET_ISHA_DEG = 17.0
+private const val TEMKIN_SUNRISE = -7.0
+private const val TEMKIN_DHUHR = 5.0
+private const val TEMKIN_ASR = 4.0
+private const val TEMKIN_MAGHRIB = 7.0
+private const val FLOOR = 300.0
+private const val BAND = 20.0
+private const val ANCHOR_SLACK = 1.0
+private const val SEARCH_DAYS = 200
+private const val SUN_INSTANT_S = -45.0
+private const val EOT_ADD_MIN = 0.00176
+private const val DAY_MS = 86_400_000.0
+
+private fun midsummerOf(k: Long): Long = dayKey(yearOf(k), 5, 21)
+
+private fun eotResidualS(L: Double): Double =
+    0.033377 * sin(L) + 0.007721 * cos(L) - 0.000229 * sin(2 * L) + 0.004198 * cos(2 * L) -
+        0.02346 * sin(3 * L) - 0.026434 * cos(3 * L)
+
+private fun decResidualDeg(L: Double): Double =
+    -1.1539e-5 - 3.6174e-5 * sin(L) - 2.1101e-5 * cos(L) + 2.0235e-5 * sin(2 * L) - 2.2534e-5 * cos(2 * L)
+
+private fun congressSun(utcMs: Double): SunPosition {
+    val T = (utcMs / DAY_MS - 10957.5) / 36525
+    val L0 = wrap360(280.46646 + T * (36000.76983 + 0.0003032 * T))
+    val M = (357.52911 + T * (35999.05029 - 0.0001537 * T)) * RAD
+    val C = (1.914602 - T * (0.004817 + 0.000014 * T)) * sin(M) +
+        (0.019993 - 0.000101 * T) * sin(2 * M) +
+        0.000289 * sin(3 * M)
+    val om = (125.04 - 1934.136 * T) * RAD
+    val Ls = (280.4665 + 36000.7698 * T) * RAD
+    val Lm = (218.3165 + 481267.8813 * T) * RAD
+    val nut = (9.2 * cos(om) + 0.57 * cos(2 * Ls) + 0.1 * cos(2 * Lm) - 0.09 * cos(2 * om)) / 3600
+    val eps = 23 + (26 + (21.448 - T * (46.815 + T * (0.00059 - T * 0.001813))) / 60) / 60 + nut
+    val lam = (L0 + C) * RAD
+    val ra = wrap360(atan2(cos(eps * RAD) * sin(lam), cos(lam)) / RAD)
+    val dec = asin(sin(eps * RAD) * sin(lam)) + decResidualDeg(L0 * RAD) * RAD
+    val eot = (wrap360(L0 - ra + 180) - 180) * 4 + EOT_ADD_MIN - eotResidualS(L0 * RAD) / 60
+    return SunPosition(dec, eot)
+}
+
+private class Solar(day: Long, val lat: Double, lon: Double) {
+    val dec: Double
+    val transit: Double
+
+    init {
+        val s = congressSun(day.toDouble() * DAY_MS + SUN_INSTANT_S * 1000)
+        dec = s.dec
+        transit = 720 - 4 * lon - s.eot
+    }
+
+    private fun hourAngle(alt: Double): Double? {
+        val c = (sin(alt * RAD) - sin(lat * RAD) * sin(dec)) / (cos(lat * RAD) * cos(dec))
+        if (c < -1 || c > 1) return null
+        return (acos(c) / RAD) * 4
+    }
+
+    fun rising(alt: Double): Double? = hourAngle(alt)?.let { transit - it }
+    fun setting(alt: Double): Double? = hourAngle(alt)?.let { transit + it }
+
+    fun asr(shadow: Double): Double? {
+        val noonAlt = 90 - abs(lat - dec / RAD)
+        if (noonAlt <= 0) return null
+        val alt = atan(1 / (shadow + tan((90 - noonAlt) * RAD))) / RAD
+        return setting(alt)
+    }
+}
+
+private class RiseSet(val sr: Double, val ss: Double, val held: Boolean)
+private class Ramp(val edge: Long, val T: Double, val far: Long?, val bump: Boolean)
+
+/** The method for one place and one year; what it needs of the year is worked out once. */
+class CongressYear(val lat: Double, val lon: Double, val year: Int, ishaDeg: Double = CONGRESS_ISHA_DEG, val clockOffset: Int? = null) {
+    private val ishaAngle = -ishaDeg
+    private val solars = HashMap<Long, Solar>()
+    private val riseSets = HashMap<Long, RiseSet>()
+    private val ramps = HashMap<String, Ramp>()
+    private val extremes = HashMap<Long, DoubleArray>()
+    private val carriedCache = HashMap<Long, DoubleArray>()
+    private var ratioDone = false
+    private var ratioValue: Double? = null
+    private var gapDone = false
+    private var gapValue: LongArray? = null
+    private var floors: Boolean? = null
+
+    private fun solar(day: Long): Solar = solars.getOrPut(day) { Solar(day, lat, lon) }
+
+    /** Printed sunrise and Maghrib with the five-hour floors. */
+    private fun riseSet(day: Long): RiseSet {
+        riseSets[day]?.let { return it }
+        val s = solar(day)
+        val dhuhr = s.transit + TEMKIN_DHUHR
+        val half = FLOOR / 2
+        val rawSr = s.rising(RISE_SET)
+        val rawSs = s.setting(RISE_SET)
+        val nsr: Double
+        val nss: Double
+        if (midsummerFloors(day)) {
+            val e = dhuhrExtremes(day)
+            nsr = e[0] - 720 + half
+            nss = e[1] + 720 - half
+        } else {
+            nsr = dhuhr - 720 + half
+            nss = dhuhr + 720 - half
+        }
+        var sr: Double
+        var ss: Double
+        if (rawSr == null || rawSs == null) {
+            val noonUp = 90 - abs(lat - s.dec / RAD) > RISE_SET
+            sr = if (noonUp) nsr else dhuhr - half
+            ss = if (noonUp) nss else dhuhr + half
+        } else {
+            sr = rawSr + TEMKIN_SUNRISE
+            ss = rawSs + TEMKIN_MAGHRIB
+        }
+        sr = maxOf(minOf(sr, dhuhr - half), nsr)
+        ss = minOf(maxOf(ss, dhuhr + half), nss)
+        var held = false
+        if (midsummerFloors(day)) {
+            val mid = midsummerOf(day)
+            if (day == mid) {
+                held = true
+            } else if (day > mid) {
+                val prev = riseSet(day - 1)
+                if (prev.held && ss > prev.ss) {
+                    ss = prev.ss
+                    held = true
+                }
+            }
+        }
+        val rs = RiseSet(sr, ss, held)
+        riseSets[day] = rs
+        return rs
+    }
+
+    private fun dhuhrOf(day: Long): Double = solar(day).transit + TEMKIN_DHUHR
+
+    private fun maghribFloored(day: Long): Boolean {
+        val s = solar(day)
+        val st = s.setting(RISE_SET) ?: return true
+        return st + TEMKIN_MAGHRIB > s.transit + TEMKIN_DHUHR + 720 - FLOOR / 2
+    }
+
+    private fun dhuhrExtremes(day: Long): DoubleArray {
+        extremes[day]?.let { return it }
+        val mid = midsummerOf(day)
+        val out: DoubleArray
+        if (day <= mid) {
+            var maxRun = dhuhrOf(day)
+            if (maghribFloored(day)) {
+                var d = day - 1
+                while (d > day - 120 && maghribFloored(d)) {
+                    maxRun = maxOf(maxRun, dhuhrOf(d))
+                    d -= 1
+                }
+            }
+            out = doubleArrayOf(maxOf(dhuhrOf(day), dhuhrOf(mid)), minOf(maxRun, dhuhrOf(mid)))
+        } else {
+            var hi = Double.NEGATIVE_INFINITY
+            var lo = Double.POSITIVE_INFINITY
+            for (d in mid..day) {
+                val v = dhuhrOf(d)
+                hi = maxOf(hi, v)
+                lo = minOf(lo, v)
+            }
+            out = doubleArrayOf(hi, lo)
+        }
+        extremes[day] = out
+        return out
+    }
+
+    private fun midsummerFloors(day: Long): Boolean {
+        floors?.let { return it }
+        val s = solar(midsummerOf(day))
+        val sr = s.rising(RISE_SET)
+        val ss = s.setting(RISE_SET)
+        val dhuhr = s.transit + TEMKIN_DHUHR
+        val half = FLOOR / 2
+        val result = if (sr == null || ss == null) {
+            true
+        } else {
+            val psr = maxOf(sr + TEMKIN_SUNRISE, dhuhr - 720 + half)
+            val pss = minOf(ss + TEMKIN_MAGHRIB, dhuhr + 720 - half)
+            1440 - (pss - psr) <= FLOOR + ANCHOR_SLACK
+        }
+        floors = result
+        return result
+    }
+
+    private fun night(day: Long): Double {
+        val rs = riseSet(day)
+        return 1440 - (rs.ss - rs.sr)
+    }
+
+    private fun fajr18(day: Long): Double? = solar(day).rising(FAJR_ANGLE)
+    private fun isha16(day: Long): Double? = solar(day).setting(ishaAngle)
+    private fun trueTime(fajr: Boolean, day: Long): Double? = if (fajr) fajr18(day) else isha16(day)
+
+    private fun gapDays(): LongArray? {
+        if (gapDone) return gapValue
+        val mid = dayKey(year, 5, 21)
+        val g: LongArray?
+        if (fajr18(mid) != null) {
+            val isha = solar(mid).setting(-CONGRESS_ISHA_DEG)
+            g = if (lat > 0 && isha != null && carriedRaw(mid)[1] < isha) longArrayOf(mid, mid) else null
+        } else {
+            var a = mid
+            while (fajr18(a - 1) == null && mid - a < SEARCH_DAYS) a -= 1
+            var b = mid
+            while (fajr18(b + 1) == null && b - mid < SEARCH_DAYS) b += 1
+            g = longArrayOf(a, b)
+        }
+        gapValue = g
+        gapDone = true
+        return g
+    }
+
+    private fun ratio(): Double? {
+        if (ratioDone) return ratioValue
+        var d = dayKey(year, 5, 21)
+        var f = fajr18(d)
+        var steps = 0
+        while (f == null && steps < SEARCH_DAYS) {
+            d -= 1
+            f = fajr18(d)
+            steps += 1
+        }
+        val r: Double? = if (f == null) {
+            null
+        } else {
+            val ss = riseSet(d).ss
+            val S = f + 1440 - ss
+            S / 3 / night(d)
+        }
+        ratioValue = r
+        ratioDone = true
+        return r
+    }
+
+    private fun carriedRaw(day: Long): DoubleArray {
+        val r = ratio() ?: 0.0
+        val rs = riseSet(day)
+        val n = night(day)
+        return doubleArrayOf(rs.sr - r * (FAJR_ANGLE / -CONGRESS_ISHA_DEG) * n, rs.ss + r * n)
+    }
+
+    private fun carried(day: Long): DoubleArray {
+        carriedCache[day]?.let { return it }
+        val mid = midsummerOf(day)
+        val out: DoubleArray
+        if (!midsummerFloors(day) || day == mid) {
+            out = carriedRaw(day)
+        } else if (day < mid) {
+            val c = carriedRaw(day)
+            val m = carried(mid)
+            out = doubleArrayOf(maxOf(c[0], m[0]), minOf(c[1], m[1]))
+        } else {
+            var prev = carried(mid)
+            for (d in (mid + 1) until day) {
+                var c = carriedCache[d]
+                if (c == null) {
+                    val raw = carriedRaw(d)
+                    c = doubleArrayOf(maxOf(raw[0], prev[0]), minOf(raw[1], prev[1]))
+                    carriedCache[d] = c
+                }
+                prev = c
+            }
+            val raw = carriedRaw(day)
+            out = doubleArrayOf(maxOf(raw[0], prev[0]), minOf(raw[1], prev[1]))
+        }
+        carriedCache[day] = out
+        return out
+    }
+
+    private fun rampOf(sideIn: Boolean, fajr: Boolean): Ramp? {
+        val gap = gapDays() ?: return null
+        val cacheKey = (if (sideIn) "in" else "out") + (if (fajr) "fajr" else "isha")
+        ramps[cacheKey]?.let { return it }
+        val edge = if (sideIn) gap[0] else gap[1]
+        val T = carried(edge)[if (fajr) 0 else 1]
+        val step = if (sideIn) -1L else 1L
+        var far: Long? = null
+        val first = trueTime(fajr, edge + step)
+        var wrapped = false
+        val off = clockOffset
+        if (!sideIn && fajr && off != null && first != null) {
+            wrapped = floor((first + off) / 1440) != floor((T + off) / 1440)
+        }
+        var d = edge + step
+        while (!wrapped && kotlin.math.abs(d - edge) < SEARCH_DAYS) {
+            val t = trueTime(fajr, d)
+            if (t != null && abs(t - T) <= BAND) {
+                far = d
+            } else if (far != null) {
+                break
+            }
+            d += step
+        }
+        val r = Ramp(edge, T, far, wrapped)
+        ramps[cacheKey] = r
+        return r
+    }
+
+    private fun ramp(day: Long, sideIn: Boolean, fajr: Boolean): Double? {
+        val r = rampOf(sideIn, fajr) ?: return trueTime(fajr, day)
+        val far = r.far ?: return trueTime(fajr, day)
+        val inside = if (sideIn) (far <= day && day < r.edge) else (r.edge < day && day <= far)
+        if (!inside) return trueTime(fajr, day)
+        val sign = if (fajr) 1.0 else -1.0
+        return r.T + (sign * BAND * kotlin.math.abs(day - r.edge).toDouble()) / kotlin.math.abs(far - r.edge).toDouble()
+    }
+
+    fun times(day: Long, asrShadow: Double = 1.0): DayMinutes {
+        val s = solar(day)
+        val rs = riseSet(day)
+        val dhuhr = s.transit + TEMKIN_DHUHR
+        val rawAsr = s.asr(asrShadow)
+        var asr = if (rawAsr == null) dhuhr else rawAsr + TEMKIN_ASR
+        asr = maxOf(dhuhr, minOf(asr, rs.ss))
+        var fajr = fajr18(day)
+        var isha = isha16(day)
+        val gap = gapDays()
+        if (gap != null) {
+            if (gap[0] <= day && day <= gap[1]) {
+                val c = carried(day)
+                fajr = c[0]
+                isha = c[1]
+                if (day == gap[0] || day == gap[1]) {
+                    val sideIn = day == gap[0]
+                    if (rampOf(sideIn, true)?.bump == true) fajr = c[0] + BAND
+                    if (rampOf(sideIn, false)?.bump == true) isha = c[1] - BAND
+                }
+            } else if (day < gap[0]) {
+                fajr = ramp(day, true, true)
+                isha = ramp(day, true, false)
+            } else {
+                fajr = ramp(day, false, true)
+                isha = ramp(day, false, false)
+            }
+        }
+        return DayMinutes(fajr ?: (rs.sr - 60), rs.sr, dhuhr, asr, rs.ss, isha ?: (rs.ss + 60))
+    }
+}
+
+private val congressYears = object : LinkedHashMap<String, CongressYear>() {
+    override fun removeEldestEntry(eldest: MutableMap.MutableEntry<String, CongressYear>?): Boolean = size > 12
+}
+
+/** The Congress method's times, minutes past 00:00 UT of the date, unrounded. */
+@Synchronized
+fun congressMinutes(lat: Double, lon: Double, year: Int, month0: Int, day: Int, asrShadow: Double = 1.0, ishaDeg: Double = CONGRESS_ISHA_DEG, clockOffset: Int? = null): DayMinutes {
+    val key = "$lat|$lon|$year|$ishaDeg|$clockOffset"
+    val cy = congressYears.getOrPut(key) { CongressYear(lat, lon, year, ishaDeg, clockOffset) }
+    return cy.times(dayKey(year, month0, day), asrShadow)
+}
