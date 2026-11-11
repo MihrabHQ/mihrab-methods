@@ -9,6 +9,10 @@ revision bump is at least a minor version.
 
 ## Unreleased
 
+No method changed; no revision raised.
+
+## 1.2.1 — 2026-11-11
+
 - **Diyanet: 186 more places.** Places Diyanet lists that had not been
   placed are now in the list, each at the point its table is computed at
   (61 on a clock of their table's own), with their entries in the
