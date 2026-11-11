@@ -131,14 +131,14 @@
   "turkiyetakvimi": {
     "certified": true,
     "checkedAt": "2026-11-11",
-    "places": 81,
+    "places": 821,
     "checks": [
       {
         "tables": "Türkiye Takvimi — its cities’ years",
-        "places": 81,
-        "times": 178848,
+        "places": 821,
+        "times": 1812768,
         "off": 0,
-        "offWithoutCorrections": 52,
+        "offWithoutCorrections": 860,
         "from": "2025-12-31",
         "to": "2027-01-02"
       }
@@ -146,8 +146,8 @@
     "corrections": {
       "from": "2025-12-31",
       "to": "2027-01-02",
-      "entries": 52,
-      "sha256": "a3059fd5aae0b0f8ddee10a2aaaf93e982ded12e652f6aa21d0a3d347a082b41"
+      "entries": 860,
+      "sha256": "edf5bd37ccd06dbcb87300a6c943353adb624a545ff6ea416a8f89715713d7bd"
     },
     "revision": 1
   }

@@ -9,7 +9,10 @@ revision bump is at least a minor version.
 
 ## Unreleased
 
-No method changed; no revision raised.
+- **Türkiye Takvimi: 740 districts.** The calendar's cities for Türkiye's
+  districts join the 81 province centres, each at the point and with the
+  temkin its year shows. Nothing changes for the centres; the revision
+  stays 1.
 
 ## 1.3.1 — 2026-11-11
 

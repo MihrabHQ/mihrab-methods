@@ -34,9 +34,9 @@ each method.
 | **Morocco** | Habous | 164 | 94,350 | **0** | 99.879 % | 114 | 27 Aug 2026 → 30 Nov 2026 |
 | **Algeria** | Ministry of Religious Affairs | 68 | 101,184 | **0** | 99.365 % | 642 | 1 Oct 2026 → 5 Jun 2027 |
 | **Indonesia** | Kemenag | 517 | 362,934 | **0** | 99.935 % | 234 | 7 Oct 2026 → 31 Jan 2027 |
-| **Türkiye Takvimi** | its cities’ years | 81 | 178,848 | **0** | 99.970 % | 52 | 31 Dec 2025 → 2 Jan 2027 |
+| **Türkiye Takvimi** | its cities’ years | 821 | 1,812,768 | **0** | 99.952 % | 860 | 31 Dec 2025 → 2 Jan 2027 |
 
-6 of 6 methods certified; 0 of 73,824,302 times off the printed minute. Last checked 9 November 2026. Generated from [`certification.json`](../certification.json) by `scripts/readme.mjs`.
+6 of 6 methods certified; 0 of 75,458,222 times off the printed minute. Last checked 9 November 2026. Generated from [`certification.json`](../certification.json) by `scripts/readme.mjs`.
 <!-- certification-table:end -->
 
 ## Sweden
@@ -170,15 +170,27 @@ corrections are added in a new list.
 
 ## Türkiye Takvimi
 
-Certified over <!--fig:turkiyetakvimi.span-->31 Dec 2025 → 2 Jan 2027<!--/fig--> (<!--fig:turkiyetakvimi.check0.places-->81<!--/fig-->
-cities — Türkiye's province centres): the method gives <!--fig:turkiyetakvimi.alonePct-->99.970<!--/fig--> %
-alone, and a list of <!--fig:turkiyetakvimi.corrections-->52<!--/fig--> corrections the rest.
+Certified over <!--fig:turkiyetakvimi.span-->31 Dec 2025 → 2 Jan 2027<!--/fig--> (<!--fig:turkiyetakvimi.check0.places-->821<!--/fig-->
+cities — Türkiye's province centres and districts): the method gives <!--fig:turkiyetakvimi.alonePct-->99.952<!--/fig--> %
+alone, and a list of <!--fig:turkiyetakvimi.corrections-->860<!--/fig--> corrections the rest.
 Fajr is the calendar's Sabâh; its İmsâk is not among the six times the
 library gives. Each city is at the point and with the temkin its year
 shows: the calendar's own files give the point only to the arc-minute.
 
+> **Research note, 2026-11-11, the districts** (not generated). For each
+> district Diyanet lists in Türkiye the calendar's city of the same name
+> was looked for within 20 km of it: 833 of 869 have one. Each was fitted
+> to its year (latitude within 0.02° of the calendar's file, then the
+> longitude and the temkin) and taken in when the method alone was off at
+> most six times in the year: 740 were, beside the 81 centres. The 16 left
+> out are all on the northern edge, the Black Sea coast of Kastamonu and
+> Sinop and three districts of Edirne and Kırklareli, off 8–39 times a
+> year; Sinop itself needed a point outside its file's arc-minute, so the
+> calendar does something there that is not read yet. Districts named
+> alike carry their province in the name.
+>
 > **Research note, 2026-11-11** (not generated). The calendar lists about
-> 120,000 cities; this first list is Türkiye's 81 province centres, where
+> 120,000 cities; the first list was Türkiye's 81 province centres, where
 > the method alone is a minute off about once in 3,400 times and never
 > more. Each point and temkin was then searched within 0.03° for the
 > fewest times off (71 → 52). İstanbul keeps ten corrections, all on

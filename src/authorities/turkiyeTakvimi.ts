@@ -1,7 +1,7 @@
 /**
  * Türkiye Takvimi — the calendar's cities, each at the point and with the
- * temkin its published year is computed with. The first list is Türkiye's
- * 81 province centres.
+ * temkin its published year is computed with: Türkiye's province centres
+ * and districts.
  */
 import cities from '../data/generated/turkiyeTakvimiCities.js';
 import corrections from '../data/generated/turkiyetakvimiCorrections.js';
