@@ -16,6 +16,7 @@ revision bump is at least a minor version.
   Nothing changes for the other methods; `certification.json` gains an
   entry and `data/corrections/turkiyetakvimi.json` is new. In every port
   too.
+
 ## 1.2.1 — 2026-11-11
 
 - **Diyanet: 186 more places.** Places Diyanet lists that had not been
