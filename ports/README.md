@@ -23,6 +23,11 @@ place, or say whether a date is inside the certified span. Those are in the
 TypeScript library ([docs/usage.md](../docs/usage.md)); the feed they read
 is described in [docs/feed.md](../docs/feed.md) for a port that wants them.
 
+`npm run port-sample -- <file>` writes a much wider sample (about 25,000
+place-days) in the same shape, for a port's check to take as its last
+argument; the `ports` workflow runs every port against it when started by
+hand.
+
 ## Revisions
 
 Each port names the method revisions it reproduces (`REVISIONS`, or

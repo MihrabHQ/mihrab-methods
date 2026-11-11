@@ -40,3 +40,32 @@ jobs:
       - uses: dart-lang/setup-dart@v1
       - run: dart analyze --fatal-warnings ports/dart
       - run: dart run ports/dart/tool/vector_check.dart .
+
+  # By hand: every port against a wide sample (about 25,000 place-days) the
+  # library writes on the spot. Too large to keep; test/vectors.json is kept.
+  wide:
+    if: github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - uses: dart-lang/setup-dart@v1
+      - run: npm ci
+      - run: npm run port-sample -- /tmp/port-sample.json
+      - name: Python
+        if: always()
+        run: python3 ports/python/test_vectors.py /tmp/port-sample.json | tail -40
+      - name: Kotlin
+        if: always()
+        run: |
+          kotlinc ports/kotlin/src ports/kotlin/test -include-runtime -nowarn -d /tmp/mihrab-methods.jar
+          java -jar /tmp/mihrab-methods.jar . /tmp/port-sample.json | tail -40
+      - name: Dart
+        if: always()
+        run: dart run ports/dart/tool/vector_check.dart . /tmp/port-sample.json | tail -40
+      - name: Swift
+        if: always()
+        run: swift run -c release --package-path ports/swift mihrab-vectors . /tmp/port-sample.json | tail -40

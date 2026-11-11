@@ -94,6 +94,7 @@ npm run corrections   # rewrites Sweden's correction list (`-- diyanet`, `-- mor
 npm run certify       # rewrites certification.json — what may be used
 npm run certify -- morocco   # just those methods; the others keep their entries
 npm run vectors       # rewrites test/vectors.json (after a method revision)
+npm run port-sample -- <file>   # a wide sample in the same shape, for checking a port; not kept
 ```
 
 The reference timetables are not part of this repository; point
