@@ -9,6 +9,10 @@ revision bump is at least a minor version.
 
 ## Unreleased
 
+No method changed; no revision raised.
+
+## 1.13.0 — 2026-11-11
+
 - **Russia's Central Muftiate, revision 1: a fourteenth method.** The
   Central Spiritual Administration of Muslims of Russia's timetables for
   eighteen cities: `mihrab-methods/cdum`, authority `cdum`. Kazakhstan's
