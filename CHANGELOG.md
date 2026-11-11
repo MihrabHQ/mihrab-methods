@@ -9,6 +9,10 @@ revision bump is at least a minor version.
 
 ## Unreleased
 
+No method changed; no revision raised.
+
+## 1.5.0 — 2026-11-11
+
 - **Kazakhstan, revision 1: a seventh method.** The Spiritual
   Administration of Muslims of Kazakhstan's times for 84 cities and towns,
   each at the coordinates the Administration gives it:
