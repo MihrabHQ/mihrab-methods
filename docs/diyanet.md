@@ -43,7 +43,8 @@ npm run corrections && for a in diyanet morocco algeria indonesia; do npm run co
   have it in 2024, 2025 and 2027; Paraguay's keep the summer time the country
   gave up in October 2024 until the end of 2025; Xinjiang's are Beijing time;
   western Brazil's, Armenia's and some of Russia's and Mongolia's are a zone
-  or two away from their own; Alchevsk's are Moscow time with summer time.
+  or two away from their own; Alchevsk's are Moscow time with summer time; Cuba's go back to
+  winter time in November 2026, which Cuba itself put off to November 2027.
   For those the table's clock is read off the table itself (`clock` in
   `data/places/diyanetWorldPoints.json`); the instants are the method's.
 - **The day's clock:** a table prints the whole day in the clock kept at

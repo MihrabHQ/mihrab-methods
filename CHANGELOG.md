@@ -9,6 +9,12 @@ revision bump is at least a minor version.
 
 ## Unreleased
 
+- **Diyanet's tables for Cuba keep the clock they are printed in.** Cuba
+  put its return to winter time off from November 2026 to November 2027;
+  the tables were printed before that. The 14 Cuban places now carry the
+  table's own clock, so the printed times are the table's whichever
+  edition of the time-zone database a machine has. The instants do not
+  change, nor the revision.
 No method changed; no revision raised.
 
 ## 1.3.0 — 2026-11-11
