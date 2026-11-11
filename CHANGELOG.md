@@ -9,6 +9,10 @@ revision bump is at least a minor version.
 
 ## Unreleased
 
+No method changed; no revision raised.
+
+## 1.6.0 — 2026-11-11
+
 - **Egypt, revision 1: an eighth method.** The Egyptian General Authority
   of Survey's times for 77 cities and towns, each at the point its
   published year shows: `mihrab-methods/egypt`, authority `egypt`. Fajr at
