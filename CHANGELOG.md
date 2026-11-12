@@ -9,6 +9,10 @@ revision bump is at least a minor version.
 
 ## Unreleased
 
+No method changed; no revision raised.
+
+## 1.20.0 — 2026-11-12
+
 - **The API answers a point without being told the authority.**
   `/v1/times?lat=&lng=` (and `/v1/nearest`) with no `authority` use the one
   the point belongs to, and say so: `authorityFrom` (`location` or
