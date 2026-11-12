@@ -9,6 +9,10 @@ revision bump is at least a minor version.
 
 ## Unreleased
 
+No method changed; no revision raised.
+
+## 1.21.1 — 2026-11-12
+
 - **Each time says what it stands on.** A `PrayerTime` gains `basis`:
   `table` (inside the certified dates, the method gave the timetable's
   minute unaided), `corrected` (the correction list moved it a minute onto
