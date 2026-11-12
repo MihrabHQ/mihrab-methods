@@ -16,7 +16,6 @@ revision bump is at least a minor version.
   now takes the shadow's length, as every other method does. No listed
   place is south of the equator, so nothing the method prints for Algeria
   changes and its revision stays; in every port.
-No method changed; no revision raised.
 
 No method changed; no revision raised.
 
