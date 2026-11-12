@@ -1,0 +1,15 @@
+{%- comment -%} The documentation's map, in the order a developer meets it. Used by the sidebar and by the small screen's menu. {%- endcomment -%}
+{%- assign sections = "Start|/,Overview|/javascript-prayer-time-library/,JavaScript library|/prayer-time-api/,Prayer time API|/examples/,Examples|/mobile-integration/,Mobile apps|/offline-prayer-time-calculator/,Working offline;Choose|/prayer-time-calculation-methods/,Calculation methods|/verification/,Verification|/compare-adhan-js-aladhan/,Compared with Adhan JS and AlAdhan;Authorities|/diyanet-prayer-time-calculation/,Diyanet|/sweden-prayer-times/,Sweden|/islamiska-forbundet-prayer-times/,Islamiska Förbundet|/diyanet.html,Diyanet worldwide in depth;Reference|/usage.html,Library and API reference|/methods.html,The methods in formulas|/status.html,Where each method stands|/feed.html,Correction feed|/openapi.json,OpenAPI description|/legal.html,Why it can be used freely" | split: ";" -%}
+<nav class="side-nav" aria-label="Documentation">
+{%- for section in sections -%}
+  {%- assign items = section | split: "|" -%}
+  <p class="side-head">{{ items[0] }}</p>
+  <ul>
+  {%- for item in items offset: 1 -%}
+    {%- assign pair = item | split: "," -%}
+    {%- assign href = pair[0] -%}
+    <li><a href="{{ href | relative_url }}"{% if page.url == href %} aria-current="page"{% endif %}>{{ pair[1] }}</a></li>
+  {%- endfor -%}
+  </ul>
+{%- endfor -%}
+</nav>
