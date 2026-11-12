@@ -9,6 +9,10 @@ revision bump is at least a minor version.
 
 ## Unreleased
 
+No method changed; no revision raised.
+
+## 1.21.0 — 2026-11-12
+
 - **The United Kingdom, revision 2: 2026 for nearly every town, and the
   edge of the summer twilight.** Wifaqul Ulama's 2026 timetables are now
   checked for all but two of its towns (they had been for ten), so the
