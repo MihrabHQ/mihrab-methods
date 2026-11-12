@@ -9,6 +9,10 @@ revision bump is at least a minor version.
 
 ## Unreleased
 
+No method changed; no revision raised.
+
+## 1.20.1 — 2026-11-12
+
 - **Algeria south of the equator: Asr takes the noon shadow's length.** The
   Ministry's method signs the noon shadow, which is right in Algeria and
   wrong where the Sun passes north of the zenith: computed for a point
