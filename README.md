@@ -1,4 +1,4 @@
-# mihrab-methods
+# Mihrab Methods – accurate Islamic prayer times for developers
 
 [![npm](https://img.shields.io/npm/v/mihrab-methods)](https://www.npmjs.com/package/mihrab-methods)
 [![PyPI](https://img.shields.io/pypi/v/mihrab-methods)](https://pypi.org/project/mihrab-methods/)
@@ -7,14 +7,41 @@
 [![downloads](https://img.shields.io/npm/dm/mihrab-methods)](#usage)
 [![certification](docs/certification.svg)](#how-verification-works)
 
-**Prayer times that match the published timetable to the printed minute.**
-Each authority's own calculation method — a ministry's, a muftiate's, a
-council of scholars' — worked out again from its published times and
-checked day by day against its timetables: <!--fig:total.off-->0<!--/fig--> of
-<!--fig:total.times-->77,611,133<!--/fig--> times off the printed minute. Free for any app, site or
+**An open-source prayer-time calculation engine for Muslim apps and
+websites.** Unlike generic prayer-time calculators, Mihrab Methods
+reproduces the calculation methods of recognised Islamic authorities — a
+ministry's, a muftiate's, a council of scholars' — and checks every result
+against the timetables they publish: <!--fig:total.off-->0<!--/fig--> of
+<!--fig:total.times-->77,611,133<!--/fig--> times off the printed minute, across
+<!--fig:total.methods-->21<!--/fig--> methods. Free for any app, site or
 mosque to use.
 
+[Installation](#installation) · [Documentation](https://mihrabhq.github.io/mihrab-methods/) · [Supported authorities](#what-is-certified) · [API reference](docs/openapi.json) · [Verification](https://mihrabhq.github.io/mihrab-methods/verification/) · [Examples](https://mihrabhq.github.io/mihrab-methods/examples/)
+
+## Why Mihrab Methods?
+
+- **Authority-specific accuracy.** Prayer times by the method a country's
+  own Islamic authority publishes by — its angles, margins, rounding and
+  high-latitude rules — not a generic preset that lands a few minutes away.
+- **Verified results.** Each method is compared with its authority's
+  published timetable, every place and every day, and is included only at
+  zero times off. [What was tested, and its limits](https://mihrabhq.github.io/mihrab-methods/verification/).
+- **Offline-first.** Times are computed on the device. No network, no key,
+  no account, no runtime dependencies.
+- **Developer-friendly.** A small typed API for TypeScript and JavaScript
+  (Node, browsers, React Native), with ports in Python, Swift, Kotlin and
+  Dart, and an [OpenAPI-described](docs/openapi.json) HTTP API.
+- **Flexible.** Any listed place of any supported authority, either Asr
+  (Shafi'i or Hanafi), and the standard conventions (MWL, ISNA, Egypt,
+  Karachi, Umm al-Qura) where no authority is covered.
+
+**Built for** Muslim prayer apps, Islamic calendar apps, mosque timetable
+screens and software, adhan and prayer notification apps, and Islamic
+lifestyle platforms.
+
 [![Usage, a day: npm downloads, PyPI downloads and API requests](docs/stats.svg)](#usage)
+
+## Installation
 
 ```sh
 npm install mihrab-methods
@@ -31,7 +58,10 @@ day.times!.fajr;     // { instant: Date, printed: 'HH:MM' } — show printed, sc
 day.certifiedUntil;  // the last date checked; past it, status is 'method-only'
 ```
 
-Or over HTTP, with nothing to install: the times at a point, from the
+### Looking for a prayer-time API?
+
+Mihrab Methods can be built into your application, as above, or called
+over HTTP with nothing to install: the times at a point, from the
 authority that publishes for it.
 
 ```
@@ -40,9 +70,12 @@ GET https://mihrab-api.elghamri.se/v1/times?lat=30.04&lng=31.24&date=2026-10-15
 
 Free to call, with no key and nothing logged, and run without a promise of
 availability: an app people rely on should carry the library. The routes
-are described in [docs/openapi.json](docs/openapi.json); the full API, the
-HTTP server and the per-authority imports are in
+are described in [docs/openapi.json](docs/openapi.json) and on the
+[prayer time API page](https://mihrabhq.github.io/mihrab-methods/prayer-time-api/);
+the full library API, the HTTP server and the per-authority imports are in
 [docs/usage.md](docs/usage.md).
+
+### Python, Swift, Kotlin, Dart
 
 In Python the same methods and correction lists are on
 [PyPI](https://pypi.org/project/mihrab-methods/), with nothing beyond the
@@ -61,7 +94,9 @@ times_for(stockholm, '2026-11-12', lists['sweden'])['printed']   # the six times
 ```
 
 Swift, Kotlin and Dart ports are in [ports/](ports/README.md); every port
-is held to the same test vectors as the library on every push.
+is held to the same test vectors as the library on every push. Examples
+for TypeScript, React Native, Flutter, Android and iOS:
+[examples](https://mihrabhq.github.io/mihrab-methods/examples/).
 
 ## What is certified
 
@@ -159,6 +194,7 @@ Counts only, to 2026-11-11, updated weekly (`scripts/stats.mjs`, history in [doc
 
 | | |
 |---|---|
+| [Documentation site](https://mihrabhq.github.io/mihrab-methods/) | Guides: the prayer time API, the JavaScript library, offline use, calculation methods compared, Diyanet, Sweden, verification, examples |
 | [docs/usage.md](docs/usage.md) | The API, the entry points, the HTTP server, this repository's commands and layout |
 | [docs/methods.md](docs/methods.md) | Each method in words and formulas, for ports to other languages; `test/vectors.json` to check one |
 | [ports/](ports/README.md) | The methods in Python ([on PyPI](https://pypi.org/project/mihrab-methods/)), Swift, Kotlin and Dart, each held to `test/vectors.json` |

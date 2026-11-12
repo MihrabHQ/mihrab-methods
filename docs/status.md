@@ -1,7 +1,7 @@
 # Where each method stands
 
 Every figure in the table and in the paragraphs below is generated from
-[`certification.json`](../certification.json) (`node scripts/readme.mjs`),
+[`certification.json`](https://github.com/MihrabHQ/mihrab-methods/blob/main/certification.json) (`node scripts/readme.mjs`),
 except inside the blocks marked **Research note**: those are a dated record
 of the research, kept so nothing is lost, and their counts are not part of
 the certification.
@@ -51,7 +51,7 @@ each method.
 | **United Kingdom (Wifaqul Ulama)** | Wifaqul Ulama’s timetables | 81 | 350,400 | **0** | 98.625 % | 4,641 | 1 Jan 2026 → 31 Dec 2027 |
 | **Tunisia** | the Institute’s times | 26 | 47,405 | **0** | 97.782 % | 1,051 | 1 Jan 2026 → 31 Dec 2026 |
 
-21 of 21 methods certified; 0 of 77,611,133 times off the printed minute. Last checked 12 November 2026. Generated from [`certification.json`](../certification.json) by `scripts/readme.mjs`.
+21 of 21 methods certified; 0 of 77,611,133 times off the printed minute. Last checked 12 November 2026. Generated from [`certification.json`](https://github.com/MihrabHQ/mihrab-methods/blob/main/certification.json) by `scripts/readme.mjs`.
 <!-- certification-table:end -->
 
 ## Sweden

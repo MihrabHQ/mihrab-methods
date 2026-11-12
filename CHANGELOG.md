@@ -9,6 +9,16 @@ revision bump is at least a minor version.
 
 ## Unreleased
 
+- **A documentation site**, built from `docs/` at
+  https://mihrabhq.github.io/mihrab-methods/ : guides for the prayer time
+  API, the JavaScript library, offline use, calculation methods compared,
+  Diyanet, Sweden and Islamiska Förbundet, a verification page (what was
+  compared, the tolerance, the limits, adding an authority), examples for
+  TypeScript, React Native, Flutter, Kotlin, Swift and Python, and an
+  `llms.txt`. The README opens with what the library is for; the package
+  descriptions and keywords on npm and PyPI say the same. The library and
+  the API are as they were.
+
 No method changed; no revision raised.
 
 ## 1.23.0 — 2026-11-12

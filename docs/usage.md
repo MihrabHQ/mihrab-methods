@@ -142,7 +142,7 @@ Node, `api/worker.ts` at the edge.
 `test/vectors.json` is a small sample of places, dates and the times to
 expect — enough to prove a port matches, too small to be a timetable.
 
-[`ports/`](../ports/README.md) has the methods in Python, Swift, Kotlin and
+[`ports/`](https://github.com/MihrabHQ/mihrab-methods/blob/main/ports/README.md) has the methods in Python, Swift, Kotlin and
 Dart, each with no dependencies and each held to that sample on every push.
 
 ## This repository

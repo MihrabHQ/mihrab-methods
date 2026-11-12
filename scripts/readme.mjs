@@ -55,7 +55,7 @@ for (const rel of docs) {
   if (!fs.existsSync(f)) continue;
   let text = fs.readFileSync(f, 'utf8');
   text = fillFigures(text, named, rel);
-  if (text.includes('<!-- certification-table:start -->')) text = fillBlock(text, 'certification-table', table(rel.startsWith('docs/') ? '../' : ''), rel);
+  if (text.includes('<!-- certification-table:start -->')) text = fillBlock(text, 'certification-table', table(rel.startsWith('docs/') ? 'https://github.com/MihrabHQ/mihrab-methods/blob/main/' : ''), rel);
   outputs.set(rel, text);
 }
 outputs.set('docs/certification.svg', badgeSvg(cert));

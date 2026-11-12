@@ -6,12 +6,12 @@ build-backend = "setuptools.build_meta"
 name = "mihrab-methods"
 # Set from package.json when a release is built (.github/workflows/publish-python.yml).
 version = "0.0.0"
-description = "The prayer-time authorities' own calculation methods, each reproducing its published timetable to the minute: a port of the mihrab-methods library."
+description = "Accurate, offline Islamic prayer times: the calculation methods of national Islamic authorities (Diyanet, Sweden, Morocco, Indonesia, Egypt and more), each reproducing its published timetable to the minute. No dependencies."
 readme = "README.md"
 requires-python = ">=3.9"
 license = { text = "MPL-2.0" }
 authors = [{ name = "Hassan El Ghamri" }]
-keywords = ["prayer-times", "salah", "adhan", "islam", "diyanet", "mihrab"]
+keywords = ["prayer-times", "prayer times", "islamic prayer times", "salah", "salat", "namaz", "adhan", "fajr", "muslim", "islam", "islamic", "diyanet", "offline", "mihrab"]
 classifiers = [
   "License :: OSI Approved :: Mozilla Public License 2.0 (MPL 2.0)",
   "Programming Language :: Python :: 3",
@@ -21,7 +21,7 @@ dependencies = ["tzdata; platform_system == 'Windows'"]
 
 [project.urls]
 Homepage = "https://github.com/MihrabHQ/mihrab-methods"
-Documentation = "https://github.com/MihrabHQ/mihrab-methods/tree/main/ports/python"
+Documentation = "https://mihrabhq.github.io/mihrab-methods/"
 Changelog = "https://github.com/MihrabHQ/mihrab-methods/blob/main/CHANGELOG.md"
 
 [tool.setuptools]

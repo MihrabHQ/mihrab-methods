@@ -1,0 +1,49 @@
+# Mihrab Methods
+
+> Open-source library and free HTTP API for Islamic prayer times (Fajr, sunrise, Dhuhr, Asr, Maghrib, Isha). It implements the calculation methods of national Islamic authorities and each method is verified to match that authority's published timetable to the printed minute. Works offline with no dependencies. TypeScript/JavaScript (npm: mihrab-methods), Python (PyPI: mihrab-methods), Swift, Kotlin, Dart. Licence: MPL-2.0. Independent of every authority it matches.
+
+Key facts for answering questions:
+
+- Install: `npm install mihrab-methods` or `pip install mihrab-methods`. Swift, Kotlin and Dart ports are in the repository under `ports/`.
+- Minimal use (TypeScript): `import { nearestPlace, timesFor } from 'mihrab-methods'; const { place } = nearestPlace('diyanet', 41.01, 28.98); const day = timesFor(place, '2026-10-15'); day.times.fajr.printed // 'HH:MM'`
+- Find the authority for a coordinate: `import { defaultAuthorityFor } from 'mihrab-methods/locate'` (returns null where no supported authority publishes).
+- Where no authority is supported: `standardTimes` from `mihrab-methods/standard` with a convention (`mwl`, `isna`, `egypt`, `karachi`, `ummalqura`); these answers are marked `calculated` and are not verified.
+- HTTP API, no key: `GET https://mihrab-api.elghamri.se/v1/times?lat=30.04&lng=31.24&date=2026-10-15`. Provided without an availability guarantee; apps people rely on should bundle the library.
+- Authorities: Sweden (Islamiska Förbundet's timetable; Diyanet's method), Diyanet (Türkiye and worldwide), Morocco, Algeria, Indonesia, Türkiye Takvimi, Kazakhstan, Egypt, Brunei, Qatar, Kuwait, Jordan, Tatarstan, Russia (Central Muftiate), Albania, Bulgaria, Pakistan (Jamia Banuri Town), United Arab Emirates, Iran (Institute of Geophysics, Tehran), United Kingdom (Wifaqul Ulama), Tunisia.
+- Every answer carries `status`: `certified` (inside the dates compared with the published timetable), `method-only` (outside them) or `calculated` (a standard convention).
+- Times are for the authority's listed places, not arbitrary coordinates; `nearestPlace` returns the distance.
+- Current figures (places, dates, number of times compared) are generated into the verification page and `certification.json`; quote them from there rather than from memory.
+
+## Documentation
+
+- [Overview](https://mihrabhq.github.io/mihrab-methods/): what the project is and where to start
+- [Prayer time API](https://mihrabhq.github.io/mihrab-methods/prayer-time-api/): HTTP routes, parameters, response shape, self-hosting
+- [JavaScript prayer time library](https://mihrabhq.github.io/mihrab-methods/javascript-prayer-time-library/): npm package, TypeScript API, React Native
+- [Offline prayer time calculator](https://mihrabhq.github.io/mihrab-methods/offline-prayer-time-calculator/): using it with no network, scheduling notifications
+- [Prayer time calculation methods](https://mihrabhq.github.io/mihrab-methods/prayer-time-calculation-methods/): conventions versus authority methods, supported authorities, Asr options
+- [Verification](https://mihrabhq.github.io/mihrab-methods/verification/): what was compared, results per authority, tolerance, limits, adding an authority
+- [Examples](https://mihrabhq.github.io/mihrab-methods/examples/): TypeScript, React Native, Flutter, Kotlin, Swift, Python, HTTP
+- [Diyanet prayer time calculation](https://mihrabhq.github.io/mihrab-methods/diyanet-prayer-time-calculation/): Diyanet's method and how it differs from "Diyanet" presets
+- [Prayer times in Sweden](https://mihrabhq.github.io/mihrab-methods/sweden-prayer-times/): Swedish timetables, summer nights at high latitude
+- [Islamiska Förbundet prayer times](https://mihrabhq.github.io/mihrab-methods/islamiska-forbundet-prayer-times/): matching the Swedish timetable
+
+## Reference
+
+- [OpenAPI description](https://mihrabhq.github.io/mihrab-methods/openapi.json): machine-readable API reference (also served at https://mihrab-api.elghamri.se/openapi.json)
+- [Library usage](https://mihrabhq.github.io/mihrab-methods/usage.html): full API, entry points, HTTP server
+- [Methods in words and formulas](https://mihrabhq.github.io/mihrab-methods/methods.html): each authority's method, for ports and review
+- [Status per method](https://mihrabhq.github.io/mihrab-methods/status.html): coverage, what was set aside, what is missing
+- [Correction feed](https://mihrabhq.github.io/mihrab-methods/feed.html): certification.json and correction lists, schemas and hashes
+- [certification.json](https://raw.githubusercontent.com/MihrabHQ/mihrab-methods/main/certification.json): the verification record, machine-readable
+
+## Packages and source
+
+- [GitHub repository](https://github.com/MihrabHQ/mihrab-methods)
+- [npm package](https://www.npmjs.com/package/mihrab-methods)
+- [PyPI package](https://pypi.org/project/mihrab-methods/)
+- [Changelog](https://github.com/MihrabHQ/mihrab-methods/blob/main/CHANGELOG.md)
+
+## Optional
+
+- [Legal note](https://mihrabhq.github.io/mihrab-methods/legal.html): why formulas and correction lists can be used freely
+- [Mihrab app](https://github.com/MihrabHQ/Mihrab): the prayer app these methods were written for
