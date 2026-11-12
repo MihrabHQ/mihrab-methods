@@ -26,9 +26,12 @@ test('the library: revisions, entry points, the package’s exports', () => {
   assert.deepEqual(Object.keys(METHOD_REVISION).sort(), [...ids].sort());
   const pkg = JSON.parse(read('package.json'));
   const index = read('src/index.ts');
+  const authorityFiles = fs.readdirSync(path.join(ROOT, 'src/authorities')).map(f => f.toLowerCase());
+  const entryFiles = fs.readdirSync(path.join(ROOT, 'src'));
   for (const a of ids) {
-    assert.ok(fs.existsSync(path.join(ROOT, `src/${a}.ts`)), `src/${a}.ts`);
-    assert.ok(fs.existsSync(path.join(ROOT, `src/authorities/${a}.ts`)), `src/authorities/${a}.ts`);
+    assert.ok(entryFiles.includes(`${a}.ts`), `src/${a}.ts`);
+    // by the directory's own listing, whatever the case of the file's name (turkiyeTakvimi.ts): a Mac's disk does not tell the two apart, a Linux one does
+    assert.ok(authorityFiles.includes(`${a}.ts`), `src/authorities/${a}.ts`);
     // Türkiye Takvimi is loaded by its own entry only (`mihrab-methods/turkiyetakvimi`), as it was written.
     if (a !== 'turkiyetakvimi') assert.ok(index.includes(`import './authorities/${a}.js';`), `src/index.ts imports ${a}`);
     assert.ok(pkg.exports[`./${a}`], `package.json exports ./${a}`);
