@@ -9,6 +9,16 @@ revision bump is at least a minor version.
 
 ## Unreleased
 
+- **`mihrab-methods/standard`: a calculated day where no authority
+  answers.** `standardTimes({ lat, lon, date, tz, convention?, asr? })` gives
+  the plain astronomical calculation by a named convention (`mwl`, `isna`,
+  `egypt`, `karachi`, `ummalqura`) for any point, with `status:
+  'calculated'` — never certified, held to no timetable. The time zone is
+  the caller's to give. In the HTTP API, `/v1/times` takes
+  `fallback=standard&tz=…` (and `convention=`): a point no authority here
+  publishes for is then answered with that day instead of 404; every other
+  answer is as it was.
+
 No method changed; no revision raised.
 
 ## 1.22.1 — 2026-11-12

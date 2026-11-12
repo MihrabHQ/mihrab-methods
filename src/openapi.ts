@@ -6,6 +6,7 @@
  * description served at /openapi.json and kept in docs/openapi.json.
  */
 import { AUTHORITIES } from './core/types.js';
+import { STANDARD_CONVENTION_IDS } from './standard.js';
 
 /** Where the public API answers. */
 export const API_URL = 'https://mihrab-api.elghamri.se';
@@ -65,6 +66,9 @@ export const ROUTE_SPECS = [
       { name: 'to', description: 'Last date of the range, inclusive.', schema: day },
       { name: 'asr', description: 'Which Asr: `printed` (the default) is the one the authority’s timetable prints; `shafii` (one shadow length) or `hanafi` (two) ask by name. `1` and `2` are the older spellings of `printed` and `hanafi`. The answer’s `asrShadow` says which came back.', schema: { type: 'string', enum: ['printed', 'shafii', 'hanafi', '1', '2'] } },
       { name: 'strict', description: '1 to refuse a date outside the certified span (422) instead of answering `method-only`.', schema: { type: 'string', enum: ['1'] } },
+      { name: 'fallback', description: '`standard`: for a point no authority here publishes for (and no authority named), answer with a calculated day — `status: calculated`, no timetable behind it — instead of 404. Needs `tz`.', schema: { type: 'string', enum: ['standard'] } },
+      { name: 'tz', description: 'With `fallback=standard`: the IANA time zone the calculated times are printed in (the API has no map of zones).', schema: { type: 'string' } },
+      { name: 'convention', description: 'With `fallback=standard`: the convention to calculate by. Left out: the one commonly used for the point’s country where that is known, else `mwl`.', schema: { type: 'string', enum: [...STANDARD_CONVENTION_IDS] } },
     ],
     example: '/v1/times?lat=36.75&lng=3.06&date=2026-10-15',
     answers: 'Times',
@@ -112,7 +116,25 @@ const SCHEMAS: Record<string, unknown> = {
     basis: { type: 'string', enum: ['table', 'corrected', 'method', 'unchecked'], description: 'What the time stands on. `table`: inside the certified span, the method gave the timetable’s minute unaided. `corrected`: the correction list moved it a minute onto the timetable’s minute. `method`: the method alone, the date being outside the certified span. `unchecked`: the method alone, and no column was checked for this time (the Asr the timetable does not print, or a time it does not print at all).' },
   }),
   DayTimes: dayTimes,
-  Times: { oneOf: [{ allOf: [object(found, ['place', 'authorityFrom']), ref('DayTimes')] }, object({ ...found, days: { type: 'array', items: ref('DayTimes') } }, ['place', 'authorityFrom', 'days'])] },
+  StandardTime: object({ instant: { type: 'string', format: 'date-time' }, printed: { type: 'string', pattern: '^\\d\\d:\\d\\d$', description: 'The wall-clock minute in the zone given.' } }),
+  StandardDayTimes: object({
+    status: { type: 'string', enum: ['calculated'], description: 'Always `calculated`: the plain astronomical calculation by a convention; no authority’s timetable stands behind it.' },
+    convention: { type: 'string', enum: [...STANDARD_CONVENTION_IDS] },
+    date: day,
+    lat: numb,
+    lon: numb,
+    clock: object({ zone: nullable(str), offsetMinutes: { type: 'integer' }, label: str }),
+    asrShadow: { type: 'integer', enum: [1, 2] },
+    times: nullable(object(Object.fromEntries(['fajr', 'sunrise', 'dhuhr', 'asr', 'maghrib', 'isha'].map(k => [k, ref('StandardTime')])))),
+  }),
+  StandardTimes: {
+    description: 'The answer to `fallback=standard` where no authority publishes for the point.',
+    oneOf: [
+      { allOf: [object({ place: { type: 'null' }, country: nullable(str), authorityFrom: { type: 'string', enum: ['none'] }, fallback: { type: 'string', enum: ['standard'] } }), ref('StandardDayTimes')] },
+      object({ place: { type: 'null' }, country: nullable(str), authorityFrom: { type: 'string', enum: ['none'] }, fallback: { type: 'string', enum: ['standard'] }, days: { type: 'array', items: ref('StandardDayTimes') } }),
+    ],
+  },
+  Times: { oneOf: [ref('StandardTimes'), { allOf: [object(found, ['place', 'authorityFrom']), ref('DayTimes')] }, object({ ...found, days: { type: 'array', items: ref('DayTimes') } }, ['place', 'authorityFrom', 'days'])] },
   Nearest: object(found, ['place', 'distanceKm', 'authorityFrom']),
   AuthorityAt: object({ country: nullable({ type: 'string', description: 'ISO 3166-1 alpha-2, among the countries with a method here and their neighbours.' }), authority: nullable({ type: 'string', enum: [...AUTHORITIES] }), place: nullable(ref('Place')), distanceKm: nullable(numb) }),
   Places: { type: 'array', items: ref('Place') },

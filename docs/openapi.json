@@ -424,6 +424,43 @@
                 "1"
               ]
             }
+          },
+          {
+            "name": "fallback",
+            "in": "query",
+            "required": false,
+            "description": "`standard`: for a point no authority here publishes for (and no authority named), answer with a calculated day — `status: calculated`, no timetable behind it — instead of 404. Needs `tz`.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "standard"
+              ]
+            }
+          },
+          {
+            "name": "tz",
+            "in": "query",
+            "required": false,
+            "description": "With `fallback=standard`: the IANA time zone the calculated times are printed in (the API has no map of zones).",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "convention",
+            "in": "query",
+            "required": false,
+            "description": "With `fallback=standard`: the convention to calculate by. Left out: the one commonly used for the point’s country where that is known, else `mwl`.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "mwl",
+                "isna",
+                "egypt",
+                "karachi",
+                "ummalqura"
+              ]
+            }
           }
         ],
         "responses": {
@@ -692,8 +729,233 @@
           "times"
         ]
       },
+      "StandardTime": {
+        "type": "object",
+        "properties": {
+          "instant": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "printed": {
+            "type": "string",
+            "pattern": "^\\d\\d:\\d\\d$",
+            "description": "The wall-clock minute in the zone given."
+          }
+        },
+        "required": [
+          "instant",
+          "printed"
+        ]
+      },
+      "StandardDayTimes": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string",
+            "enum": [
+              "calculated"
+            ],
+            "description": "Always `calculated`: the plain astronomical calculation by a convention; no authority’s timetable stands behind it."
+          },
+          "convention": {
+            "type": "string",
+            "enum": [
+              "mwl",
+              "isna",
+              "egypt",
+              "karachi",
+              "ummalqura"
+            ]
+          },
+          "date": {
+            "type": "string",
+            "format": "date"
+          },
+          "lat": {
+            "type": "number"
+          },
+          "lon": {
+            "type": "number"
+          },
+          "clock": {
+            "type": "object",
+            "properties": {
+              "zone": {
+                "anyOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              },
+              "offsetMinutes": {
+                "type": "integer"
+              },
+              "label": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "zone",
+              "offsetMinutes",
+              "label"
+            ]
+          },
+          "asrShadow": {
+            "type": "integer",
+            "enum": [
+              1,
+              2
+            ]
+          },
+          "times": {
+            "anyOf": [
+              {
+                "type": "object",
+                "properties": {
+                  "fajr": {
+                    "$ref": "#/components/schemas/StandardTime"
+                  },
+                  "sunrise": {
+                    "$ref": "#/components/schemas/StandardTime"
+                  },
+                  "dhuhr": {
+                    "$ref": "#/components/schemas/StandardTime"
+                  },
+                  "asr": {
+                    "$ref": "#/components/schemas/StandardTime"
+                  },
+                  "maghrib": {
+                    "$ref": "#/components/schemas/StandardTime"
+                  },
+                  "isha": {
+                    "$ref": "#/components/schemas/StandardTime"
+                  }
+                },
+                "required": [
+                  "fajr",
+                  "sunrise",
+                  "dhuhr",
+                  "asr",
+                  "maghrib",
+                  "isha"
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "required": [
+          "status",
+          "convention",
+          "date",
+          "lat",
+          "lon",
+          "clock",
+          "asrShadow",
+          "times"
+        ]
+      },
+      "StandardTimes": {
+        "description": "The answer to `fallback=standard` where no authority publishes for the point.",
+        "oneOf": [
+          {
+            "allOf": [
+              {
+                "type": "object",
+                "properties": {
+                  "place": {
+                    "type": "null"
+                  },
+                  "country": {
+                    "anyOf": [
+                      {
+                        "type": "string"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "authorityFrom": {
+                    "type": "string",
+                    "enum": [
+                      "none"
+                    ]
+                  },
+                  "fallback": {
+                    "type": "string",
+                    "enum": [
+                      "standard"
+                    ]
+                  }
+                },
+                "required": [
+                  "place",
+                  "country",
+                  "authorityFrom",
+                  "fallback"
+                ]
+              },
+              {
+                "$ref": "#/components/schemas/StandardDayTimes"
+              }
+            ]
+          },
+          {
+            "type": "object",
+            "properties": {
+              "place": {
+                "type": "null"
+              },
+              "country": {
+                "anyOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              },
+              "authorityFrom": {
+                "type": "string",
+                "enum": [
+                  "none"
+                ]
+              },
+              "fallback": {
+                "type": "string",
+                "enum": [
+                  "standard"
+                ]
+              },
+              "days": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/StandardDayTimes"
+                }
+              }
+            },
+            "required": [
+              "place",
+              "country",
+              "authorityFrom",
+              "fallback",
+              "days"
+            ]
+          }
+        ]
+      },
       "Times": {
         "oneOf": [
+          {
+            "$ref": "#/components/schemas/StandardTimes"
+          },
           {
             "allOf": [
               {

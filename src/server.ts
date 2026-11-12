@@ -16,11 +16,15 @@
  *
  * Options on /v1/times: asr=shafii or asr=hanafi for an Asr by name (the default is
  * the one the timetable prints; asr=2 still means hanafi); strict=1 to refuse a date
- * outside the certified span (HTTP 422) instead of answering 'method-only'.
+ * outside the certified span (HTTP 422) instead of answering 'method-only';
+ * fallback=standard with tz=<IANA zone> (and optionally convention=) to get a
+ * calculated day — status 'calculated', mihrab-methods/standard — for a point no
+ * authority here publishes for, instead of a 404.
  */
 import { AUTHORITIES, methodInfo, nearestPlace, placeById, placesOf, timesFor, timesForRange, UncertifiedMethodError, type AsrChoice, type Authority, type Place } from './index.js';
 import { countryAt, defaultAuthorityFor } from './locate.js';
 import { openapi, ROUTES, type RoutePath } from './openapi.js';
+import { STANDARD_CONVENTION_IDS, standardConventionFor, standardTimes, type StandardConvention } from './standard.js';
 
 export class HttpError extends Error {
   constructor(
@@ -65,6 +69,32 @@ const find = (q: URLSearchParams): Found => {
 const brief = (p: Place) => ({ id: p.id, name: p.name, country: p.country, lat: p.lat, lon: p.lon, tz: p.tz });
 const said = (f: Found) => ({ place: brief(f.place), ...(f.distanceKm === undefined ? {} : { distanceKm: f.distanceKm }), authorityFrom: f.authorityFrom });
 
+/** The standard calculation for a request's point (`fallback=standard`): a day, or a range of them. The zone is the caller's. */
+const calculated = (q: URLSearchParams, asr: 'shafii' | 'hanafi') => {
+  const lat = num(q, 'lat'),
+    lon = num(q, 'lng');
+  const tz = q.get('tz');
+  if (!tz) throw new HttpError(400, 'tz: with fallback=standard the IANA time zone the times are printed in is needed, e.g. tz=Europe/Paris');
+  const named = q.get('convention');
+  if (named !== null && !(STANDARD_CONVENTION_IDS as string[]).includes(named)) throw new HttpError(400, `convention: one of ${STANDARD_CONVENTION_IDS.join(', ')}`);
+  const country = countryAt(lat, lon);
+  const convention = (named as StandardConvention | null) ?? standardConventionFor(country);
+  const one = (date: string) => standardTimes({ lat, lon, date, tz, convention, asr });
+  const head = { place: null, country, authorityFrom: 'none' as const, fallback: 'standard' as const };
+  const from = q.get('from'),
+    to = q.get('to');
+  if (from && to) {
+    const a = Date.parse(`${from}T00:00:00Z`),
+      b = Date.parse(`${to}T00:00:00Z`);
+    if (!Number.isFinite(a) || !Number.isFinite(b) || b < a) throw new HttpError(400, 'from, to: two dates, the first not after the second');
+    if ((b - a) / 86_400_000 > 366) throw new HttpError(400, 'from, to: at most 367 days');
+    const days = [];
+    for (let t = a; t <= b; t += 86_400_000) days.push(one(new Date(t).toISOString().slice(0, 10)));
+    return { ...head, days };
+  }
+  return { ...head, ...one(q.get('date') ?? new Date().toISOString().slice(0, 10)) };
+};
+
 const HANDLERS: Record<RoutePath, (q: URLSearchParams) => unknown> = {
   '/': () => ({
     name: 'mihrab-methods',
@@ -94,9 +124,18 @@ const HANDLERS: Record<RoutePath, (q: URLSearchParams) => unknown> = {
     return { country: countryAt(lat, lng), authority, place: near ? brief(near.place) : null, distanceKm: near ? km(near.distanceKm) : null };
   },
   '/v1/times': q => {
-    const f = find(q);
     const asked = q.get('asr');
     if (asked !== null && !['1', '2', 'printed', 'shafii', 'hanafi'].includes(asked)) throw new HttpError(400, 'asr: printed, shafii or hanafi');
+    const fallback = q.get('fallback');
+    if (fallback !== null && fallback !== 'standard') throw new HttpError(400, 'fallback: standard');
+    let f: Found;
+    try {
+      f = find(q);
+    } catch (e) {
+      // A point no authority here publishes for, and the caller asked for a calculated day instead of a 404.
+      if (!(fallback && e instanceof HttpError && e.status === 404 && !q.get('place') && q.get('authority') === null)) throw e;
+      return calculated(q, asked === '2' || asked === 'hanafi' ? 'hanafi' : 'shafii');
+    }
     const opts = { asr: asked === '2' ? ('hanafi' as const) : asked === null || asked === '1' ? ('printed' as const) : (asked as AsrChoice), strict: q.get('strict') === '1' };
     const from = q.get('from'),
       to = q.get('to');

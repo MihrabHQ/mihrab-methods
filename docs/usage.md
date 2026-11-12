@@ -14,6 +14,7 @@ an Indonesian app does not carry Diyanet's worldwide points:
 | `mihrab-methods` | all of them |
 | `mihrab-methods/sweden`, `/diyanet`, `/morocco`, `/algeria`, `/indonesia`, `/turkiyetakvimi`, `/kazakhstan`, `/egypt`, `/brunei`, `/qatar`, `/kuwait`, `/jordan`, `/tatarstan`, `/cdum`, `/albania`, `/bulgaria`, `/banuri`, `/uae`, `/tehran`, `/wifaq`, `/tunisia` | one authority: its places, list and certification |
 | `mihrab-methods/locate` | `countryAt`, `defaultAuthorityFor` — the country at a point, and the authority whose table it prays by (the country outlines, kept apart because most apps already know their country) |
+| `mihrab-methods/standard` | `standardTimes` — a calculated day by a named convention for a point no authority here publishes for; `status: 'calculated'`, never certified |
 | `mihrab-methods/core` | the calls and types with no data (load authorities yourself) |
 
 CommonJS and ES modules, with types. Node 18+, or any bundler; nothing is
@@ -62,6 +63,28 @@ table's own clock where it keeps one no zone does (Morocco's GMT+1 until
 September 2026; some of Diyanet's). An app shows `printed` and schedules
 on `instant`; nothing needs rounding or converting.
 
+### Where no authority answers: `mihrab-methods/standard`
+
+For a point none of these authorities publishes for, an app that must
+show something can ask for a **calculated** day — the plain astronomical
+calculation by a well-known convention, not an authority's method, and
+held to nobody's timetable:
+
+```ts
+import { standardTimes } from 'mihrab-methods/standard';
+
+standardTimes({ lat: 48.86, lon: 2.35, date: '2026-10-15', tz: 'Europe/Paris' });
+// { status: 'calculated', convention: 'mwl', clock, asrShadow: 1, times: { fajr: { instant, printed }, … } }
+```
+
+`tz` is required: the library has no map of the world's zones, so the
+IANA zone the times are printed in is the caller's to give. `convention`
+is `mwl` (the default), `isna`, `egypt`, `karachi` or `ummalqura`
+(`STANDARD_CONVENTIONS` has their angles); `asr: 'hanafi'` gives two
+shadow lengths. The answer's `status` is always `calculated`, so it cannot
+be mistaken for a certified day. There are no margins and no high-latitude
+rule: where a twilight does not form the day's `times` is `null`.
+
 ## As an HTTP API
 
 ```
@@ -101,6 +124,11 @@ point's own; `maxKm=` refuses beyond a distance) and how the authority was
 chosen (`authorityFrom`: `location` or `request`). Where no authority here
 publishes for the point the answer is 404, not another country's method:
 name one with `authority=` to ask for it anyway.
+Or add `fallback=standard&tz=<IANA zone>` (and
+optionally `convention=`): such a point is then answered with the
+calculated day above — `status: calculated`, `fallback: standard`,
+`place: null` — instead of 404. A point an authority does publish for is
+answered by its method as always.
 
 `GET /` lists the routes and each method's revision and certification, and
 [`/openapi.json`](openapi.json) describes them (OpenAPI 3.1, written from
@@ -146,7 +174,7 @@ nothing.
 | `src/sun/preciseSun.ts` | VSOP87 apparent sun, after Astronomy Engine: within about 0.05 s and 0.5″ of JPL's DE421 |
 | `src/core/` | The calls (`api.ts`), the computation they share (`compute.ts`), dates, clocks, the correction-list index, `fetchLatestCorrections` |
 | `src/authorities/` | Each authority's places, at the point (and Morocco's horizon) its method is computed at, with its description |
-| `src/index.ts`, `src/<authority>.ts`, `src/locate.ts`, `src/core.ts` | The package's entry points |
+| `src/index.ts`, `src/<authority>.ts`, `src/locate.ts`, `src/standard.ts`, `src/core.ts` | The package's entry points |
 | `data/places/`, `data/corrections/`, `data/locate/` | The place lists and fitted points, the correction lists, the country outlines — embedded into the code by `scripts/embed.mjs` at build time |
 | `certification.json`, `schemas/` | The 100 % gate's record, and the schemas of the files apps read |
 | `tools/verify.ts`, `tools/certify.ts`, `tools/corrections.ts` | The day-by-day check against the timetables; the certification; the correction lists |

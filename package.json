@@ -323,6 +323,16 @@
         "default": "./dist/cjs/locate.js"
       }
     },
+    "./standard": {
+      "import": {
+        "types": "./dist/esm/standard.d.ts",
+        "default": "./dist/esm/standard.js"
+      },
+      "require": {
+        "types": "./dist/cjs/standard.d.ts",
+        "default": "./dist/cjs/standard.js"
+      }
+    },
     "./certification.json": "./certification.json",
     "./data/corrections/*.json": "./data/corrections/*.json",
     "./schemas/*.json": "./schemas/*.json",
@@ -398,6 +408,9 @@
       ],
       "locate": [
         "./dist/cjs/locate.d.ts"
+      ],
+      "standard": [
+        "./dist/cjs/standard.d.ts"
       ]
     }
   },
