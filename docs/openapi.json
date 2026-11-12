@@ -1,0 +1,878 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "mihrab-methods",
+    "version": "1",
+    "description": "The prayer-time authorities’ own calculation methods, each reproducing its published timetable to the minute. Read-only, no key, nothing logged or stored; answers may be kept for an hour. It is run without a promise of availability: an app that depends on these times should carry the library (npm, PyPI) rather than call this for every reader.",
+    "license": {
+      "name": "MPL-2.0",
+      "identifier": "MPL-2.0"
+    }
+  },
+  "externalDocs": {
+    "url": "https://github.com/MihrabHQ/mihrab-methods#readme"
+  },
+  "servers": [
+    {
+      "url": "https://mihrab-api.elghamri.se"
+    }
+  ],
+  "paths": {
+    "/": {
+      "get": {
+        "summary": "The routes, and each method’s certification",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "For example /",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Index"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/openapi.json": {
+      "get": {
+        "summary": "This description",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "For example /openapi.json",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OpenApi"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/methods": {
+      "get": {
+        "summary": "Every method: its parameters, revision, certification, correction list and sources",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "For example /v1/methods",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Methods"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/places": {
+      "get": {
+        "summary": "An authority’s places",
+        "parameters": [
+          {
+            "name": "authority",
+            "in": "query",
+            "required": true,
+            "description": "Whose places.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "sweden",
+                "diyanet",
+                "morocco",
+                "algeria",
+                "indonesia",
+                "turkiyetakvimi",
+                "kazakhstan",
+                "egypt",
+                "brunei",
+                "qatar",
+                "kuwait",
+                "jordan",
+                "tatarstan",
+                "cdum",
+                "albania",
+                "bulgaria",
+                "banuri",
+                "uae",
+                "tehran",
+                "wifaq"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "For example /v1/places?authority=algeria",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Places"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "A parameter is missing or not what it should be.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/authority": {
+      "get": {
+        "summary": "The authority whose timetable a point’s community prays by",
+        "description": "The country at the point, the authority that publishes for it (null where none here does) and that authority’s nearest place.",
+        "parameters": [
+          {
+            "name": "lat",
+            "in": "query",
+            "required": true,
+            "description": "Latitude, degrees north.",
+            "schema": {
+              "type": "number",
+              "minimum": -90,
+              "maximum": 90
+            }
+          },
+          {
+            "name": "lng",
+            "in": "query",
+            "required": true,
+            "description": "Longitude, degrees east.",
+            "schema": {
+              "type": "number",
+              "minimum": -180,
+              "maximum": 180
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "For example /v1/authority?lat=36.75&lng=3.06",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AuthorityAt"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "A parameter is missing or not what it should be.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/nearest": {
+      "get": {
+        "summary": "The place nearest a point",
+        "description": "Among the named authority’s places, or, with no authority named, among those of the authority the point belongs to.",
+        "parameters": [
+          {
+            "name": "authority",
+            "in": "query",
+            "required": false,
+            "description": "Whose places. Left out: the authority the point belongs to, as /v1/authority answers.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "sweden",
+                "diyanet",
+                "morocco",
+                "algeria",
+                "indonesia",
+                "turkiyetakvimi",
+                "kazakhstan",
+                "egypt",
+                "brunei",
+                "qatar",
+                "kuwait",
+                "jordan",
+                "tatarstan",
+                "cdum",
+                "albania",
+                "bulgaria",
+                "banuri",
+                "uae",
+                "tehran",
+                "wifaq"
+              ]
+            }
+          },
+          {
+            "name": "lat",
+            "in": "query",
+            "required": true,
+            "description": "Latitude, degrees north.",
+            "schema": {
+              "type": "number",
+              "minimum": -90,
+              "maximum": 90
+            }
+          },
+          {
+            "name": "lng",
+            "in": "query",
+            "required": true,
+            "description": "Longitude, degrees east.",
+            "schema": {
+              "type": "number",
+              "minimum": -180,
+              "maximum": 180
+            }
+          },
+          {
+            "name": "maxKm",
+            "in": "query",
+            "required": false,
+            "description": "Answer 404 when the nearest place is farther than this.",
+            "schema": {
+              "type": "number",
+              "exclusiveMinimum": 0
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "For example /v1/nearest?lat=36.75&lng=3.06",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Nearest"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "A parameter is missing or not what it should be.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "No such place, or no place there.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/times": {
+      "get": {
+        "summary": "A place’s prayer times on a date, or on every date of a range",
+        "description": "Name the place by its id, or give a point: the times are those of the nearest place of the named authority, or, with no authority named, of the authority the point belongs to (404 where none here publishes for it). The answer says which place it is and how far away, and `status` says whether the date is inside the span the method was checked over (`certified`) or the method alone (`method-only`). With `from` and `to` the answer is `{ place, days }`.",
+        "parameters": [
+          {
+            "name": "place",
+            "in": "query",
+            "required": false,
+            "description": "A place id, as /v1/places lists them (`algeria:27`). Given: authority, lat and lng are not read.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "authority",
+            "in": "query",
+            "required": false,
+            "description": "Whose timetable. Left out: the authority the point belongs to.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "sweden",
+                "diyanet",
+                "morocco",
+                "algeria",
+                "indonesia",
+                "turkiyetakvimi",
+                "kazakhstan",
+                "egypt",
+                "brunei",
+                "qatar",
+                "kuwait",
+                "jordan",
+                "tatarstan",
+                "cdum",
+                "albania",
+                "bulgaria",
+                "banuri",
+                "uae",
+                "tehran",
+                "wifaq"
+              ]
+            }
+          },
+          {
+            "name": "lat",
+            "in": "query",
+            "required": false,
+            "description": "Latitude, degrees north.",
+            "schema": {
+              "type": "number",
+              "minimum": -90,
+              "maximum": 90
+            }
+          },
+          {
+            "name": "lng",
+            "in": "query",
+            "required": false,
+            "description": "Longitude, degrees east.",
+            "schema": {
+              "type": "number",
+              "minimum": -180,
+              "maximum": 180
+            }
+          },
+          {
+            "name": "maxKm",
+            "in": "query",
+            "required": false,
+            "description": "With a point: answer 404 when the nearest place is farther than this.",
+            "schema": {
+              "type": "number",
+              "exclusiveMinimum": 0
+            }
+          },
+          {
+            "name": "date",
+            "in": "query",
+            "required": false,
+            "description": "The civil date at the place. Left out: today (UTC).",
+            "schema": {
+              "type": "string",
+              "format": "date"
+            }
+          },
+          {
+            "name": "from",
+            "in": "query",
+            "required": false,
+            "description": "First date of a range (with `to`).",
+            "schema": {
+              "type": "string",
+              "format": "date"
+            }
+          },
+          {
+            "name": "to",
+            "in": "query",
+            "required": false,
+            "description": "Last date of the range, inclusive.",
+            "schema": {
+              "type": "string",
+              "format": "date"
+            }
+          },
+          {
+            "name": "asr",
+            "in": "query",
+            "required": false,
+            "description": "2 for the Hanafi Asr (a shadow of twice the length).",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "1",
+                "2"
+              ]
+            }
+          },
+          {
+            "name": "strict",
+            "in": "query",
+            "required": false,
+            "description": "1 to refuse a date outside the certified span (422) instead of answering `method-only`.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "1"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "For example /v1/times?lat=36.75&lng=3.06&date=2026-10-15",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Times"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "A parameter is missing or not what it should be.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "No such place, or no place there.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "The date is outside the certified span, and strict=1 was asked.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Place": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "country": {
+            "type": "string",
+            "description": "ISO 3166-1 alpha-2."
+          },
+          "lat": {
+            "type": "number"
+          },
+          "lon": {
+            "type": "number"
+          },
+          "tz": {
+            "type": "string",
+            "description": "IANA time zone."
+          }
+        },
+        "required": [
+          "id",
+          "name",
+          "country",
+          "lat",
+          "lon",
+          "tz"
+        ]
+      },
+      "PrayerTime": {
+        "type": "object",
+        "properties": {
+          "instant": {
+            "type": "string",
+            "format": "date-time",
+            "description": "The exact moment."
+          },
+          "printed": {
+            "type": "string",
+            "pattern": "^\\d\\d:\\d\\d$",
+            "description": "The wall-clock minute on the timetable’s clock."
+          }
+        },
+        "required": [
+          "instant",
+          "printed"
+        ]
+      },
+      "DayTimes": {
+        "type": "object",
+        "properties": {
+          "authority": {
+            "type": "string",
+            "enum": [
+              "sweden",
+              "diyanet",
+              "morocco",
+              "algeria",
+              "indonesia",
+              "turkiyetakvimi",
+              "kazakhstan",
+              "egypt",
+              "brunei",
+              "qatar",
+              "kuwait",
+              "jordan",
+              "tatarstan",
+              "cdum",
+              "albania",
+              "bulgaria",
+              "banuri",
+              "uae",
+              "tehran",
+              "wifaq"
+            ]
+          },
+          "placeId": {
+            "type": "string"
+          },
+          "date": {
+            "type": "string",
+            "format": "date"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "certified",
+              "method-only"
+            ],
+            "description": "`certified`: inside the dates the method was checked against the authority’s timetable. `method-only`: outside them, the method alone."
+          },
+          "certifiedFrom": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "certifiedUntil": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "revision": {
+            "type": "integer",
+            "description": "The method’s revision: it rises when what the method prints changes."
+          },
+          "clock": {
+            "type": "object",
+            "properties": {
+              "zone": {
+                "anyOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              },
+              "offsetMinutes": {
+                "type": "integer"
+              },
+              "label": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "zone",
+              "offsetMinutes",
+              "label"
+            ]
+          },
+          "times": {
+            "anyOf": [
+              {
+                "type": "object",
+                "properties": {
+                  "fajr": {
+                    "$ref": "#/components/schemas/PrayerTime"
+                  },
+                  "sunrise": {
+                    "$ref": "#/components/schemas/PrayerTime"
+                  },
+                  "dhuhr": {
+                    "$ref": "#/components/schemas/PrayerTime"
+                  },
+                  "asr": {
+                    "$ref": "#/components/schemas/PrayerTime"
+                  },
+                  "maghrib": {
+                    "$ref": "#/components/schemas/PrayerTime"
+                  },
+                  "isha": {
+                    "$ref": "#/components/schemas/PrayerTime"
+                  }
+                },
+                "required": [
+                  "fajr",
+                  "sunrise",
+                  "dhuhr",
+                  "asr",
+                  "maghrib",
+                  "isha"
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "required": [
+          "authority",
+          "placeId",
+          "date",
+          "status",
+          "certifiedFrom",
+          "certifiedUntil",
+          "revision",
+          "clock",
+          "times"
+        ]
+      },
+      "Times": {
+        "oneOf": [
+          {
+            "allOf": [
+              {
+                "type": "object",
+                "properties": {
+                  "place": {
+                    "$ref": "#/components/schemas/Place"
+                  },
+                  "distanceKm": {
+                    "type": "number",
+                    "description": "From the point asked about to the place’s own point; absent when the place was named by id."
+                  },
+                  "authorityFrom": {
+                    "type": "string",
+                    "enum": [
+                      "request",
+                      "location"
+                    ],
+                    "description": "`location`: no authority was named, and the point’s own was used."
+                  }
+                },
+                "required": [
+                  "place",
+                  "authorityFrom"
+                ]
+              },
+              {
+                "$ref": "#/components/schemas/DayTimes"
+              }
+            ]
+          },
+          {
+            "type": "object",
+            "properties": {
+              "place": {
+                "$ref": "#/components/schemas/Place"
+              },
+              "distanceKm": {
+                "type": "number",
+                "description": "From the point asked about to the place’s own point; absent when the place was named by id."
+              },
+              "authorityFrom": {
+                "type": "string",
+                "enum": [
+                  "request",
+                  "location"
+                ],
+                "description": "`location`: no authority was named, and the point’s own was used."
+              },
+              "days": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/DayTimes"
+                }
+              }
+            },
+            "required": [
+              "place",
+              "authorityFrom",
+              "days"
+            ]
+          }
+        ]
+      },
+      "Nearest": {
+        "type": "object",
+        "properties": {
+          "place": {
+            "$ref": "#/components/schemas/Place"
+          },
+          "distanceKm": {
+            "type": "number",
+            "description": "From the point asked about to the place’s own point; absent when the place was named by id."
+          },
+          "authorityFrom": {
+            "type": "string",
+            "enum": [
+              "request",
+              "location"
+            ],
+            "description": "`location`: no authority was named, and the point’s own was used."
+          }
+        },
+        "required": [
+          "place",
+          "distanceKm",
+          "authorityFrom"
+        ]
+      },
+      "AuthorityAt": {
+        "type": "object",
+        "properties": {
+          "country": {
+            "anyOf": [
+              {
+                "type": "string",
+                "description": "ISO 3166-1 alpha-2, among the countries with a method here and their neighbours."
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "authority": {
+            "anyOf": [
+              {
+                "type": "string",
+                "enum": [
+                  "sweden",
+                  "diyanet",
+                  "morocco",
+                  "algeria",
+                  "indonesia",
+                  "turkiyetakvimi",
+                  "kazakhstan",
+                  "egypt",
+                  "brunei",
+                  "qatar",
+                  "kuwait",
+                  "jordan",
+                  "tatarstan",
+                  "cdum",
+                  "albania",
+                  "bulgaria",
+                  "banuri",
+                  "uae",
+                  "tehran",
+                  "wifaq"
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "place": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Place"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "distanceKm": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "required": [
+          "country",
+          "authority",
+          "place",
+          "distanceKm"
+        ]
+      },
+      "Places": {
+        "type": "array",
+        "items": {
+          "$ref": "#/components/schemas/Place"
+        }
+      },
+      "Methods": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "description": "As the library’s methodInfo gives it.",
+          "required": [
+            "authority",
+            "name",
+            "revision",
+            "certified",
+            "places"
+          ]
+        }
+      },
+      "Index": {
+        "type": "object",
+        "required": [
+          "name",
+          "routes",
+          "authorities",
+          "methods"
+        ]
+      },
+      "OpenApi": {
+        "type": "object"
+      },
+      "Error": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "error"
+        ]
+      }
+    }
+  }
+}

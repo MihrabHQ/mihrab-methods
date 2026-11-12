@@ -10,13 +10,16 @@
  *   GET /v1/times?place=algeria:27&date=2026-10-15   one day, as timesFor gives it
  *   GET /v1/times?authority=algeria&lat=36.75&lng=3.06&date=2026-10-15
  *   GET /v1/times?place=algeria:27&from=2026-10-01&to=2026-10-31
- *   GET /v1/authority?lat=36.75&lng=3.06             defaultAuthorityFor, with the country
+ *   GET /v1/times?lat=36.75&lng=3.06&date=2026-10-15  the point's own authority, its nearest place
+ *   GET /v1/authority?lat=36.75&lng=3.06             defaultAuthorityFor, with the country and the nearest place
+ *   GET /openapi.json                                the routes, described (src/openapi.ts)
  *
  * Options on /v1/times: asr=2 for the Hanafi Asr; strict=1 to refuse a date
  * outside the certified span (HTTP 422) instead of answering 'method-only'.
  */
 import { AUTHORITIES, methodInfo, nearestPlace, placeById, placesOf, timesFor, timesForRange, UncertifiedMethodError, type Authority, type Place } from './index.js';
 import { countryAt, defaultAuthorityFor } from './locate.js';
+import { openapi, ROUTES, type RoutePath } from './openapi.js';
 
 export class HttpError extends Error {
   constructor(
@@ -38,70 +41,72 @@ const authorityOf = (q: URLSearchParams): Authority => {
   if (!isAuthority(a)) throw new HttpError(400, `authority: one of ${AUTHORITIES.join(', ')}`);
   return a;
 };
-const placeOf = (q: URLSearchParams): Place => {
+type Found = { place: Place; distanceKm?: number; authorityFrom: 'request' | 'location' };
+const km = (d: number) => Math.round(d * 10) / 10;
+/** The place a request means: by id, or the nearest to its point — of the authority it names, or of the point's own. */
+const find = (q: URLSearchParams): Found => {
   const id = q.get('place');
   if (id) {
     const p = placeById(id);
     if (!p) throw new HttpError(404, `no place ${id}`);
-    return p;
+    return { place: p, authorityFrom: 'request' };
   }
-  const near = nearestPlace(authorityOf(q), num(q, 'lat'), num(q, 'lng'));
+  const lat = num(q, 'lat'),
+    lng = num(q, 'lng');
+  const named = q.get('authority') !== null;
+  const authority = named ? authorityOf(q) : defaultAuthorityFor(lat, lng);
+  if (!authority) throw new HttpError(404, `no authority here publishes for that point (country: ${countryAt(lat, lng) ?? 'not one with a method here'}); name one with authority=`);
+  const maxKm = q.get('maxKm') === null ? undefined : num(q, 'maxKm');
+  const near = nearestPlace(authority, lat, lng, { maxKm });
   if (!near) throw new HttpError(404, 'no place near there');
-  return near.place;
+  return { place: near.place, distanceKm: km(near.distanceKm), authorityFrom: named ? 'request' : 'location' };
 };
 const brief = (p: Place) => ({ id: p.id, name: p.name, country: p.country, lat: p.lat, lon: p.lon, tz: p.tz });
+const said = (f: Found) => ({ place: brief(f.place), ...(f.distanceKm === undefined ? {} : { distanceKm: f.distanceKm }), authorityFrom: f.authorityFrom });
 
-const ROUTES = [
-  '/v1/methods',
-  '/v1/places?authority=<authority>',
-  '/v1/nearest?authority=<authority>&lat=<lat>&lng=<lng>',
-  '/v1/times?place=<authority:id>&date=<YYYY-MM-DD>[&asr=2][&strict=1]',
-  '/v1/times?authority=<authority>&lat=<lat>&lng=<lng>&date=<YYYY-MM-DD>',
-  '/v1/times?place=<authority:id>&from=<YYYY-MM-DD>&to=<YYYY-MM-DD>',
-  '/v1/authority?lat=<lat>&lng=<lng>',
-];
+const HANDLERS: Record<RoutePath, (q: URLSearchParams) => unknown> = {
+  '/': () => ({
+    name: 'mihrab-methods',
+    description: 'The prayer-time authorities’ own calculation methods, each reproducing its published timetable to the minute.',
+    docs: 'https://github.com/MihrabHQ/mihrab-methods#readme',
+    openapi: '/openapi.json',
+    routes: ROUTES,
+    authorities: AUTHORITIES,
+    // each method's record, as the library carries it (the feed on main may be newer: methodInfo says the date)
+    methods: AUTHORITIES.map(a => {
+      const m = methodInfo(a);
+      return { authority: a, name: m.name, revision: m.revision, certified: m.certified, checkedAt: m.certification?.checkedAt ?? null, places: m.places };
+    }),
+  }),
+  '/openapi.json': () => openapi(),
+  '/v1/methods': () => AUTHORITIES.map(methodInfo),
+  '/v1/places': q => placesOf(authorityOf(q)).map(brief),
+  '/v1/nearest': q => {
+    if (q.get('place')) throw new HttpError(400, 'place: not read here; give lat and lng');
+    return said(find(q));
+  },
+  '/v1/authority': q => {
+    const lat = num(q, 'lat'),
+      lng = num(q, 'lng');
+    const authority = defaultAuthorityFor(lat, lng);
+    const near = authority && nearestPlace(authority, lat, lng);
+    return { country: countryAt(lat, lng), authority, place: near ? brief(near.place) : null, distanceKm: near ? km(near.distanceKm) : null };
+  },
+  '/v1/times': q => {
+    const f = find(q);
+    const opts = { asrShadow: q.get('asr') === '2' ? (2 as const) : (1 as const), strict: q.get('strict') === '1' };
+    const from = q.get('from'),
+      to = q.get('to');
+    if (from && to) return { ...said(f), days: timesForRange(f.place, from, to, opts) };
+    return { ...said(f), ...timesFor(f.place, q.get('date') ?? new Date().toISOString().slice(0, 10), opts) };
+  },
+};
 
 /** The answer to a request path and query. Throws HttpError, UncertifiedMethodError, RangeError or TypeError. */
 export function handle(url: URL): unknown {
-  const q = url.searchParams;
-  switch (url.pathname.replace(/\/+$/, '') || '/') {
-    case '/':
-      return {
-        name: 'mihrab-methods',
-        description: 'The prayer-time authorities’ own calculation methods, each reproducing its published timetable to the minute.',
-        docs: 'https://github.com/MihrabHQ/mihrab-methods#readme',
-        routes: ROUTES,
-        authorities: AUTHORITIES,
-        // each method's record, as the library carries it (the feed on main may be newer: methodInfo says the date)
-        methods: AUTHORITIES.map(a => {
-          const m = methodInfo(a);
-          return { authority: a, name: m.name, revision: m.revision, certified: m.certified, checkedAt: m.certification?.checkedAt ?? null, places: m.places };
-        }),
-      };
-    case '/v1/methods':
-      return AUTHORITIES.map(methodInfo);
-    case '/v1/places':
-      return placesOf(authorityOf(q)).map(brief);
-    case '/v1/nearest': {
-      const near = nearestPlace(authorityOf(q), num(q, 'lat'), num(q, 'lng'));
-      return near && { place: brief(near.place), distanceKm: Math.round(near.distanceKm * 10) / 10 };
-    }
-    case '/v1/authority': {
-      const lat = num(q, 'lat'),
-        lng = num(q, 'lng');
-      return { country: countryAt(lat, lng), authority: defaultAuthorityFor(lat, lng) };
-    }
-    case '/v1/times': {
-      const place = placeOf(q);
-      const opts = { asrShadow: q.get('asr') === '2' ? (2 as const) : (1 as const), strict: q.get('strict') === '1' };
-      const from = q.get('from'),
-        to = q.get('to');
-      if (from && to) return { place: brief(place), days: timesForRange(place, from, to, opts) };
-      return { place: brief(place), ...timesFor(place, q.get('date') ?? new Date().toISOString().slice(0, 10), opts) };
-    }
-    default:
-      throw new HttpError(404, `no such route; the routes are ${ROUTES.join(' · ')}`);
-  }
+  const path = url.pathname.replace(/\/+$/, '') || '/';
+  if (!Object.hasOwn(HANDLERS, path)) throw new HttpError(404, `no such route; the routes are ${ROUTES.join(' · ')}`);
+  return HANDLERS[path as RoutePath](url.searchParams);
 }
 
 /** Status, body and headers for a request, errors included — what both servers send. */

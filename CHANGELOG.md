@@ -9,6 +9,24 @@ revision bump is at least a minor version.
 
 ## Unreleased
 
+- **The API answers a point without being told the authority.**
+  `/v1/times?lat=&lng=` (and `/v1/nearest`) with no `authority` use the one
+  the point belongs to, and say so: `authorityFrom` (`location` or
+  `request`) and `distanceKm`, the distance to the place whose times these
+  are; `maxKm=` refuses beyond a distance. Where no authority here
+  publishes for the point the answer is 404. `/v1/authority` gains `place`
+  and `distanceKm`. Everything an answer had before is unchanged.
+- **`defaultAuthorityFor` knows every authority.** It answered for Sweden,
+  Morocco, Algeria, Indonesia and Türkiye only; now also Kazakhstan, Egypt,
+  Brunei, Qatar, Kuwait, Jordan, Albania, Bulgaria, Pakistan, the Emirates
+  and Iran by the country's outline, and Tatarstan's, the Central
+  Muftiate's and Wifaqul Ulama's by the nearest place they list.
+  `data/locate/countryOutlines.json` gains those countries and their
+  neighbours' border strips (`scripts/outlines.py`).
+- **The API is described**: OpenAPI 3.1 at `/openapi.json` and in
+  `docs/openapi.json`, written from the table the handler dispatches on
+  (`src/openapi.ts`), and its address and terms of use are in the README.
+
 No method changed; no revision raised.
 
 ## 1.19.0 — 2026-11-12

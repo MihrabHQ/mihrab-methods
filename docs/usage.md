@@ -23,7 +23,7 @@ read from disk or fetched unless you call `fetchLatestCorrections`.
 import { placesOf, placeById, nearestPlace, timesFor, timesForRange, candidateTimes, methodInfo } from 'mihrab-methods';
 import { defaultAuthorityFor } from 'mihrab-methods/locate';
 
-defaultAuthorityFor(59.33, 18.07);            // 'sweden' (null where none of them is the country's authority)
+defaultAuthorityFor(59.33, 18.07);            // 'sweden' (null where none of them publishes for the point)
 const { place, distanceKm } = nearestPlace('sweden', 59.33, 18.07)!;
 place.id;                                     // 'sweden:stockholm' — stable; place.country 'SE'
 placeById('diyanet:9146');                    // Adana
@@ -51,26 +51,49 @@ on `instant`; nothing needs rounding or converting.
 
 ## As an HTTP API
 
+```
+https://mihrab-api.elghamri.se
+```
+
 The public API serves main's methods and lists, deployed with every change
-(`api/worker.ts`, Cloudflare Workers): JSON, CORS open, nothing logged or
-stored, answers cached for an hour. Or run the same handler yourself:
+(`api/worker.ts`, Cloudflare Workers): JSON over GET, no key, CORS open,
+nothing logged or stored, answers cached for an hour.
+
+**Using it.** It is free to call, from a site, a script or a prototype, and
+it is run without a promise of availability and may be rate-limited if one
+caller crowds out the rest. An app or a mosque screen that people rely on
+should carry the library instead (npm or PyPI: the same times, offline, no
+request per reader), or run the handler itself:
 
 ```sh
 npm run serve      # http://localhost:8787
 ```
 
 ```
+GET /v1/times?lat=30.04&lng=31.24&date=2026-10-15
 GET /v1/times?authority=diyanet&lat=41.01&lng=28.98&date=2026-10-15
 GET /v1/times?place=algeria:27&from=2026-10-01&to=2026-10-31
 GET /v1/nearest?authority=morocco&lat=33.57&lng=-7.59
 GET /v1/authority?lat=59.33&lng=18.07
 GET /v1/places?authority=indonesia
 GET /v1/methods
+GET /openapi.json
 ```
 
-`GET /` lists the routes and each method's revision and certification.
-The handler is `src/server.ts`; `tools/serve.ts` serves it on Node,
-`api/worker.ts` at the edge.
+A point with no `authority` is answered by the authority it belongs to
+(`defaultAuthorityFor`: the country's own, or the body that lists a town
+there), from that authority's nearest place. The answer names the place,
+says how far it is (`distanceKm`: the times are that place's, not the
+point's own; `maxKm=` refuses beyond a distance) and how the authority was
+chosen (`authorityFrom`: `location` or `request`). Where no authority here
+publishes for the point the answer is 404, not another country's method:
+name one with `authority=` to ask for it anyway.
+
+`GET /` lists the routes and each method's revision and certification, and
+[`/openapi.json`](openapi.json) describes them (OpenAPI 3.1, written from
+the same table the handler dispatches on: `src/openapi.ts`, `npm run
+openapi`). The handler is `src/server.ts`; `tools/serve.ts` serves it on
+Node, `api/worker.ts` at the edge.
 
 ## In another language
 
@@ -116,8 +139,9 @@ nothing.
 | `tools/verify.ts`, `tools/certify.ts`, `tools/corrections.ts` | The day-by-day check against the timetables; the certification; the correction lists |
 | `tools/vectors.ts`, `test/vectors.json`, `docs/methods.md` | For ports: the sample and the written method |
 | `ports/` | The methods in Python, Swift, Kotlin and Dart, and each one's check against the sample |
-| `src/server.ts` | The HTTP API (routes and handler) |
+| `src/server.ts`, `src/openapi.ts` | The HTTP API: the handler, and the routes with their description (`docs/openapi.json`) |
 | `tools/serve.ts`, `api/worker.ts` | The API on Node, and at the edge |
+| `scripts/outlines.py` | Adds a country, or a neighbour's border strip, to `data/locate/countryOutlines.json` |
 | `scripts/release-check.mjs` | Whether npm needs a release, and which |
 | `scripts/stats.mjs` | The usage counts (npm, the API) in the README, weekly |
 

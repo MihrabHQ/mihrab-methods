@@ -8,10 +8,11 @@
  * Tornio, two kilometres apart; Ceuta on Morocco's coast; Sebatik, split
  * between Indonesia and Malaysia). `defaultAuthorityFor(lat, lon)` turns
  * that into the authority whose table the point's community prays by, or
- * null where none of the five applies.
+ * null where none of them applies.
  *
- * Its own entry point because the outlines are 470 KB an app that already
- * knows its country does not need.
+ * Its own entry point because the outlines are most of a megabyte an app
+ * that already knows its country does not need. `scripts/outlines.py` adds a
+ * country to them.
  */
 import outlines from './data/generated/countryOutlines.js';
 import { isLoaded } from './core/registry.js';
@@ -157,37 +158,68 @@ export function countryAt(latitude: number, longitude: number): string | null {
 const EXCLAVE_KM = 8;
 /** A listed Moroccan town the outline's border runs through (Ahfir, Lagouira). */
 const LISTED_TOWN_KM = 5;
+/** A city of the Central Muftiate's list, or a place of Tatarstan's, serves this far around its point. */
+const RUSSIAN_PLACE_KM = 30;
+/** A town of Wifaqul Ulama's timetables serves this far around its point. */
+const BRITISH_TOWN_KM = 15;
+
+/** The countries one authority here publishes for, border to border. */
+const NATIONAL: Readonly<Record<string, Authority>> = {
+  SE: 'sweden',
+  MA: 'morocco',
+  DZ: 'algeria',
+  ID: 'indonesia',
+  TR: 'diyanet',
+  KZ: 'kazakhstan',
+  EG: 'egypt',
+  BN: 'brunei',
+  QA: 'qatar',
+  KW: 'kuwait',
+  JO: 'jordan',
+  AL: 'albania',
+  BG: 'bulgaria',
+  PK: 'banuri',
+  AE: 'uae',
+  IR: 'tehran',
+};
+
+const near = (authority: Authority, latitude: number, longitude: number, maxKm: number) =>
+  isLoaded(authority) ? nearestPlace(authority, latitude, longitude, { maxKm }) : null;
 
 /**
  * The authority whose table a point's community prays by: Sweden's inside
  * Sweden, Morocco's in Morocco (with Western Sahara, and Ceuta and Melilla,
  * which the ministry lists — when `mihrab-methods/morocco` is loaded, so
- * its cities can be consulted), Algeria's, Indonesia's, and Diyanet's in
- * Türkiye and Northern Cyprus. Null elsewhere: Diyanet publishes tables
- * for places in 197 other countries, but it is not those countries' own
- * authority, so an app offers it there as a choice, not as the default.
+ * its cities can be consulted), Algeria's, Indonesia's, Diyanet's in
+ * Türkiye and Northern Cyprus, and so on for each country in `NATIONAL`.
+ * In Russia, where no one body publishes for the whole country, a point
+ * within 30 km of a place Tatarstan's Administration or the Central
+ * Muftiate lists is given to whichever lists the nearer one (when those
+ * methods are loaded), and in Britain a point within 15 km of a town of
+ * Wifaqul Ulama's timetables is given to it. Null elsewhere: Diyanet publishes tables for places
+ * in 197 other countries, but it is not those countries' own authority, so
+ * an app offers it there as a choice, not as the default.
  */
 export function defaultAuthorityFor(latitude: number, longitude: number): Authority | null {
   const code = countryAt(latitude, longitude);
+  const national = code ? NATIONAL[code] : undefined;
+  if (national) return national;
   switch (code) {
-    case 'SE':
-      return 'sweden';
-    case 'MA':
-      return 'morocco';
-    case 'DZ':
-      return 'algeria';
-    case 'ID':
-      return 'indonesia';
-    case 'TR':
-      return 'diyanet';
     case 'ES':
     case 'MR': {
-      if (!isLoaded('morocco')) return null;
-      const near = nearestPlace('morocco', latitude, longitude);
-      if (!near) return null;
-      const within = near.distanceKm <= (code === 'ES' ? EXCLAVE_KM : LISTED_TOWN_KM);
+      const town = near('morocco', latitude, longitude, code === 'ES' ? EXCLAVE_KM : LISTED_TOWN_KM);
       // Spain's cities the ministry lists are its two on the African coast.
-      return within && (code !== 'ES' || latitude < 35.95) ? 'morocco' : null;
+      return town && (code !== 'ES' || latitude < 35.95) ? 'morocco' : null;
+    }
+    // Russia's outline here is only its western border strips, so its interior answers null.
+    case 'RU':
+    case null: {
+      const tatar = near('tatarstan', latitude, longitude, RUSSIAN_PLACE_KM);
+      const central = near('cdum', latitude, longitude, RUSSIAN_PLACE_KM);
+      if (tatar && central) return tatar.distanceKm <= central.distanceKm ? 'tatarstan' : 'cdum';
+      if (tatar || central) return tatar ? 'tatarstan' : 'cdum';
+      // Britain has no outline here either: a town Wifaqul Ulama publishes for is found by its point.
+      return near('wifaq', latitude, longitude, BRITISH_TOWN_KM) ? 'wifaq' : null;
     }
     default:
       return null;

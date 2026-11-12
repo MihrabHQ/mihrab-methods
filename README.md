@@ -31,7 +31,17 @@ day.times!.fajr;     // { instant: Date, printed: 'HH:MM' } — show printed, sc
 day.certifiedUntil;  // the last date checked; past it, status is 'method-only'
 ```
 
-The full API, the HTTP server and the per-authority imports are in
+Or over HTTP, with nothing to install: the times at a point, from the
+authority that publishes for it.
+
+```
+GET https://mihrab-api.elghamri.se/v1/times?lat=30.04&lng=31.24&date=2026-10-15
+```
+
+Free to call, with no key and nothing logged, and run without a promise of
+availability: an app people rely on should carry the library. The routes
+are described in [docs/openapi.json](docs/openapi.json); the full API, the
+HTTP server and the per-authority imports are in
 [docs/usage.md](docs/usage.md).
 
 In Python the same methods and correction lists are on

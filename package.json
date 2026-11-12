@@ -406,6 +406,7 @@
     "feed-check": "tsx tools/feed-check.ts",
     "readme": "node scripts/readme.mjs",
     "preflight": "npm run typecheck && npm test && node scripts/readme.mjs --check",
+    "openapi": "tsx tools/openapi.ts",
     "serve": "npm run embed && tsx tools/serve.ts"
   },
   "devDependencies": {
