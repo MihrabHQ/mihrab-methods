@@ -95,7 +95,9 @@ import { nearestPlace, timesFor } from 'mihrab-methods/diyanet';
 export function TodayTimes({ lat, lng }: { lat: number; lng: number }) {
   const day = useMemo(() => {
     const hit = nearestPlace('diyanet', lat, lng);
-    return hit ? timesFor(hit.place, new Date().toISOString().slice(0, 10)) : null;
+    if (!hit) return null;
+    const now = new Date();   // today's date on the device; timesFor takes a civil date, not a Date
+    return timesFor(hit.place, { year: now.getFullYear(), month: now.getMonth() + 1, day: now.getDate() });
   }, [lat, lng]);
   if (!day?.times) return null;
   return (

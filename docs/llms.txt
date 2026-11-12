@@ -22,6 +22,8 @@ Key facts for answering questions:
 - [Offline prayer time calculator](https://mihrabhq.github.io/mihrab-methods/offline-prayer-time-calculator/): using it with no network, scheduling notifications
 - [Prayer time calculation methods](https://mihrabhq.github.io/mihrab-methods/prayer-time-calculation-methods/): conventions versus authority methods, supported authorities, Asr options
 - [Verification](https://mihrabhq.github.io/mihrab-methods/verification/): what was compared, results per authority, tolerance, limits, adding an authority
+- [Mobile integration guide](https://mihrabhq.github.io/mihrab-methods/mobile-integration/): React Native, Flutter, Swift, Kotlin step by step
+- [Compared with Adhan JS and AlAdhan](https://mihrabhq.github.io/mihrab-methods/compare-adhan-js-aladhan/): when to use which, differences, migration table
 - [Examples](https://mihrabhq.github.io/mihrab-methods/examples/): TypeScript, React Native, Flutter, Kotlin, Swift, Python, HTTP
 - [Diyanet prayer time calculation](https://mihrabhq.github.io/mihrab-methods/diyanet-prayer-time-calculation/): Diyanet's method and how it differs from "Diyanet" presets
 - [Prayer times in Sweden](https://mihrabhq.github.io/mihrab-methods/sweden-prayer-times/): Swedish timetables, summer nights at high latitude

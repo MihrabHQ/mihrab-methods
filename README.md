@@ -96,7 +96,10 @@ times_for(stockholm, '2026-11-12', lists['sweden'])['printed']   # the six times
 Swift, Kotlin and Dart ports are in [ports/](ports/README.md); every port
 is held to the same test vectors as the library on every push. Examples
 for TypeScript, React Native, Flutter, Android and iOS:
-[examples](https://mihrabhq.github.io/mihrab-methods/examples/).
+[examples](https://mihrabhq.github.io/mihrab-methods/examples/) and the
+[mobile integration guide](https://mihrabhq.github.io/mihrab-methods/mobile-integration/).
+Coming from Adhan JS or AlAdhan?
+[How they compare](https://mihrabhq.github.io/mihrab-methods/compare-adhan-js-aladhan/).
 
 ## What is certified
 

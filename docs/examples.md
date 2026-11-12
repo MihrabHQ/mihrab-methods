@@ -56,7 +56,7 @@ import { nearestPlace, timesFor } from 'mihrab-methods';
 
 const authority = defaultAuthorityFor(lat, lng);          // null where no authority here publishes
 const found = authority && nearestPlace(authority, lat, lng);
-const day = found && timesFor(found.place, new Date());
+const day = found && timesFor(found.place, '2026-11-12');   // 'YYYY-MM-DD' or { year, month, day }
 ```
 
 More: [the JavaScript library page](javascript-prayer-time-library.md).
@@ -75,7 +75,8 @@ export function TodayTimes({ lat, lng }: { lat: number; lng: number }) {
   const rows = useMemo(() => {
     const found = nearestPlace('sweden', lat, lng);
     if (!found) return [];
-    const day = timesFor(found.place, new Date());
+    const now = new Date();   // today's date on the device; timesFor takes a civil date, not a Date
+    const day = timesFor(found.place, { year: now.getFullYear(), month: now.getMonth() + 1, day: now.getDate() });
     return Object.entries(day.times ?? {}).map(([name, t]) => ({ name, printed: t.printed }));
   }, [lat, lng]);
 
@@ -185,6 +186,10 @@ curl 'https://mihrab-api.elghamri.se/v1/times?lat=59.33&lng=18.07&date=2026-11-1
 
 Routes, parameters and the answer's shape: [prayer time API](prayer-time-api.md)
 and the [OpenAPI description](openapi.json).
+
+A fuller walk-through per platform — what to bundle, choosing the place,
+scheduling notifications — is in the
+[mobile integration guide](mobile-integration.md).
 
 ## What the ports leave to you
 

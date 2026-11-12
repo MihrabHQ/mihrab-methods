@@ -13,6 +13,9 @@
  *     certification record's dates (the check records a new date every day
  *     it finds every time on its minute; that alone is not a release, the
  *     live feed carries it), the README and the version; or
+ *   - **what npm shows of the package changed** — its description, keywords
+ *     or homepage: npm's page and search read them from the published
+ *     version, and the README beside them, so only a release moves them; or
  *   - **the certified span on npm runs out within SPAN_DAYS** (30) while
  *     main's reaches further: past its span the published package answers
  *     `method-only` for a date main certifies.
@@ -107,6 +110,9 @@ function main() {
   const pm = JSON.parse(mine.get('package.json')), pt = JSON.parse(theirs.get('package.json'));
   const newExports = Object.keys(pm.exports ?? {}).filter(k => !(k in (pt.exports ?? {})));
   if (newExports.length) { reasons.push(`new entry points: ${newExports.join(', ')}`); minor = true; }
+  // What npm's page and search show: only a published version carries it (and the README with it).
+  const shown = ['description', 'keywords', 'homepage'].filter(k => JSON.stringify(pm[k] ?? null) !== JSON.stringify(pt[k] ?? null));
+  if (shown.length) reasons.push(`what npm shows changed (${shown.join(', ')})`);
   const removed = Object.keys(pt.exports ?? {}).filter(k => !(k in (pm.exports ?? {})));
   if (removed.length) {
     // Taking an entry point away breaks someone: never automatic.

@@ -69,6 +69,8 @@ yourself, or skip the network and embed the library.
 | [Prayer times in Sweden](sweden-prayer-times.md) | Swedish apps: the tables Swedish mosques follow, and the summer nights |
 | [Islamiska Förbundet prayer times](islamiska-forbundet-prayer-times.md) | Matching Islamiska Förbundet's timetable for its towns |
 | [Verification](verification.md) | What was tested, over which dates, and the exceptions |
+| [Mobile integration guide](mobile-integration.md) | React Native, Flutter, Swift and Kotlin, step by step: what to bundle, picking the place, scheduling |
+| [Compared with Adhan JS and AlAdhan](compare-adhan-js-aladhan.md) | What each is for, what differs, and what Mihrab Methods does not do |
 | [Examples](examples.md) | TypeScript, React Native, Flutter, Kotlin, Swift, Python |
 
 ## Reference

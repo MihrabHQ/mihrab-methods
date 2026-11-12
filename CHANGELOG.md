@@ -18,6 +18,14 @@ revision bump is at least a minor version.
   `llms.txt`. The README opens with what the library is for; the package
   descriptions and keywords on npm and PyPI say the same. The library and
   the API are as they were.
+- **Two more guides on the site:** a mobile integration guide (React
+  Native, Flutter, Swift, Kotlin: what to bundle, choosing the place,
+  scheduling) and a comparison with Adhan JS and AlAdhan (what each is
+  for, and what this library does not do). Two examples that passed a
+  `Date` to `timesFor` are corrected: it takes a civil date.
+- **Releases:** a change to the package's description, keywords or
+  homepage is now a release (patch), since npm's page and search show
+  only what a published version carries.
 
 No method changed; no revision raised.
 
