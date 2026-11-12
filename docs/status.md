@@ -46,11 +46,11 @@ each method.
 | **Albania** | the Community’s calendar | 22 | 48,180 | **0** | 98.082 % | 924 | 1 Jan 2026 → 31 Dec 2026 |
 | **Bulgaria** | the Grand Mufti’s Office’s timetable | 48 | 105,120 | **0** | 97.671 % | 2,448 | 1 Jan 2026 → 31 Dec 2026 |
 | **Pakistan (Banuri Town)** | Jamia Banuri Town’s timetable | 100 | 219,000 | **0** | 99.996 % | 8 | 1 Jan 2026 → 31 Dec 2026 |
-| **United Arab Emirates** | the Authority’s times | 41 | 89,790 | **0** | 98.524 % | 1,251 | 1 Jan 2026 → 31 Dec 2026 |
+| **United Arab Emirates** | the Authority’s times | 41 | 179,580 | **0** | 98.221 % | 3,036 | 1 Jan 2026 → 31 Dec 2027 |
 | **Iran (Tehran Institute of Geophysics)** | the Institute of Geophysics’ sheets | 31 | 90,520 | **0** | 99.002 % | 903 | 21 Mar 2025 → 20 Mar 2027 |
 | **United Kingdom (Wifaqul Ulama)** | Wifaqul Ulama’s timetables | 81 | 350,400 | **0** | 98.625 % | 4,641 | 1 Jan 2026 → 31 Dec 2027 |
 
-20 of 20 methods certified; 0 of 77,473,926 times off the printed minute. Last checked 12 November 2026. Generated from [`certification.json`](../certification.json) by `scripts/readme.mjs`.
+20 of 20 methods certified; 0 of 77,563,716 times off the printed minute. Last checked 12 November 2026. Generated from [`certification.json`](../certification.json) by `scripts/readme.mjs`.
 <!-- certification-table:end -->
 
 ## Sweden
@@ -435,9 +435,9 @@ cities): the method gives <!--fig:banuri.alonePct-->99.996<!--/fig--> % alone, a
 
 ## United Arab Emirates
 
-Certified over <!--fig:uae.span-->1 Jan 2026 → 31 Dec 2026<!--/fig--> (<!--fig:uae.check0.places-->41<!--/fig-->
-zones): the method gives <!--fig:uae.alonePct-->98.524<!--/fig--> % alone, and a list of
-<!--fig:uae.corrections-->1,251<!--/fig--> corrections the rest.
+Certified over <!--fig:uae.span-->1 Jan 2026 → 31 Dec 2027<!--/fig--> (<!--fig:uae.check0.places-->41<!--/fig-->
+zones): the method gives <!--fig:uae.alonePct-->98.221<!--/fig--> % alone, and a list of
+<!--fig:uae.corrections-->3,036<!--/fig--> corrections the rest.
 
 > **Research note, 2026-11-12** (not generated). The zones are the
 > Authority's: its areas, some four hundred, fall into forty-one tables

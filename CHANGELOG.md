@@ -9,6 +9,11 @@ revision bump is at least a minor version.
 
 ## Unreleased
 
+- **United Arab Emirates: checked on two years.** The correction list now
+  runs to 31 December 2027 (it ended with 2026), and the certification
+  covers 2026 and 2027 for all 41 zones. The method is unchanged: the
+  same revision, and no time it prints for 2026 moves.
+
 No method changed; no revision raised.
 
 ## 1.21.1 — 2026-11-12

@@ -412,18 +412,18 @@
       {
         "tables": "United Arab Emirates — the Authority’s times",
         "places": 41,
-        "times": 89790,
+        "times": 179580,
         "off": 0,
-        "offWithoutCorrections": 1325,
+        "offWithoutCorrections": 3193,
         "from": "2026-01-01",
-        "to": "2026-12-31"
+        "to": "2027-12-31"
       }
     ],
     "corrections": {
       "from": "2026-01-01",
-      "to": "2026-12-31",
-      "entries": 1251,
-      "sha256": "3bc4720857ef51e55061f59fe2521ce1fb00d2d6c864c897a5bd6b9976802b9b"
+      "to": "2027-12-31",
+      "entries": 3036,
+      "sha256": "747d36488188db98e5949c3844f50ee708322b5690ea76556f9d69638944af29"
     },
     "revision": 1
   },
