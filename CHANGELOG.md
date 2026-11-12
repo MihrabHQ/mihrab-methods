@@ -9,8 +9,21 @@ revision bump is at least a minor version.
 
 ## Unreleased
 
-No method changed; no revision raised.
-
+- **Albania and Bulgaria, revision 1 each: a fifteenth and a sixteenth
+  method.** The Muslim Community of Albania's calendar (Tirana and
+  twenty-one towns of Albania and its neighbours: `mihrab-methods/albania`)
+  and the Grand Mufti's Office of Bulgaria's timetable (Sofia and
+  forty-seven towns: `mihrab-methods/bulgaria`). Each is one town's table
+  with the sun taken once for the whole day — at 0h UT of the date for
+  Tirana, at 11h UT of the day before for Sofia — Fajr at 18°, Isha at 17°,
+  the old temkin on sunrise, Dhuhr, Asr and Maghrib, and every other town
+  as whole minutes on it (`docs/methods.md`, `src/methods/townTable.ts`).
+  With its correction list each matches the published timetable of every
+  town over the certified span (`docs/status.md`). `certification.json`
+  gains `albania` and `bulgaria`, and `data/corrections/albania.json` and
+  `bulgaria.json` are new. In every port (`albania_minutes`,
+  `bulgaria_minutes` / `albaniaMinutes`, `bulgariaMinutes`, `REVISIONS`
+  with both at 1). No other method's output changes.
 ## 1.13.0 — 2026-11-11
 
 - **Russia's Central Muftiate, revision 1: a fourteenth method.** The

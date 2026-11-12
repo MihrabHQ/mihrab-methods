@@ -1,7 +1,7 @@
 {
   "name": "mihrab-methods",
   "version": "1.13.0",
-  "description": "The prayer-time authorities' own calculation methods, each reproducing its published timetable to the minute: Sweden (Diyanet, as Islamiska Förbundet prints it), Diyanet worldwide, Morocco (Habous), Algeria (Ministry of Religious Affairs), Indonesia (Kemenag), Türkiye Takvimi, Kazakhstan (Spiritual Administration), Egypt (General Authority of Survey), Brunei (Ministry of Religious Affairs), Qatar (Qatar Calendar House), Kuwait (Ministry of Awqaf and Islamic Affairs), Jordan (Ministry of Awqaf, Islamic Affairs and Holy Places), Tatarstan (Spiritual Administration of Muslims), Russia (Central Spiritual Administration of Muslims).",
+  "description": "The prayer-time authorities' own calculation methods, each reproducing its published timetable to the minute: Sweden (Diyanet, as Islamiska Förbundet prints it), Diyanet worldwide, Morocco (Habous), Algeria (Ministry of Religious Affairs), Indonesia (Kemenag), Türkiye Takvimi, Kazakhstan (Spiritual Administration), Egypt (General Authority of Survey), Brunei (Ministry of Religious Affairs), Qatar (Qatar Calendar House), Kuwait (Ministry of Awqaf and Islamic Affairs), Jordan (Ministry of Awqaf, Islamic Affairs and Holy Places), Tatarstan (Spiritual Administration of Muslims), Russia (Central Spiritual Administration of Muslims), Albania (Muslim Community of Albania), Bulgaria (Grand Mufti’s Office).",
   "license": "MPL-2.0",
   "author": "Hassan El Ghamri",
   "repository": {
@@ -37,6 +37,8 @@
     "./dist/*/jordan.js",
     "./dist/*/tatarstan.js",
     "./dist/*/cdum.js",
+    "./dist/*/albania.js",
+    "./dist/*/bulgaria.js",
     "./dist/*/authorities/*.js",
     "./src/index.ts",
     "./src/sweden.ts",
@@ -53,6 +55,8 @@
     "./src/jordan.ts",
     "./src/tatarstan.ts",
     "./src/cdum.ts",
+    "./src/albania.ts",
+    "./src/bulgaria.ts",
     "./src/authorities/*.ts"
   ],
   "engines": {
@@ -229,6 +233,26 @@
         "default": "./dist/cjs/cdum.js"
       }
     },
+    "./albania": {
+      "import": {
+        "types": "./dist/esm/albania.d.ts",
+        "default": "./dist/esm/albania.js"
+      },
+      "require": {
+        "types": "./dist/cjs/albania.d.ts",
+        "default": "./dist/cjs/albania.js"
+      }
+    },
+    "./bulgaria": {
+      "import": {
+        "types": "./dist/esm/bulgaria.d.ts",
+        "default": "./dist/esm/bulgaria.js"
+      },
+      "require": {
+        "types": "./dist/cjs/bulgaria.d.ts",
+        "default": "./dist/cjs/bulgaria.js"
+      }
+    },
     "./locate": {
       "import": {
         "types": "./dist/esm/locate.d.ts",
@@ -290,6 +314,12 @@
       ],
       "cdum": [
         "./dist/cjs/cdum.d.ts"
+      ],
+      "albania": [
+        "./dist/cjs/albania.d.ts"
+      ],
+      "bulgaria": [
+        "./dist/cjs/bulgaria.d.ts"
       ],
       "locate": [
         "./dist/cjs/locate.d.ts"

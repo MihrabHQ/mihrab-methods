@@ -438,6 +438,44 @@ Rostov-on-Don to Saint Petersburg and Khabarovsk.
   parallel's own day. No place listed is that far north, and the method
   gives no times there.
 
+## A reference town's table: Albania and Bulgaria
+
+`src/methods/townTable.ts`, with `albania.ts` and `bulgaria.ts`. Each
+authority prints one table, computed for one town, and gives every other
+town as a whole number of minutes on it.
+
+- **The sun is taken once a day.** Meeus's apparent sun (Morocco's) is read
+  at one fixed moment, and that one declination and one equation of time
+  serve every time of the day: Dhuhr from the transit, the others the
+  transit plus or minus the hour angle of their altitude. Nothing is
+  iterated to a time's own moment — which is what told these tables from
+  every other here: with the sun at each time's own moment the mornings fit
+  one day and the evenings another.
+- **Fajr** 18°, **Isha** 17°, **sunrise** and **Maghrib** with the sun's
+  centre 0.8333° below the horizon, **Asr** one shadow length beyond the
+  noon shadow (two, for a reader who asks for the Hanafi Asr).
+- **Margins**, the old temkin: sunrise 7 minutes earlier, Dhuhr 5 later, Asr
+  4 later, Maghrib 7 later; none on Isha. Then the nearest minute.
+- **A town** is the reference town's table plus its whole minutes. A listed
+  town's point carries them in its longitude — a quarter of a degree from
+  the reference town's to the minute, west later — and towns with the same
+  minutes are told apart by a thousandth of a degree of latitude, which the
+  method does not read. The points are not where the towns are.
+
+### Albania
+
+The Muslim Community of Albania's calendar: Tirana, at the 41°20′ N,
+19°49′ E the calendar itself gives, and twenty-one towns of Albania,
+Kosovo, North Macedonia, Montenegro and the Preševo valley. The sun is
+taken at **0h UT of the date**; Fajr — the calendar's Imsak — has no
+margin.
+
+### Bulgaria
+
+The Grand Mufti's Office's timetable: Sofia (42.708° N, 23.3219° E) and
+forty-seven towns. The sun is taken at **11h UT of the day before**; Fajr
+is a minute earlier than 18°.
+
 ## Checking a port
 
 1. Take `test/vectors.json`. For each case, compute the six times at the

@@ -43,8 +43,10 @@ each method.
 | **Jordan** | the Ministry’s times | 17 | 37,230 | **0** | 98.380 % | 603 | 1 Jan 2026 → 31 Dec 2026 |
 | **Tatarstan** | the Administration’s timetable | 44 | 96,360 | **0** | 98.071 % | 1,858 | 1 Jan 2026 → 31 Dec 2026 |
 | **Russia (Central Muftiate)** | the Central Muftiate’s timetables | 18 | 39,342 | **0** | 99.877 % | 48 | 1 Jan 2026 → 31 Dec 2026 |
+| **Albania** | the Community’s calendar | 22 | 48,180 | **0** | 98.082 % | 924 | 1 Jan 2026 → 31 Dec 2026 |
+| **Bulgaria** | the Grand Mufti’s Office’s timetable | 48 | 105,120 | **0** | 97.671 % | 2,448 | 1 Jan 2026 → 31 Dec 2026 |
 
-14 of 14 methods certified; 0 of 76,570,916 times off the printed minute. Last checked 9 November 2026. Generated from [`certification.json`](../certification.json) by `scripts/readme.mjs`.
+16 of 16 methods certified; 0 of 76,724,216 times off the printed minute. Last checked 9 November 2026. Generated from [`certification.json`](../certification.json) by `scripts/readme.mjs`.
 <!-- certification-table:end -->
 
 ## Sweden
@@ -385,6 +387,31 @@ cities): the method gives <!--fig:cdum.alonePct-->99.877<!--/fig--> % alone, and
 > parallel's; computed on the printed minutes and cut, it gives 2,525 of
 > the 2,533 white-night times, and the other eight follow a neighbouring
 > time that is itself on the other side of a minute.
+
+## Albania
+
+Certified over <!--fig:albania.span-->1 Jan 2026 → 31 Dec 2026<!--/fig--> (<!--fig:albania.check0.places-->22<!--/fig-->
+towns): the method gives <!--fig:albania.alonePct-->98.082<!--/fig--> % alone, and a list of
+<!--fig:albania.corrections-->924<!--/fig--> corrections the rest.
+
+## Bulgaria
+
+Certified over <!--fig:bulgaria.span-->1 Jan 2026 → 31 Dec 2026<!--/fig--> (<!--fig:bulgaria.check0.places-->48<!--/fig-->
+towns): the method gives <!--fig:bulgaria.alonePct-->97.671<!--/fig--> % alone, and a list of
+<!--fig:bulgaria.corrections-->2,448<!--/fig--> corrections the rest.
+
+> **Research note, 2026-11-12** (not generated). Both are one town's table
+> and a column of minutes, so a town's corrections are the reference town's
+> own, on the same days: Tirana's 42 times and Sofia's 51 are all there is,
+> each counted once a town. What the tables are not is a sun followed
+> through the day. Fitted with the sun at each time's own moment, Sofia's
+> mornings wanted the calendar three quarters of a day back and its evenings
+> a day and a quarter; one sun for the whole day, read thirteen hours before
+> the date begins, gives both. Tirana's is read at 0h UT. Neither moment is
+> a round local hour, and the Bulgarian page names no year: whether its
+> table is computed afresh each year or kept is not known from one year of
+> it, and the next year's check will say. The margins are the old temkin:
+> seven minutes at each end of the day, five on Dhuhr, four on Asr.
 
 ## Not here, and why
 

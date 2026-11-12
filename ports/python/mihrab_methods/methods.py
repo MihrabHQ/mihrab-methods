@@ -1,5 +1,5 @@
 """The methods: Sweden and Diyanet (the Congress method), Morocco, Algeria,
-Indonesia, Türkiye Takvimi, Kazakhstan, Egypt, Brunei, Qatar, Kuwait, Jordan, Tatarstan and Russia's Central Muftiate. A port of src/methods/*.ts — the TypeScript is the reference,
+Indonesia, Türkiye Takvimi, Kazakhstan, Egypt, Brunei, Qatar, Kuwait, Jordan, Tatarstan, Russia's Central Muftiate, Albania and Bulgaria. A port of src/methods/*.ts — the TypeScript is the reference,
 docs/methods.md says what each does, and test_vectors.py holds this to it.
 
 Every function takes a civil date with the month 0-based, as the TypeScript
@@ -701,6 +701,52 @@ def cdum_minutes(lat, lon, year, month0, day):
         if not math.isfinite(isha):
             isha = p[4] + math.floor((r[5] - r[4]) * night / there)
     return {'fajr': fajr, 'sunrise': p[1], 'dhuhr': p[2], 'asr': p[3], 'maghrib': p[4], 'isha': isha}
+
+
+# ---------------------------------------------------------------- Albania and Bulgaria: a reference town's table
+
+# lat, lon of the town the table is computed at; when the day's sun is taken (days after 0h UT of the date);
+# the margins on Fajr, sunrise, Dhuhr, Asr, Maghrib, Isha
+ALBANIA_TABLE = (41.3333, 19.8167, 0.0, (0, -7, 5, 4, 7, 0))
+BULGARIA_TABLE = (42.708, 23.3219, -13 / 24, (-1, -7, 5, 4, 7, 0))
+
+
+def town_minutes(table, lon):
+    """The whole minutes a town adds to the reference town's table (west later, east earlier)."""
+    return math.floor((table[1] - lon) * 4 + 0.5)
+
+
+def town_table_raw_minutes(table, lon, year, month0, day, asr_shadow=1):
+    """Before rounding: the reference town's table — the sun taken once for the whole day — plus the town's minutes."""
+    lat, lon0, sun_at, margins = table
+    dec, eot = meeus_apparent_sun(_d0(year, month0, day) + sun_at)
+    add = town_minutes(table, lon)
+    noon = 720 - 4 * lon0 - eot
+    sp, cp = math.sin(lat * RAD), math.cos(lat * RAD)
+
+    def event(altitude, sign):
+        c = (math.sin(altitude * RAD) - sp * math.sin(dec)) / (cp * math.cos(dec))
+        return noon + (sign * 4 * math.acos(c)) / RAD
+
+    asr_altitude = math.atan(1 / (asr_shadow + math.tan(abs(lat * RAD - dec)))) / RAD
+    return {
+        'fajr': event(-18, -1) + margins[0] + add,
+        'sunrise': event(-0.8333, -1) + margins[1] + add,
+        'dhuhr': noon + margins[2] + add,
+        'asr': event(asr_altitude, 1) + margins[3] + add,
+        'maghrib': event(-0.8333, 1) + margins[4] + add,
+        'isha': event(-17, 1) + margins[5] + add,
+    }
+
+
+def albania_minutes(lon, year, month0, day, asr_shadow=1):
+    """Tirana's table, the sun taken at 0h UT of the date; rounded to the nearest minute."""
+    return {k: math.floor(v + 0.5) for k, v in town_table_raw_minutes(ALBANIA_TABLE, lon, year, month0, day, asr_shadow).items()}
+
+
+def bulgaria_minutes(lon, year, month0, day, asr_shadow=1):
+    """Sofia's table, the sun taken at 11h UT of the day before; rounded to the nearest minute."""
+    return {k: math.floor(v + 0.5) for k, v in town_table_raw_minutes(BULGARIA_TABLE, lon, year, month0, day, asr_shadow).items()}
 
 
 # ---------------------------------------------------------------- Sweden and Diyanet: the Congress method

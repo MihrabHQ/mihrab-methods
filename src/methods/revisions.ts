@@ -21,4 +21,6 @@ export const METHOD_REVISION = {
   jordan: 1,
   tatarstan: 1,
   cdum: 1,
+  albania: 1,
+  bulgaria: 1,
 } as const;

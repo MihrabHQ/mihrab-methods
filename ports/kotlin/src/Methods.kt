@@ -1,5 +1,5 @@
 // The methods: Sweden and Diyanet (the Congress method), Morocco, Algeria,
-// Indonesia, Türkiye Takvimi, Kazakhstan, Egypt, Brunei, Qatar, Kuwait, Jordan, Tatarstan and Russia's Central Muftiate. A port of src/methods/*.ts — the TypeScript is the reference,
+// Indonesia, Türkiye Takvimi, Kazakhstan, Egypt, Brunei, Qatar, Kuwait, Jordan, Tatarstan, Russia's Central Muftiate, Albania and Bulgaria. A port of src/methods/*.ts — the TypeScript is the reference,
 // docs/methods.md says what each does, and the vector check holds this to it.
 //
 // Every function takes a civil date with the month 0-based, as the TypeScript
@@ -606,6 +606,48 @@ fun cdumMinutes(lat: Double, lon: Double, year: Int, month0: Int, day: Int): Day
         isha = if (p.isha.isFinite()) p.isha else p.maghrib + floor((r.isha - r.maghrib) * night / there),
     )
 }
+
+// ---------------------------------------------------------------- Albania and Bulgaria: a reference town's table
+
+/** The town a table is computed at, when the day's sun is taken (days after 0h UT of the date), and the margins. */
+class TownTable(val lat: Double, val lon: Double, val sunAt: Double, val margins: DoubleArray)
+
+val ALBANIA_TABLE = TownTable(41.3333, 19.8167, 0.0, doubleArrayOf(0.0, -7.0, 5.0, 4.0, 7.0, 0.0))
+val BULGARIA_TABLE = TownTable(42.708, 23.3219, -13.0 / 24, doubleArrayOf(-1.0, -7.0, 5.0, 4.0, 7.0, 0.0))
+
+/** The whole minutes a town adds to the reference town's table (west later, east earlier). */
+fun townMinutes(table: TownTable, lon: Double): Double = floor((table.lon - lon) * 4 + 0.5)
+
+/** Before rounding: the reference town's table — the sun taken once for the whole day — plus the town's minutes. */
+fun townTableRawMinutes(table: TownTable, lon: Double, year: Int, month0: Int, day: Int, asrShadow: Double = 1.0): DayMinutes {
+    val s = meeusApparentSun(d0Of(year, month0, day) + table.sunAt)
+    val add = townMinutes(table, lon)
+    val noon = 720 - 4 * table.lon - s.eot
+    val sp = sin(table.lat * RAD)
+    val cp = cos(table.lat * RAD)
+    fun event(altitude: Double, sign: Double): Double {
+        val c = (sin(altitude * RAD) - sp * sin(s.dec)) / (cp * cos(s.dec))
+        return noon + (sign * 4 * acos(c)) / RAD
+    }
+    val asrAltitude = atan(1 / (asrShadow + tan(abs(table.lat * RAD - s.dec)))) / RAD
+    val m = table.margins
+    return DayMinutes(
+        fajr = event(-18.0, -1.0) + m[0] + add,
+        sunrise = event(-0.8333, -1.0) + m[1] + add,
+        dhuhr = noon + m[2] + add,
+        asr = event(asrAltitude, 1.0) + m[3] + add,
+        maghrib = event(-0.8333, 1.0) + m[4] + add,
+        isha = event(-17.0, 1.0) + m[5] + add,
+    )
+}
+
+/** Tirana's table, the sun taken at 0h UT of the date; rounded to the nearest minute. */
+fun albaniaMinutes(lon: Double, year: Int, month0: Int, day: Int, asrShadow: Double = 1.0): DayMinutes? =
+    townTableRawMinutes(ALBANIA_TABLE, lon, year, month0, day, asrShadow).mapped { floor(it + 0.5) }
+
+/** Sofia's table, the sun taken at 11h UT of the day before; rounded to the nearest minute. */
+fun bulgariaMinutes(lon: Double, year: Int, month0: Int, day: Int, asrShadow: Double = 1.0): DayMinutes? =
+    townTableRawMinutes(BULGARIA_TABLE, lon, year, month0, day, asrShadow).mapped { floor(it + 0.5) }
 
 // ---------------------------------------------------------------- Sweden and Diyanet: the Congress method
 

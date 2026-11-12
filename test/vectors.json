@@ -14,7 +14,9 @@
   "kuwait": 1,
   "jordan": 1,
   "tatarstan": 1,
-  "cdum": 1
+  "cdum": 1,
+  "albania": 1,
+  "bulgaria": 1
  },
  "cases": [
   {
@@ -5691,6 +5693,874 @@
     "asr": "2026-12-31T05:31:00.000Z",
     "maghrib": "2026-12-31T07:16:00.000Z",
     "isha": "2026-12-31T09:04:00.000Z"
+   }
+  },
+  {
+   "place": {
+    "id": "albania:1",
+    "name": "Tirana",
+    "lat": 41.3333,
+    "lon": 19.8167,
+    "tz": "Europe/Tirane"
+   },
+   "date": "2026-01-01",
+   "clock": {
+    "zone": "Europe/Tirane",
+    "offsetMinutes": 60,
+    "label": "Europe/Tirane"
+   },
+   "printed": {
+    "fajr": "05:27",
+    "sunrise": "07:00",
+    "dhuhr": "11:49",
+    "asr": "14:08",
+    "maghrib": "16:28",
+    "isha": "17:55"
+   },
+   "instants": {
+    "fajr": "2026-01-01T04:27:00.000Z",
+    "sunrise": "2026-01-01T06:00:00.000Z",
+    "dhuhr": "2026-01-01T10:49:00.000Z",
+    "asr": "2026-01-01T13:08:00.000Z",
+    "maghrib": "2026-01-01T15:28:00.000Z",
+    "isha": "2026-01-01T16:55:00.000Z"
+   }
+  },
+  {
+   "place": {
+    "id": "albania:1",
+    "name": "Tirana",
+    "lat": 41.3333,
+    "lon": 19.8167,
+    "tz": "Europe/Tirane"
+   },
+   "date": "2026-05-02",
+   "clock": {
+    "zone": "Europe/Tirane",
+    "offsetMinutes": 120,
+    "label": "Europe/Tirane"
+   },
+   "printed": {
+    "fajr": "03:50",
+    "sunrise": "05:30",
+    "dhuhr": "12:43",
+    "asr": "16:34",
+    "maghrib": "19:45",
+    "isha": "21:18"
+   },
+   "instants": {
+    "fajr": "2026-05-02T01:50:00.000Z",
+    "sunrise": "2026-05-02T03:30:00.000Z",
+    "dhuhr": "2026-05-02T10:43:00.000Z",
+    "asr": "2026-05-02T14:34:00.000Z",
+    "maghrib": "2026-05-02T17:45:00.000Z",
+    "isha": "2026-05-02T19:18:00.000Z"
+   }
+  },
+  {
+   "place": {
+    "id": "albania:1",
+    "name": "Tirana",
+    "lat": 41.3333,
+    "lon": 19.8167,
+    "tz": "Europe/Tirane"
+   },
+   "date": "2026-09-01",
+   "clock": {
+    "zone": "Europe/Tirane",
+    "offsetMinutes": 120,
+    "label": "Europe/Tirane"
+   },
+   "printed": {
+    "fajr": "04:29",
+    "sunrise": "06:00",
+    "dhuhr": "12:46",
+    "asr": "16:26",
+    "maghrib": "19:22",
+    "isha": "20:47"
+   },
+   "instants": {
+    "fajr": "2026-09-01T02:29:00.000Z",
+    "sunrise": "2026-09-01T04:00:00.000Z",
+    "dhuhr": "2026-09-01T10:46:00.000Z",
+    "asr": "2026-09-01T14:26:00.000Z",
+    "maghrib": "2026-09-01T17:22:00.000Z",
+    "isha": "2026-09-01T18:47:00.000Z"
+   }
+  },
+  {
+   "place": {
+    "id": "albania:1",
+    "name": "Tirana",
+    "lat": 41.3333,
+    "lon": 19.8167,
+    "tz": "Europe/Tirane"
+   },
+   "date": "2026-12-31",
+   "clock": {
+    "zone": "Europe/Tirane",
+    "offsetMinutes": 60,
+    "label": "Europe/Tirane"
+   },
+   "printed": {
+    "fajr": "05:27",
+    "sunrise": "06:59",
+    "dhuhr": "11:48",
+    "asr": "14:07",
+    "maghrib": "16:27",
+    "isha": "17:54"
+   },
+   "instants": {
+    "fajr": "2026-12-31T04:27:00.000Z",
+    "sunrise": "2026-12-31T05:59:00.000Z",
+    "dhuhr": "2026-12-31T10:48:00.000Z",
+    "asr": "2026-12-31T13:07:00.000Z",
+    "maghrib": "2026-12-31T15:27:00.000Z",
+    "isha": "2026-12-31T16:54:00.000Z"
+   }
+  },
+  {
+   "place": {
+    "id": "albania:2",
+    "name": "Durrës",
+    "lat": 41.3333,
+    "lon": 19.3167,
+    "tz": "Europe/Tirane"
+   },
+   "date": "2026-01-01",
+   "clock": {
+    "zone": "Europe/Tirane",
+    "offsetMinutes": 60,
+    "label": "Europe/Tirane"
+   },
+   "printed": {
+    "fajr": "05:29",
+    "sunrise": "07:02",
+    "dhuhr": "11:51",
+    "asr": "14:10",
+    "maghrib": "16:30",
+    "isha": "17:57"
+   },
+   "instants": {
+    "fajr": "2026-01-01T04:29:00.000Z",
+    "sunrise": "2026-01-01T06:02:00.000Z",
+    "dhuhr": "2026-01-01T10:51:00.000Z",
+    "asr": "2026-01-01T13:10:00.000Z",
+    "maghrib": "2026-01-01T15:30:00.000Z",
+    "isha": "2026-01-01T16:57:00.000Z"
+   }
+  },
+  {
+   "place": {
+    "id": "albania:2",
+    "name": "Durrës",
+    "lat": 41.3333,
+    "lon": 19.3167,
+    "tz": "Europe/Tirane"
+   },
+   "date": "2026-05-02",
+   "clock": {
+    "zone": "Europe/Tirane",
+    "offsetMinutes": 120,
+    "label": "Europe/Tirane"
+   },
+   "printed": {
+    "fajr": "03:52",
+    "sunrise": "05:32",
+    "dhuhr": "12:45",
+    "asr": "16:36",
+    "maghrib": "19:47",
+    "isha": "21:20"
+   },
+   "instants": {
+    "fajr": "2026-05-02T01:52:00.000Z",
+    "sunrise": "2026-05-02T03:32:00.000Z",
+    "dhuhr": "2026-05-02T10:45:00.000Z",
+    "asr": "2026-05-02T14:36:00.000Z",
+    "maghrib": "2026-05-02T17:47:00.000Z",
+    "isha": "2026-05-02T19:20:00.000Z"
+   }
+  },
+  {
+   "place": {
+    "id": "albania:2",
+    "name": "Durrës",
+    "lat": 41.3333,
+    "lon": 19.3167,
+    "tz": "Europe/Tirane"
+   },
+   "date": "2026-09-01",
+   "clock": {
+    "zone": "Europe/Tirane",
+    "offsetMinutes": 120,
+    "label": "Europe/Tirane"
+   },
+   "printed": {
+    "fajr": "04:31",
+    "sunrise": "06:02",
+    "dhuhr": "12:48",
+    "asr": "16:28",
+    "maghrib": "19:24",
+    "isha": "20:49"
+   },
+   "instants": {
+    "fajr": "2026-09-01T02:31:00.000Z",
+    "sunrise": "2026-09-01T04:02:00.000Z",
+    "dhuhr": "2026-09-01T10:48:00.000Z",
+    "asr": "2026-09-01T14:28:00.000Z",
+    "maghrib": "2026-09-01T17:24:00.000Z",
+    "isha": "2026-09-01T18:49:00.000Z"
+   }
+  },
+  {
+   "place": {
+    "id": "albania:2",
+    "name": "Durrës",
+    "lat": 41.3333,
+    "lon": 19.3167,
+    "tz": "Europe/Tirane"
+   },
+   "date": "2026-12-31",
+   "clock": {
+    "zone": "Europe/Tirane",
+    "offsetMinutes": 60,
+    "label": "Europe/Tirane"
+   },
+   "printed": {
+    "fajr": "05:29",
+    "sunrise": "07:01",
+    "dhuhr": "11:50",
+    "asr": "14:09",
+    "maghrib": "16:29",
+    "isha": "17:56"
+   },
+   "instants": {
+    "fajr": "2026-12-31T04:29:00.000Z",
+    "sunrise": "2026-12-31T06:01:00.000Z",
+    "dhuhr": "2026-12-31T10:50:00.000Z",
+    "asr": "2026-12-31T13:09:00.000Z",
+    "maghrib": "2026-12-31T15:29:00.000Z",
+    "isha": "2026-12-31T16:56:00.000Z"
+   }
+  },
+  {
+   "place": {
+    "id": "albania:11",
+    "name": "Korçë",
+    "lat": 41.3333,
+    "lon": 21.0667,
+    "tz": "Europe/Tirane"
+   },
+   "date": "2026-01-01",
+   "clock": {
+    "zone": "Europe/Tirane",
+    "offsetMinutes": 60,
+    "label": "Europe/Tirane"
+   },
+   "printed": {
+    "fajr": "05:22",
+    "sunrise": "06:55",
+    "dhuhr": "11:44",
+    "asr": "14:03",
+    "maghrib": "16:23",
+    "isha": "17:50"
+   },
+   "instants": {
+    "fajr": "2026-01-01T04:22:00.000Z",
+    "sunrise": "2026-01-01T05:55:00.000Z",
+    "dhuhr": "2026-01-01T10:44:00.000Z",
+    "asr": "2026-01-01T13:03:00.000Z",
+    "maghrib": "2026-01-01T15:23:00.000Z",
+    "isha": "2026-01-01T16:50:00.000Z"
+   }
+  },
+  {
+   "place": {
+    "id": "albania:11",
+    "name": "Korçë",
+    "lat": 41.3333,
+    "lon": 21.0667,
+    "tz": "Europe/Tirane"
+   },
+   "date": "2026-05-02",
+   "clock": {
+    "zone": "Europe/Tirane",
+    "offsetMinutes": 120,
+    "label": "Europe/Tirane"
+   },
+   "printed": {
+    "fajr": "03:45",
+    "sunrise": "05:25",
+    "dhuhr": "12:38",
+    "asr": "16:29",
+    "maghrib": "19:40",
+    "isha": "21:13"
+   },
+   "instants": {
+    "fajr": "2026-05-02T01:45:00.000Z",
+    "sunrise": "2026-05-02T03:25:00.000Z",
+    "dhuhr": "2026-05-02T10:38:00.000Z",
+    "asr": "2026-05-02T14:29:00.000Z",
+    "maghrib": "2026-05-02T17:40:00.000Z",
+    "isha": "2026-05-02T19:13:00.000Z"
+   }
+  },
+  {
+   "place": {
+    "id": "albania:11",
+    "name": "Korçë",
+    "lat": 41.3333,
+    "lon": 21.0667,
+    "tz": "Europe/Tirane"
+   },
+   "date": "2026-09-01",
+   "clock": {
+    "zone": "Europe/Tirane",
+    "offsetMinutes": 120,
+    "label": "Europe/Tirane"
+   },
+   "printed": {
+    "fajr": "04:24",
+    "sunrise": "05:55",
+    "dhuhr": "12:41",
+    "asr": "16:21",
+    "maghrib": "19:17",
+    "isha": "20:42"
+   },
+   "instants": {
+    "fajr": "2026-09-01T02:24:00.000Z",
+    "sunrise": "2026-09-01T03:55:00.000Z",
+    "dhuhr": "2026-09-01T10:41:00.000Z",
+    "asr": "2026-09-01T14:21:00.000Z",
+    "maghrib": "2026-09-01T17:17:00.000Z",
+    "isha": "2026-09-01T18:42:00.000Z"
+   }
+  },
+  {
+   "place": {
+    "id": "albania:11",
+    "name": "Korçë",
+    "lat": 41.3333,
+    "lon": 21.0667,
+    "tz": "Europe/Tirane"
+   },
+   "date": "2026-12-31",
+   "clock": {
+    "zone": "Europe/Tirane",
+    "offsetMinutes": 60,
+    "label": "Europe/Tirane"
+   },
+   "printed": {
+    "fajr": "05:22",
+    "sunrise": "06:54",
+    "dhuhr": "11:43",
+    "asr": "14:02",
+    "maghrib": "16:22",
+    "isha": "17:49"
+   },
+   "instants": {
+    "fajr": "2026-12-31T04:22:00.000Z",
+    "sunrise": "2026-12-31T05:54:00.000Z",
+    "dhuhr": "2026-12-31T10:43:00.000Z",
+    "asr": "2026-12-31T13:02:00.000Z",
+    "maghrib": "2026-12-31T15:22:00.000Z",
+    "isha": "2026-12-31T16:49:00.000Z"
+   }
+  },
+  {
+   "place": {
+    "id": "albania:20",
+    "name": "Shkup",
+    "lat": 41.3333,
+    "lon": 21.3167,
+    "tz": "Europe/Skopje"
+   },
+   "date": "2026-01-01",
+   "clock": {
+    "zone": "Europe/Skopje",
+    "offsetMinutes": 60,
+    "label": "Europe/Skopje"
+   },
+   "printed": {
+    "fajr": "05:21",
+    "sunrise": "06:54",
+    "dhuhr": "11:43",
+    "asr": "14:02",
+    "maghrib": "16:22",
+    "isha": "17:49"
+   },
+   "instants": {
+    "fajr": "2026-01-01T04:21:00.000Z",
+    "sunrise": "2026-01-01T05:54:00.000Z",
+    "dhuhr": "2026-01-01T10:43:00.000Z",
+    "asr": "2026-01-01T13:02:00.000Z",
+    "maghrib": "2026-01-01T15:22:00.000Z",
+    "isha": "2026-01-01T16:49:00.000Z"
+   }
+  },
+  {
+   "place": {
+    "id": "albania:20",
+    "name": "Shkup",
+    "lat": 41.3333,
+    "lon": 21.3167,
+    "tz": "Europe/Skopje"
+   },
+   "date": "2026-05-02",
+   "clock": {
+    "zone": "Europe/Skopje",
+    "offsetMinutes": 120,
+    "label": "Europe/Skopje"
+   },
+   "printed": {
+    "fajr": "03:44",
+    "sunrise": "05:24",
+    "dhuhr": "12:37",
+    "asr": "16:28",
+    "maghrib": "19:39",
+    "isha": "21:12"
+   },
+   "instants": {
+    "fajr": "2026-05-02T01:44:00.000Z",
+    "sunrise": "2026-05-02T03:24:00.000Z",
+    "dhuhr": "2026-05-02T10:37:00.000Z",
+    "asr": "2026-05-02T14:28:00.000Z",
+    "maghrib": "2026-05-02T17:39:00.000Z",
+    "isha": "2026-05-02T19:12:00.000Z"
+   }
+  },
+  {
+   "place": {
+    "id": "albania:20",
+    "name": "Shkup",
+    "lat": 41.3333,
+    "lon": 21.3167,
+    "tz": "Europe/Skopje"
+   },
+   "date": "2026-09-01",
+   "clock": {
+    "zone": "Europe/Skopje",
+    "offsetMinutes": 120,
+    "label": "Europe/Skopje"
+   },
+   "printed": {
+    "fajr": "04:23",
+    "sunrise": "05:54",
+    "dhuhr": "12:40",
+    "asr": "16:20",
+    "maghrib": "19:16",
+    "isha": "20:41"
+   },
+   "instants": {
+    "fajr": "2026-09-01T02:23:00.000Z",
+    "sunrise": "2026-09-01T03:54:00.000Z",
+    "dhuhr": "2026-09-01T10:40:00.000Z",
+    "asr": "2026-09-01T14:20:00.000Z",
+    "maghrib": "2026-09-01T17:16:00.000Z",
+    "isha": "2026-09-01T18:41:00.000Z"
+   }
+  },
+  {
+   "place": {
+    "id": "albania:20",
+    "name": "Shkup",
+    "lat": 41.3333,
+    "lon": 21.3167,
+    "tz": "Europe/Skopje"
+   },
+   "date": "2026-12-31",
+   "clock": {
+    "zone": "Europe/Skopje",
+    "offsetMinutes": 60,
+    "label": "Europe/Skopje"
+   },
+   "printed": {
+    "fajr": "05:21",
+    "sunrise": "06:53",
+    "dhuhr": "11:42",
+    "asr": "14:01",
+    "maghrib": "16:21",
+    "isha": "17:48"
+   },
+   "instants": {
+    "fajr": "2026-12-31T04:21:00.000Z",
+    "sunrise": "2026-12-31T05:53:00.000Z",
+    "dhuhr": "2026-12-31T10:42:00.000Z",
+    "asr": "2026-12-31T13:01:00.000Z",
+    "maghrib": "2026-12-31T15:21:00.000Z",
+    "isha": "2026-12-31T16:48:00.000Z"
+   }
+  },
+  {
+   "place": {
+    "id": "bulgaria:1",
+    "name": "Sofia",
+    "lat": 42.708,
+    "lon": 23.3219,
+    "tz": "Europe/Sofia"
+   },
+   "date": "2026-01-01",
+   "clock": {
+    "zone": "Europe/Sofia",
+    "offsetMinutes": 120,
+    "label": "Europe/Sofia"
+   },
+   "printed": {
+    "fajr": "06:14",
+    "sunrise": "07:50",
+    "dhuhr": "12:35",
+    "asr": "14:49",
+    "maghrib": "17:10",
+    "isha": "18:39"
+   },
+   "instants": {
+    "fajr": "2026-01-01T04:14:00.000Z",
+    "sunrise": "2026-01-01T05:50:00.000Z",
+    "dhuhr": "2026-01-01T10:35:00.000Z",
+    "asr": "2026-01-01T12:49:00.000Z",
+    "maghrib": "2026-01-01T15:10:00.000Z",
+    "isha": "2026-01-01T16:39:00.000Z"
+   }
+  },
+  {
+   "place": {
+    "id": "bulgaria:1",
+    "name": "Sofia",
+    "lat": 42.708,
+    "lon": 23.3219,
+    "tz": "Europe/Sofia"
+   },
+   "date": "2026-05-02",
+   "clock": {
+    "zone": "Europe/Sofia",
+    "offsetMinutes": 180,
+    "label": "Europe/Sofia"
+   },
+   "printed": {
+    "fajr": "04:30",
+    "sunrise": "06:14",
+    "dhuhr": "13:29",
+    "asr": "17:21",
+    "maghrib": "20:34",
+    "isha": "22:10"
+   },
+   "instants": {
+    "fajr": "2026-05-02T01:30:00.000Z",
+    "sunrise": "2026-05-02T03:14:00.000Z",
+    "dhuhr": "2026-05-02T10:29:00.000Z",
+    "asr": "2026-05-02T14:21:00.000Z",
+    "maghrib": "2026-05-02T17:34:00.000Z",
+    "isha": "2026-05-02T19:10:00.000Z"
+   }
+  },
+  {
+   "place": {
+    "id": "bulgaria:1",
+    "name": "Sofia",
+    "lat": 42.708,
+    "lon": 23.3219,
+    "tz": "Europe/Sofia"
+   },
+   "date": "2026-09-01",
+   "clock": {
+    "zone": "Europe/Sofia",
+    "offsetMinutes": 180,
+    "label": "Europe/Sofia"
+   },
+   "printed": {
+    "fajr": "05:09",
+    "sunrise": "06:43",
+    "dhuhr": "13:32",
+    "asr": "17:13",
+    "maghrib": "20:11",
+    "isha": "21:38"
+   },
+   "instants": {
+    "fajr": "2026-09-01T02:09:00.000Z",
+    "sunrise": "2026-09-01T03:43:00.000Z",
+    "dhuhr": "2026-09-01T10:32:00.000Z",
+    "asr": "2026-09-01T14:13:00.000Z",
+    "maghrib": "2026-09-01T17:11:00.000Z",
+    "isha": "2026-09-01T18:38:00.000Z"
+   }
+  },
+  {
+   "place": {
+    "id": "bulgaria:1",
+    "name": "Sofia",
+    "lat": 42.708,
+    "lon": 23.3219,
+    "tz": "Europe/Sofia"
+   },
+   "date": "2026-12-31",
+   "clock": {
+    "zone": "Europe/Sofia",
+    "offsetMinutes": 120,
+    "label": "Europe/Sofia"
+   },
+   "printed": {
+    "fajr": "06:14",
+    "sunrise": "07:50",
+    "dhuhr": "12:34",
+    "asr": "14:48",
+    "maghrib": "17:09",
+    "isha": "18:38"
+   },
+   "instants": {
+    "fajr": "2026-12-31T04:14:00.000Z",
+    "sunrise": "2026-12-31T05:50:00.000Z",
+    "dhuhr": "2026-12-31T10:34:00.000Z",
+    "asr": "2026-12-31T12:48:00.000Z",
+    "maghrib": "2026-12-31T15:09:00.000Z",
+    "isha": "2026-12-31T16:38:00.000Z"
+   }
+  },
+  {
+   "place": {
+    "id": "bulgaria:2",
+    "name": "Aytos",
+    "lat": 42.708,
+    "lon": 27.0719,
+    "tz": "Europe/Sofia"
+   },
+   "date": "2026-01-01",
+   "clock": {
+    "zone": "Europe/Sofia",
+    "offsetMinutes": 120,
+    "label": "Europe/Sofia"
+   },
+   "printed": {
+    "fajr": "05:59",
+    "sunrise": "07:35",
+    "dhuhr": "12:20",
+    "asr": "14:34",
+    "maghrib": "16:55",
+    "isha": "18:24"
+   },
+   "instants": {
+    "fajr": "2026-01-01T03:59:00.000Z",
+    "sunrise": "2026-01-01T05:35:00.000Z",
+    "dhuhr": "2026-01-01T10:20:00.000Z",
+    "asr": "2026-01-01T12:34:00.000Z",
+    "maghrib": "2026-01-01T14:55:00.000Z",
+    "isha": "2026-01-01T16:24:00.000Z"
+   }
+  },
+  {
+   "place": {
+    "id": "bulgaria:2",
+    "name": "Aytos",
+    "lat": 42.708,
+    "lon": 27.0719,
+    "tz": "Europe/Sofia"
+   },
+   "date": "2026-05-02",
+   "clock": {
+    "zone": "Europe/Sofia",
+    "offsetMinutes": 180,
+    "label": "Europe/Sofia"
+   },
+   "printed": {
+    "fajr": "04:15",
+    "sunrise": "05:59",
+    "dhuhr": "13:14",
+    "asr": "17:06",
+    "maghrib": "20:19",
+    "isha": "21:55"
+   },
+   "instants": {
+    "fajr": "2026-05-02T01:15:00.000Z",
+    "sunrise": "2026-05-02T02:59:00.000Z",
+    "dhuhr": "2026-05-02T10:14:00.000Z",
+    "asr": "2026-05-02T14:06:00.000Z",
+    "maghrib": "2026-05-02T17:19:00.000Z",
+    "isha": "2026-05-02T18:55:00.000Z"
+   }
+  },
+  {
+   "place": {
+    "id": "bulgaria:2",
+    "name": "Aytos",
+    "lat": 42.708,
+    "lon": 27.0719,
+    "tz": "Europe/Sofia"
+   },
+   "date": "2026-09-01",
+   "clock": {
+    "zone": "Europe/Sofia",
+    "offsetMinutes": 180,
+    "label": "Europe/Sofia"
+   },
+   "printed": {
+    "fajr": "04:54",
+    "sunrise": "06:28",
+    "dhuhr": "13:17",
+    "asr": "16:58",
+    "maghrib": "19:56",
+    "isha": "21:23"
+   },
+   "instants": {
+    "fajr": "2026-09-01T01:54:00.000Z",
+    "sunrise": "2026-09-01T03:28:00.000Z",
+    "dhuhr": "2026-09-01T10:17:00.000Z",
+    "asr": "2026-09-01T13:58:00.000Z",
+    "maghrib": "2026-09-01T16:56:00.000Z",
+    "isha": "2026-09-01T18:23:00.000Z"
+   }
+  },
+  {
+   "place": {
+    "id": "bulgaria:2",
+    "name": "Aytos",
+    "lat": 42.708,
+    "lon": 27.0719,
+    "tz": "Europe/Sofia"
+   },
+   "date": "2026-12-31",
+   "clock": {
+    "zone": "Europe/Sofia",
+    "offsetMinutes": 120,
+    "label": "Europe/Sofia"
+   },
+   "printed": {
+    "fajr": "05:59",
+    "sunrise": "07:35",
+    "dhuhr": "12:19",
+    "asr": "14:33",
+    "maghrib": "16:54",
+    "isha": "18:23"
+   },
+   "instants": {
+    "fajr": "2026-12-31T03:59:00.000Z",
+    "sunrise": "2026-12-31T05:35:00.000Z",
+    "dhuhr": "2026-12-31T10:19:00.000Z",
+    "asr": "2026-12-31T12:33:00.000Z",
+    "maghrib": "2026-12-31T14:54:00.000Z",
+    "isha": "2026-12-31T16:23:00.000Z"
+   }
+  },
+  {
+   "place": {
+    "id": "bulgaria:3",
+    "name": "Balchik",
+    "lat": 42.708,
+    "lon": 27.8219,
+    "tz": "Europe/Sofia"
+   },
+   "date": "2026-01-01",
+   "clock": {
+    "zone": "Europe/Sofia",
+    "offsetMinutes": 120,
+    "label": "Europe/Sofia"
+   },
+   "printed": {
+    "fajr": "05:56",
+    "sunrise": "07:32",
+    "dhuhr": "12:17",
+    "asr": "14:31",
+    "maghrib": "16:52",
+    "isha": "18:21"
+   },
+   "instants": {
+    "fajr": "2026-01-01T03:56:00.000Z",
+    "sunrise": "2026-01-01T05:32:00.000Z",
+    "dhuhr": "2026-01-01T10:17:00.000Z",
+    "asr": "2026-01-01T12:31:00.000Z",
+    "maghrib": "2026-01-01T14:52:00.000Z",
+    "isha": "2026-01-01T16:21:00.000Z"
+   }
+  },
+  {
+   "place": {
+    "id": "bulgaria:3",
+    "name": "Balchik",
+    "lat": 42.708,
+    "lon": 27.8219,
+    "tz": "Europe/Sofia"
+   },
+   "date": "2026-05-02",
+   "clock": {
+    "zone": "Europe/Sofia",
+    "offsetMinutes": 180,
+    "label": "Europe/Sofia"
+   },
+   "printed": {
+    "fajr": "04:12",
+    "sunrise": "05:56",
+    "dhuhr": "13:11",
+    "asr": "17:03",
+    "maghrib": "20:16",
+    "isha": "21:52"
+   },
+   "instants": {
+    "fajr": "2026-05-02T01:12:00.000Z",
+    "sunrise": "2026-05-02T02:56:00.000Z",
+    "dhuhr": "2026-05-02T10:11:00.000Z",
+    "asr": "2026-05-02T14:03:00.000Z",
+    "maghrib": "2026-05-02T17:16:00.000Z",
+    "isha": "2026-05-02T18:52:00.000Z"
+   }
+  },
+  {
+   "place": {
+    "id": "bulgaria:3",
+    "name": "Balchik",
+    "lat": 42.708,
+    "lon": 27.8219,
+    "tz": "Europe/Sofia"
+   },
+   "date": "2026-09-01",
+   "clock": {
+    "zone": "Europe/Sofia",
+    "offsetMinutes": 180,
+    "label": "Europe/Sofia"
+   },
+   "printed": {
+    "fajr": "04:51",
+    "sunrise": "06:25",
+    "dhuhr": "13:14",
+    "asr": "16:55",
+    "maghrib": "19:53",
+    "isha": "21:20"
+   },
+   "instants": {
+    "fajr": "2026-09-01T01:51:00.000Z",
+    "sunrise": "2026-09-01T03:25:00.000Z",
+    "dhuhr": "2026-09-01T10:14:00.000Z",
+    "asr": "2026-09-01T13:55:00.000Z",
+    "maghrib": "2026-09-01T16:53:00.000Z",
+    "isha": "2026-09-01T18:20:00.000Z"
+   }
+  },
+  {
+   "place": {
+    "id": "bulgaria:3",
+    "name": "Balchik",
+    "lat": 42.708,
+    "lon": 27.8219,
+    "tz": "Europe/Sofia"
+   },
+   "date": "2026-12-31",
+   "clock": {
+    "zone": "Europe/Sofia",
+    "offsetMinutes": 120,
+    "label": "Europe/Sofia"
+   },
+   "printed": {
+    "fajr": "05:56",
+    "sunrise": "07:32",
+    "dhuhr": "12:16",
+    "asr": "14:30",
+    "maghrib": "16:51",
+    "isha": "18:20"
+   },
+   "instants": {
+    "fajr": "2026-12-31T03:56:00.000Z",
+    "sunrise": "2026-12-31T05:32:00.000Z",
+    "dhuhr": "2026-12-31T10:16:00.000Z",
+    "asr": "2026-12-31T12:30:00.000Z",
+    "maghrib": "2026-12-31T14:51:00.000Z",
+    "isha": "2026-12-31T16:20:00.000Z"
    }
   }
  ]

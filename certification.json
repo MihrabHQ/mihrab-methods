@@ -334,5 +334,51 @@
       "sha256": "1d7a0850ff60e86588df21070a543c90da3e70354c2bc3eed59b1cbfdc0fba4c"
     },
     "revision": 1
+  },
+  "albania": {
+    "certified": true,
+    "checkedAt": "2026-11-11",
+    "places": 22,
+    "checks": [
+      {
+        "tables": "Albania — the Community’s calendar",
+        "places": 22,
+        "times": 48180,
+        "off": 0,
+        "offWithoutCorrections": 924,
+        "from": "2026-01-01",
+        "to": "2026-12-31"
+      }
+    ],
+    "corrections": {
+      "from": "2026-01-01",
+      "to": "2026-12-31",
+      "entries": 924,
+      "sha256": "cb5b9d12609c0522b81468faceda1ac184afbe440225d23781aaa8f4b08f16ca"
+    },
+    "revision": 1
+  },
+  "bulgaria": {
+    "certified": true,
+    "checkedAt": "2026-11-11",
+    "places": 48,
+    "checks": [
+      {
+        "tables": "Bulgaria — the Grand Mufti’s Office’s timetable",
+        "places": 48,
+        "times": 105120,
+        "off": 0,
+        "offWithoutCorrections": 2448,
+        "from": "2026-01-01",
+        "to": "2026-12-31"
+      }
+    ],
+    "corrections": {
+      "from": "2026-01-01",
+      "to": "2026-12-31",
+      "entries": 2448,
+      "sha256": "2639c48418d7e7539dd2364aaeddd6f87953cbbd7c7f459bdf48d8ba157bfc63"
+    },
+    "revision": 1
   }
 }

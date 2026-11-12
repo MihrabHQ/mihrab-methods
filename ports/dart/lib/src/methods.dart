@@ -1,5 +1,5 @@
 // The methods: Sweden and Diyanet (the Congress method), Morocco, Algeria,
-// Indonesia, Türkiye Takvimi, Kazakhstan, Egypt, Brunei, Qatar, Kuwait, Jordan, Tatarstan and Russia's Central Muftiate. A port of src/methods/*.ts — the TypeScript is the reference,
+// Indonesia, Türkiye Takvimi, Kazakhstan, Egypt, Brunei, Qatar, Kuwait, Jordan, Tatarstan, Russia's Central Muftiate, Albania and Bulgaria. A port of src/methods/*.ts — the TypeScript is the reference,
 // docs/methods.md says what each does, and the vector check holds this to it.
 //
 // Every function takes a civil date with the month 0-based, as the TypeScript
@@ -630,6 +630,52 @@ DayMinutes? cdumMinutes(double lat, double lon, int year, int month0, int day) {
     p.isha.isFinite ? p.isha : p.maghrib + ((r.isha - r.maghrib) * night / there).floorToDouble(),
   );
 }
+
+// ---------------------------------------------------------------- Albania and Bulgaria: a reference town's table
+
+/// The town a table is computed at, when the day's sun is taken (days after 0h UT of the date), and the margins.
+class TownTable {
+  final double lat, lon, sunAt;
+  final List<double> margins;
+  const TownTable(this.lat, this.lon, this.sunAt, this.margins);
+}
+
+const albaniaTable = TownTable(41.3333, 19.8167, 0.0, [0.0, -7.0, 5.0, 4.0, 7.0, 0.0]);
+const bulgariaTable = TownTable(42.708, 23.3219, -13.0 / 24, [-1.0, -7.0, 5.0, 4.0, 7.0, 0.0]);
+
+/// The whole minutes a town adds to the reference town's table (west later, east earlier).
+double townMinutes(TownTable table, double lon) => ((table.lon - lon) * 4 + 0.5).floorToDouble();
+
+/// Before rounding: the reference town's table — the sun taken once for the whole day — plus the town's minutes.
+DayMinutes townTableRawMinutes(TownTable table, double lon, int year, int month0, int day, {double asrShadow = 1.0}) {
+  final s = meeusApparentSun(_d0Of(year, month0, day) + table.sunAt);
+  final add = townMinutes(table, lon);
+  final noon = 720 - 4 * table.lon - s.eot;
+  final sp = sin(table.lat * rad), cp = cos(table.lat * rad);
+  double event(double altitude, double sign) {
+    final c = (sin(altitude * rad) - sp * sin(s.dec)) / (cp * cos(s.dec));
+    return noon + (sign * 4 * acos(c)) / rad;
+  }
+
+  final asrAltitude = atan(1 / (asrShadow + tan((table.lat * rad - s.dec).abs()))) / rad;
+  final m = table.margins;
+  return DayMinutes(
+    event(-18.0, -1.0) + m[0] + add,
+    event(-0.8333, -1.0) + m[1] + add,
+    noon + m[2] + add,
+    event(asrAltitude, 1.0) + m[3] + add,
+    event(-0.8333, 1.0) + m[4] + add,
+    event(-17.0, 1.0) + m[5] + add,
+  );
+}
+
+/// Tirana's table, the sun taken at 0h UT of the date; rounded to the nearest minute.
+DayMinutes? albaniaMinutes(double lon, int year, int month0, int day, {double asrShadow = 1.0}) =>
+    townTableRawMinutes(albaniaTable, lon, year, month0, day, asrShadow: asrShadow).mapped((v) => (v + 0.5).floorToDouble());
+
+/// Sofia's table, the sun taken at 11h UT of the day before; rounded to the nearest minute.
+DayMinutes? bulgariaMinutes(double lon, int year, int month0, int day, {double asrShadow = 1.0}) =>
+    townTableRawMinutes(bulgariaTable, lon, year, month0, day, asrShadow: asrShadow).mapped((v) => (v + 0.5).floorToDouble());
 
 // ---------------------------------------------------------------- Sweden and Diyanet: the Congress method
 

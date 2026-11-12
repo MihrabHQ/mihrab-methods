@@ -236,6 +236,8 @@ export function checkAuthority(a: CheckRun): Result | null {
     jordan: 'Jordan — the Ministry’s times',
     tatarstan: 'Tatarstan — the Administration’s timetable',
     cdum: 'Russia — the Central Muftiate’s timetables',
+    albania: 'Albania — the Community’s calendar',
+    bulgaria: 'Bulgaria — the Grand Mufti’s Office’s timetable',
   };
   return check(names[a], placesOf(a), path.join(TABLES, a, 'v1/cities'));
 }

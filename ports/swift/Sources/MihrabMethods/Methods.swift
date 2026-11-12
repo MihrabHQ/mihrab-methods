@@ -1,5 +1,5 @@
 // The methods: Sweden and Diyanet (the Congress method), Morocco, Algeria,
-// Indonesia, Türkiye Takvimi, Kazakhstan, Egypt, Brunei, Qatar, Kuwait, Jordan, Tatarstan and Russia's Central Muftiate. A port of src/methods/*.ts — the TypeScript is the reference,
+// Indonesia, Türkiye Takvimi, Kazakhstan, Egypt, Brunei, Qatar, Kuwait, Jordan, Tatarstan, Russia's Central Muftiate, Albania and Bulgaria. A port of src/methods/*.ts — the TypeScript is the reference,
 // docs/methods.md says what each does, and the vector check holds this to it.
 //
 // Every function takes a civil date with the month 0-based, as the TypeScript
@@ -623,6 +623,55 @@ func cdumMinutes(_ lat: Double, _ lon: Double, _ year: Int, _ month0: Int, _ day
         asr: p.asr,
         maghrib: p.maghrib,
         isha: p.isha.isFinite ? p.isha : p.maghrib + floor((r.isha - r.maghrib) * night / there))
+}
+
+// ---------------------------------------------------------------- Albania and Bulgaria: a reference town's table
+
+/// The town a table is computed at, when the day's sun is taken (days after 0h UT of the date), and the margins.
+struct TownTable {
+    let lat: Double
+    let lon: Double
+    let sunAt: Double
+    let margins: DayMinutes
+}
+
+let ALBANIA_TABLE = TownTable(lat: 41.3333, lon: 19.8167, sunAt: 0, margins: DayMinutes(fajr: 0, sunrise: -7, dhuhr: 5, asr: 4, maghrib: 7, isha: 0))
+let BULGARIA_TABLE = TownTable(lat: 42.708, lon: 23.3219, sunAt: -13.0 / 24, margins: DayMinutes(fajr: -1, sunrise: -7, dhuhr: 5, asr: 4, maghrib: 7, isha: 0))
+
+/// The whole minutes a town adds to the reference town's table (west later, east earlier).
+func townMinutes(_ table: TownTable, _ lon: Double) -> Double {
+    return floor((table.lon - lon) * 4 + 0.5)
+}
+
+/// Before rounding: the reference town's table — the sun taken once for the whole day — plus the town's minutes.
+func townTableRawMinutes(_ table: TownTable, _ lon: Double, _ year: Int, _ month0: Int, _ day: Int, asrShadow: Double = 1) -> DayMinutes {
+    let s = meeusApparentSun(d0Of(year, month0, day) + table.sunAt)
+    let add = townMinutes(table, lon)
+    let noon = 720 - 4 * table.lon - s.eot
+    let sp = sin(table.lat * RAD), cp = cos(table.lat * RAD)
+    func event(_ altitude: Double, _ sign: Double) -> Double {
+        let c = (sin(altitude * RAD) - sp * sin(s.dec)) / (cp * cos(s.dec))
+        return noon + (sign * 4 * acos(c)) / RAD
+    }
+    let asrAltitude = atan(1 / (asrShadow + tan(abs(table.lat * RAD - s.dec)))) / RAD
+    let m = table.margins
+    return DayMinutes(
+        fajr: event(-18, -1) + m.fajr + add,
+        sunrise: event(-0.8333, -1) + m.sunrise + add,
+        dhuhr: noon + m.dhuhr + add,
+        asr: event(asrAltitude, 1) + m.asr + add,
+        maghrib: event(-0.8333, 1) + m.maghrib + add,
+        isha: event(-17, 1) + m.isha + add)
+}
+
+/// Tirana's table, the sun taken at 0h UT of the date; rounded to the nearest minute.
+func albaniaMinutes(_ lon: Double, _ year: Int, _ month0: Int, _ day: Int, asrShadow: Double = 1) -> DayMinutes? {
+    return townTableRawMinutes(ALBANIA_TABLE, lon, year, month0, day, asrShadow: asrShadow).mapped { floor($0 + 0.5) }
+}
+
+/// Sofia's table, the sun taken at 11h UT of the day before; rounded to the nearest minute.
+func bulgariaMinutes(_ lon: Double, _ year: Int, _ month0: Int, _ day: Int, asrShadow: Double = 1) -> DayMinutes? {
+    return townTableRawMinutes(BULGARIA_TABLE, lon, year, month0, day, asrShadow: asrShadow).mapped { floor($0 + 0.5) }
 }
 
 // ---------------------------------------------------------------- Sweden and Diyanet: the Congress method

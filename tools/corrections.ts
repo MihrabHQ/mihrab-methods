@@ -30,7 +30,7 @@ type SwedenCorrections = CorrectionsFile;
 
 const WORLD = process.argv.includes('diyanet');
 /** A national authority's own tables (Morocco, Algeria, Indonesia), at its places' points. */
-const NATIONAL = (['morocco', 'algeria', 'indonesia', 'turkiyetakvimi', 'kazakhstan', 'egypt', 'brunei', 'qatar', 'kuwait', 'jordan', 'tatarstan', 'cdum'] as const).find(a => process.argv.includes(a));
+const NATIONAL = (['morocco', 'algeria', 'indonesia', 'turkiyetakvimi', 'kazakhstan', 'egypt', 'brunei', 'qatar', 'kuwait', 'jordan', 'tatarstan', 'cdum', 'albania', 'bulgaria'] as const).find(a => process.argv.includes(a));
 const MOROCCO = NATIONAL !== undefined;
 const FILE =
   NATIONAL === 'morocco' ? MOROCCO_CORRECTIONS_FILE
@@ -45,6 +45,8 @@ const FILE =
   : NATIONAL === 'jordan' ? path.join(DIR, 'jordan.json')
   : NATIONAL === 'tatarstan' ? path.join(DIR, 'tatarstan.json')
   : NATIONAL === 'cdum' ? path.join(DIR, 'cdum.json')
+  : NATIONAL === 'albania' ? path.join(DIR, 'albania.json')
+  : NATIONAL === 'bulgaria' ? path.join(DIR, 'bulgaria.json')
   : WORLD ? DIYANET_CORRECTIONS_FILE : CORRECTIONS_FILE;
 const TZ = 'Europe/Stockholm';
 const pts = JSON.parse(fs.readFileSync(path.join(__dirname, '..', 'data/places/diyanet-sweden-points.json'), 'utf8')) as Record<string, { name: string; lat: number; lon: number }>;
