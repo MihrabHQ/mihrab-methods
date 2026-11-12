@@ -17,7 +17,8 @@
   "cdum": 1,
   "albania": 1,
   "bulgaria": 1,
-  "banuri": 1
+  "banuri": 1,
+  "uae": 1
  },
  "cases": [
   {
@@ -6934,6 +6935,414 @@
     "asr": "2026-12-31T10:36:00.000Z",
     "maghrib": "2026-12-31T12:14:00.000Z",
     "isha": "2026-12-31T13:44:00.000Z"
+   }
+  },
+  {
+   "place": {
+    "id": "uae:36",
+    "name": "Abu Dhabi",
+    "lat": 24.454,
+    "lon": 54.3032,
+    "tz": "Asia/Dubai",
+    "dipDeg": 0.54,
+    "dipMaghribDeg": 0.54,
+    "fajrMinutes": -1.38
+   },
+   "date": "2026-01-01",
+   "clock": {
+    "zone": "Asia/Dubai",
+    "offsetMinutes": 240,
+    "label": "Asia/Dubai"
+   },
+   "printed": {
+    "fajr": "05:44",
+    "sunrise": "07:03",
+    "dhuhr": "12:28",
+    "asr": "15:26",
+    "maghrib": "17:49",
+    "isha": "19:07"
+   },
+   "instants": {
+    "fajr": "2026-01-01T01:44:00.000Z",
+    "sunrise": "2026-01-01T03:03:00.000Z",
+    "dhuhr": "2026-01-01T08:28:00.000Z",
+    "asr": "2026-01-01T11:26:00.000Z",
+    "maghrib": "2026-01-01T13:49:00.000Z",
+    "isha": "2026-01-01T15:07:00.000Z"
+   }
+  },
+  {
+   "place": {
+    "id": "uae:36",
+    "name": "Abu Dhabi",
+    "lat": 24.454,
+    "lon": 54.3032,
+    "tz": "Asia/Dubai",
+    "dipDeg": 0.54,
+    "dipMaghribDeg": 0.54,
+    "fajrMinutes": -1.38
+   },
+   "date": "2026-05-02",
+   "clock": {
+    "zone": "Asia/Dubai",
+    "offsetMinutes": 240,
+    "label": "Asia/Dubai"
+   },
+   "printed": {
+    "fajr": "04:25",
+    "sunrise": "05:43",
+    "dhuhr": "12:22",
+    "asr": "15:47",
+    "maghrib": "18:55",
+    "isha": "20:14"
+   },
+   "instants": {
+    "fajr": "2026-05-02T00:25:00.000Z",
+    "sunrise": "2026-05-02T01:43:00.000Z",
+    "dhuhr": "2026-05-02T08:22:00.000Z",
+    "asr": "2026-05-02T11:47:00.000Z",
+    "maghrib": "2026-05-02T14:55:00.000Z",
+    "isha": "2026-05-02T16:14:00.000Z"
+   }
+  },
+  {
+   "place": {
+    "id": "uae:36",
+    "name": "Abu Dhabi",
+    "lat": 24.454,
+    "lon": 54.3032,
+    "tz": "Asia/Dubai",
+    "dipDeg": 0.54,
+    "dipMaghribDeg": 0.54,
+    "fajrMinutes": -1.38
+   },
+   "date": "2026-09-01",
+   "clock": {
+    "zone": "Asia/Dubai",
+    "offsetMinutes": 240,
+    "label": "Asia/Dubai"
+   },
+   "printed": {
+    "fajr": "04:45",
+    "sunrise": "06:00",
+    "dhuhr": "12:25",
+    "asr": "15:51",
+    "maghrib": "18:44",
+    "isha": "19:59"
+   },
+   "instants": {
+    "fajr": "2026-09-01T00:45:00.000Z",
+    "sunrise": "2026-09-01T02:00:00.000Z",
+    "dhuhr": "2026-09-01T08:25:00.000Z",
+    "asr": "2026-09-01T11:51:00.000Z",
+    "maghrib": "2026-09-01T14:44:00.000Z",
+    "isha": "2026-09-01T15:59:00.000Z"
+   }
+  },
+  {
+   "place": {
+    "id": "uae:36",
+    "name": "Abu Dhabi",
+    "lat": 24.454,
+    "lon": 54.3032,
+    "tz": "Asia/Dubai",
+    "dipDeg": 0.54,
+    "dipMaghribDeg": 0.54,
+    "fajrMinutes": -1.38
+   },
+   "date": "2026-12-31",
+   "clock": {
+    "zone": "Asia/Dubai",
+    "offsetMinutes": 240,
+    "label": "Asia/Dubai"
+   },
+   "printed": {
+    "fajr": "05:44",
+    "sunrise": "07:02",
+    "dhuhr": "12:28",
+    "asr": "15:25",
+    "maghrib": "17:48",
+    "isha": "19:06"
+   },
+   "instants": {
+    "fajr": "2026-12-31T01:44:00.000Z",
+    "sunrise": "2026-12-31T03:02:00.000Z",
+    "dhuhr": "2026-12-31T08:28:00.000Z",
+    "asr": "2026-12-31T11:25:00.000Z",
+    "maghrib": "2026-12-31T13:48:00.000Z",
+    "isha": "2026-12-31T15:06:00.000Z"
+   }
+  },
+  {
+   "place": {
+    "id": "uae:56",
+    "name": "Liwa",
+    "lat": 22.95,
+    "lon": 53.8059,
+    "tz": "Asia/Dubai",
+    "dipDeg": 0.57,
+    "dipMaghribDeg": 0.78,
+    "fajrMinutes": -0.02
+   },
+   "date": "2026-01-01",
+   "clock": {
+    "zone": "Asia/Dubai",
+    "offsetMinutes": 240,
+    "label": "Asia/Dubai"
+   },
+   "printed": {
+    "fajr": "05:46",
+    "sunrise": "07:03",
+    "dhuhr": "12:30",
+    "asr": "15:31",
+    "maghrib": "17:55",
+    "isha": "19:11"
+   },
+   "instants": {
+    "fajr": "2026-01-01T01:46:00.000Z",
+    "sunrise": "2026-01-01T03:03:00.000Z",
+    "dhuhr": "2026-01-01T08:30:00.000Z",
+    "asr": "2026-01-01T11:31:00.000Z",
+    "maghrib": "2026-01-01T13:55:00.000Z",
+    "isha": "2026-01-01T15:11:00.000Z"
+   }
+  },
+  {
+   "place": {
+    "id": "uae:56",
+    "name": "Liwa",
+    "lat": 22.95,
+    "lon": 53.8059,
+    "tz": "Asia/Dubai",
+    "dipDeg": 0.57,
+    "dipMaghribDeg": 0.78,
+    "fajrMinutes": -0.02
+   },
+   "date": "2026-05-02",
+   "clock": {
+    "zone": "Asia/Dubai",
+    "offsetMinutes": 240,
+    "label": "Asia/Dubai"
+   },
+   "printed": {
+    "fajr": "04:31",
+    "sunrise": "05:49",
+    "dhuhr": "12:24",
+    "asr": "15:46",
+    "maghrib": "18:56",
+    "isha": "20:13"
+   },
+   "instants": {
+    "fajr": "2026-05-02T00:31:00.000Z",
+    "sunrise": "2026-05-02T01:49:00.000Z",
+    "dhuhr": "2026-05-02T08:24:00.000Z",
+    "asr": "2026-05-02T11:46:00.000Z",
+    "maghrib": "2026-05-02T14:56:00.000Z",
+    "isha": "2026-05-02T16:13:00.000Z"
+   }
+  },
+  {
+   "place": {
+    "id": "uae:56",
+    "name": "Liwa",
+    "lat": 22.95,
+    "lon": 53.8059,
+    "tz": "Asia/Dubai",
+    "dipDeg": 0.57,
+    "dipMaghribDeg": 0.78,
+    "fajrMinutes": -0.02
+   },
+   "date": "2026-09-01",
+   "clock": {
+    "zone": "Asia/Dubai",
+    "offsetMinutes": 240,
+    "label": "Asia/Dubai"
+   },
+   "printed": {
+    "fajr": "04:50",
+    "sunrise": "06:05",
+    "dhuhr": "12:27",
+    "asr": "15:52",
+    "maghrib": "18:46",
+    "isha": "19:59"
+   },
+   "instants": {
+    "fajr": "2026-09-01T00:50:00.000Z",
+    "sunrise": "2026-09-01T02:05:00.000Z",
+    "dhuhr": "2026-09-01T08:27:00.000Z",
+    "asr": "2026-09-01T11:52:00.000Z",
+    "maghrib": "2026-09-01T14:46:00.000Z",
+    "isha": "2026-09-01T15:59:00.000Z"
+   }
+  },
+  {
+   "place": {
+    "id": "uae:56",
+    "name": "Liwa",
+    "lat": 22.95,
+    "lon": 53.8059,
+    "tz": "Asia/Dubai",
+    "dipDeg": 0.57,
+    "dipMaghribDeg": 0.78,
+    "fajrMinutes": -0.02
+   },
+   "date": "2026-12-31",
+   "clock": {
+    "zone": "Asia/Dubai",
+    "offsetMinutes": 240,
+    "label": "Asia/Dubai"
+   },
+   "printed": {
+    "fajr": "05:45",
+    "sunrise": "07:03",
+    "dhuhr": "12:30",
+    "asr": "15:30",
+    "maghrib": "17:54",
+    "isha": "19:10"
+   },
+   "instants": {
+    "fajr": "2026-12-31T01:45:00.000Z",
+    "sunrise": "2026-12-31T03:03:00.000Z",
+    "dhuhr": "2026-12-31T08:30:00.000Z",
+    "asr": "2026-12-31T11:30:00.000Z",
+    "maghrib": "2026-12-31T13:54:00.000Z",
+    "isha": "2026-12-31T15:10:00.000Z"
+   }
+  },
+  {
+   "place": {
+    "id": "uae:80",
+    "name": "Jebel Jais",
+    "lat": 25.946,
+    "lon": 56.1686,
+    "tz": "Asia/Dubai",
+    "dipDeg": 1.645,
+    "dipMaghribDeg": 1.645,
+    "fajrMinutes": 0
+   },
+   "date": "2026-01-01",
+   "clock": {
+    "zone": "Asia/Dubai",
+    "offsetMinutes": 240,
+    "label": "Asia/Dubai"
+   },
+   "printed": {
+    "fajr": "05:40",
+    "sunrise": "06:54",
+    "dhuhr": "12:21",
+    "asr": "15:16",
+    "maghrib": "17:44",
+    "isha": "18:57"
+   },
+   "instants": {
+    "fajr": "2026-01-01T01:40:00.000Z",
+    "sunrise": "2026-01-01T02:54:00.000Z",
+    "dhuhr": "2026-01-01T08:21:00.000Z",
+    "asr": "2026-01-01T11:16:00.000Z",
+    "maghrib": "2026-01-01T13:44:00.000Z",
+    "isha": "2026-01-01T14:57:00.000Z"
+   }
+  },
+  {
+   "place": {
+    "id": "uae:80",
+    "name": "Jebel Jais",
+    "lat": 25.946,
+    "lon": 56.1686,
+    "tz": "Asia/Dubai",
+    "dipDeg": 1.645,
+    "dipMaghribDeg": 1.645,
+    "fajrMinutes": 0
+   },
+   "date": "2026-05-02",
+   "clock": {
+    "zone": "Asia/Dubai",
+    "offsetMinutes": 240,
+    "label": "Asia/Dubai"
+   },
+   "printed": {
+    "fajr": "04:15",
+    "sunrise": "05:30",
+    "dhuhr": "12:14",
+    "asr": "15:42",
+    "maghrib": "18:55",
+    "isha": "20:10"
+   },
+   "instants": {
+    "fajr": "2026-05-02T00:15:00.000Z",
+    "sunrise": "2026-05-02T01:30:00.000Z",
+    "dhuhr": "2026-05-02T08:14:00.000Z",
+    "asr": "2026-05-02T11:42:00.000Z",
+    "maghrib": "2026-05-02T14:55:00.000Z",
+    "isha": "2026-05-02T16:10:00.000Z"
+   }
+  },
+  {
+   "place": {
+    "id": "uae:80",
+    "name": "Jebel Jais",
+    "lat": 25.946,
+    "lon": 56.1686,
+    "tz": "Asia/Dubai",
+    "dipDeg": 1.645,
+    "dipMaghribDeg": 1.645,
+    "fajrMinutes": 0
+   },
+   "date": "2026-09-01",
+   "clock": {
+    "zone": "Asia/Dubai",
+    "offsetMinutes": 240,
+    "label": "Asia/Dubai"
+   },
+   "printed": {
+    "fajr": "04:36",
+    "sunrise": "05:48",
+    "dhuhr": "12:17",
+    "asr": "15:45",
+    "maghrib": "18:42",
+    "isha": "19:54"
+   },
+   "instants": {
+    "fajr": "2026-09-01T00:36:00.000Z",
+    "sunrise": "2026-09-01T01:48:00.000Z",
+    "dhuhr": "2026-09-01T08:17:00.000Z",
+    "asr": "2026-09-01T11:45:00.000Z",
+    "maghrib": "2026-09-01T14:42:00.000Z",
+    "isha": "2026-09-01T15:54:00.000Z"
+   }
+  },
+  {
+   "place": {
+    "id": "uae:80",
+    "name": "Jebel Jais",
+    "lat": 25.946,
+    "lon": 56.1686,
+    "tz": "Asia/Dubai",
+    "dipDeg": 1.645,
+    "dipMaghribDeg": 1.645,
+    "fajrMinutes": 0
+   },
+   "date": "2026-12-31",
+   "clock": {
+    "zone": "Asia/Dubai",
+    "offsetMinutes": 240,
+    "label": "Asia/Dubai"
+   },
+   "printed": {
+    "fajr": "05:40",
+    "sunrise": "06:54",
+    "dhuhr": "12:20",
+    "asr": "15:15",
+    "maghrib": "17:43",
+    "isha": "18:57"
+   },
+   "instants": {
+    "fajr": "2026-12-31T01:40:00.000Z",
+    "sunrise": "2026-12-31T02:54:00.000Z",
+    "dhuhr": "2026-12-31T08:20:00.000Z",
+    "asr": "2026-12-31T11:15:00.000Z",
+    "maghrib": "2026-12-31T13:43:00.000Z",
+    "isha": "2026-12-31T14:57:00.000Z"
    }
   }
  ]

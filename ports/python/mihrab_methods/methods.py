@@ -1,5 +1,5 @@
 """The methods: Sweden and Diyanet (the Congress method), Morocco, Algeria,
-Indonesia, Türkiye Takvimi, Kazakhstan, Egypt, Brunei, Qatar, Kuwait, Jordan, Tatarstan, Russia's Central Muftiate, Albania, Bulgaria and Pakistan's Jamia Banuri Town. A port of src/methods/*.ts — the TypeScript is the reference,
+Indonesia, Türkiye Takvimi, Kazakhstan, Egypt, Brunei, Qatar, Kuwait, Jordan, Tatarstan, Russia's Central Muftiate, Albania, Bulgaria, Pakistan's Jamia Banuri Town and the United Arab Emirates. A port of src/methods/*.ts — the TypeScript is the reference,
 docs/methods.md says what each does, and test_vectors.py holds this to it.
 
 Every function takes a civil date with the month 0-based, as the TypeScript
@@ -773,6 +773,60 @@ def banuri_minutes(lat, lon, year, month0, day, asr_shadow=2):
         return None
     p = [math.floor((h - lon / 15) * 60 + 0.5) for h in hours]
     return {'fajr': p[0], 'sunrise': p[1], 'dhuhr': p[2], 'asr': p[3], 'maghrib': p[4], 'isha': p[5]}
+
+
+# ---------------------------------------------------------------- United Arab Emirates
+
+
+def uae_raw_minutes(lat, lon, year, month0, day, dip_deg=0, asr_shadow=1, dip_maghrib_deg=None, morning_minutes=0):
+    """Before rounding: Jordan's kind of program with the Emirates' figures — 18° and 18°, the zone's horizon allowances, its morning margin on Fajr and sunrise, Dhuhr two minutes after the transit, the noon shadow taken at Dhuhr."""
+    if dip_maghrib_deg is None:
+        dip_maghrib_deg = dip_deg
+    d0 = _d0(year, month0, day)
+
+    def at(t):
+        return meeus_apparent_sun(d0 + t / 1440)
+
+    noon = 720 - 4 * lon
+    for _ in range(3):
+        noon = 720 - 4 * lon - at(noon)[1]
+    sp, cp = math.sin(lat * RAD), math.cos(lat * RAD)
+    T = (d0 + noon / 1440) / 36525
+    Ma = (357.52911 + 35999.05029 * T) * RAD
+    horizon = -(34 / 60 + 0.26667 / (1.00014 - 0.016708 * math.cos(Ma) - 0.00014 * math.cos(2 * Ma)))
+
+    def event(alt, sign, start):
+        t = start
+        for _ in range(3):
+            dec, eot = at(t)
+            c = (math.sin(alt * RAD) - sp * math.sin(dec)) / (cp * math.cos(dec))
+            if not abs(c) <= 1:
+                return NAN
+            t = 720 - 4 * lon - eot + (sign * 4 * math.acos(c)) / RAD
+        return t
+
+    dhuhr = noon + 2
+    dec_d, eot_d = at(dhuhr)
+    noon_true = math.asin(sp * math.sin(dec_d) + cp * math.cos(dec_d) * math.cos(((dhuhr - (720 - 4 * lon - eot_d)) / 4) * RAD)) / RAD
+    noon_apparent = noon_true + _refraction_from_true(noon_true)
+    asr_apparent = math.atan(1 / (asr_shadow + 1 / math.tan(noon_apparent * RAD))) / RAD
+    asr_true = asr_apparent - _refraction_from_apparent(asr_apparent)
+    return {
+        'fajr': event(-18, -1, noon - 420) + morning_minutes,
+        'sunrise': event(horizon - dip_deg, -1, noon - 360) + morning_minutes,
+        'dhuhr': dhuhr,
+        'asr': event(asr_true, 1, noon + 200),
+        'maghrib': event(horizon - dip_maghrib_deg, 1, noon + 360),
+        'isha': event(-18, 1, noon + 420),
+    }
+
+
+def uae_minutes(lat, lon, year, month0, day, dip_deg=0, asr_shadow=1, dip_maghrib_deg=None, morning_minutes=0):
+    """Rounded to the nearest minute. None where a time does not form."""
+    r = uae_raw_minutes(lat, lon, year, month0, day, dip_deg, asr_shadow, dip_maghrib_deg, morning_minutes)
+    if not all(math.isfinite(v) for v in r.values()):
+        return None
+    return {k: math.floor(v + 0.5) for k, v in r.items()}
 
 
 # ---------------------------------------------------------------- Sweden and Diyanet: the Congress method

@@ -9,7 +9,7 @@
 **Prayer times that match the published timetable to the printed minute.**
 Each national authority's own calculation method, worked out again from its
 published times and checked day by day against its timetables: <!--fig:total.off-->0<!--/fig--> of
-<!--fig:total.times-->76,943,216<!--/fig--> times off the printed minute. Free for any app, site or
+<!--fig:total.times-->77,033,006<!--/fig--> times off the printed minute. Free for any app, site or
 mosque to use.
 
 [![Usage, a day: npm downloads and API requests](docs/stats.svg)](#usage)
@@ -55,8 +55,9 @@ The full API, the HTTP server and the per-authority imports are in
 | **Albania** | the Community’s calendar | 22 | 48,180 | **0** | 98.082 % | 924 | 1 Jan 2026 → 31 Dec 2026 |
 | **Bulgaria** | the Grand Mufti’s Office’s timetable | 48 | 105,120 | **0** | 97.671 % | 2,448 | 1 Jan 2026 → 31 Dec 2026 |
 | **Pakistan (Banuri Town)** | Jamia Banuri Town’s timetable | 100 | 219,000 | **0** | 99.996 % | 8 | 1 Jan 2026 → 31 Dec 2026 |
+| **United Arab Emirates** | the Authority’s times | 41 | 89,790 | **0** | 98.524 % | 1,251 | 1 Jan 2026 → 31 Dec 2026 |
 
-17 of 17 methods certified; 0 of 76,943,216 times off the printed minute. Last checked 9 November 2026. Generated from [`certification.json`](certification.json) by `scripts/readme.mjs`.
+18 of 18 methods certified; 0 of 77,033,006 times off the printed minute. Last checked 9 November 2026. Generated from [`certification.json`](certification.json) by `scripts/readme.mjs`.
 <!-- certification-table:end -->
 
 "By the method alone" is the formula without its correction list. The list

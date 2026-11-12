@@ -46,8 +46,9 @@ each method.
 | **Albania** | the Community’s calendar | 22 | 48,180 | **0** | 98.082 % | 924 | 1 Jan 2026 → 31 Dec 2026 |
 | **Bulgaria** | the Grand Mufti’s Office’s timetable | 48 | 105,120 | **0** | 97.671 % | 2,448 | 1 Jan 2026 → 31 Dec 2026 |
 | **Pakistan (Banuri Town)** | Jamia Banuri Town’s timetable | 100 | 219,000 | **0** | 99.996 % | 8 | 1 Jan 2026 → 31 Dec 2026 |
+| **United Arab Emirates** | the Authority’s times | 41 | 89,790 | **0** | 98.524 % | 1,251 | 1 Jan 2026 → 31 Dec 2026 |
 
-17 of 17 methods certified; 0 of 76,943,216 times off the printed minute. Last checked 9 November 2026. Generated from [`certification.json`](../certification.json) by `scripts/readme.mjs`.
+18 of 18 methods certified; 0 of 77,033,006 times off the printed minute. Last checked 9 November 2026. Generated from [`certification.json`](../certification.json) by `scripts/readme.mjs`.
 <!-- certification-table:end -->
 
 ## Sweden
@@ -429,6 +430,27 @@ cities): the method gives <!--fig:banuri.alonePct-->99.996<!--/fig--> % alone, a
 > it is the point at which the method gives the city's whole year, and the
 > year pins it to about a ten-thousandth of a degree, since every minute
 > of 2,190 has to fall on the right side. Karachi's is 24°52′ N, 67°03′ E.
+
+## United Arab Emirates
+
+Certified over <!--fig:uae.span-->1 Jan 2026 → 31 Dec 2026<!--/fig--> (<!--fig:uae.check0.places-->41<!--/fig-->
+zones): the method gives <!--fig:uae.alonePct-->98.524<!--/fig--> % alone, and a list of
+<!--fig:uae.corrections-->1,251<!--/fig--> corrections the rest.
+
+> **Research note, 2026-11-12** (not generated). The zones are the
+> Authority's: its areas, some four hundred, fall into forty-one tables
+> (three pairs of zones print the same table). What told the method from a
+> plain one: Dhuhr is two minutes after the transit; sunrise and Maghrib fit no single horizon but one a zone, the
+> mountains' far larger; and Asr near the Tropic was most of a minute late
+> in June until the noon shadow was taken at Dhuhr rather than at the
+> transit. In thirty-eight zones the method alone gives about 98.9 % of
+> the times, the rest a minute away. **Dubai's three zones (Dubai, Lahbab
+> and Margham, Hatta) are not read as well**: about 93 % alone, with Dhuhr
+> itself spread over a little more than a minute by any series for the
+> sun tried, which says those tables come from another program. They are
+> served by the same method and a longer list; past the list's dates a time
+> there may be a minute off. The reference is one year, read once; there
+> is no scheduled renewal for this method.
 
 ## Not here, and why
 

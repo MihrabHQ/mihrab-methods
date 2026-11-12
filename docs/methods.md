@@ -501,6 +501,35 @@ is more than the two angles.
   read off the timetable: the point at which the method prints the city's
   year.
 
+## United Arab Emirates
+
+`src/methods/uae.ts`. The prayer times the General Authority of Islamic
+Affairs, Endowments and Zakat publishes for its forty-one zones, read off
+its year. It is Jordan's and Morocco's kind of program, with the
+Authority's own figures.
+
+- **Meeus's apparent sun** at each time's own moment, the declination and
+  the equation of time iterated.
+- **Fajr** and **Isha** at 18°.
+- **Sunrise** and **Maghrib** with the sun's upper limb on the horizon — 34′
+  of refraction and the semi-diameter for the sun's distance that day —
+  lowered by the zone's **horizon allowance**, one eastward and one
+  westward: about 0.35° on the low islands, 0.54° in most towns, 1.2° on
+  Jebel Hafeet and 1.6° on Jebel Jais.
+- **The zone's morning**, Fajr and sunrise both, earlier by the zone's own
+  margin: nothing in a zone of one place, up to 2.2 minutes in a wide one.
+- **Dhuhr** two minutes after the sun's transit.
+- **Asr** on the apparent sun, one shadow length beyond the noon shadow,
+  and **the noon shadow is taken at Dhuhr**: the sun's refracted altitude
+  two minutes after the transit. South of 24° N, where the midsummer sun
+  passes almost overhead, those two minutes lengthen the shadow enough to
+  move Asr by most of a minute.
+- **Every time rounded to the nearest minute.**
+- **Imsak**, which the Authority prints too, is Fajr less ten minutes.
+
+Each zone is computed at its own point (`data/places/uaeZones.json`, with
+its two allowances and its morning margin), read off the timetable.
+
 ## Checking a port
 
 1. Take `test/vectors.json`. For each case, compute the six times at the

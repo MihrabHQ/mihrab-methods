@@ -9,7 +9,19 @@ revision bump is at least a minor version.
 
 ## Unreleased
 
-No method changed; no revision raised.
+- **The United Arab Emirates, revision 1: an eighteenth method.** The
+  prayer times of the General Authority of Islamic Affairs, Endowments and
+  Zakat for its forty-one zones: `mihrab-methods/uae`, authority `uae`.
+  Jordan's kind of program with the Authority's figures — 18° and 18°, a
+  horizon allowance a zone, a morning margin a zone, Dhuhr two minutes
+  after the transit, Asr on the apparent sun with the noon shadow taken at
+  Dhuhr (`docs/methods.md`). With its correction
+  list the method matches the published timetable of every zone over the
+  certified span; Dubai's three zones lean on the list more than the others
+  (`docs/status.md`). `certification.json` gains a `uae` entry and
+  `data/corrections/uae.json` is new. In every port (`uae_minutes` /
+  `uaeMinutes`, `REVISIONS` with `uae: 1`). No other method's output
+  changes.
 
 ## 1.16.0 — 2026-11-12
 

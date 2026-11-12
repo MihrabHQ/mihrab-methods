@@ -239,6 +239,7 @@ export function checkAuthority(a: CheckRun): Result | null {
     albania: 'Albania — the Community’s calendar',
     bulgaria: 'Bulgaria — the Grand Mufti’s Office’s timetable',
     banuri: 'Pakistan — Jamia Banuri Town’s timetable',
+    uae: 'United Arab Emirates — the Authority’s times',
   };
   return check(names[a], placesOf(a), path.join(TABLES, a, 'v1/cities'));
 }
