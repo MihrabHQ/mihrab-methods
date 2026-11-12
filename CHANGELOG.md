@@ -9,6 +9,10 @@ revision bump is at least a minor version.
 
 ## Unreleased
 
+No method changed; no revision raised.
+
+## 1.14.0 — 2026-11-12
+
 - **Albania and Bulgaria, revision 1 each: a fifteenth and a sixteenth
   method.** The Muslim Community of Albania's calendar (Tirana and
   twenty-one towns of Albania and its neighbours: `mihrab-methods/albania`)
@@ -24,6 +28,7 @@ revision bump is at least a minor version.
   `bulgaria.json` are new. In every port (`albania_minutes`,
   `bulgaria_minutes` / `albaniaMinutes`, `bulgariaMinutes`, `REVISIONS`
   with both at 1). No other method's output changes.
+
 ## 1.13.0 — 2026-11-11
 
 - **Russia's Central Muftiate, revision 1: a fourteenth method.** The
