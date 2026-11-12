@@ -55,6 +55,6 @@ zone whose rules changed between them.
 | File | What |
 | --- | --- |
 | `mihrab_methods/sun.py` | The three positions of the sun the methods use |
-| `mihrab_methods/methods.py` | The methods: the Congress method (Sweden, Diyanet), Morocco, Algeria, Indonesia, Türkiye Takvimi, Kazakhstan, Egypt, Brunei, Qatar, Kuwait, Jordan, Tatarstan, Russia's Central Muftiate, Albania, Bulgaria, Pakistan's Jamia Banuri Town, the United Arab Emirates, Iran's Institute of Geophysics, the United Kingdom's Wifaqul Ulama |
+| `mihrab_methods/methods.py` | The methods: the Congress method (Sweden, Diyanet), Morocco, Algeria, Indonesia, Türkiye Takvimi, Kazakhstan, Egypt, Brunei, Qatar, Kuwait, Jordan, Tatarstan, Russia's Central Muftiate, Albania, Bulgaria, Pakistan's Jamia Banuri Town, the United Arab Emirates, Iran's Institute of Geophysics, the United Kingdom's Wifaqul Ulama, Tunisia's Institut National de la Météorologie |
 | `mihrab_methods/api.py` | Place and date in, the day out: clock, correction list, printing |
 | `test_vectors.py` | Holds the port to `test/vectors.json` |

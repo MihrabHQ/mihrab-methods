@@ -54,9 +54,10 @@ const FILES = {
   uaeZones: ['data/places/uaeZones.json', '{ id: number; name: string; lat: number; lon: number; dipEast: number; dipWest: number; morningMinutes: number }[]'],
   tehranCities: ['data/places/tehranCities.json', '{ id: number; name: string; lat: number; lon: number }[]'],
   wifaqTowns: ['data/places/wifaqTowns.json', '{ id: number; name: string; lat: number; lon: number; country: string }[]'],
+  tunisiaPlaces: ['data/places/tunisiaPlaces.json', '{ id: number; name: string; lat: number; lon: number; dip: number; dipSunset: number }[]'],
   countryOutlines: ['data/locate/countryOutlines.json', '{ scale: number; countries: Record<string, number[][][]> }'],
 };
-for (const a of ['sweden', 'diyanet', 'morocco', 'algeria', 'indonesia', 'turkiyetakvimi', 'kazakhstan', 'egypt', 'brunei', 'qatar', 'kuwait', 'jordan', 'tatarstan', 'cdum', 'albania', 'bulgaria', 'banuri', 'uae', 'tehran', 'wifaq']) {
+for (const a of ['sweden', 'diyanet', 'morocco', 'algeria', 'indonesia', 'turkiyetakvimi', 'kazakhstan', 'egypt', 'brunei', 'qatar', 'kuwait', 'jordan', 'tatarstan', 'cdum', 'albania', 'bulgaria', 'banuri', 'uae', 'tehran', 'wifaq', 'tunisia']) {
   FILES[`${a}Corrections`] = [`data/corrections/${a}.json`, 'CorrectionsFile'];
 }
 
@@ -79,7 +80,7 @@ for (const [name, [src, type]] of Object.entries(FILES)) {
 
 // certification.json, one module per authority (an entry point carries only its own)
 const cert = JSON.parse(fs.readFileSync(path.join(ROOT, 'certification.json'), 'utf8'));
-for (const a of ['sweden', 'diyanet', 'morocco', 'algeria', 'indonesia', 'turkiyetakvimi', 'kazakhstan', 'egypt', 'brunei', 'qatar', 'kuwait', 'jordan', 'tatarstan', 'cdum', 'albania', 'bulgaria', 'banuri', 'uae', 'tehran', 'wifaq']) {
+for (const a of ['sweden', 'diyanet', 'morocco', 'algeria', 'indonesia', 'turkiyetakvimi', 'kazakhstan', 'egypt', 'brunei', 'qatar', 'kuwait', 'jordan', 'tatarstan', 'cdum', 'albania', 'bulgaria', 'banuri', 'uae', 'tehran', 'wifaq', 'tunisia']) {
   write(
     `${a}Certification`,
     `import type { Certification } from '../../core/types.js';\nconst data: Certification | null = ${JSON.stringify(cert[a] ?? null)};\nexport default data;\n`,

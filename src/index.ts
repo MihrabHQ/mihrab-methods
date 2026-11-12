@@ -30,6 +30,7 @@ import './authorities/banuri.js';
 import './authorities/uae.js';
 import './authorities/tehran.js';
 import './authorities/wifaq.js';
+import './authorities/tunisia.js';
 
 export * from './core/index.js';
 export { diyanetCountry } from './authorities/diyanet.js';

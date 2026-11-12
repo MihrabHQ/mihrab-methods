@@ -109,7 +109,7 @@ const dayTimes = object({
 const SCHEMAS: Record<string, unknown> = {
   Place: place,
   PrayerTime: object({ instant: { type: 'string', format: 'date-time', description: 'The exact moment.' }, printed: { type: 'string', pattern: '^\\d\\d:\\d\\d$', description: 'The wall-clock minute on the timetable’s clock.' },
-    basis: { type: 'string', enum: ['table', 'corrected', 'method', 'unchecked'], description: 'What the time stands on. `table`: inside the certified span, the method gave the timetable’s minute unaided. `corrected`: the correction list moved it a minute onto the timetable’s minute. `method`: the method alone, the date being outside the certified span. `unchecked`: the method alone, and no column was checked for this time (the Asr the timetable does not print).' },
+    basis: { type: 'string', enum: ['table', 'corrected', 'method', 'unchecked'], description: 'What the time stands on. `table`: inside the certified span, the method gave the timetable’s minute unaided. `corrected`: the correction list moved it a minute onto the timetable’s minute. `method`: the method alone, the date being outside the certified span. `unchecked`: the method alone, and no column was checked for this time (the Asr the timetable does not print, or a time it does not print at all).' },
   }),
   DayTimes: dayTimes,
   Times: { oneOf: [{ allOf: [object(found, ['place', 'authorityFrom']), ref('DayTimes')] }, object({ ...found, days: { type: 'array', items: ref('DayTimes') } }, ['place', 'authorityFrom', 'days'])] },

@@ -1,5 +1,5 @@
 """The methods: Sweden and Diyanet (the Congress method), Morocco, Algeria,
-Indonesia, Türkiye Takvimi, Kazakhstan, Egypt, Brunei, Qatar, Kuwait, Jordan, Tatarstan, Russia's Central Muftiate, Albania, Bulgaria, Pakistan's Jamia Banuri Town, the United Arab Emirates, Iran's Institute of Geophysics and the United Kingdom's Wifaqul Ulama. A port of src/methods/*.ts — the TypeScript is the reference,
+Indonesia, Türkiye Takvimi, Kazakhstan, Egypt, Brunei, Qatar, Kuwait, Jordan, Tatarstan, Russia's Central Muftiate, Albania, Bulgaria, Pakistan's Jamia Banuri Town, the United Arab Emirates, Iran's Institute of Geophysics, the United Kingdom's Wifaqul Ulama and Tunisia's Institut National de la Météorologie. A port of src/methods/*.ts — the TypeScript is the reference,
 docs/methods.md says what each does, and test_vectors.py holds this to it.
 
 Every function takes a civil date with the month 0-based, as the TypeScript
@@ -870,6 +870,48 @@ def tehran_raw_minutes(lat, lon, year, month0, day, asr_shadow=1):
 def tehran_minutes(lat, lon, year, month0, day, asr_shadow=1):
     """Rounded to the nearest minute. None where a time does not form."""
     r = tehran_raw_minutes(lat, lon, year, month0, day, asr_shadow)
+    if not all(math.isfinite(v) for v in r.values()):
+        return None
+    return {k: math.floor(v + 0.5) for k, v in r.items()}
+
+
+# ---------------------------------------------------------------- Tunisia: the Institut National de la Météorologie
+
+
+def tunisia_raw_minutes(lat, lon, year, month0, day, asr_shadow=1, dip_deg=0, dip_sunset_deg=None):
+    """Before rounding: the Institut National de la Météorologie's program — Meeus's apparent sun; Dhuhr seven minutes after the transit and Asr (plain geometry) on the sun of 0 h UT; Fajr and Isha at 18° and sunset at 0.8333° with the sun iterated and the horizon lowered by the place's allowance; Maghrib two minutes after sunset. The sunrise mirrors the sunset and is not checked: the Institute gives none."""
+    if dip_sunset_deg is None:
+        dip_sunset_deg = dip_deg
+    d0 = _d0(year, month0, day)
+    sp, cp = math.sin(lat * RAD), math.cos(lat * RAD)
+    dec0, eot0 = meeus_apparent_sun(d0)
+    noon0 = 720 - 4 * lon - eot0
+
+    def event(alt, sign, start):
+        t = start
+        for _ in range(3):
+            dec, eot = meeus_apparent_sun(d0 + t / 1440)
+            c = (math.sin(alt * RAD) - sp * math.sin(dec)) / (cp * math.cos(dec))
+            if not abs(c) <= 1:
+                return NAN
+            t = 720 - 4 * lon - eot + (sign * 4 * math.acos(c)) / RAD
+        return t
+
+    asr_altitude = math.atan(1 / (asr_shadow + math.tan(abs(lat * RAD - dec0))))
+    c_asr = (math.sin(asr_altitude) - sp * math.sin(dec0)) / (cp * math.cos(dec0))
+    return {
+        'fajr': event(-18 - dip_deg, -1, noon0 - 400),
+        'sunrise': event(-0.8333 - dip_sunset_deg, -1, noon0 - 360),
+        'dhuhr': noon0 + 7,
+        'asr': noon0 + (4 * math.acos(c_asr)) / RAD if abs(c_asr) <= 1 else NAN,
+        'maghrib': event(-0.8333 - dip_sunset_deg, 1, noon0 + 360) + 2,
+        'isha': event(-18 - dip_deg, 1, noon0 + 400),
+    }
+
+
+def tunisia_minutes(lat, lon, year, month0, day, asr_shadow=1, dip_deg=0, dip_sunset_deg=None):
+    """Rounded to the nearest minute. None where a time does not form."""
+    r = tunisia_raw_minutes(lat, lon, year, month0, day, asr_shadow, dip_deg, dip_sunset_deg)
     if not all(math.isfinite(v) for v in r.values()):
         return None
     return {k: math.floor(v + 0.5) for k, v in r.items()}

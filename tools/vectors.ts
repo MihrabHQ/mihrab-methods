@@ -32,6 +32,7 @@ const PICK: Record<string, string[]> = {
   uae: ['uae:36', 'uae:56', 'uae:80'],
   tehran: ['tehran:26', 'tehran:25', 'tehran:4'],
   wifaq: ['wifaq:13', 'wifaq:1', 'wifaq:69', 'wifaq:25'],
+  tunisia: ['tunisia:1', 'tunisia:16', 'tunisia:3', 'tunisia:13'],
 };
 
 /** Dates a port gets wrong unless it has a rule exactly: Wifaqul Ulama's last night of the summer twilight at Grange-over-Sands, where 18° is reached for five minutes. */

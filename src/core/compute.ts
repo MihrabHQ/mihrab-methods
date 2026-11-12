@@ -23,6 +23,7 @@ import { banuriTimes } from '../methods/banuri.js';
 import { uaeTimes } from '../methods/uae.js';
 import { tehranTimes } from '../methods/tehran.js';
 import { wifaqTimes } from '../methods/wifaq.js';
+import { tunisiaTimes } from '../methods/tunisia.js';
 import { authorityData } from './registry.js';
 import { placeClockAt } from './clock.js';
 import type { AsrChoice, Authority, Instants, Place, PrayerKey } from './types.js';
@@ -34,6 +35,13 @@ export type ComputeOptions = {
 };
 
 /** The Asr an authority's timetable prints: 2 (two shadow lengths, the Hanafi one) for these, 1 for the rest. */
+/**
+ * The times an authority's timetable does not print at all: its method
+ * gives them, and no column was ever held to them. Iran's sheets print no
+ * Asr and no Isha; Tunisia's Institute gives no sunrise.
+ */
+export const NOT_PRINTED: Partial<Record<Authority, readonly string[]>> = { tehran: ['asr', 'isha'], tunisia: ['sunrise'] };
+
 const PRINTS_HANAFI: ReadonlySet<Authority> = new Set<Authority>(['tatarstan', 'cdum', 'banuri', 'wifaq']);
 /** Methods that have only the Asr their timetable prints. */
 const ONE_ASR: ReadonlySet<Authority> = new Set<Authority>(['tatarstan', 'cdum']);
@@ -97,9 +105,12 @@ export function candidateInstants(place: Place, year: number, month: number, day
     case 'banuri':
     case 'uae':
     case 'tehran':
-    case 'wifaq': {
+    case 'wifaq':
+    case 'tunisia': {
       const t =
-        place.authority === 'morocco'
+        place.authority === 'tunisia'
+          ? tunisiaTimes(place.lat, place.lon, year, month, day, shadow, place.dipDeg, place.dipMaghribDeg)
+          : place.authority === 'morocco'
           ? moroccoTimes(place.lat, place.lon, year, month, day, place.dipDeg, shadow, place.dipMaghribDeg)
           : place.authority === 'algeria'
             ? algeriaTimes(place.lat, place.lon, year, month, day, shadow)

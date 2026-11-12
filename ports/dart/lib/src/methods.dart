@@ -1,5 +1,5 @@
 // The methods: Sweden and Diyanet (the Congress method), Morocco, Algeria,
-// Indonesia, Türkiye Takvimi, Kazakhstan, Egypt, Brunei, Qatar, Kuwait, Jordan, Tatarstan, Russia's Central Muftiate, Albania, Bulgaria, Pakistan's Jamia Banuri Town, the United Arab Emirates, Iran's Institute of Geophysics and the United Kingdom's Wifaqul Ulama. A port of src/methods/*.ts — the TypeScript is the reference,
+// Indonesia, Türkiye Takvimi, Kazakhstan, Egypt, Brunei, Qatar, Kuwait, Jordan, Tatarstan, Russia's Central Muftiate, Albania, Bulgaria, Pakistan's Jamia Banuri Town, the United Arab Emirates, Iran's Institute of Geophysics, the United Kingdom's Wifaqul Ulama and Tunisia's Institut National de la Météorologie. A port of src/methods/*.ts — the TypeScript is the reference,
 // docs/methods.md says what each does, and the vector check holds this to it.
 //
 // Every function takes a civil date with the month 0-based, as the TypeScript
@@ -795,6 +795,44 @@ DayMinutes tehranRawMinutes(double lat, double lon, int year, int month0, int da
 /// Rounded to the nearest minute. Null where a time does not form.
 DayMinutes? tehranMinutes(double lat, double lon, int year, int month0, int day, {double asrShadow = 1.0}) {
   final r = tehranRawMinutes(lat, lon, year, month0, day, asrShadow: asrShadow);
+  return r.allFinite ? r.mapped((v) => (v + 0.5).floorToDouble()) : null;
+}
+
+// ---------------------------------------------------------------- Tunisia: the Institut National de la Météorologie
+
+/// Before rounding: the Institut National de la Météorologie's program — Meeus's apparent sun; Dhuhr seven minutes after the transit and Asr (plain geometry) on the sun of 0 h UT; Fajr and Isha at 18° and sunset at 0.8333° with the sun iterated and the horizon lowered by the place's allowance; Maghrib two minutes after sunset. The sunrise mirrors the sunset and is not checked: the Institute gives none.
+DayMinutes tunisiaRawMinutes(double lat, double lon, int year, int month0, int day, {double asrShadow = 1.0, double dipDeg = 0.0, double? dipSunsetDeg}) {
+  final dipSunset = dipSunsetDeg ?? dipDeg;
+  final d0 = _d0Of(year, month0, day);
+  final sp = sin(lat * rad), cp = cos(lat * rad);
+  final sun0 = meeusApparentSun(d0);
+  final noon0 = 720 - 4 * lon - sun0.eot;
+  double event(double alt, double sign, double start) {
+    var t = start;
+    for (var i = 0; i < 3; i++) {
+      final s = meeusApparentSun(d0 + t / 1440);
+      final c = (sin(alt * rad) - sp * sin(s.dec)) / (cp * cos(s.dec));
+      if (!(c.abs() <= 1)) return double.nan;
+      t = 720 - 4 * lon - s.eot + (sign * 4 * acos(c)) / rad;
+    }
+    return t;
+  }
+
+  final asrAltitude = atan(1 / (asrShadow + tan((lat * rad - sun0.dec).abs())));
+  final cAsr = (sin(asrAltitude) - sp * sin(sun0.dec)) / (cp * cos(sun0.dec));
+  return DayMinutes(
+    event(-18 - dipDeg, -1.0, noon0 - 400),
+    event(-0.8333 - dipSunset, -1.0, noon0 - 360),
+    noon0 + 7,
+    cAsr.abs() <= 1 ? noon0 + (4 * acos(cAsr)) / rad : double.nan,
+    event(-0.8333 - dipSunset, 1.0, noon0 + 360) + 2,
+    event(-18 - dipDeg, 1.0, noon0 + 400),
+  );
+}
+
+/// Rounded to the nearest minute. Null where a time does not form.
+DayMinutes? tunisiaMinutes(double lat, double lon, int year, int month0, int day, {double asrShadow = 1.0, double dipDeg = 0.0, double? dipSunsetDeg}) {
+  final r = tunisiaRawMinutes(lat, lon, year, month0, day, asrShadow: asrShadow, dipDeg: dipDeg, dipSunsetDeg: dipSunsetDeg);
   return r.allFinite ? r.mapped((v) => (v + 0.5).floorToDouble()) : null;
 }
 

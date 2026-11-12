@@ -2,7 +2,7 @@
  * The library's calls. Each works for whichever authorities are loaded —
  * `mihrab-methods` loads all five, `mihrab-methods/<authority>` one.
  */
-import { asrFor, candidateInstants, correctionAt, type ComputeOptions } from './compute.js';
+import { NOT_PRINTED, asrFor, candidateInstants, correctionAt, type ComputeOptions } from './compute.js';
 import { parseCivilDate, nextDay, type Ymd } from './civilDate.js';
 import { printedAt, tableClockAt } from './clock.js';
 import { authorityData, isLoaded, loadedAuthorities } from './registry.js';
@@ -107,7 +107,7 @@ function dayTimes(place: Place, d: Ymd, instants: Instants | null, status: DayTi
     // what each time stands on: the timetable (unaided, or by the list), the method alone, or nothing checked
     const moved = status === 'certified' && listed ? correctionAt(place, d.year, d.month0, d.day) : undefined;
     const basis = (k: PrayerKey): Basis =>
-      k === 'asr' && !asr.printed ? 'unchecked' : status !== 'certified' || !listed ? 'method' : moved?.[k] ? 'corrected' : 'table';
+      (k === 'asr' && !asr.printed) || NOT_PRINTED[place.authority]?.includes(k) ? 'unchecked' : status !== 'certified' || !listed ? 'method' : moved?.[k] ? 'corrected' : 'table';
     for (const k of PRAYER_KEYS) times[k] = { instant: instants[k], printed: printedAt(instants[k], clock.offsetMinutes), basis: basis(k) };
   }
   return {

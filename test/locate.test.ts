@@ -46,6 +46,9 @@ test('defaultAuthorityFor: the authority whose table the community prays by', ()
   assert.equal(defaultAuthorityFor(24.2, 55.76), 'uae'); // Al Ain
   assert.equal(defaultAuthorityFor(24.25, 55.79), null); // Buraimi, Oman, the same town's other half
   assert.equal(defaultAuthorityFor(35.69, 51.39), 'tehran');
+  assert.equal(defaultAuthorityFor(36.8, 10.18), 'tunisia'); // Tunis
+  assert.equal(defaultAuthorityFor(33.92, 8.13), 'tunisia'); // Tozeur
+  assert.equal(defaultAuthorityFor(36.37, 6.61), 'algeria'); // Constantine, across the border
   // Russia: by the place listed, not the country
   assert.equal(defaultAuthorityFor(55.79, 49.12), 'tatarstan'); // Kazan
   assert.equal(defaultAuthorityFor(55.75, 37.62), 'cdum'); // Moscow

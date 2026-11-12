@@ -205,3 +205,18 @@ test('where the timetable prints the Hanafi Asr, printed and hanafi are one, and
   assert.equal(day.asrShadow, 2);
   assert.notEqual(day.times!.asr.basis, 'unchecked');
 });
+
+test('a time the timetable does not print at all is unchecked: Iran’s Asr and Isha, Tunisia’s sunrise', async () => {
+  await import('../src/tehran.js');
+  await import('../src/tunisia.js');
+  const tehran = timesFor(nearestPlace('tehran', 35.69, 51.39)!.place, '2026-06-01');
+  assert.equal(tehran.times!.asr.basis, 'unchecked');
+  assert.equal(tehran.times!.isha.basis, 'unchecked');
+  assert.notEqual(tehran.times!.fajr.basis, 'unchecked');
+  assert.notEqual(tehran.times!.maghrib.basis, 'unchecked');
+  const tunis = timesFor(nearestPlace('tunisia', 36.8, 10.18)!.place, '2026-06-21');
+  assert.equal(tunis.status, 'certified');
+  assert.equal(tunis.times!.sunrise.basis, 'unchecked');
+  assert.deepEqual(['fajr', 'dhuhr', 'asr', 'maghrib', 'isha'].map(k => tunis.times![k as 'fajr'].printed), ['03:08', '12:28', '16:13', '19:44', '21:35']);
+  for (const k of ['fajr', 'dhuhr', 'asr', 'maghrib', 'isha'] as const) assert.notEqual(tunis.times![k].basis, 'unchecked');
+});

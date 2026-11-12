@@ -12,7 +12,7 @@ an Indonesian app does not carry Diyanet's worldwide points:
 | Import | Loads |
 |---|---|
 | `mihrab-methods` | all of them |
-| `mihrab-methods/sweden`, `/diyanet`, `/morocco`, `/algeria`, `/indonesia`, `/turkiyetakvimi`, `/kazakhstan`, `/egypt`, `/brunei`, `/qatar`, `/kuwait`, `/jordan`, `/tatarstan`, `/cdum`, `/albania`, `/bulgaria`, `/banuri`, `/uae`, `/tehran`, `/wifaq` | one authority: its places, list and certification |
+| `mihrab-methods/sweden`, `/diyanet`, `/morocco`, `/algeria`, `/indonesia`, `/turkiyetakvimi`, `/kazakhstan`, `/egypt`, `/brunei`, `/qatar`, `/kuwait`, `/jordan`, `/tatarstan`, `/cdum`, `/albania`, `/bulgaria`, `/banuri`, `/uae`, `/tehran`, `/wifaq`, `/tunisia` | one authority: its places, list and certification |
 | `mihrab-methods/locate` | `countryAt`, `defaultAuthorityFor` — the country at a point, and the authority whose table it prays by (the country outlines, kept apart because most apps already know their country) |
 | `mihrab-methods/core` | the calls and types with no data (load authorities yourself) |
 
@@ -49,7 +49,8 @@ dates, and the method gave the timetable's minute unaided), `corrected`
 (the correction list moved it a minute onto the timetable's minute),
 `method` (the method alone: the date is outside the certified dates) or
 `unchecked` (the method alone, and no column was checked for it: the Asr
-the timetable does not print). The Asr is the one the authority's
+the timetable does not print, and a time it does not print at all — Iran's
+Asr and Isha, Tunisia's sunrise). The Asr is the one the authority's
 timetable prints unless another is asked for by name; for Tatarstan's, the
 Central Muftiate's, Jamia Banuri's and Wifaqul Ulama's that is the Hanafi
 one, and `asrShadow` on the answer always says which came back. The older
@@ -141,7 +142,7 @@ nothing.
 
 | Path | What |
 |---|---|
-| `src/methods/` | The methods: Sweden and Diyanet (`sweden.ts`), Morocco, Algeria, Indonesia, Türkiye Takvimi, Kazakhstan, Egypt, Brunei, Qatar, Kuwait, Jordan, Tatarstan, Russia's Central Muftiate, Albania, Bulgaria, Pakistan's Jamia Banuri Town, the United Arab Emirates, Iran's Institute of Geophysics, the United Kingdom's Wifaqul Ulama; their revisions |
+| `src/methods/` | The methods: Sweden and Diyanet (`sweden.ts`), Morocco, Algeria, Indonesia, Türkiye Takvimi, Kazakhstan, Egypt, Brunei, Qatar, Kuwait, Jordan, Tatarstan, Russia's Central Muftiate, Albania, Bulgaria, Pakistan's Jamia Banuri Town, the United Arab Emirates, Iran's Institute of Geophysics, the United Kingdom's Wifaqul Ulama, Tunisia's Institut National de la Météorologie; their revisions |
 | `src/sun/preciseSun.ts` | VSOP87 apparent sun, after Astronomy Engine: within about 0.05 s and 0.5″ of JPL's DE421 |
 | `src/core/` | The calls (`api.ts`), the computation they share (`compute.ts`), dates, clocks, the correction-list index, `fetchLatestCorrections` |
 | `src/authorities/` | Each authority's places, at the point (and Morocco's horizon) its method is computed at, with its description |

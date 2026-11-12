@@ -23,7 +23,10 @@ in a city is a method that tells someone the wrong time for a prayer. Until
 it is on every minute, it stays out of `timesFor` (`candidateTimes` can run
 it for research).
 
-What a new authority needs:
+What a new authority needs (the wiring — every list of authorities the
+library, its tools and the four ports keep — is written by
+`python3 scripts/new-authority.py definition.json`, whose header says what
+the definition holds; `test/registry.test.ts` fails if a list was missed):
 
 1. **The formula, written from scratch** in `src/methods/<authority>.ts`:
    the sun, the angles, the margins, the rounding and the high-latitude rule

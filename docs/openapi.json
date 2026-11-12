@@ -103,7 +103,8 @@
                 "banuri",
                 "uae",
                 "tehran",
-                "wifaq"
+                "wifaq",
+                "tunisia"
               ]
             }
           }
@@ -216,7 +217,8 @@
                 "banuri",
                 "uae",
                 "tehran",
-                "wifaq"
+                "wifaq",
+                "tunisia"
               ]
             }
           },
@@ -328,7 +330,8 @@
                 "banuri",
                 "uae",
                 "tehran",
-                "wifaq"
+                "wifaq",
+                "tunisia"
               ]
             }
           },
@@ -524,7 +527,7 @@
               "method",
               "unchecked"
             ],
-            "description": "What the time stands on. `table`: inside the certified span, the method gave the timetable’s minute unaided. `corrected`: the correction list moved it a minute onto the timetable’s minute. `method`: the method alone, the date being outside the certified span. `unchecked`: the method alone, and no column was checked for this time (the Asr the timetable does not print)."
+            "description": "What the time stands on. `table`: inside the certified span, the method gave the timetable’s minute unaided. `corrected`: the correction list moved it a minute onto the timetable’s minute. `method`: the method alone, the date being outside the certified span. `unchecked`: the method alone, and no column was checked for this time (the Asr the timetable does not print, or a time it does not print at all)."
           }
         },
         "required": [
@@ -558,7 +561,8 @@
               "banuri",
               "uae",
               "tehran",
-              "wifaq"
+              "wifaq",
+              "tunisia"
             ]
           },
           "placeId": {
@@ -817,7 +821,8 @@
                   "banuri",
                   "uae",
                   "tehran",
-                  "wifaq"
+                  "wifaq",
+                  "tunisia"
                 ]
               },
               {

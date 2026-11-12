@@ -242,6 +242,7 @@ export function checkAuthority(a: CheckRun): Result | null {
     uae: 'United Arab Emirates — the Authority’s times',
     tehran: 'Iran — the Institute of Geophysics’ sheets',
     wifaq: 'United Kingdom — Wifaqul Ulama’s timetables',
+    tunisia: 'Tunisia — the Institute’s times',
   };
   return check(names[a], placesOf(a), path.join(TABLES, a, 'v1/cities'));
 }

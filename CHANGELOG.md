@@ -9,7 +9,32 @@ revision bump is at least a minor version.
 
 ## Unreleased
 
-No method changed; no revision raised.
+- **Tunisia, revision 1: a twenty-first method.** The prayer times of the
+  Institut National de la Météorologie for twenty-six places — the
+  governorates' seats, Aïn Draham and Rjim Maatoug: `mihrab-methods/tunisia`,
+  authority `tunisia`. Dhuhr (seven minutes after the transit) and Asr on
+  the sun of 0 h UT; Fajr and Isha at 18° and the sunset at 0.8333° with
+  the horizon lowered by the place's allowance; Maghrib two minutes after
+  sunset (`docs/methods.md`). With its correction list the method matches
+  the published times of every place over the certified span. The
+  Institute gives no sunrise: the method's is not checked.
+  `certification.json` gains a `tunisia` entry and
+  `data/corrections/tunisia.json` is new; `defaultAuthorityFor` answers
+  `tunisia` in Tunisia. In every port (`tunisia_minutes` /
+  `tunisiaMinutes`, `REVISIONS` with `tunisia: 1`). No other method's
+  output changes.
+- **`basis` says `unchecked` for a time a timetable does not print.** Iran's
+  sheets print no Asr and no Isha, and Tunisia's Institute no sunrise: those
+  times are the method's, held to no column, and were reported as `table`.
+  They are `unchecked` now, as the Asr a timetable does not print already
+  was. No time moves.
+- **A scaffold for the next authority.** `scripts/new-authority.py` takes
+  one small definition and writes the wiring an authority needs in every
+  registry — the library's, the tools' and the four ports' — leaving the
+  method, its ports and its words to be written; `test/registry.test.ts`
+  fails when one registry disagrees with another (`CONTRIBUTING.md`).
+
+No other method's output changes.
 
 ## 1.21.2 — 2026-11-12
 

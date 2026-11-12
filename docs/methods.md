@@ -597,6 +597,32 @@ list.
 Each town is computed at its own point (`data/places/wifaqTowns.json`),
 read off its timetable; the timetables print none.
 
+## Tunisia
+
+`src/methods/tunisia.ts`. The prayer times the Institut National de la
+Météorologie gives for a place and a day, read off a year of its answers at
+twenty-six places.
+
+- **Meeus's apparent sun.**
+- **Dhuhr** and **Asr** on *the sun of the day*: its declination and
+  equation of time at 0 h UT, held for both. Dhuhr is seven minutes after
+  that sun's transit; Asr is where its shadow is one length beyond the noon
+  shadow, in plain geometry (no refraction).
+- **Fajr** and **Isha** at 18°, the sun taken at each time's own moment
+  (iterated), **the horizon lowered by the place's allowance**: the dip of
+  its height, 0.06° on the coast, 0.5° at Béja and Tataouine, 0.88° at Le
+  Kef.
+- **Maghrib** two minutes after sunset; sunset with the sun's centre
+  0.8333° below the horizon, lowered by the same allowance.
+- **Every time rounded to the nearest minute.**
+- **No sunrise is given.** The one the method returns is the mirror of its
+  sunset — the same horizon and allowance, no margin — and is not checked
+  against anything.
+
+Each place is computed at its own point with its own allowance
+(`data/places/tunisiaPlaces.json`). Two places, Kairouan and Sidi Bouzid,
+take theirs at sunset only: their Fajr and Isha are at a plain 18°.
+
 ## Checking a port
 
 1. Take `test/vectors.json`. For each case, compute the six times at the

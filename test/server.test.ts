@@ -106,7 +106,7 @@ test('the Worker keeps the authorities: their files are marked as having side ef
   const listed: string[] = JSON.parse(fs.readFileSync(path.join(root, 'package.json'), 'utf8')).sideEffects;
   const covered = (file: string) =>
     listed.some(p => new RegExp('^' + p.replace(/[.]/g, '\\.').replace(/\*/g, '[^/]+') + '$').test(file));
-  const entries = ['index', 'sweden', 'diyanet', 'morocco', 'algeria', 'indonesia', 'turkiyetakvimi', 'kazakhstan', 'egypt', 'brunei', 'qatar', 'kuwait', 'jordan', 'tatarstan', 'cdum', 'albania', 'bulgaria', 'banuri', 'uae', 'tehran', 'wifaq'].map(n => `./src/${n}.ts`);
+  const entries = ['index', 'sweden', 'diyanet', 'morocco', 'algeria', 'indonesia', 'turkiyetakvimi', 'kazakhstan', 'egypt', 'brunei', 'qatar', 'kuwait', 'jordan', 'tatarstan', 'cdum', 'albania', 'bulgaria', 'banuri', 'uae', 'tehran', 'wifaq', 'tunisia'].map(n => `./src/${n}.ts`);
   const authorities = fs
     .readdirSync(path.join(root, 'src', 'authorities'))
     .filter(f => f.endsWith('.ts'))

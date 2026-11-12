@@ -49,8 +49,9 @@ each method.
 | **United Arab Emirates** | the Authority’s times | 41 | 179,580 | **0** | 98.221 % | 3,036 | 1 Jan 2026 → 31 Dec 2027 |
 | **Iran (Tehran Institute of Geophysics)** | the Institute of Geophysics’ sheets | 31 | 90,520 | **0** | 99.002 % | 903 | 21 Mar 2025 → 20 Mar 2027 |
 | **United Kingdom (Wifaqul Ulama)** | Wifaqul Ulama’s timetables | 81 | 350,400 | **0** | 98.625 % | 4,641 | 1 Jan 2026 → 31 Dec 2027 |
+| **Tunisia** | the Institute’s times | 26 | 47,405 | **0** | 97.782 % | 1,051 | 1 Jan 2026 → 31 Dec 2026 |
 
-20 of 20 methods certified; 0 of 77,563,716 times off the printed minute. Last checked 12 November 2026. Generated from [`certification.json`](../certification.json) by `scripts/readme.mjs`.
+21 of 21 methods certified; 0 of 77,611,121 times off the printed minute. Last checked 12 November 2026. Generated from [`certification.json`](../certification.json) by `scripts/readme.mjs`.
 <!-- certification-table:end -->
 
 ## Sweden
@@ -493,6 +494,26 @@ towns): the method gives <!--fig:wifaq.alonePct-->98.625<!--/fig--> % alone, and
 > and is not what is certified: the method alone gives it on the printed
 > minute about nine days in ten. The reference is read once a year; there
 > is no scheduled renewal.
+
+## Tunisia
+
+Certified over <!--fig:tunisia.span-->1 Jan 2026 → 31 Dec 2026<!--/fig--> (<!--fig:tunisia.check0.places-->26<!--/fig-->
+places): the method gives <!--fig:tunisia.alonePct-->97.782<!--/fig--> % alone, and a list of
+<!--fig:tunisia.corrections-->1,051<!--/fig--> corrections the rest.
+
+> **Research note, 2026-11-12** (not generated). The Institute answers for
+> a governorate and a delegation, a day at a time; the reference here is a
+> sample: the twenty-four governorates' seats, Aïn Draham and Rjim
+> Maatoug, one year. What told the method from a plain one: Dhuhr and Asr
+> sit on the sun of 0 h UT and not of their own hour, Dhuhr seven minutes
+> after its transit; and Fajr, Isha and the sunset all move with the
+> place's height — one allowance a place, which is the dip of the horizon
+> from its altitude (0.0293° × √metres fits them). No time of the method
+> alone is more than a minute from the Institute's, and the misses are
+> spread evenly over the columns: the last seconds of another series for
+> the sun, not another rule. The Institute gives no sunrise, so the
+> sunrise here is not certified. The Institute's other delegations are
+> not read.
 
 ## Not here, and why
 

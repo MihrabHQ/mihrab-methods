@@ -2,8 +2,8 @@
  * The shapes the library speaks in. Nothing here computes anything.
  */
 
-export type Authority = 'sweden' | 'diyanet' | 'morocco' | 'algeria' | 'indonesia' | 'turkiyetakvimi' | 'kazakhstan' | 'egypt' | 'brunei' | 'qatar' | 'kuwait' | 'jordan' | 'tatarstan' | 'cdum' | 'albania' | 'bulgaria' | 'banuri' | 'uae' | 'tehran' | 'wifaq';
-export const AUTHORITIES: readonly Authority[] = ['sweden', 'diyanet', 'morocco', 'algeria', 'indonesia', 'turkiyetakvimi', 'kazakhstan', 'egypt', 'brunei', 'qatar', 'kuwait', 'jordan', 'tatarstan', 'cdum', 'albania', 'bulgaria', 'banuri', 'uae', 'tehran', 'wifaq'];
+export type Authority = 'sweden' | 'diyanet' | 'morocco' | 'algeria' | 'indonesia' | 'turkiyetakvimi' | 'kazakhstan' | 'egypt' | 'brunei' | 'qatar' | 'kuwait' | 'jordan' | 'tatarstan' | 'cdum' | 'albania' | 'bulgaria' | 'banuri' | 'uae' | 'tehran' | 'wifaq' | 'tunisia';
+export const AUTHORITIES: readonly Authority[] = ['sweden', 'diyanet', 'morocco', 'algeria', 'indonesia', 'turkiyetakvimi', 'kazakhstan', 'egypt', 'brunei', 'qatar', 'kuwait', 'jordan', 'tatarstan', 'cdum', 'albania', 'bulgaria', 'banuri', 'uae', 'tehran', 'wifaq', 'tunisia'];
 
 export type PrayerKey = 'fajr' | 'sunrise' | 'dhuhr' | 'asr' | 'maghrib' | 'isha';
 export const PRAYER_KEYS: readonly PrayerKey[] = ['fajr', 'sunrise', 'dhuhr', 'asr', 'maghrib', 'isha'];
@@ -125,7 +125,7 @@ export type Basis =
   | 'corrected'
   /** The method alone: the date is outside the certified span (or the method is not certified, or was run without its list). */
   | 'method'
-  /** The method alone, and no column of the timetable was checked for this time: the Asr it does not print. */
+  /** The method alone, and no column of the timetable was checked for this time: the Asr it does not print, or a time it does not print at all. */
   | 'unchecked';
 
 /** Which Asr to give: the one the authority's timetable prints, or one by name (one shadow length, or two). */

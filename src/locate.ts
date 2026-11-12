@@ -181,6 +181,7 @@ const NATIONAL: Readonly<Record<string, Authority>> = {
   PK: 'banuri',
   AE: 'uae',
   IR: 'tehran',
+  TN: 'tunisia',
 };
 
 const near = (authority: Authority, latitude: number, longitude: number, maxKm: number) =>
