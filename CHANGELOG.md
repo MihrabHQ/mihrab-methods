@@ -9,6 +9,15 @@ revision bump is at least a minor version.
 
 ## Unreleased
 
+- **Algeria south of the equator: Asr takes the noon shadow's length.** The
+  Ministry's method signs the noon shadow, which is right in Algeria and
+  wrong where the Sun passes north of the zenith: computed for a point
+  south of the equator, Asr fell at Dhuhr or hours early. There the method
+  now takes the shadow's length, as every other method does. No listed
+  place is south of the equator, so nothing the method prints for Algeria
+  changes and its revision stays; in every port.
+No method changed; no revision raised.
+
 No method changed; no revision raised.
 
 ## 1.20.0 — 2026-11-12
@@ -46,7 +55,6 @@ No method changed; no revision raised.
   `data/corrections/wifaq.json` is new. In every port (`wifaq_minutes` /
   `wifaqMinutes`, `REVISIONS` with `wifaq: 1`). No other method's output
   changes.
-No method changed; no revision raised.
 
 ## 1.18.0 — 2026-11-12
 

@@ -125,7 +125,9 @@ def algeria_raw_minutes(lat, lon, year, month0, day, asr_shadow=1):
         return t
 
     def asr_altitude(dec):
-        return math.atan(1 / (asr_shadow + math.tan((lat - dec / RAD) * RAD))) / RAD
+        # the signed noon shadow is a northern one: south of the equator, its length
+        noon_shadow = math.tan((lat - dec / RAD) * RAD)
+        return math.atan(1 / (asr_shadow + (noon_shadow if lat >= 0 else abs(noon_shadow)))) / RAD
 
     return {
         'fajr': event(lambda dec: -18, -1, noon - 420),

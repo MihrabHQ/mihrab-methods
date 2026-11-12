@@ -126,7 +126,11 @@ func algeriaRawMinutes(_ lat: Double, _ lon: Double, _ year: Int, _ month0: Int,
         }
         return t
     }
-    func asrAltitude(_ dec: Double) -> Double { return atan(1 / (asrShadow + tan((lat - dec / RAD) * RAD))) / RAD }
+    // the signed noon shadow is a northern one: south of the equator, its length
+    func asrAltitude(_ dec: Double) -> Double {
+        let noonShadow = tan((lat - dec / RAD) * RAD)
+        return atan(1 / (asrShadow + (lat >= 0 ? noonShadow : abs(noonShadow)))) / RAD
+    }
     return DayMinutes(
         fajr: event({ _ in -18 }, -1, noon - 420),
         sunrise: event({ _ in -0.833 }, -1, noon - 360),

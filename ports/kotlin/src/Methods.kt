@@ -109,7 +109,11 @@ fun algeriaRawMinutes(lat: Double, lon: Double, year: Int, month0: Int, day: Int
         }
         return t
     }
-    val asrAltitude = { dec: Double -> atan(1 / (asrShadow + tan((lat - dec / RAD) * RAD))) / RAD }
+    // the signed noon shadow is a northern one: south of the equator, its length
+    val asrAltitude = { dec: Double ->
+        val noonShadow = tan((lat - dec / RAD) * RAD)
+        atan(1 / (asrShadow + (if (lat >= 0) noonShadow else abs(noonShadow)))) / RAD
+    }
     return DayMinutes(
         fajr = event({ -18.0 }, -1.0, noon - 420),
         sunrise = event({ -0.833 }, -1.0, noon - 360),

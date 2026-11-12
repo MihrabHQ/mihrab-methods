@@ -107,7 +107,11 @@ DayMinutes algeriaRawMinutes(double lat, double lon, int year, int month0, int d
     return t;
   }
 
-  double asrAltitude(double dec) => atan(1 / (asrShadow + tan((lat - dec / rad) * rad))) / rad;
+  // the signed noon shadow is a northern one: south of the equator, its length
+  double asrAltitude(double dec) {
+    final noonShadow = tan((lat - dec / rad) * rad);
+    return atan(1 / (asrShadow + (lat >= 0 ? noonShadow : noonShadow.abs()))) / rad;
+  }
   return DayMinutes(
     event((_) => -18.0, -1.0, noon - 420),
     event((_) => -0.833, -1.0, noon - 360),
