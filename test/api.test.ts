@@ -155,3 +155,53 @@ test('methodInfo describes each method', () => {
   }
   assert.ok(methodInfo('diyanet').countries.length > 150);
 });
+
+test('each time says what it stands on, and the answer says which Asr it carries', () => {
+  // a day and a time the correction list moves, read from the list itself
+  const cov = methodInfo('morocco').corrections;
+  const place = placesOf('morocco')[0];
+  let corrected = 0, table = 0;
+  for (const day of timesForRange(place, cov.from, cov.to)) {
+    assert.equal(day.asrShadow, 1);
+    for (const k of ['fajr', 'sunrise', 'dhuhr', 'asr', 'maghrib', 'isha'] as const) {
+      const b = day.times![k].basis;
+      assert.ok(b === 'table' || b === 'corrected', `${day.date} ${k}: ${b}`);
+      if (b === 'corrected') {
+        corrected++;
+        // without the list the same time is a minute away
+        const bare = candidateTimes(place, day.date, { corrections: false }).times![k];
+        assert.equal(Math.abs(bare.instant.getTime() - day.times![k].instant.getTime()), 60_000);
+        assert.equal(bare.basis, 'method');
+      } else table++;
+    }
+  }
+  assert.ok(corrected > 0 && table > corrected);
+  // outside the certified span: the method alone
+  assert.equal(timesFor(place, '2041-03-01').times!.fajr.basis, 'method');
+  // the Asr the timetable does not print is unchecked, on an otherwise certified day
+  const other = timesFor(place, cov.from, { asr: 'hanafi' });
+  assert.equal(other.asrShadow, 2);
+  assert.equal(other.times!.asr.basis, 'unchecked');
+  assert.notEqual(other.times!.dhuhr.basis, 'unchecked');
+  assert.deepEqual(timesFor(place, cov.from, { asrShadow: 2 }), other); // the older spelling
+});
+
+test('where the timetable prints the Hanafi Asr, printed and hanafi are one, and shafii is the other', () => {
+  for (const a of ['wifaq', 'banuri'] as const) {
+    const place = placesOf(a)[0];
+    const date = methodInfo(a).corrections.from;
+    const printed = timesFor(place, date);
+    assert.equal(printed.asrShadow, 2, a);
+    assert.deepEqual(timesFor(place, date, { asr: 'hanafi' }), printed, a);
+    assert.deepEqual(timesFor(place, date, { asrShadow: 2 }), printed, a);
+    const shafii = timesFor(place, date, { asr: 'shafii' });
+    assert.equal(shafii.asrShadow, 1, a);
+    assert.equal(shafii.times!.asr.basis, 'unchecked', a);
+    assert.ok(shafii.times!.asr.instant < printed.times!.asr.instant, a);
+  }
+  // Tatarstan's method has the one Asr its timetable prints: that is what comes back, and the answer says so.
+  const kazan = placesOf('tatarstan')[0];
+  const day = timesFor(kazan, methodInfo('tatarstan').corrections.from, { asr: 'shafii' });
+  assert.equal(day.asrShadow, 2);
+  assert.notEqual(day.times!.asr.basis, 'unchecked');
+});

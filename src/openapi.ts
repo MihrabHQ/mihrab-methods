@@ -63,7 +63,7 @@ export const ROUTE_SPECS = [
       { name: 'date', description: 'The civil date at the place. Left out: today (UTC).', schema: day },
       { name: 'from', description: 'First date of a range (with `to`).', schema: day },
       { name: 'to', description: 'Last date of the range, inclusive.', schema: day },
-      { name: 'asr', description: '2 for the Hanafi Asr (a shadow of twice the length).', schema: { type: 'string', enum: ['1', '2'] } },
+      { name: 'asr', description: 'Which Asr: `printed` (the default) is the one the authority’s timetable prints; `shafii` (one shadow length) or `hanafi` (two) ask by name. `1` and `2` are the older spellings of `printed` and `hanafi`. The answer’s `asrShadow` says which came back.', schema: { type: 'string', enum: ['printed', 'shafii', 'hanafi', '1', '2'] } },
       { name: 'strict', description: '1 to refuse a date outside the certified span (422) instead of answering `method-only`.', schema: { type: 'string', enum: ['1'] } },
     ],
     example: '/v1/times?lat=36.75&lng=3.06&date=2026-10-15',
@@ -102,12 +102,15 @@ const dayTimes = object({
   certifiedUntil: nullable(day),
   revision: { type: 'integer', description: 'The method’s revision: it rises when what the method prints changes.' },
   clock: object({ zone: nullable(str), offsetMinutes: { type: 'integer' }, label: str }),
+  asrShadow: { type: 'integer', enum: [1, 2], description: 'Which Asr `times.asr` is: 1 for one shadow length (Shafi’i), 2 for two (Hanafi).' },
   times: nullable(object(Object.fromEntries(['fajr', 'sunrise', 'dhuhr', 'asr', 'maghrib', 'isha'].map(k => [k, ref('PrayerTime')])))),
 });
 
 const SCHEMAS: Record<string, unknown> = {
   Place: place,
-  PrayerTime: object({ instant: { type: 'string', format: 'date-time', description: 'The exact moment.' }, printed: { type: 'string', pattern: '^\\d\\d:\\d\\d$', description: 'The wall-clock minute on the timetable’s clock.' } }),
+  PrayerTime: object({ instant: { type: 'string', format: 'date-time', description: 'The exact moment.' }, printed: { type: 'string', pattern: '^\\d\\d:\\d\\d$', description: 'The wall-clock minute on the timetable’s clock.' },
+    basis: { type: 'string', enum: ['table', 'corrected', 'method', 'unchecked'], description: 'What the time stands on. `table`: inside the certified span, the method gave the timetable’s minute unaided. `corrected`: the correction list moved it a minute onto the timetable’s minute. `method`: the method alone, the date being outside the certified span. `unchecked`: the method alone, and no column was checked for this time (the Asr the timetable does not print).' },
+  }),
   DayTimes: dayTimes,
   Times: { oneOf: [{ allOf: [object(found, ['place', 'authorityFrom']), ref('DayTimes')] }, object({ ...found, days: { type: 'array', items: ref('DayTimes') } }, ['place', 'authorityFrom', 'days'])] },
   Nearest: object(found, ['place', 'distanceKm', 'authorityFrom']),

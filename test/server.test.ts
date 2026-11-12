@@ -70,6 +70,16 @@ test('every route is described, and the description on file is the one served', 
   }
 });
 
+test('asr by name, and what each time stands on', () => {
+  const r = get('/v1/times?place=algeria:27&date=2026-10-15&asr=hanafi').json;
+  assert.equal(r.asrShadow, 2);
+  assert.equal(r.times.asr.basis, 'unchecked');
+  assert.ok(['table', 'corrected'].includes(r.times.fajr.basis));
+  assert.deepEqual(get('/v1/times?place=algeria:27&date=2026-10-15&asr=2').json, r);
+  assert.equal(get('/v1/times?place=algeria:27&date=2026-10-15').json.asrShadow, 1);
+  assert.equal(get('/v1/times?place=algeria:27&asr=maliki').status, 400);
+});
+
 test('errors are JSON with the right status, and never cached', () => {
   assert.equal(get('/v1/times?authority=nowhere&lat=1&lng=1').status, 400);
   assert.equal(get('/v1/times?authority=algeria&lat=x&lng=3').status, 400);

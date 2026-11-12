@@ -398,10 +398,13 @@
             "name": "asr",
             "in": "query",
             "required": false,
-            "description": "2 for the Hanafi Asr (a shadow of twice the length).",
+            "description": "Which Asr: `printed` (the default) is the one the authority’s timetable prints; `shafii` (one shadow length) or `hanafi` (two) ask by name. `1` and `2` are the older spellings of `printed` and `hanafi`. The answer’s `asrShadow` says which came back.",
             "schema": {
               "type": "string",
               "enum": [
+                "printed",
+                "shafii",
+                "hanafi",
                 "1",
                 "2"
               ]
@@ -512,11 +515,22 @@
             "type": "string",
             "pattern": "^\\d\\d:\\d\\d$",
             "description": "The wall-clock minute on the timetable’s clock."
+          },
+          "basis": {
+            "type": "string",
+            "enum": [
+              "table",
+              "corrected",
+              "method",
+              "unchecked"
+            ],
+            "description": "What the time stands on. `table`: inside the certified span, the method gave the timetable’s minute unaided. `corrected`: the correction list moved it a minute onto the timetable’s minute. `method`: the method alone, the date being outside the certified span. `unchecked`: the method alone, and no column was checked for this time (the Asr the timetable does not print)."
           }
         },
         "required": [
           "instant",
-          "printed"
+          "printed",
+          "basis"
         ]
       },
       "DayTimes": {
@@ -614,6 +628,14 @@
               "label"
             ]
           },
+          "asrShadow": {
+            "type": "integer",
+            "enum": [
+              1,
+              2
+            ],
+            "description": "Which Asr `times.asr` is: 1 for one shadow length (Shafi’i), 2 for two (Hanafi)."
+          },
           "times": {
             "anyOf": [
               {
@@ -662,6 +684,7 @@
           "certifiedUntil",
           "revision",
           "clock",
+          "asrShadow",
           "times"
         ]
       },

@@ -2,7 +2,7 @@
  * The library's calls. Each works for whichever authorities are loaded —
  * `mihrab-methods` loads all five, `mihrab-methods/<authority>` one.
  */
-import { candidateInstants, type ComputeOptions } from './compute.js';
+import { asrFor, candidateInstants, correctionAt, type ComputeOptions } from './compute.js';
 import { parseCivilDate, nextDay, type Ymd } from './civilDate.js';
 import { printedAt, tableClockAt } from './clock.js';
 import { authorityData, isLoaded, loadedAuthorities } from './registry.js';
@@ -10,6 +10,7 @@ import {
   PRAYER_KEYS,
   UncertifiedMethodError,
   type Authority,
+  type Basis,
   type Certification,
   type CivilDate,
   type DayTimes,
@@ -96,14 +97,18 @@ export function nearestPlace(authority: Authority, lat: number, lon: number, opt
   return best;
 }
 
-function dayTimes(place: Place, d: Ymd, instants: Instants | null, status: DayTimes['status']): DayTimes {
+function dayTimes(place: Place, d: Ymd, instants: Instants | null, status: DayTimes['status'], asr: { shadow: 1 | 2; printed: boolean }, listed = true): DayTimes {
   const data = authorityData(place.authority);
   const span = certifiedSpan(place.authority);
   const clock = tableClockAt(place, d.year, d.month0, d.day);
   let times: Record<PrayerKey, PrayerTime> | null = null;
   if (instants) {
     times = {} as Record<PrayerKey, PrayerTime>;
-    for (const k of PRAYER_KEYS) times[k] = { instant: instants[k], printed: printedAt(instants[k], clock.offsetMinutes) };
+    // what each time stands on: the timetable (unaided, or by the list), the method alone, or nothing checked
+    const moved = status === 'certified' && listed ? correctionAt(place, d.year, d.month0, d.day) : undefined;
+    const basis = (k: PrayerKey): Basis =>
+      k === 'asr' && !asr.printed ? 'unchecked' : status !== 'certified' || !listed ? 'method' : moved?.[k] ? 'corrected' : 'table';
+    for (const k of PRAYER_KEYS) times[k] = { instant: instants[k], printed: printedAt(instants[k], clock.offsetMinutes), basis: basis(k) };
   }
   return {
     authority: place.authority,
@@ -114,6 +119,7 @@ function dayTimes(place: Place, d: Ymd, instants: Instants | null, status: DayTi
     certifiedUntil: span?.to ?? null,
     revision: data.revision,
     clock,
+    asrShadow: asr.shadow,
     times,
   };
 }
@@ -141,7 +147,7 @@ export function timesFor(place: Place, date: CivilDate, opts: TimesOptions = {})
   const d = parseCivilDate(date);
   const status = statusFor(place.authority, d.iso);
   if (status === 'method-only' && opts.strict) throw new UncertifiedMethodError(place.authority, d.iso);
-  return dayTimes(place, d, candidateInstants(place, d.year, d.month0, d.day, opts.asrShadow ?? 1), status);
+  return dayTimes(place, d, candidateInstants(place, d.year, d.month0, d.day, opts.asrShadow ?? 1, { asr: opts.asr }), status, asrFor(place.authority, opts.asrShadow, opts.asr));
 }
 
 /** `timesFor` for every date from `from` to `to`, both inclusive — a month's timetable, a year's. */
@@ -161,7 +167,14 @@ export function timesForRange(place: Place, from: CivilDate, to: CivilDate, opts
  */
 export function candidateTimes(place: Place, date: CivilDate, opts: TimesOptions & ComputeOptions = {}): DayTimes {
   const d = parseCivilDate(date);
-  return dayTimes(place, d, candidateInstants(place, d.year, d.month0, d.day, opts.asrShadow ?? 1, { corrections: opts.corrections }), statusFor(place.authority, d.iso));
+  return dayTimes(
+    place,
+    d,
+    candidateInstants(place, d.year, d.month0, d.day, opts.asrShadow ?? 1, { corrections: opts.corrections, asr: opts.asr }),
+    statusFor(place.authority, d.iso),
+    asrFor(place.authority, opts.asrShadow, opts.asr),
+    opts.corrections !== false,
+  );
 }
 
 /** What the method is: its parameters, revision, certification, correction list and sources. */

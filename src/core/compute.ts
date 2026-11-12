@@ -25,9 +25,40 @@ import { tehranTimes } from '../methods/tehran.js';
 import { wifaqTimes } from '../methods/wifaq.js';
 import { authorityData } from './registry.js';
 import { placeClockAt } from './clock.js';
-import type { Instants, Place, PrayerKey } from './types.js';
+import type { AsrChoice, Authority, Instants, Place, PrayerKey } from './types.js';
 
-export type ComputeOptions = { corrections?: boolean };
+export type ComputeOptions = {
+  corrections?: boolean;
+  /** Which Asr: the one the timetable prints (the default), or one by name. Overrides the `asrShadow` argument. */
+  asr?: AsrChoice;
+};
+
+/** The Asr an authority's timetable prints: 2 (two shadow lengths, the Hanafi one) for these, 1 for the rest. */
+const PRINTS_HANAFI: ReadonlySet<Authority> = new Set<Authority>(['tatarstan', 'cdum', 'banuri', 'wifaq']);
+/** Methods that have only the Asr their timetable prints. */
+const ONE_ASR: ReadonlySet<Authority> = new Set<Authority>(['tatarstan', 'cdum']);
+
+export function printedAsrShadow(authority: Authority): 1 | 2 {
+  return PRINTS_HANAFI.has(authority) ? 2 : 1;
+}
+
+/**
+ * The Asr a request comes to: its shadow length, and whether it is the one
+ * the timetable prints (the only one a correction list holds). `asrShadow`
+ * is the older way to ask: 1 for the printed Asr, 2 for the Hanafi one.
+ * A method with one Asr answers with that, whatever is asked.
+ */
+export function asrFor(authority: Authority, asrShadow: 1 | 2 = 1, asr?: AsrChoice): { shadow: 1 | 2; printed: boolean } {
+  const printed = printedAsrShadow(authority);
+  const want = asr ?? (asrShadow === 2 ? 'hanafi' : 'printed');
+  const shadow = want === 'printed' || ONE_ASR.has(authority) ? printed : want === 'shafii' ? 1 : 2;
+  return { shadow, printed: shadow === printed };
+}
+
+/** What the correction list moves on a day at a place: minutes by prayer, or undefined. Asr is the printed one's. */
+export function correctionAt(place: Place, year: number, month: number, day: number): Partial<Record<PrayerKey, number>> | undefined {
+  return authorityData(place.authority).corrections.correction(place.lat, place.lon, year, month, day) ?? undefined;
+}
 
 /**
  * The method as it stands, certified or not, for a civil date with the
@@ -36,16 +67,17 @@ export type ComputeOptions = { corrections?: boolean };
  */
 export function candidateInstants(place: Place, year: number, month: number, day: number, asrShadow: 1 | 2 = 1, opts: ComputeOptions = {}): Instants | null {
   const fix = opts.corrections === false ? null : authorityData(place.authority).corrections;
+  const { shadow, printed: printedAsr } = asrFor(place.authority, asrShadow, opts.asr);
   switch (place.authority) {
     case 'sweden':
     case 'diyanet': {
       // The Congress method's own rounding is inside it; its instants land on the minute (rounded, as the app does).
       const clock = placeClockAt(place, year, month, day);
-      const t = place.prayerPoints ? perPrayer(place, place.prayerPoints, year, month, day, asrShadow) : congressTimes(place.lat, place.lon, year, month, day, asrShadow, place.ishaDeg, clock);
+      const t = place.prayerPoints ? perPrayer(place, place.prayerPoints, year, month, day, shadow) : congressTimes(place.lat, place.lon, year, month, day, shadow, place.ishaDeg, clock);
       // then the correction list: the few times Diyanet's program rounds the other way (the standard Asr only)
       const c = fix?.correction(place.lat, place.lon, year, month, day);
       const min = (d: Date, k: PrayerKey) =>
-        new Date((Math.round(d.getTime() / 60_000) + (k === 'asr' && asrShadow !== 1 ? 0 : (c?.[k] ?? 0))) * 60_000);
+        new Date((Math.round(d.getTime() / 60_000) + (k === 'asr' && !printedAsr ? 0 : (c?.[k] ?? 0))) * 60_000);
       return { fajr: min(t.fajr, 'fajr'), sunrise: min(t.sunrise, 'sunrise'), dhuhr: min(t.dhuhr, 'dhuhr'), asr: min(t.asr, 'asr'), maghrib: min(t.maghrib, 'maghrib'), isha: min(t.isha, 'isha') };
     }
     case 'morocco':
@@ -68,44 +100,44 @@ export function candidateInstants(place: Place, year: number, month: number, day
     case 'wifaq': {
       const t =
         place.authority === 'morocco'
-          ? moroccoTimes(place.lat, place.lon, year, month, day, place.dipDeg, asrShadow, place.dipMaghribDeg)
+          ? moroccoTimes(place.lat, place.lon, year, month, day, place.dipDeg, shadow, place.dipMaghribDeg)
           : place.authority === 'algeria'
-            ? algeriaTimes(place.lat, place.lon, year, month, day, asrShadow)
+            ? algeriaTimes(place.lat, place.lon, year, month, day, shadow)
             : place.authority === 'kazakhstan'
               ? kazakhstanTimes(place.lat, place.lon, year, month, day)
             : place.authority === 'egypt'
-              ? egyptTimes(place.lat, place.lon, year, month, day, asrShadow)
+              ? egyptTimes(place.lat, place.lon, year, month, day, shadow)
             : place.authority === 'brunei'
-              ? bruneiTimes(place.lon, year, month, day, asrShadow)
+              ? bruneiTimes(place.lon, year, month, day, shadow)
             : place.authority === 'qatar'
-              ? qatarTimes(place.lat, place.lon, year, month, day, asrShadow)
+              ? qatarTimes(place.lat, place.lon, year, month, day, shadow)
             : place.authority === 'kuwait'
-              ? kuwaitTimes(place.lon, year, month, day, asrShadow)
+              ? kuwaitTimes(place.lon, year, month, day, shadow)
             : place.authority === 'jordan'
-              ? jordanTimes(place.lat, place.lon, year, month, day, place.dipDeg, asrShadow, place.dipMaghribDeg, place.fajrMinutes)
+              ? jordanTimes(place.lat, place.lon, year, month, day, place.dipDeg, shadow, place.dipMaghribDeg, place.fajrMinutes)
             : place.authority === 'tatarstan'
               ? tatarstanTimes(place.lat, place.lon, year, month, day, place.dipDeg)
             : place.authority === 'cdum'
               ? cdumTimes(place.lat, place.lon, year, month, day)
             : place.authority === 'albania'
-              ? albaniaTimes(place.lon, year, month, day, asrShadow)
+              ? albaniaTimes(place.lon, year, month, day, shadow)
             : place.authority === 'bulgaria'
-              ? bulgariaTimes(place.lon, year, month, day, asrShadow)
+              ? bulgariaTimes(place.lon, year, month, day, shadow)
             : place.authority === 'banuri'
-              ? banuriTimes(place.lat, place.lon, year, month, day)
+              ? banuriTimes(place.lat, place.lon, year, month, day, shadow)
             : place.authority === 'wifaq'
-              ? wifaqTimes(place.lat, place.lon, year, month, day)
+              ? wifaqTimes(place.lat, place.lon, year, month, day, shadow)
             : place.authority === 'tehran'
-              ? tehranTimes(place.lat, place.lon, year, month, day, asrShadow)
+              ? tehranTimes(place.lat, place.lon, year, month, day, shadow)
             : place.authority === 'uae'
-              ? uaeTimes(place.lat, place.lon, year, month, day, place.dipDeg, asrShadow, place.dipMaghribDeg, place.fajrMinutes)
+              ? uaeTimes(place.lat, place.lon, year, month, day, place.dipDeg, shadow, place.dipMaghribDeg, place.fajrMinutes)
             : place.authority === 'turkiyetakvimi'
-              ? takvimTimes(place.lat, place.lon, year, month, day, place.temkin, asrShadow)
-              : kemenagTimes(place.lat, place.lon, year, month, day, { highland: place.highland, twilightDip: place.twilightDip, asrShadow, afternoon: place.afternoon });
+              ? takvimTimes(place.lat, place.lon, year, month, day, place.temkin, shadow)
+              : kemenagTimes(place.lat, place.lon, year, month, day, { highland: place.highland, twilightDip: place.twilightDip, asrShadow: shadow, afternoon: place.afternoon });
       // the correction list: the authority's few times on the other side of a minute (the standard Asr only)
       const c = !t || !fix ? undefined : fix.correction(place.lat, place.lon, year, month, day);
       if (!t || !c) return t;
-      const mv = (d: Date, k: PrayerKey) => new Date(d.getTime() + (k === 'asr' && asrShadow !== 1 ? 0 : (c[k] ?? 0)) * 60_000);
+      const mv = (d: Date, k: PrayerKey) => new Date(d.getTime() + (k === 'asr' && !printedAsr ? 0 : (c[k] ?? 0)) * 60_000);
       return { fajr: mv(t.fajr, 'fajr'), sunrise: mv(t.sunrise, 'sunrise'), dhuhr: mv(t.dhuhr, 'dhuhr'), asr: mv(t.asr, 'asr'), maghrib: mv(t.maghrib, 'maghrib'), isha: mv(t.isha, 'isha') };
     }
   }

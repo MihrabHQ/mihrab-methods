@@ -9,6 +9,22 @@ revision bump is at least a minor version.
 
 ## Unreleased
 
+- **Each time says what it stands on.** A `PrayerTime` gains `basis`:
+  `table` (inside the certified dates, the method gave the timetable's
+  minute unaided), `corrected` (the correction list moved it a minute onto
+  the timetable's minute), `method` (the method alone, the date being
+  outside the certified dates) or `unchecked` (the method alone, with no
+  column checked for it: the Asr the timetable does not print). The day's
+  `status` is unchanged.
+- **Asr by name, and the answer says which it carries.** `timesFor` takes
+  `asr: 'printed' | 'shafii' | 'hanafi'` (the API: `asr=`), and `DayTimes`
+  gains `asrShadow` (1 or 2). `'printed'`, the default, is the Asr the
+  authority's timetable prints, as before: the Hanafi one for Tatarstan's,
+  the Central Muftiate's, Jamia Banuri's and Wifaqul Ulama's. Their Shafi'i
+  Asr can now be asked for (Banuri, Wifaq). `asrShadow: 2` still asks for
+  the Hanafi Asr; for those four it used to return the printed Asr without
+  its corrections and now returns it with them.
+
 No method changed; no revision raised.
 
 ## 1.21.0 — 2026-11-12

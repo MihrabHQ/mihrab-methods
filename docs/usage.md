@@ -34,14 +34,26 @@ timesFor(place, '2026-10-15');                // or { year: 2026, month: 10, day
 //                                            on the printed minute all but rarely, never a minute further
 //   date: '2026-10-15', certifiedFrom: '2024-01-01', certifiedUntil: '2027-12-31', revision: 1,
 //   clock: { zone: 'Europe/Stockholm', offsetMinutes: 120, label: 'Europe/Stockholm' },
-//   times: { fajr: { instant: Date, printed: '05:09' }, sunrise: …, dhuhr: …, asr: …, maghrib: …, isha: … }
+//   asrShadow: 1,                            which Asr this is: 1 one shadow length (Shafi'i), 2 two (Hanafi)
+//   times: { fajr: { instant: Date, printed: '05:09', basis: 'table' }, sunrise: …, dhuhr: …, asr: …, maghrib: …, isha: … }
 // }
 timesFor(place, '2031-01-01', { strict: true });   // throws UncertifiedMethodError instead
-timesFor(place, '2026-10-15', { asrShadow: 2 });   // the Hanafi Asr (the tables print the standard one)
+timesFor(place, '2026-10-15', { asr: 'hanafi' });  // an Asr by name: 'shafii' or 'hanafi' (default 'printed', the timetable's own)
 timesForRange(place, '2026-10-01', '2026-10-31');  // a month, one DayTimes per day
 candidateTimes(place, '2026-10-15', { corrections: false }); // the formula alone — research
 methodInfo('morocco');                        // angles, margins, rounding, revision, certification, sources, spec
 ```
+
+`basis` says what each time stands on: `table` (inside the certified
+dates, and the method gave the timetable's minute unaided), `corrected`
+(the correction list moved it a minute onto the timetable's minute),
+`method` (the method alone: the date is outside the certified dates) or
+`unchecked` (the method alone, and no column was checked for it: the Asr
+the timetable does not print). The Asr is the one the authority's
+timetable prints unless another is asked for by name; for Tatarstan's, the
+Central Muftiate's, Jamia Banuri's and Wifaqul Ulama's that is the Hanafi
+one, and `asrShadow` on the answer always says which came back. The older
+`{ asrShadow: 2 }` still asks for the Hanafi Asr.
 
 `printed` is the wall-clock minute on `clock`, which is the clock the
 authority prints the day in: the place's zone as kept at noon, or the

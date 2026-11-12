@@ -113,7 +113,23 @@ export type PrayerTime = {
   instant: Date;
   /** 'HH:MM' on the table's clock (`DayTimes.clock`). */
   printed: string;
+  /** What this time stands on (`timesFor` and `candidateTimes` always say). */
+  basis?: Basis;
 };
+
+/** What one time stands on. */
+export type Basis =
+  /** Inside the certified span, and the method gave the timetable's minute unaided. */
+  | 'table'
+  /** Inside the certified span, and the correction list moved it one minute onto the timetable's minute. */
+  | 'corrected'
+  /** The method alone: the date is outside the certified span (or the method is not certified, or was run without its list). */
+  | 'method'
+  /** The method alone, and no column of the timetable was checked for this time: the Asr it does not print. */
+  | 'unchecked';
+
+/** Which Asr to give: the one the authority's timetable prints, or one by name (one shadow length, or two). */
+export type AsrChoice = 'printed' | 'shafii' | 'hanafi';
 
 /** The clock a day's times are printed in. */
 export type TableClock = {
@@ -145,12 +161,20 @@ export type DayTimes = {
   /** The method's revision that computed this. */
   revision: number;
   clock: TableClock;
+  /** Which Asr `times.asr` is: 1 for one shadow length (Shafi'i), 2 for two (Hanafi). */
+  asrShadow?: 1 | 2;
   /** Null on a day the method gives no times for the place. */
   times: Record<PrayerKey, PrayerTime> | null;
 };
 
 export type TimesOptions = {
-  /** 2 for the Hanafi Asr; the tables print the standard one (1). */
+  /**
+   * Which Asr: 'printed' (the default) is the one the authority's timetable
+   * prints, the only one its correction list holds; 'shafii' and 'hanafi'
+   * ask for one by name. The answer's `asrShadow` says which came back.
+   */
+  asr?: AsrChoice;
+  /** The older way to ask: 1 for the printed Asr, 2 for the Hanafi one. `asr` wins where both are given. */
   asrShadow?: 1 | 2;
   /** Throw `UncertifiedMethodError` for a date outside the certified span, instead of returning `status: 'method-only'`. */
   strict?: boolean;

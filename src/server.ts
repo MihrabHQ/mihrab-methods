@@ -14,10 +14,11 @@
  *   GET /v1/authority?lat=36.75&lng=3.06             defaultAuthorityFor, with the country and the nearest place
  *   GET /openapi.json                                the routes, described (src/openapi.ts)
  *
- * Options on /v1/times: asr=2 for the Hanafi Asr; strict=1 to refuse a date
+ * Options on /v1/times: asr=shafii or asr=hanafi for an Asr by name (the default is
+ * the one the timetable prints; asr=2 still means hanafi); strict=1 to refuse a date
  * outside the certified span (HTTP 422) instead of answering 'method-only'.
  */
-import { AUTHORITIES, methodInfo, nearestPlace, placeById, placesOf, timesFor, timesForRange, UncertifiedMethodError, type Authority, type Place } from './index.js';
+import { AUTHORITIES, methodInfo, nearestPlace, placeById, placesOf, timesFor, timesForRange, UncertifiedMethodError, type AsrChoice, type Authority, type Place } from './index.js';
 import { countryAt, defaultAuthorityFor } from './locate.js';
 import { openapi, ROUTES, type RoutePath } from './openapi.js';
 
@@ -94,7 +95,9 @@ const HANDLERS: Record<RoutePath, (q: URLSearchParams) => unknown> = {
   },
   '/v1/times': q => {
     const f = find(q);
-    const opts = { asrShadow: q.get('asr') === '2' ? (2 as const) : (1 as const), strict: q.get('strict') === '1' };
+    const asked = q.get('asr');
+    if (asked !== null && !['1', '2', 'printed', 'shafii', 'hanafi'].includes(asked)) throw new HttpError(400, 'asr: printed, shafii or hanafi');
+    const opts = { asr: asked === '2' ? ('hanafi' as const) : asked === null || asked === '1' ? ('printed' as const) : (asked as AsrChoice), strict: q.get('strict') === '1' };
     const from = q.get('from'),
       to = q.get('to');
     if (from && to) return { ...said(f), days: timesForRange(f.place, from, to, opts) };

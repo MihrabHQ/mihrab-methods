@@ -42,5 +42,7 @@ export {
   type PrayerKey,
   type PrayerTime,
   type TableClock,
+  type AsrChoice,
+  type Basis,
   type TimesOptions,
 } from './types.js';
