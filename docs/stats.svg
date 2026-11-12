@@ -67,7 +67,7 @@ text{font-family:system-ui,-apple-system,"Segoe UI",sans-serif}
 <line x1="630.6" y1="282" x2="630.6" y2="286" class="a"/>
 <text x="630.6" y="299" class="m">Nov 9</text>
 <text x="4" y="336" class="t">API requests a day</text>
-<text x="716" y="336" class="s" text-anchor="end"><tspan class="v">1,890</tspan> in the last 7 days · <tspan class="v">1,900</tspan> in all</text>
+<text x="716" y="336" class="s" text-anchor="end"><tspan class="v">2,910</tspan> in the last 7 days · <tspan class="v">2,920</tspan> in all</text>
 <line x1="4" y1="414.7" x2="716" y2="414.7" class="g"/>
 <text x="722" y="418.7" class="m">500</text>
 <line x1="4" y1="387.3" x2="716" y2="387.3" class="g"/>
@@ -81,6 +81,9 @@ text{font-family:system-ui,-apple-system,"Segoe UI",sans-serif}
 <rect x="548.4" y="413.0" width="22.0" height="29.0" rx="2.0" class="p"><title>Nov 6: 530 requests</title></rect>
 <rect x="576.8" y="436.0" width="22.0" height="6.0" rx="2.0" class="p"><title>Nov 7: 110 requests</title></rect>
 <rect x="605.3" y="380.8" width="22.0" height="61.2" rx="2.0" class="p"><title>Nov 8: 1,120 requests</title></rect>
+<rect x="633.8" y="389.5" width="22.0" height="52.5" rx="2.0" class="p"><title>Nov 9: 960 requests</title></rect>
+<rect x="662.3" y="440.5" width="22.0" height="1.5" rx="2.0" class="p"><title>Nov 10: 10 requests</title></rect>
+<rect x="690.8" y="439.3" width="22.0" height="2.7" rx="2.0" class="p"><title>Nov 11: 50 requests</title></rect>
 <text x="616.3" y="375.8" class="v" text-anchor="middle">1,120</text>
 <text x="246.1" y="434" class="m" text-anchor="middle">not live yet</text>
 <line x1="32.5" y1="442" x2="32.5" y2="446" class="a"/>

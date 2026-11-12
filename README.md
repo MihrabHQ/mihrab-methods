@@ -150,7 +150,7 @@ as fixed addresses and the details: [docs/feed.md](docs/feed.md).
 |---|---:|---:|---:|
 | npm downloads | 2,407 | 3,345 | 3,345 |
 | PyPI downloads | 804 | 804 | 804 (since 2026-11-11) |
-| API requests | 1,890 | 1,900 | 1,900 (since 2026-11-04) |
+| API requests | 2,910 | 2,920 | 2,920 (since 2026-11-04) |
 
 Counts only, to 2026-11-11, updated weekly (`scripts/stats.mjs`, history in [docs/stats.json](docs/stats.json)): npm's public download counts — every install counts, CI and mirrors included — PyPI's for the [Python port](https://pypi.org/project/mihrab-methods/) (pypistats.org, mirrors left out), and Cloudflare's request counts for the API. No addresses, queries or places are recorded anywhere.
 <!-- usage:end -->
