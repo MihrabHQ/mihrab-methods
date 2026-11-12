@@ -9,6 +9,10 @@ revision bump is at least a minor version.
 
 ## Unreleased
 
+No method changed; no revision raised.
+
+## 1.19.0 — 2026-11-12
+
 - **The United Kingdom, revision 1: a twentieth method.** Wifaqul Ulama
   (Britain)'s yearly timetables for eighty-one towns: `mihrab-methods/wifaq`,
   authority `wifaq`. Fajr at 18°, Zuhr four minutes after the transit,
