@@ -17,7 +17,7 @@ from . import methods
 
 PRAYERS = ('fajr', 'sunrise', 'dhuhr', 'asr', 'maghrib', 'isha')
 #: The method revisions this port reproduces. A correction list belongs to one revision.
-REVISIONS = {'sweden': 1, 'diyanet': 2, 'morocco': 3, 'algeria': 1, 'indonesia': 2, 'turkiyetakvimi': 1, 'kazakhstan': 1, 'egypt': 1, 'brunei': 1, 'qatar': 1, 'kuwait': 1, 'jordan': 1, 'tatarstan': 1, 'cdum': 1, 'albania': 1, 'bulgaria': 1, 'banuri': 1, 'uae': 1, 'tehran': 1}
+REVISIONS = {'sweden': 1, 'diyanet': 2, 'morocco': 3, 'algeria': 1, 'indonesia': 2, 'turkiyetakvimi': 1, 'kazakhstan': 1, 'egypt': 1, 'brunei': 1, 'qatar': 1, 'kuwait': 1, 'jordan': 1, 'tatarstan': 1, 'cdum': 1, 'albania': 1, 'bulgaria': 1, 'banuri': 1, 'uae': 1, 'tehran': 1, 'wifaq': 1}
 
 _UTC = datetime.timezone.utc
 
@@ -129,6 +129,8 @@ def minutes_for(place, date, corrections=None, asr_shadow=1):
         t = methods.bulgaria_minutes(place['lon'], year, month0, day, asr_shadow)
     elif a == 'banuri':
         t = methods.banuri_minutes(place['lat'], place['lon'], year, month0, day)
+    elif a == 'wifaq':
+        t = methods.wifaq_minutes(place['lat'], place['lon'], year, month0, day)
     elif a == 'tehran':
         t = methods.tehran_minutes(place['lat'], place['lon'], year, month0, day, asr_shadow)
     elif a == 'uae':

@@ -2,8 +2,8 @@
  * The shapes the library speaks in. Nothing here computes anything.
  */
 
-export type Authority = 'sweden' | 'diyanet' | 'morocco' | 'algeria' | 'indonesia' | 'turkiyetakvimi' | 'kazakhstan' | 'egypt' | 'brunei' | 'qatar' | 'kuwait' | 'jordan' | 'tatarstan' | 'cdum' | 'albania' | 'bulgaria' | 'banuri' | 'uae' | 'tehran';
-export const AUTHORITIES: readonly Authority[] = ['sweden', 'diyanet', 'morocco', 'algeria', 'indonesia', 'turkiyetakvimi', 'kazakhstan', 'egypt', 'brunei', 'qatar', 'kuwait', 'jordan', 'tatarstan', 'cdum', 'albania', 'bulgaria', 'banuri', 'uae', 'tehran'];
+export type Authority = 'sweden' | 'diyanet' | 'morocco' | 'algeria' | 'indonesia' | 'turkiyetakvimi' | 'kazakhstan' | 'egypt' | 'brunei' | 'qatar' | 'kuwait' | 'jordan' | 'tatarstan' | 'cdum' | 'albania' | 'bulgaria' | 'banuri' | 'uae' | 'tehran' | 'wifaq';
+export const AUTHORITIES: readonly Authority[] = ['sweden', 'diyanet', 'morocco', 'algeria', 'indonesia', 'turkiyetakvimi', 'kazakhstan', 'egypt', 'brunei', 'qatar', 'kuwait', 'jordan', 'tatarstan', 'cdum', 'albania', 'bulgaria', 'banuri', 'uae', 'tehran', 'wifaq'];
 
 export type PrayerKey = 'fajr' | 'sunrise' | 'dhuhr' | 'asr' | 'maghrib' | 'isha';
 export const PRAYER_KEYS: readonly PrayerKey[] = ['fajr', 'sunrise', 'dhuhr', 'asr', 'maghrib', 'isha'];

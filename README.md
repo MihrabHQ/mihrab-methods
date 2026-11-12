@@ -11,7 +11,7 @@
 Each authority's own calculation method — a ministry's, a muftiate's, a
 council of scholars' — worked out again from its published times and
 checked day by day against its timetables: <!--fig:total.off-->0<!--/fig--> of
-<!--fig:total.times-->77,123,526<!--/fig--> times off the printed minute. Free for any app, site or
+<!--fig:total.times-->77,320,626<!--/fig--> times off the printed minute. Free for any app, site or
 mosque to use.
 
 [![Usage, a day: npm downloads, PyPI downloads and API requests](docs/stats.svg)](#usage)
@@ -78,8 +78,9 @@ is held to the same test vectors as the library on every push.
 | **Pakistan (Banuri Town)** | Jamia Banuri Town’s timetable | 100 | 219,000 | **0** | 99.996 % | 8 | 1 Jan 2026 → 31 Dec 2026 |
 | **United Arab Emirates** | the Authority’s times | 41 | 89,790 | **0** | 98.524 % | 1,251 | 1 Jan 2026 → 31 Dec 2026 |
 | **Iran (Tehran Institute of Geophysics)** | the Institute of Geophysics’ sheets | 31 | 90,520 | **0** | 99.002 % | 903 | 21 Mar 2025 → 20 Mar 2027 |
+| **United Kingdom (Wifaqul Ulama)** | Wifaqul Ulama’s timetables | 81 | 197,100 | **0** | 98.680 % | 2,508 | 1 Jan 2026 → 31 Dec 2027 |
 
-19 of 19 methods certified; 0 of 77,123,526 times off the printed minute. Last checked 12 November 2026. Generated from [`certification.json`](certification.json) by `scripts/readme.mjs`.
+20 of 20 methods certified; 0 of 77,320,626 times off the printed minute. Last checked 12 November 2026. Generated from [`certification.json`](certification.json) by `scripts/readme.mjs`.
 <!-- certification-table:end -->
 
 "By the method alone" is the formula without its correction list. The list

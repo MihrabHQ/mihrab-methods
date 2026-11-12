@@ -1,5 +1,5 @@
 // The methods: Sweden and Diyanet (the Congress method), Morocco, Algeria,
-// Indonesia, Türkiye Takvimi, Kazakhstan, Egypt, Brunei, Qatar, Kuwait, Jordan, Tatarstan, Russia's Central Muftiate, Albania, Bulgaria, Pakistan's Jamia Banuri Town, the United Arab Emirates and Iran's Institute of Geophysics. A port of src/methods/*.ts — the TypeScript is the reference,
+// Indonesia, Türkiye Takvimi, Kazakhstan, Egypt, Brunei, Qatar, Kuwait, Jordan, Tatarstan, Russia's Central Muftiate, Albania, Bulgaria, Pakistan's Jamia Banuri Town, the United Arab Emirates, Iran's Institute of Geophysics and the United Kingdom's Wifaqul Ulama. A port of src/methods/*.ts — the TypeScript is the reference,
 // docs/methods.md says what each does, and the vector check holds this to it.
 //
 // Every function takes a civil date with the month 0-based, as the TypeScript
@@ -781,6 +781,44 @@ func tehranMinutes(_ lat: Double, _ lon: Double, _ year: Int, _ month0: Int, _ d
     let r = tehranRawMinutes(lat, lon, year, month0, day, asrShadow: asrShadow)
     if r.all.contains(where: { !$0.isFinite }) { return nil }
     return r.mapped { floor($0 + 0.5) }
+}
+
+// ---------------------------------------------------------------- United Kingdom: Wifaqul Ulama
+
+/// Wifaqul Ulama's timetables: Fajr 18° (on the sun of 0h UT where the event's own does not reach it, else the middle of that date's sunset and the day before's sunrise), sunrise −0.8333°, Zuhr transit + 4, Asr on the noon shadow of the sun 90 minutes before 0h UT, Maghrib sunset + 5, Isha the earlier of 15° and a seventh of the night; nearest minute, the Shafi'i Asr rounded down. Nil where a time does not form.
+func wifaqMinutes(_ lat: Double, _ lon: Double, _ year: Int, _ month0: Int, _ day: Int, asrShadow: Double = 2) -> DayMinutes? {
+    let sp = sin(lat * RAD), cp = cos(lat * RAD)
+    func noonOf(_ d0: Double) -> Double {
+        var noon = 720 - 4 * lon - meeusApparentSun(d0 + 720.0 / 1440).eot
+        for _ in 0..<2 { noon = 720 - 4 * lon - meeusApparentSun(d0 + noon / 1440).eot }
+        return noon
+    }
+    func event(_ d0: Double, _ alt: Double, _ sign: Double, _ start: Double, fixed: Double? = nil) -> Double {
+        var t = start
+        for _ in 0..<3 {
+            let s = meeusApparentSun(d0 + (fixed ?? t) / 1440)
+            let c = (sin(alt * RAD) - sp * sin(s.dec)) / (cp * cos(s.dec))
+            if !(abs(c) <= 1) { return Double.nan }
+            t = 720 - 4 * lon - s.eot + (sign * 4 * acos(c)) / RAD
+        }
+        return t
+    }
+    let d0 = d0Of(year, month0, day)
+    let noon = noonOf(d0)
+    let sunrise = event(d0, -0.8333, -1, noon - 360)
+    let sunset = event(d0, -0.8333, 1, noon + 360)
+    var fajr = event(d0, -18, -1, noon - 420)
+    if !fajr.isFinite { fajr = event(d0, -18, -1, noon - 420, fixed: 0) }
+    if !fajr.isFinite { fajr = (sunset + event(d0 - 1, -0.8333, -1, noonOf(d0 - 1) - 360)) / 2 - 720 }
+    let asrAltitude = atan(1 / (asrShadow + tan(abs(lat * RAD - meeusApparentSun(d0 - 90.0 / 1440).dec)))) / RAD
+    let asr = event(d0, asrAltitude, 1, noon + 200)
+    let seventh = sunset + (event(d0 + 1, -0.8333, -1, noonOf(d0 + 1) - 360) + 1440 - sunset) / 7
+    let isha15 = event(d0, -15, 1, noon + 420)
+    let raw = [fajr, sunrise, noon + 4, asr, sunset + 5, seventh]
+    if raw.contains(where: { !$0.isFinite }) { return nil }
+    func near(_ v: Double) -> Double { return floor(v + 0.5) }
+    let isha = isha15.isFinite ? min(near(isha15), near(seventh)) : near(seventh)
+    return DayMinutes(fajr: near(fajr), sunrise: near(sunrise), dhuhr: near(noon + 4), asr: asrShadow == 1 ? floor(asr) : near(asr), maghrib: near(sunset + 5), isha: isha)
 }
 
 // ---------------------------------------------------------------- Sweden and Diyanet: the Congress method

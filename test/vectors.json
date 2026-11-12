@@ -19,7 +19,8 @@
   "bulgaria": 1,
   "banuri": 1,
   "uae": 1,
-  "tehran": 1
+  "tehran": 1,
+  "wifaq": 1
  },
  "cases": [
   {
@@ -7716,6 +7717,378 @@
     "asr": "2027-03-20T11:49:00.000Z",
     "maghrib": "2027-03-20T14:42:00.000Z",
     "isha": "2027-03-20T15:25:00.000Z"
+   }
+  },
+  {
+   "place": {
+    "id": "wifaq:13",
+    "name": "Bradford",
+    "lat": 53.804,
+    "lon": -1.773,
+    "tz": "Europe/London"
+   },
+   "date": "2026-01-01",
+   "clock": {
+    "zone": "Europe/London",
+    "offsetMinutes": 0,
+    "label": "Europe/London"
+   },
+   "printed": {
+    "fajr": "06:13",
+    "sunrise": "08:25",
+    "dhuhr": "12:15",
+    "asr": "14:09",
+    "maghrib": "16:02",
+    "isha": "17:47"
+   },
+   "instants": {
+    "fajr": "2026-01-01T06:13:00.000Z",
+    "sunrise": "2026-01-01T08:25:00.000Z",
+    "dhuhr": "2026-01-01T12:15:00.000Z",
+    "asr": "2026-01-01T14:09:00.000Z",
+    "maghrib": "2026-01-01T16:02:00.000Z",
+    "isha": "2026-01-01T17:47:00.000Z"
+   }
+  },
+  {
+   "place": {
+    "id": "wifaq:13",
+    "name": "Bradford",
+    "lat": 53.804,
+    "lon": -1.773,
+    "tz": "Europe/London"
+   },
+   "date": "2026-09-01",
+   "clock": {
+    "zone": "Europe/London",
+    "offsetMinutes": 60,
+    "label": "Europe/London"
+   },
+   "printed": {
+    "fajr": "04:00",
+    "sunrise": "06:16",
+    "dhuhr": "13:11",
+    "asr": "17:47",
+    "maghrib": "20:02",
+    "isha": "21:26"
+   },
+   "instants": {
+    "fajr": "2026-09-01T03:00:00.000Z",
+    "sunrise": "2026-09-01T05:16:00.000Z",
+    "dhuhr": "2026-09-01T12:11:00.000Z",
+    "asr": "2026-09-01T16:47:00.000Z",
+    "maghrib": "2026-09-01T19:02:00.000Z",
+    "isha": "2026-09-01T20:26:00.000Z"
+   }
+  },
+  {
+   "place": {
+    "id": "wifaq:13",
+    "name": "Bradford",
+    "lat": 53.804,
+    "lon": -1.773,
+    "tz": "Europe/London"
+   },
+   "date": "2027-05-02",
+   "clock": {
+    "zone": "Europe/London",
+    "offsetMinutes": 60,
+    "label": "Europe/London"
+   },
+   "printed": {
+    "fajr": "02:39",
+    "sunrise": "05:30",
+    "dhuhr": "13:08",
+    "asr": "18:15",
+    "maghrib": "20:44",
+    "isha": "21:55"
+   },
+   "instants": {
+    "fajr": "2027-05-02T01:39:00.000Z",
+    "sunrise": "2027-05-02T04:30:00.000Z",
+    "dhuhr": "2027-05-02T12:08:00.000Z",
+    "asr": "2027-05-02T17:15:00.000Z",
+    "maghrib": "2027-05-02T19:44:00.000Z",
+    "isha": "2027-05-02T20:55:00.000Z"
+   }
+  },
+  {
+   "place": {
+    "id": "wifaq:13",
+    "name": "Bradford",
+    "lat": 53.804,
+    "lon": -1.773,
+    "tz": "Europe/London"
+   },
+   "date": "2027-12-31",
+   "clock": {
+    "zone": "Europe/London",
+    "offsetMinutes": 0,
+    "label": "Europe/London"
+   },
+   "printed": {
+    "fajr": "06:13",
+    "sunrise": "08:25",
+    "dhuhr": "12:14",
+    "asr": "14:08",
+    "maghrib": "16:00",
+    "isha": "17:46"
+   },
+   "instants": {
+    "fajr": "2027-12-31T06:13:00.000Z",
+    "sunrise": "2027-12-31T08:25:00.000Z",
+    "dhuhr": "2027-12-31T12:14:00.000Z",
+    "asr": "2027-12-31T14:08:00.000Z",
+    "maghrib": "2027-12-31T16:00:00.000Z",
+    "isha": "2027-12-31T17:46:00.000Z"
+   }
+  },
+  {
+   "place": {
+    "id": "wifaq:1",
+    "name": "Aberdeen",
+    "lat": 57.16,
+    "lon": -2.101,
+    "tz": "Europe/London"
+   },
+   "date": "2026-01-01",
+   "clock": {
+    "zone": "Europe/London",
+    "offsetMinutes": 0,
+    "label": "Europe/London"
+   },
+   "printed": {
+    "fajr": "06:21",
+    "sunrise": "08:48",
+    "dhuhr": "12:16",
+    "asr": "13:49",
+    "maghrib": "15:42",
+    "isha": "17:40"
+   },
+   "instants": {
+    "fajr": "2026-01-01T06:21:00.000Z",
+    "sunrise": "2026-01-01T08:48:00.000Z",
+    "dhuhr": "2026-01-01T12:16:00.000Z",
+    "asr": "2026-01-01T13:49:00.000Z",
+    "maghrib": "2026-01-01T15:42:00.000Z",
+    "isha": "2026-01-01T17:40:00.000Z"
+   }
+  },
+  {
+   "place": {
+    "id": "wifaq:1",
+    "name": "Aberdeen",
+    "lat": 57.16,
+    "lon": -2.101,
+    "tz": "Europe/London"
+   },
+   "date": "2026-09-01",
+   "clock": {
+    "zone": "Europe/London",
+    "offsetMinutes": 60,
+    "label": "Europe/London"
+   },
+   "printed": {
+    "fajr": "03:35",
+    "sunrise": "06:10",
+    "dhuhr": "13:12",
+    "asr": "17:48",
+    "maghrib": "20:10",
+    "isha": "21:32"
+   },
+   "instants": {
+    "fajr": "2026-09-01T02:35:00.000Z",
+    "sunrise": "2026-09-01T05:10:00.000Z",
+    "dhuhr": "2026-09-01T12:12:00.000Z",
+    "asr": "2026-09-01T16:48:00.000Z",
+    "maghrib": "2026-09-01T19:10:00.000Z",
+    "isha": "2026-09-01T20:32:00.000Z"
+   }
+  },
+  {
+   "place": {
+    "id": "wifaq:1",
+    "name": "Aberdeen",
+    "lat": 57.16,
+    "lon": -2.101,
+    "tz": "Europe/London"
+   },
+   "date": "2027-05-02",
+   "clock": {
+    "zone": "Europe/London",
+    "offsetMinutes": 60,
+    "label": "Europe/London"
+   },
+   "printed": {
+    "fajr": "01:07",
+    "sunrise": "05:18",
+    "dhuhr": "13:09",
+    "asr": "18:20",
+    "maghrib": "20:59",
+    "isha": "22:06"
+   },
+   "instants": {
+    "fajr": "2027-05-02T00:07:00.000Z",
+    "sunrise": "2027-05-02T04:18:00.000Z",
+    "dhuhr": "2027-05-02T12:09:00.000Z",
+    "asr": "2027-05-02T17:20:00.000Z",
+    "maghrib": "2027-05-02T19:59:00.000Z",
+    "isha": "2027-05-02T21:06:00.000Z"
+   }
+  },
+  {
+   "place": {
+    "id": "wifaq:1",
+    "name": "Aberdeen",
+    "lat": 57.16,
+    "lon": -2.101,
+    "tz": "Europe/London"
+   },
+   "date": "2027-12-31",
+   "clock": {
+    "zone": "Europe/London",
+    "offsetMinutes": 0,
+    "label": "Europe/London"
+   },
+   "printed": {
+    "fajr": "06:21",
+    "sunrise": "08:48",
+    "dhuhr": "12:15",
+    "asr": "13:47",
+    "maghrib": "15:40",
+    "isha": "17:39"
+   },
+   "instants": {
+    "fajr": "2027-12-31T06:21:00.000Z",
+    "sunrise": "2027-12-31T08:48:00.000Z",
+    "dhuhr": "2027-12-31T12:15:00.000Z",
+    "asr": "2027-12-31T13:47:00.000Z",
+    "maghrib": "2027-12-31T15:40:00.000Z",
+    "isha": "2027-12-31T17:39:00.000Z"
+   }
+  },
+  {
+   "place": {
+    "id": "wifaq:69",
+    "name": "Saint Helier (Jersey)",
+    "lat": 49.188,
+    "lon": -2.108,
+    "tz": "Europe/London"
+   },
+   "date": "2026-01-01",
+   "clock": {
+    "zone": "Europe/London",
+    "offsetMinutes": 0,
+    "label": "Europe/London"
+   },
+   "printed": {
+    "fajr": "06:07",
+    "sunrise": "08:03",
+    "dhuhr": "12:16",
+    "asr": "14:36",
+    "maghrib": "16:26",
+    "isha": "17:58"
+   },
+   "instants": {
+    "fajr": "2026-01-01T06:07:00.000Z",
+    "sunrise": "2026-01-01T08:03:00.000Z",
+    "dhuhr": "2026-01-01T12:16:00.000Z",
+    "asr": "2026-01-01T14:36:00.000Z",
+    "maghrib": "2026-01-01T16:26:00.000Z",
+    "isha": "2026-01-01T17:58:00.000Z"
+   }
+  },
+  {
+   "place": {
+    "id": "wifaq:69",
+    "name": "Saint Helier (Jersey)",
+    "lat": 49.188,
+    "lon": -2.108,
+    "tz": "Europe/London"
+   },
+   "date": "2026-09-01",
+   "clock": {
+    "zone": "Europe/London",
+    "offsetMinutes": 60,
+    "label": "Europe/London"
+   },
+   "printed": {
+    "fajr": "04:27",
+    "sunrise": "06:25",
+    "dhuhr": "13:12",
+    "asr": "17:48",
+    "maghrib": "19:56",
+    "isha": "21:22"
+   },
+   "instants": {
+    "fajr": "2026-09-01T03:27:00.000Z",
+    "sunrise": "2026-09-01T05:25:00.000Z",
+    "dhuhr": "2026-09-01T12:12:00.000Z",
+    "asr": "2026-09-01T16:48:00.000Z",
+    "maghrib": "2026-09-01T18:56:00.000Z",
+    "isha": "2026-09-01T20:22:00.000Z"
+   }
+  },
+  {
+   "place": {
+    "id": "wifaq:69",
+    "name": "Saint Helier (Jersey)",
+    "lat": 49.188,
+    "lon": -2.108,
+    "tz": "Europe/London"
+   },
+   "date": "2027-05-02",
+   "clock": {
+    "zone": "Europe/London",
+    "offsetMinutes": 60,
+    "label": "Europe/London"
+   },
+   "printed": {
+    "fajr": "03:30",
+    "sunrise": "05:46",
+    "dhuhr": "13:09",
+    "asr": "18:11",
+    "maghrib": "20:31",
+    "isha": "21:46"
+   },
+   "instants": {
+    "fajr": "2027-05-02T02:30:00.000Z",
+    "sunrise": "2027-05-02T04:46:00.000Z",
+    "dhuhr": "2027-05-02T12:09:00.000Z",
+    "asr": "2027-05-02T17:11:00.000Z",
+    "maghrib": "2027-05-02T19:31:00.000Z",
+    "isha": "2027-05-02T20:46:00.000Z"
+   }
+  },
+  {
+   "place": {
+    "id": "wifaq:69",
+    "name": "Saint Helier (Jersey)",
+    "lat": 49.188,
+    "lon": -2.108,
+    "tz": "Europe/London"
+   },
+   "date": "2027-12-31",
+   "clock": {
+    "zone": "Europe/London",
+    "offsetMinutes": 0,
+    "label": "Europe/London"
+   },
+   "printed": {
+    "fajr": "06:07",
+    "sunrise": "08:03",
+    "dhuhr": "12:15",
+    "asr": "14:34",
+    "maghrib": "16:24",
+    "isha": "17:57"
+   },
+   "instants": {
+    "fajr": "2027-12-31T06:07:00.000Z",
+    "sunrise": "2027-12-31T08:03:00.000Z",
+    "dhuhr": "2027-12-31T12:15:00.000Z",
+    "asr": "2027-12-31T14:34:00.000Z",
+    "maghrib": "2027-12-31T16:24:00.000Z",
+    "isha": "2027-12-31T17:57:00.000Z"
    }
   }
  ]

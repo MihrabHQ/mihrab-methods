@@ -1,5 +1,5 @@
 """The methods: Sweden and Diyanet (the Congress method), Morocco, Algeria,
-Indonesia, Türkiye Takvimi, Kazakhstan, Egypt, Brunei, Qatar, Kuwait, Jordan, Tatarstan, Russia's Central Muftiate, Albania, Bulgaria, Pakistan's Jamia Banuri Town, the United Arab Emirates and Iran's Institute of Geophysics. A port of src/methods/*.ts — the TypeScript is the reference,
+Indonesia, Türkiye Takvimi, Kazakhstan, Egypt, Brunei, Qatar, Kuwait, Jordan, Tatarstan, Russia's Central Muftiate, Albania, Bulgaria, Pakistan's Jamia Banuri Town, the United Arab Emirates, Iran's Institute of Geophysics and the United Kingdom's Wifaqul Ulama. A port of src/methods/*.ts — the TypeScript is the reference,
 docs/methods.md says what each does, and test_vectors.py holds this to it.
 
 Every function takes a civil date with the month 0-based, as the TypeScript
@@ -871,6 +871,57 @@ def tehran_minutes(lat, lon, year, month0, day, asr_shadow=1):
     if not all(math.isfinite(v) for v in r.values()):
         return None
     return {k: math.floor(v + 0.5) for k, v in r.items()}
+
+
+# ---------------------------------------------------------------- United Kingdom: Wifaqul Ulama
+
+
+def wifaq_minutes(lat, lon, year, month0, day, asr_shadow=2):
+    """Wifaqul Ulama's timetables: Fajr 18° (on the sun of 0h UT where the event's own does not reach it, else the middle of that date's sunset and the day before's sunrise), sunrise −0.8333°, Zuhr transit + 4, Asr on the noon shadow of the sun 90 minutes before 0h UT, Maghrib sunset + 5, Isha the earlier of 15° and a seventh of the night; nearest minute, the Shafi'i Asr rounded down. None where a time does not form."""
+    sp, cp = math.sin(lat * RAD), math.cos(lat * RAD)
+
+    def program(d0):
+        def at(t):
+            return meeus_apparent_sun(d0 + t / 1440)
+
+        noon = 720 - 4 * lon - at(720)[1]
+        for _ in range(2):
+            noon = 720 - 4 * lon - at(noon)[1]
+
+        def event(alt, sign, start, fixed=None):
+            t = start
+            for _ in range(3):
+                dec, eot = at(t if fixed is None else fixed)
+                c = (math.sin(alt * RAD) - sp * math.sin(dec)) / (cp * math.cos(dec))
+                if not abs(c) <= 1:
+                    return NAN
+                t = 720 - 4 * lon - eot + (sign * 4 * math.acos(c)) / RAD
+            return t
+
+        return noon, event, at
+
+    d0 = _d0(year, month0, day)
+    noon, event, at = program(d0)
+    sunrise = event(-0.8333, -1, noon - 360)
+    sunset = event(-0.8333, 1, noon + 360)
+    fajr = event(-18, -1, noon - 420)
+    if not math.isfinite(fajr):
+        fajr = event(-18, -1, noon - 420, 0)
+    if not math.isfinite(fajr):
+        noon_b, event_b, _ = program(d0 - 1)
+        fajr = (sunset + event_b(-0.8333, -1, noon_b - 360)) / 2 - 720
+    asr_altitude = math.atan(1 / (asr_shadow + math.tan(abs(lat * RAD - at(-90)[0])))) / RAD
+    asr = event(asr_altitude, 1, noon + 200)
+    noon_n, event_n, _ = program(d0 + 1)
+    seventh = sunset + (event_n(-0.8333, -1, noon_n - 360) + 1440 - sunset) / 7
+    isha15 = event(-15, 1, noon + 420)
+    raw = [fajr, sunrise, noon + 4, asr, sunset + 5, seventh]
+    if not all(math.isfinite(v) for v in raw):
+        return None
+    near = lambda v: math.floor(v + 0.5)
+    isha = min(near(isha15), near(seventh)) if math.isfinite(isha15) else near(seventh)
+    return {'fajr': near(fajr), 'sunrise': near(sunrise), 'dhuhr': near(noon + 4), 'asr': math.floor(asr) if asr_shadow == 1 else near(asr),
+            'maghrib': near(sunset + 5), 'isha': isha}
 
 
 # ---------------------------------------------------------------- Sweden and Diyanet: the Congress method

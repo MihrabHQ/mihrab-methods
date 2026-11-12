@@ -48,8 +48,9 @@ each method.
 | **Pakistan (Banuri Town)** | Jamia Banuri Town’s timetable | 100 | 219,000 | **0** | 99.996 % | 8 | 1 Jan 2026 → 31 Dec 2026 |
 | **United Arab Emirates** | the Authority’s times | 41 | 89,790 | **0** | 98.524 % | 1,251 | 1 Jan 2026 → 31 Dec 2026 |
 | **Iran (Tehran Institute of Geophysics)** | the Institute of Geophysics’ sheets | 31 | 90,520 | **0** | 99.002 % | 903 | 21 Mar 2025 → 20 Mar 2027 |
+| **United Kingdom (Wifaqul Ulama)** | Wifaqul Ulama’s timetables | 81 | 197,100 | **0** | 98.680 % | 2,508 | 1 Jan 2026 → 31 Dec 2027 |
 
-19 of 19 methods certified; 0 of 77,123,526 times off the printed minute. Last checked 12 November 2026. Generated from [`certification.json`](../certification.json) by `scripts/readme.mjs`.
+20 of 20 methods certified; 0 of 77,320,626 times off the printed minute. Last checked 12 November 2026. Generated from [`certification.json`](../certification.json) by `scripts/readme.mjs`.
 <!-- certification-table:end -->
 
 ## Sweden
@@ -470,6 +471,28 @@ province capitals): the method gives <!--fig:tehran.alonePct-->99.002<!--/fig-->
 > spread evenly over the columns and the year — the last seconds of the
 > sun, not another rule. The reference is read once a year, when the
 > Institute puts the new sheets up; there is no scheduled renewal.
+
+## United Kingdom: Wifaqul Ulama
+
+Certified over <!--fig:wifaq.span-->1 Jan 2026 → 31 Dec 2027<!--/fig--> (<!--fig:wifaq.check0.places-->81<!--/fig-->
+towns): the method gives <!--fig:wifaq.alonePct-->98.680<!--/fig--> % alone, and a list of
+<!--fig:wifaq.corrections-->2,508<!--/fig--> corrections the rest.
+
+> **Research note, 2026-11-12** (not generated). The reference is the 2027
+> timetable of every town and the 2026 one of nine. What told the method
+> from a plain one: every time is the nearest minute but the Shafi'i Asr,
+> which is rounded down; Isha follows 15° only in winter and a seventh of
+> the night the rest of the year; the two Asrs drifted through the year
+> against a noon shadow taken at noon, and fit one taken from the sun of
+> the day's start; and Fajr in the perpetual twilight is not the night's
+> middle but the middle of the date's own sunset and the previous
+> sunrise. No time of the method alone is more than a minute from the
+> timetable. One district's timetable (Birmingham, Solihull) is rounded
+> another way and has a month out of place in 2027; it is left out, and
+> Birmingham's five other districts are in. The Shafi'i Asr is printed too
+> and is not what is certified: the method alone gives it on the printed
+> minute about nine days in ten. The reference is read once a year; there
+> is no scheduled renewal.
 
 ## Not here, and why
 

@@ -1,7 +1,7 @@
 {
   "name": "mihrab-methods",
   "version": "1.18.0",
-  "description": "The prayer-time authorities' own calculation methods, each reproducing its published timetable to the minute: Sweden (Diyanet, as Islamiska Förbundet prints it), Diyanet worldwide, Morocco (Habous), Algeria (Ministry of Religious Affairs), Indonesia (Kemenag), Türkiye Takvimi, Kazakhstan (Spiritual Administration), Egypt (General Authority of Survey), Brunei (Ministry of Religious Affairs), Qatar (Qatar Calendar House), Kuwait (Ministry of Awqaf and Islamic Affairs), Jordan (Ministry of Awqaf, Islamic Affairs and Holy Places), Tatarstan (Spiritual Administration of Muslims), Russia (Central Spiritual Administration of Muslims), Albania (Muslim Community of Albania), Bulgaria (Grand Mufti’s Office), Pakistan (Jamia Banuri Town), the United Arab Emirates, Iran (Tehran Institute of Geophysics).",
+  "description": "The prayer-time authorities' own calculation methods, each reproducing its published timetable to the minute: Sweden (Diyanet, as Islamiska Förbundet prints it), Diyanet worldwide, Morocco (Habous), Algeria (Ministry of Religious Affairs), Indonesia (Kemenag), Türkiye Takvimi, Kazakhstan (Spiritual Administration), Egypt (General Authority of Survey), Brunei (Ministry of Religious Affairs), Qatar (Qatar Calendar House), Kuwait (Ministry of Awqaf and Islamic Affairs), Jordan (Ministry of Awqaf, Islamic Affairs and Holy Places), Tatarstan (Spiritual Administration of Muslims), Russia (Central Spiritual Administration of Muslims), Albania (Muslim Community of Albania), Bulgaria (Grand Mufti’s Office), Pakistan (Jamia Banuri Town), the United Arab Emirates, Iran (Tehran Institute of Geophysics), the United Kingdom (Wifaqul Ulama).",
   "license": "MPL-2.0",
   "author": "Hassan El Ghamri",
   "repository": {
@@ -42,6 +42,7 @@
     "./dist/*/banuri.js",
     "./dist/*/uae.js",
     "./dist/*/tehran.js",
+    "./dist/*/wifaq.js",
     "./dist/*/authorities/*.js",
     "./src/index.ts",
     "./src/sweden.ts",
@@ -63,6 +64,7 @@
     "./src/banuri.ts",
     "./src/uae.ts",
     "./src/tehran.ts",
+    "./src/wifaq.ts",
     "./src/authorities/*.ts"
   ],
   "engines": {
@@ -289,6 +291,16 @@
         "default": "./dist/cjs/tehran.js"
       }
     },
+    "./wifaq": {
+      "import": {
+        "types": "./dist/esm/wifaq.d.ts",
+        "default": "./dist/esm/wifaq.js"
+      },
+      "require": {
+        "types": "./dist/cjs/wifaq.d.ts",
+        "default": "./dist/cjs/wifaq.js"
+      }
+    },
     "./locate": {
       "import": {
         "types": "./dist/esm/locate.d.ts",
@@ -365,6 +377,9 @@
       ],
       "tehran": [
         "./dist/cjs/tehran.d.ts"
+      ],
+      "wifaq": [
+        "./dist/cjs/wifaq.d.ts"
       ],
       "locate": [
         "./dist/cjs/locate.d.ts"

@@ -9,6 +9,17 @@ revision bump is at least a minor version.
 
 ## Unreleased
 
+- **The United Kingdom, revision 1: a twentieth method.** Wifaqul Ulama
+  (Britain)'s yearly timetables for eighty-one towns: `mihrab-methods/wifaq`,
+  authority `wifaq`. Fajr at 18°, Zuhr four minutes after the transit,
+  Maghrib five after sunset, Isha at 15° or a seventh of the night, the
+  Hanafi Asr, and its own rule for Fajr in the summer twilight
+  (`docs/methods.md`). With its correction list the method matches the
+  published timetable of every town over the certified span
+  (`docs/status.md`). `certification.json` gains a `wifaq` entry and
+  `data/corrections/wifaq.json` is new. In every port (`wifaq_minutes` /
+  `wifaqMinutes`, `REVISIONS` with `wifaq: 1`). No other method's output
+  changes.
 No method changed; no revision raised.
 
 ## 1.18.0 — 2026-11-12

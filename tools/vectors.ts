@@ -31,6 +31,7 @@ const PICK: Record<string, string[]> = {
   banuri: ['banuri:7487', 'banuri:7488', 'banuri:7494'],
   uae: ['uae:36', 'uae:56', 'uae:80'],
   tehran: ['tehran:26', 'tehran:25', 'tehran:4'],
+  wifaq: ['wifaq:13', 'wifaq:1', 'wifaq:69'],
 };
 
 function dates(from: string, to: string): string[] {

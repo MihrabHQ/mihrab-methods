@@ -22,6 +22,7 @@ import { bulgariaTimes } from '../methods/bulgaria.js';
 import { banuriTimes } from '../methods/banuri.js';
 import { uaeTimes } from '../methods/uae.js';
 import { tehranTimes } from '../methods/tehran.js';
+import { wifaqTimes } from '../methods/wifaq.js';
 import { authorityData } from './registry.js';
 import { placeClockAt } from './clock.js';
 import type { Instants, Place, PrayerKey } from './types.js';
@@ -63,7 +64,8 @@ export function candidateInstants(place: Place, year: number, month: number, day
     case 'bulgaria':
     case 'banuri':
     case 'uae':
-    case 'tehran': {
+    case 'tehran':
+    case 'wifaq': {
       const t =
         place.authority === 'morocco'
           ? moroccoTimes(place.lat, place.lon, year, month, day, place.dipDeg, asrShadow, place.dipMaghribDeg)
@@ -91,6 +93,8 @@ export function candidateInstants(place: Place, year: number, month: number, day
               ? bulgariaTimes(place.lon, year, month, day, asrShadow)
             : place.authority === 'banuri'
               ? banuriTimes(place.lat, place.lon, year, month, day)
+            : place.authority === 'wifaq'
+              ? wifaqTimes(place.lat, place.lon, year, month, day)
             : place.authority === 'tehran'
               ? tehranTimes(place.lat, place.lon, year, month, day, asrShadow)
             : place.authority === 'uae'

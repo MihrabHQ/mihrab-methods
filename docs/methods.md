@@ -556,6 +556,44 @@ plain program with no margins.
 Each capital is computed at its own point (`data/places/tehranCities.json`):
 the point its sheet names to two decimals, read to three.
 
+## United Kingdom: Wifaqul Ulama
+
+`src/methods/wifaq.ts`. The method Wifaqul Ulama (Britain) computes its
+yearly timetables by, for some eighty towns from Aberdeen to Jersey. Its
+page states the angles and the two margins; the rest is read off the
+timetables of two years.
+
+- **Meeus's apparent sun** at each time's own moment, the declination and
+  the equation of time iterated.
+- **Fajr** with the sun 18° below the horizon.
+- **Fajr in the summer twilight.** Where the sun of Fajr's own moment no
+  longer reaches 18°, the sun of 0h UT of the date is asked instead — a
+  night or two at each edge of the season. On the nights neither reaches
+  it, Fajr is **the middle between that date's sunset and the sunrise of
+  the day before**, twelve hours earlier: close to the middle of the night,
+  a little after it in May and a little before it in late July.
+- **Sunrise** and sunset with the sun's centre 0.8333° below the horizon.
+- **Zuhr** four minutes after the sun's transit.
+- **Asr** at one shadow length beyond the noon shadow (Shafi'i) or two
+  (Hanafi). The noon shadow is taken from the sun's declination an hour and
+  a half before 0h UT of the date, not at noon; the time itself is on its
+  own sun.
+- **Maghrib** five minutes after sunset.
+- **Isha** with the sun 15° below the horizon, or **a seventh of the
+  night** — sunset to the next sunrise — after sunset, whichever is
+  earlier; the seventh alone where 15° is not reached.
+- **Every time rounded to the nearest minute**; the Shafi'i Asr alone is
+  rounded down.
+
+The timetables print both Asrs. This library gives one Asr a place, and
+for this authority it is the **Hanafi** one — the one the page names where
+no local scholar says otherwise, and the one the correction list is for.
+`wifaqTimes(…, 1)` gives the Shafi'i Asr by the same method, without the
+list.
+
+Each town is computed at its own point (`data/places/wifaqTowns.json`),
+read off its timetable; the timetables print none.
+
 ## Checking a port
 
 1. Take `test/vectors.json`. For each case, compute the six times at the
