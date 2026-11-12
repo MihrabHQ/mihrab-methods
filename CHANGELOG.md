@@ -9,6 +9,10 @@ revision bump is at least a minor version.
 
 ## Unreleased
 
+No method changed; no revision raised.
+
+## 1.23.0 — 2026-11-12
+
 - **`mihrab-methods/standard`: a calculated day where no authority
   answers.** `standardTimes({ lat, lon, date, tz, convention?, asr? })` gives
   the plain astronomical calculation by a named convention (`mwl`, `isna`,
