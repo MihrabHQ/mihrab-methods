@@ -9,6 +9,10 @@ revision bump is at least a minor version.
 
 ## Unreleased
 
+No method changed; no revision raised.
+
+## 1.22.1 — 2026-11-12
+
 - **Qatar: the list runs to today again.** The Calendar House's monthly
   calendars after Rabi II 1448 are not posted yet, and the correction list
   had ended with the last one, on 11 October 2026. It now also takes the
