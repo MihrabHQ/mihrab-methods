@@ -9,6 +9,10 @@ revision bump is at least a minor version.
 
 ## Unreleased
 
+No method changed; no revision raised.
+
+## 1.16.0 — 2026-11-12
+
 - **Pakistan's Jamia Banuri Town, revision 1: a seventeenth method.** The
   prayer times of Jamia Uloom-ul-Islamia, Banuri Town (Karachi) for a
   hundred cities of Pakistan: `mihrab-methods/banuri`, authority `banuri`.
