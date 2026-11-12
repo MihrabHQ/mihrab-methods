@@ -9,6 +9,10 @@ revision bump is at least a minor version.
 
 ## Unreleased
 
+No method changed; no revision raised.
+
+## 1.18.0 — 2026-11-12
+
 - **Iran, revision 1: a nineteenth method.** The Institute of Geophysics
   of the University of Tehran, for the thirty-one province capitals its
   Calendar Center prints a sheet for: `mihrab-methods/tehran`, authority
