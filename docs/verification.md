@@ -34,6 +34,7 @@ off is **zero**; a method at 99.9 % is not shipped.
 ## Results by authority
 
 <!-- certification-table:start -->
+
 | Authority | Tables matched | Places | Times checked | Off the printed minute | By the method alone | Correction entries | Checked over |
 |---|---|---:|---:|---:|---:|---:|---|
 | **Sweden** | Islamiska Förbundet’s tables | 107 | 63,114 | **0** | 99.968 % | 270 | 11 Oct 2026 → 14 Dec 2027 |
@@ -60,6 +61,7 @@ off is **zero**; a method at 99.9 % is not shipped.
 | **Tunisia** | the Institute’s times | 26 | 47,405 | **0** | 97.782 % | 1,051 | 1 Jan 2026 → 31 Dec 2026 |
 
 21 of 21 methods certified; 0 of 77,611,133 times off the printed minute. Last checked 12 November 2026. Generated from [`certification.json`](https://github.com/MihrabHQ/mihrab-methods/blob/main/certification.json) by `scripts/readme.mjs`.
+
 <!-- certification-table:end -->
 
 How to read the columns:

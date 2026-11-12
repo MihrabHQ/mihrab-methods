@@ -55,7 +55,13 @@ for (const rel of docs) {
   if (!fs.existsSync(f)) continue;
   let text = fs.readFileSync(f, 'utf8');
   text = fillFigures(text, named, rel);
-  if (text.includes('<!-- certification-table:start -->')) text = fillBlock(text, 'certification-table', table(rel.startsWith('docs/') ? 'https://github.com/MihrabHQ/mihrab-methods/blob/main/' : ''), rel);
+  if (text.includes('<!-- certification-table:start -->')) {
+    // In docs/ (the site, built by Jekyll) the links are absolute, and the table stands clear of
+    // its markers by a blank line: kramdown reads no table straight after an HTML comment.
+    const site = rel.startsWith('docs/');
+    const body = table(site ? 'https://github.com/MihrabHQ/mihrab-methods/blob/main/' : '');
+    text = fillBlock(text, 'certification-table', site ? `\n${body.replace(/\n+$/, '')}\n` : body, rel);
+  }
   outputs.set(rel, text);
 }
 outputs.set('docs/certification.svg', badgeSvg(cert));
