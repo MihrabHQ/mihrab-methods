@@ -9,6 +9,10 @@ revision bump is at least a minor version.
 
 ## Unreleased
 
+No method changed; no revision raised.
+
+## 1.17.0 — 2026-11-12
+
 - **The United Arab Emirates, revision 1: an eighteenth method.** The
   prayer times of the General Authority of Islamic Affairs, Endowments and
   Zakat for its forty-one zones: `mihrab-methods/uae`, authority `uae`.
