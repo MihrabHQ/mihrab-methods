@@ -57,7 +57,7 @@ The full API, the HTTP server and the per-authority imports are in
 | **Pakistan (Banuri Town)** | Jamia Banuri Town’s timetable | 100 | 219,000 | **0** | 99.996 % | 8 | 1 Jan 2026 → 31 Dec 2026 |
 | **United Arab Emirates** | the Authority’s times | 41 | 89,790 | **0** | 98.524 % | 1,251 | 1 Jan 2026 → 31 Dec 2026 |
 
-18 of 18 methods certified; 0 of 77,033,006 times off the printed minute. Last checked 9 November 2026. Generated from [`certification.json`](certification.json) by `scripts/readme.mjs`.
+18 of 18 methods certified; 0 of 77,033,006 times off the printed minute. Last checked 12 November 2026. Generated from [`certification.json`](certification.json) by `scripts/readme.mjs`.
 <!-- certification-table:end -->
 
 "By the method alone" is the formula without its correction list. The list
