@@ -9,6 +9,10 @@ revision bump is at least a minor version.
 
 ## Unreleased
 
+No method changed; no revision raised.
+
+## 1.23.1 — 2026-11-12
+
 - **A documentation site**, built from `docs/` at
   https://mihrabhq.github.io/mihrab-methods/ : guides for the prayer time
   API, the JavaScript library, offline use, calculation methods compared,
