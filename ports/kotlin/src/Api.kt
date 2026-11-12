@@ -14,7 +14,7 @@ enum class Authority { sweden, diyanet, morocco, algeria, indonesia, turkiyetakv
 enum class Prayer { fajr, sunrise, dhuhr, asr, maghrib, isha }
 
 /** The method revisions this port reproduces. A correction list belongs to one revision. */
-val REVISIONS: Map<String, Int> = mapOf("sweden" to 1, "diyanet" to 2, "morocco" to 3, "algeria" to 1, "indonesia" to 2, "turkiyetakvimi" to 1, "kazakhstan" to 1, "egypt" to 1, "brunei" to 1, "qatar" to 1, "kuwait" to 1, "jordan" to 1, "tatarstan" to 1, "cdum" to 1, "albania" to 1, "bulgaria" to 1, "banuri" to 1, "uae" to 1, "tehran" to 1, "wifaq" to 1)
+val REVISIONS: Map<String, Int> = mapOf("sweden" to 1, "diyanet" to 2, "morocco" to 3, "algeria" to 1, "indonesia" to 2, "turkiyetakvimi" to 1, "kazakhstan" to 1, "egypt" to 1, "brunei" to 1, "qatar" to 1, "kuwait" to 1, "jordan" to 1, "tatarstan" to 1, "cdum" to 1, "albania" to 1, "bulgaria" to 1, "banuri" to 1, "uae" to 1, "tehran" to 1, "wifaq" to 2)
 
 /**
  * A place as the library's lists have it (data/places). Use the coordinates

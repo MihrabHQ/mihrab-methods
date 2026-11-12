@@ -811,7 +811,7 @@ func wifaqMinutes(_ lat: Double, _ lon: Double, _ year: Int, _ month0: Int, _ da
     let noon = noonOf(d0)
     let sunrise = event(d0, -0.8333, -1, noon - 360)
     let sunset = event(d0, -0.8333, 1, noon + 360)
-    var fajr = event(d0, -18, -1, noon - 420)
+    var fajr = event(d0, -18, -1, 0) // the first pass reads the sun at 0h UT
     if !fajr.isFinite { fajr = event(d0, -18, -1, noon - 420, fixed: 0) }
     if !fajr.isFinite { fajr = (sunset + event(d0 - 1, -0.8333, -1, noonOf(d0 - 1) - 360)) / 2 - 720 }
     let asrAltitude = atan(1 / (asrShadow + tan(abs(lat * RAD - meeusApparentSun(d0 - 90.0 / 1440).dec)))) / RAD

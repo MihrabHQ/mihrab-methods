@@ -906,7 +906,7 @@ def wifaq_minutes(lat, lon, year, month0, day, asr_shadow=2):
     noon, event, at = program(d0)
     sunrise = event(-0.8333, -1, noon - 360)
     sunset = event(-0.8333, 1, noon + 360)
-    fajr = event(-18, -1, noon - 420)
+    fajr = event(-18, -1, 0)  # the first pass reads the sun at 0h UT
     if not math.isfinite(fajr):
         fajr = event(-18, -1, noon - 420, 0)
     if not math.isfinite(fajr):

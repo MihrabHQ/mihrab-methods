@@ -9,7 +9,19 @@ revision bump is at least a minor version.
 
 ## Unreleased
 
-No method changed; no revision raised.
+- **The United Kingdom, revision 2: 2026 for nearly every town, and the
+  edge of the summer twilight.** Wifaqul Ulama's 2026 timetables are now
+  checked for all but two of its towns (they had been for ten), so the
+  method is certified over two years. One night of them showed how the
+  search for Fajr begins: from the sun of 0h UT, which on the last night
+  of the twilight season, where the sun dips to 18° for a few minutes
+  only, decides whether Fajr forms. With that the method needs fewer
+  corrections and matches the published timetable of every town over the
+  certified span (`docs/status.md`). What it prints changes only on such a
+  night, by a few minutes; `REVISIONS` has `wifaq: 2` in every port, and
+  `data/corrections/wifaq.json` is the list for revision 2.
+
+No other method's output changes.
 
 ## 1.20.1 — 2026-11-12
 

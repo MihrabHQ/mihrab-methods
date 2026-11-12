@@ -565,7 +565,10 @@ timetables of two years.
 
 - **Meeus's apparent sun** at each time's own moment, the declination and
   the equation of time iterated.
-- **Fajr** with the sun 18° below the horizon.
+- **Fajr** with the sun 18° below the horizon. The search for it starts
+  from the sun of 0h UT of the date: on the last night of the twilight
+  season, where 18° is reached for a few minutes only, that first reading
+  decides whether Fajr forms at all.
 - **Fajr in the summer twilight.** Where the sun of Fajr's own moment no
   longer reaches 18°, the sun of 0h UT of the date is asked instead — a
   night or two at each edge of the season. On the nights neither reaches

@@ -31,8 +31,11 @@ const PICK: Record<string, string[]> = {
   banuri: ['banuri:7487', 'banuri:7488', 'banuri:7494'],
   uae: ['uae:36', 'uae:56', 'uae:80'],
   tehran: ['tehran:26', 'tehran:25', 'tehran:4'],
-  wifaq: ['wifaq:13', 'wifaq:1', 'wifaq:69'],
+  wifaq: ['wifaq:13', 'wifaq:1', 'wifaq:69', 'wifaq:25'],
 };
+
+/** Dates a port gets wrong unless it has a rule exactly: Wifaqul Ulama's last night of the summer twilight at Grange-over-Sands, where 18° is reached for five minutes. */
+const EDGES: Record<string, string[]> = { 'wifaq:25': ['2026-08-02'] };
 
 function dates(from: string, to: string): string[] {
   const a = Date.parse(from), b = Date.parse(to);
@@ -51,7 +54,7 @@ for (const a of AUTHORITIES) {
   const byId = new Map(placesOf(a).map(p => [p.id, p]));
   for (const id of PICK[a]) {
     const place = byId.get(id) ?? placesOf(a)[0];
-    for (const date of dates(span.from, span.to)) {
+    for (const date of [...dates(span.from, span.to), ...(EDGES[place.id] ?? [])]) {
       const t = timesFor(place, date);
       const p: Partial<Place> = { id: place.id, name: place.name, lat: place.lat, lon: place.lon, tz: place.tz };
       for (const k of ['dipDeg', 'dipMaghribDeg', 'fajrMinutes', 'highland', 'twilightDip', 'afternoon', 'ishaDeg', 'clock', 'temkin'] as const) if (place[k] !== undefined) (p as Record<string, unknown>)[k] = place[k];

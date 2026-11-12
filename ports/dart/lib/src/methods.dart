@@ -826,7 +826,7 @@ DayMinutes? wifaqMinutes(double lat, double lon, int year, int month0, int day, 
   final noon = noonOf(d0);
   final sunrise = event(d0, -0.8333, -1.0, noon - 360);
   final sunset = event(d0, -0.8333, 1.0, noon + 360);
-  var fajr = event(d0, -18.0, -1.0, noon - 420);
+  var fajr = event(d0, -18.0, -1.0, 0.0); // the first pass reads the sun at 0h UT
   if (!fajr.isFinite) fajr = event(d0, -18.0, -1.0, noon - 420, 0.0);
   if (!fajr.isFinite) fajr = (sunset + event(d0 - 1, -0.8333, -1.0, noonOf(d0 - 1) - 360)) / 2 - 720;
   final asrAltitude = atan(1 / (asrShadow + tan((lat * rad - meeusApparentSun(d0 - 90.0 / 1440).dec).abs()))) / rad;

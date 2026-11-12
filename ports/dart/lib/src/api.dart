@@ -14,7 +14,7 @@ enum Authority { sweden, diyanet, morocco, algeria, indonesia, turkiyetakvimi, k
 enum Prayer { fajr, sunrise, dhuhr, asr, maghrib, isha }
 
 /// The method revisions this port reproduces. A correction list belongs to one revision.
-const Map<String, int> revisions = {'sweden': 1, 'diyanet': 2, 'morocco': 3, 'algeria': 1, 'indonesia': 2, 'turkiyetakvimi': 1, 'kazakhstan': 1, 'egypt': 1, 'brunei': 1, 'qatar': 1, 'kuwait': 1, 'jordan': 1, 'tatarstan': 1, 'cdum': 1, 'albania': 1, 'bulgaria': 1, 'banuri': 1, 'uae': 1, 'tehran': 1, 'wifaq': 1};
+const Map<String, int> revisions = {'sweden': 1, 'diyanet': 2, 'morocco': 3, 'algeria': 1, 'indonesia': 2, 'turkiyetakvimi': 1, 'kazakhstan': 1, 'egypt': 1, 'brunei': 1, 'qatar': 1, 'kuwait': 1, 'jordan': 1, 'tatarstan': 1, 'cdum': 1, 'albania': 1, 'bulgaria': 1, 'banuri': 1, 'uae': 1, 'tehran': 1, 'wifaq': 2};
 
 /// One change of a table's own clock: from a date on, minutes east of UTC.
 class ClockChange {
