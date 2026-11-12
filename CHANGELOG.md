@@ -9,6 +9,10 @@ revision bump is at least a minor version.
 
 ## Unreleased
 
+No method changed; no revision raised.
+
+## 1.22.0 — 2026-11-12
+
 - **Tunisia, revision 1: a twenty-first method.** The prayer times of the
   Institut National de la Météorologie for twenty-six places — the
   governorates' seats, Aïn Draham and Rjim Maatoug: `mihrab-methods/tunisia`,
