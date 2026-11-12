@@ -1,5 +1,5 @@
 """The methods: Sweden and Diyanet (the Congress method), Morocco, Algeria,
-Indonesia, Türkiye Takvimi, Kazakhstan, Egypt, Brunei, Qatar, Kuwait, Jordan, Tatarstan, Russia's Central Muftiate, Albania, Bulgaria, Pakistan's Jamia Banuri Town and the United Arab Emirates. A port of src/methods/*.ts — the TypeScript is the reference,
+Indonesia, Türkiye Takvimi, Kazakhstan, Egypt, Brunei, Qatar, Kuwait, Jordan, Tatarstan, Russia's Central Muftiate, Albania, Bulgaria, Pakistan's Jamia Banuri Town, the United Arab Emirates and Iran's Institute of Geophysics. A port of src/methods/*.ts — the TypeScript is the reference,
 docs/methods.md says what each does, and test_vectors.py holds this to it.
 
 Every function takes a civil date with the month 0-based, as the TypeScript
@@ -824,6 +824,50 @@ def uae_raw_minutes(lat, lon, year, month0, day, dip_deg=0, asr_shadow=1, dip_ma
 def uae_minutes(lat, lon, year, month0, day, dip_deg=0, asr_shadow=1, dip_maghrib_deg=None, morning_minutes=0):
     """Rounded to the nearest minute. None where a time does not form."""
     r = uae_raw_minutes(lat, lon, year, month0, day, dip_deg, asr_shadow, dip_maghrib_deg, morning_minutes)
+    if not all(math.isfinite(v) for v in r.values()):
+        return None
+    return {k: math.floor(v + 0.5) for k, v in r.items()}
+
+
+# ---------------------------------------------------------------- Iran: the Institute of Geophysics, Tehran
+
+
+def tehran_raw_minutes(lat, lon, year, month0, day, asr_shadow=1):
+    """Before rounding: the Institute of Geophysics' plain program — Meeus's apparent sun iterated, Fajr 17.7°, sunrise −0.8333°, Dhuhr the transit, Asr at the noon shadow plus the lengths asked, Maghrib 4.5°, Isha 14°; no margins."""
+    d0 = _d0(year, month0, day)
+
+    def at(t):
+        return meeus_apparent_sun(d0 + t / 1440)
+
+    noon = 720 - 4 * lon
+    for _ in range(3):
+        noon = 720 - 4 * lon - at(noon)[1]
+    sp, cp = math.sin(lat * RAD), math.cos(lat * RAD)
+
+    def event(alt, sign, start):
+        t = start
+        for _ in range(3):
+            dec, eot = at(t)
+            c = (math.sin(alt * RAD) - sp * math.sin(dec)) / (cp * math.cos(dec))
+            if not abs(c) <= 1:
+                return NAN
+            t = 720 - 4 * lon - eot + (sign * 4 * math.acos(c)) / RAD
+        return t
+
+    asr_altitude = math.atan(1 / (asr_shadow + math.tan(abs(lat * RAD - at(noon)[0])))) / RAD
+    return {
+        'fajr': event(-17.7, -1, noon - 420),
+        'sunrise': event(-0.8333, -1, noon - 360),
+        'dhuhr': noon,
+        'asr': event(asr_altitude, 1, noon + 200),
+        'maghrib': event(-4.5, 1, noon + 380),
+        'isha': event(-14, 1, noon + 420),
+    }
+
+
+def tehran_minutes(lat, lon, year, month0, day, asr_shadow=1):
+    """Rounded to the nearest minute. None where a time does not form."""
+    r = tehran_raw_minutes(lat, lon, year, month0, day, asr_shadow)
     if not all(math.isfinite(v) for v in r.values()):
         return None
     return {k: math.floor(v + 0.5) for k, v in r.items()}

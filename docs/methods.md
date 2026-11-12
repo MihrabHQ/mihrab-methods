@@ -530,6 +530,32 @@ Authority's own figures.
 Each zone is computed at its own point (`data/places/uaeZones.json`, with
 its two allowances and its morning margin), read off the timetable.
 
+## Iran: Institute of Geophysics, Tehran
+
+`src/methods/tehran.ts`. The method the Institute of Geophysics of the
+University of Tehran computes its Calendar Center's yearly sheets by, read
+off two years of the sheets for the thirty-one province capitals. It is a
+plain program with no margins.
+
+- **Meeus's apparent sun** at each time's own moment, the declination and
+  the equation of time iterated.
+- **Fajr** with the sun 17.7° below the horizon.
+- **Sunrise** and sunset with the sun's centre 0.8333° below it.
+- **Dhuhr** at the sun's transit.
+- **Maghrib** with the sun 4.5° below the horizon, after sunset.
+- **Every time rounded to the nearest minute.**
+- **Asr and Isha are not printed** by the Institute. The method computes
+  them as it is given everywhere — Asr at one shadow length beyond the noon
+  shadow, Isha with the sun 14° below the horizon — and no table holds
+  them, so the certification is of Fajr, sunrise, Dhuhr and Maghrib.
+- The sheets print two more columns, outside the six times this library
+  gives: sunset, and **midnight, halfway from sunset to the next day's
+  Fajr** (`tehranSunsetAndMidnight`, TypeScript only, without a correction
+  list).
+
+Each capital is computed at its own point (`data/places/tehranCities.json`):
+the point its sheet names to two decimals, read to three.
+
 ## Checking a port
 
 1. Take `test/vectors.json`. For each case, compute the six times at the

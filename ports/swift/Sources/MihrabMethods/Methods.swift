@@ -1,5 +1,5 @@
 // The methods: Sweden and Diyanet (the Congress method), Morocco, Algeria,
-// Indonesia, Türkiye Takvimi, Kazakhstan, Egypt, Brunei, Qatar, Kuwait, Jordan, Tatarstan, Russia's Central Muftiate, Albania, Bulgaria, Pakistan's Jamia Banuri Town and the United Arab Emirates. A port of src/methods/*.ts — the TypeScript is the reference,
+// Indonesia, Türkiye Takvimi, Kazakhstan, Egypt, Brunei, Qatar, Kuwait, Jordan, Tatarstan, Russia's Central Muftiate, Albania, Bulgaria, Pakistan's Jamia Banuri Town, the United Arab Emirates and Iran's Institute of Geophysics. A port of src/methods/*.ts — the TypeScript is the reference,
 // docs/methods.md says what each does, and the vector check holds this to it.
 //
 // Every function takes a civil date with the month 0-based, as the TypeScript
@@ -743,6 +743,42 @@ func uaeRawMinutes(_ lat: Double, _ lon: Double, _ year: Int, _ month0: Int, _ d
 func uaeMinutes(_ lat: Double, _ lon: Double, _ year: Int, _ month0: Int, _ day: Int,
                    dipDeg: Double = 0, asrShadow: Double = 1, dipMaghribDeg: Double? = nil, morningMinutes: Double = 0) -> DayMinutes? {
     let r = uaeRawMinutes(lat, lon, year, month0, day, dipDeg: dipDeg, asrShadow: asrShadow, dipMaghribDeg: dipMaghribDeg, morningMinutes: morningMinutes)
+    if r.all.contains(where: { !$0.isFinite }) { return nil }
+    return r.mapped { floor($0 + 0.5) }
+}
+
+// ---------------------------------------------------------------- Iran: the Institute of Geophysics, Tehran
+
+/// Before rounding: the Institute of Geophysics' plain program — Meeus's apparent sun iterated, Fajr 17.7°, sunrise −0.8333°, Dhuhr the transit, Asr at the noon shadow plus the lengths asked, Maghrib 4.5°, Isha 14°; no margins.
+func tehranRawMinutes(_ lat: Double, _ lon: Double, _ year: Int, _ month0: Int, _ day: Int, asrShadow: Double = 1) -> DayMinutes {
+    let d0 = d0Of(year, month0, day)
+    func at(_ t: Double) -> SunPosition { return meeusApparentSun(d0 + t / 1440) }
+    var noon = 720 - 4 * lon
+    for _ in 0..<3 { noon = 720 - 4 * lon - at(noon).eot }
+    let sp = sin(lat * RAD), cp = cos(lat * RAD)
+    func event(_ alt: Double, _ sign: Double, _ start: Double) -> Double {
+        var t = start
+        for _ in 0..<3 {
+            let s = at(t)
+            let c = (sin(alt * RAD) - sp * sin(s.dec)) / (cp * cos(s.dec))
+            if !(abs(c) <= 1) { return Double.nan }
+            t = 720 - 4 * lon - s.eot + (sign * 4 * acos(c)) / RAD
+        }
+        return t
+    }
+    let asrAltitude = atan(1 / (asrShadow + tan(abs(lat * RAD - at(noon).dec)))) / RAD
+    return DayMinutes(
+        fajr: event(-17.7, -1, noon - 420),
+        sunrise: event(-0.8333, -1, noon - 360),
+        dhuhr: noon,
+        asr: event(asrAltitude, 1, noon + 200),
+        maghrib: event(-4.5, 1, noon + 380),
+        isha: event(-14, 1, noon + 420))
+}
+
+/// Rounded to the nearest minute. Nil where a time does not form.
+func tehranMinutes(_ lat: Double, _ lon: Double, _ year: Int, _ month0: Int, _ day: Int, asrShadow: Double = 1) -> DayMinutes? {
+    let r = tehranRawMinutes(lat, lon, year, month0, day, asrShadow: asrShadow)
     if r.all.contains(where: { !$0.isFinite }) { return nil }
     return r.mapped { floor($0 + 0.5) }
 }

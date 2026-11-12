@@ -47,8 +47,9 @@ each method.
 | **Bulgaria** | the Grand Mufti’s Office’s timetable | 48 | 105,120 | **0** | 97.671 % | 2,448 | 1 Jan 2026 → 31 Dec 2026 |
 | **Pakistan (Banuri Town)** | Jamia Banuri Town’s timetable | 100 | 219,000 | **0** | 99.996 % | 8 | 1 Jan 2026 → 31 Dec 2026 |
 | **United Arab Emirates** | the Authority’s times | 41 | 89,790 | **0** | 98.524 % | 1,251 | 1 Jan 2026 → 31 Dec 2026 |
+| **Iran (Tehran Institute of Geophysics)** | the Institute of Geophysics’ sheets | 31 | 90,520 | **0** | 99.002 % | 903 | 21 Mar 2025 → 20 Mar 2027 |
 
-18 of 18 methods certified; 0 of 77,033,006 times off the printed minute. Last checked 12 November 2026. Generated from [`certification.json`](../certification.json) by `scripts/readme.mjs`.
+19 of 19 methods certified; 0 of 77,123,526 times off the printed minute. Last checked 12 November 2026. Generated from [`certification.json`](../certification.json) by `scripts/readme.mjs`.
 <!-- certification-table:end -->
 
 ## Sweden
@@ -451,6 +452,24 @@ zones): the method gives <!--fig:uae.alonePct-->98.524<!--/fig--> % alone, and a
 > served by the same method and a longer list; past the list's dates a time
 > there may be a minute off. The reference is one year, read once; there
 > is no scheduled renewal for this method.
+
+## Iran: Institute of Geophysics, Tehran
+
+Certified over <!--fig:tehran.span-->21 Mar 2025 → 20 Mar 2027<!--/fig--> (<!--fig:tehran.check0.places-->31<!--/fig-->
+province capitals): the method gives <!--fig:tehran.alonePct-->99.002<!--/fig--> % alone, and a list of
+<!--fig:tehran.corrections-->903<!--/fig--> corrections the rest.
+
+> **Research note, 2026-11-12** (not generated). The sheets are two years,
+> 1404 and 1405 of the Iranian calendar, a sheet a capital; each names its
+> point to two decimals of a degree, the same in both years. The columns
+> held to the sheets are Fajr, sunrise, Dhuhr and Maghrib; Asr and Isha are
+> not printed and so are not certified. Sunset and midnight, which are
+> printed, fit the same program as closely (midnight as halfway from sunset
+> to the next day's Fajr) and are outside the six times. No time of the
+> method alone is more than a minute from the sheet, and the misses are
+> spread evenly over the columns and the year — the last seconds of the
+> sun, not another rule. The reference is read once a year, when the
+> Institute puts the new sheets up; there is no scheduled renewal.
 
 ## Not here, and why
 

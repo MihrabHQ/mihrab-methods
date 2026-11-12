@@ -9,6 +9,19 @@ revision bump is at least a minor version.
 
 ## Unreleased
 
+- **Iran, revision 1: a nineteenth method.** The Institute of Geophysics
+  of the University of Tehran, for the thirty-one province capitals its
+  Calendar Center prints a sheet for: `mihrab-methods/tehran`, authority
+  `tehran`. A plain program — Fajr at 17.7°, sunrise at −0.8333°, Dhuhr at
+  the transit, Maghrib at 4.5°, the nearest minute (`docs/methods.md`). With
+  its correction list the method matches the published sheets of every
+  capital over the certified span, in the four times they print of the
+  six; Asr and Isha (one shadow length, 14°) are not printed and not
+  certified (`docs/status.md`). `certification.json` gains a `tehran` entry
+  and `data/corrections/tehran.json` is new. In every port
+  (`tehran_minutes` / `tehranMinutes`, `REVISIONS` with `tehran: 1`).
+  `tehranSunsetAndMidnight` (TypeScript) gives the sheets' sunset and
+  midnight. No other method's output changes.
 No method changed; no revision raised.
 
 ## 1.17.0 — 2026-11-12

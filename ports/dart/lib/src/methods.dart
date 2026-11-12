@@ -1,5 +1,5 @@
 // The methods: Sweden and Diyanet (the Congress method), Morocco, Algeria,
-// Indonesia, Türkiye Takvimi, Kazakhstan, Egypt, Brunei, Qatar, Kuwait, Jordan, Tatarstan, Russia's Central Muftiate, Albania, Bulgaria, Pakistan's Jamia Banuri Town and the United Arab Emirates. A port of src/methods/*.ts — the TypeScript is the reference,
+// Indonesia, Türkiye Takvimi, Kazakhstan, Egypt, Brunei, Qatar, Kuwait, Jordan, Tatarstan, Russia's Central Muftiate, Albania, Bulgaria, Pakistan's Jamia Banuri Town, the United Arab Emirates and Iran's Institute of Geophysics. A port of src/methods/*.ts — the TypeScript is the reference,
 // docs/methods.md says what each does, and the vector check holds this to it.
 //
 // Every function takes a civil date with the month 0-based, as the TypeScript
@@ -752,6 +752,45 @@ DayMinutes uaeRawMinutes(double lat, double lon, int year, int month0, int day,
 DayMinutes? uaeMinutes(double lat, double lon, int year, int month0, int day,
     {double dipDeg = 0.0, double asrShadow = 1.0, double? dipMaghribDeg, double morningMinutes = 0.0}) {
   final r = uaeRawMinutes(lat, lon, year, month0, day, dipDeg: dipDeg, asrShadow: asrShadow, dipMaghribDeg: dipMaghribDeg, morningMinutes: morningMinutes);
+  return r.allFinite ? r.mapped((v) => (v + 0.5).floorToDouble()) : null;
+}
+
+// ---------------------------------------------------------------- Iran: the Institute of Geophysics, Tehran
+
+/// Before rounding: the Institute of Geophysics' plain program — Meeus's apparent sun iterated, Fajr 17.7°, sunrise −0.8333°, Dhuhr the transit, Asr at the noon shadow plus the lengths asked, Maghrib 4.5°, Isha 14°; no margins.
+DayMinutes tehranRawMinutes(double lat, double lon, int year, int month0, int day, {double asrShadow = 1.0}) {
+  final d0 = _d0Of(year, month0, day);
+  SunPosition at(double t) => meeusApparentSun(d0 + t / 1440);
+  var noon = 720 - 4 * lon;
+  for (var i = 0; i < 3; i++) {
+    noon = 720 - 4 * lon - at(noon).eot;
+  }
+  final sp = sin(lat * rad), cp = cos(lat * rad);
+  double event(double alt, double sign, double start) {
+    var t = start;
+    for (var i = 0; i < 3; i++) {
+      final s = at(t);
+      final c = (sin(alt * rad) - sp * sin(s.dec)) / (cp * cos(s.dec));
+      if (!(c.abs() <= 1)) return double.nan;
+      t = 720 - 4 * lon - s.eot + (sign * 4 * acos(c)) / rad;
+    }
+    return t;
+  }
+
+  final asrAltitude = atan(1 / (asrShadow + tan((lat * rad - at(noon).dec).abs()))) / rad;
+  return DayMinutes(
+    event(-17.7, -1.0, noon - 420),
+    event(-0.8333, -1.0, noon - 360),
+    noon,
+    event(asrAltitude, 1.0, noon + 200),
+    event(-4.5, 1.0, noon + 380),
+    event(-14.0, 1.0, noon + 420),
+  );
+}
+
+/// Rounded to the nearest minute. Null where a time does not form.
+DayMinutes? tehranMinutes(double lat, double lon, int year, int month0, int day, {double asrShadow = 1.0}) {
+  final r = tehranRawMinutes(lat, lon, year, month0, day, asrShadow: asrShadow);
   return r.allFinite ? r.mapped((v) => (v + 0.5).floorToDouble()) : null;
 }
 

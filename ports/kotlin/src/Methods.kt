@@ -1,5 +1,5 @@
 // The methods: Sweden and Diyanet (the Congress method), Morocco, Algeria,
-// Indonesia, Türkiye Takvimi, Kazakhstan, Egypt, Brunei, Qatar, Kuwait, Jordan, Tatarstan, Russia's Central Muftiate, Albania, Bulgaria, Pakistan's Jamia Banuri Town and the United Arab Emirates. A port of src/methods/*.ts — the TypeScript is the reference,
+// Indonesia, Türkiye Takvimi, Kazakhstan, Egypt, Brunei, Qatar, Kuwait, Jordan, Tatarstan, Russia's Central Muftiate, Albania, Bulgaria, Pakistan's Jamia Banuri Town, the United Arab Emirates and Iran's Institute of Geophysics. A port of src/methods/*.ts — the TypeScript is the reference,
 // docs/methods.md says what each does, and the vector check holds this to it.
 //
 // Every function takes a civil date with the month 0-based, as the TypeScript
@@ -719,6 +719,43 @@ fun uaeRawMinutes(lat: Double, lon: Double, year: Int, month0: Int, day: Int, di
 /** Rounded to the nearest minute. Null where a time does not form. */
 fun uaeMinutes(lat: Double, lon: Double, year: Int, month0: Int, day: Int, dipDeg: Double = 0.0, asrShadow: Double = 1.0, dipMaghribDeg: Double? = null, morningMinutes: Double = 0.0): DayMinutes? {
     val r = uaeRawMinutes(lat, lon, year, month0, day, dipDeg, asrShadow, dipMaghribDeg, morningMinutes)
+    return if (r.allFinite) r.mapped { floor(it + 0.5) } else null
+}
+
+// ---------------------------------------------------------------- Iran: the Institute of Geophysics, Tehran
+
+/** Before rounding: the Institute of Geophysics' plain program — Meeus's apparent sun iterated, Fajr 17.7°, sunrise −0.8333°, Dhuhr the transit, Asr at the noon shadow plus the lengths asked, Maghrib 4.5°, Isha 14°; no margins. */
+fun tehranRawMinutes(lat: Double, lon: Double, year: Int, month0: Int, day: Int, asrShadow: Double = 1.0): DayMinutes {
+    val d0 = d0Of(year, month0, day)
+    fun at(t: Double) = meeusApparentSun(d0 + t / 1440)
+    var noon = 720 - 4 * lon
+    repeat(3) { noon = 720 - 4 * lon - at(noon).eot }
+    val sp = sin(lat * RAD)
+    val cp = cos(lat * RAD)
+    fun event(alt: Double, sign: Double, start: Double): Double {
+        var t = start
+        repeat(3) {
+            val s = at(t)
+            val c = (sin(alt * RAD) - sp * sin(s.dec)) / (cp * cos(s.dec))
+            if (!(abs(c) <= 1)) return Double.NaN
+            t = 720 - 4 * lon - s.eot + (sign * 4 * acos(c)) / RAD
+        }
+        return t
+    }
+    val asrAltitude = atan(1 / (asrShadow + tan(abs(lat * RAD - at(noon).dec)))) / RAD
+    return DayMinutes(
+        fajr = event(-17.7, -1.0, noon - 420),
+        sunrise = event(-0.8333, -1.0, noon - 360),
+        dhuhr = noon,
+        asr = event(asrAltitude, 1.0, noon + 200),
+        maghrib = event(-4.5, 1.0, noon + 380),
+        isha = event(-14.0, 1.0, noon + 420),
+    )
+}
+
+/** Rounded to the nearest minute. Null where a time does not form. */
+fun tehranMinutes(lat: Double, lon: Double, year: Int, month0: Int, day: Int, asrShadow: Double = 1.0): DayMinutes? {
+    val r = tehranRawMinutes(lat, lon, year, month0, day, asrShadow)
     return if (r.allFinite) r.mapped { floor(it + 0.5) } else null
 }
 

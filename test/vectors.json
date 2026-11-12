@@ -18,7 +18,8 @@
   "albania": 1,
   "bulgaria": 1,
   "banuri": 1,
-  "uae": 1
+  "uae": 1,
+  "tehran": 1
  },
  "cases": [
   {
@@ -7343,6 +7344,378 @@
     "asr": "2026-12-31T11:15:00.000Z",
     "maghrib": "2026-12-31T13:43:00.000Z",
     "isha": "2026-12-31T14:57:00.000Z"
+   }
+  },
+  {
+   "place": {
+    "id": "tehran:26",
+    "name": "Tehran",
+    "lat": 35.699,
+    "lon": 51.421,
+    "tz": "Asia/Tehran"
+   },
+   "date": "2025-03-21",
+   "clock": {
+    "zone": "Asia/Tehran",
+    "offsetMinutes": 210,
+    "label": "Asia/Tehran"
+   },
+   "printed": {
+    "fajr": "04:43",
+    "sunrise": "06:07",
+    "dhuhr": "12:11",
+    "asr": "15:39",
+    "maghrib": "18:35",
+    "isha": "19:22"
+   },
+   "instants": {
+    "fajr": "2025-03-21T01:13:00.000Z",
+    "sunrise": "2025-03-21T02:37:00.000Z",
+    "dhuhr": "2025-03-21T08:41:00.000Z",
+    "asr": "2025-03-21T12:09:00.000Z",
+    "maghrib": "2025-03-21T15:05:00.000Z",
+    "isha": "2025-03-21T15:52:00.000Z"
+   }
+  },
+  {
+   "place": {
+    "id": "tehran:26",
+    "name": "Tehran",
+    "lat": 35.699,
+    "lon": 51.421,
+    "tz": "Asia/Tehran"
+   },
+   "date": "2025-11-19",
+   "clock": {
+    "zone": "Asia/Tehran",
+    "offsetMinutes": 210,
+    "label": "Asia/Tehran"
+   },
+   "printed": {
+    "fajr": "05:17",
+    "sunrise": "06:44",
+    "dhuhr": "11:50",
+    "asr": "14:35",
+    "maghrib": "17:15",
+    "isha": "18:04"
+   },
+   "instants": {
+    "fajr": "2025-11-19T01:47:00.000Z",
+    "sunrise": "2025-11-19T03:14:00.000Z",
+    "dhuhr": "2025-11-19T08:20:00.000Z",
+    "asr": "2025-11-19T11:05:00.000Z",
+    "maghrib": "2025-11-19T13:45:00.000Z",
+    "isha": "2025-11-19T14:34:00.000Z"
+   }
+  },
+  {
+   "place": {
+    "id": "tehran:26",
+    "name": "Tehran",
+    "lat": 35.699,
+    "lon": 51.421,
+    "tz": "Asia/Tehran"
+   },
+   "date": "2026-07-20",
+   "clock": {
+    "zone": "Asia/Tehran",
+    "offsetMinutes": 210,
+    "label": "Asia/Tehran"
+   },
+   "printed": {
+    "fajr": "03:22",
+    "sunrise": "05:03",
+    "dhuhr": "12:11",
+    "asr": "15:59",
+    "maghrib": "19:38",
+    "isha": "20:35"
+   },
+   "instants": {
+    "fajr": "2026-07-19T23:52:00.000Z",
+    "sunrise": "2026-07-20T01:33:00.000Z",
+    "dhuhr": "2026-07-20T08:41:00.000Z",
+    "asr": "2026-07-20T12:29:00.000Z",
+    "maghrib": "2026-07-20T16:08:00.000Z",
+    "isha": "2026-07-20T17:05:00.000Z"
+   }
+  },
+  {
+   "place": {
+    "id": "tehran:26",
+    "name": "Tehran",
+    "lat": 35.699,
+    "lon": 51.421,
+    "tz": "Asia/Tehran"
+   },
+   "date": "2027-03-20",
+   "clock": {
+    "zone": "Asia/Tehran",
+    "offsetMinutes": 210,
+    "label": "Asia/Tehran"
+   },
+   "printed": {
+    "fajr": "04:45",
+    "sunrise": "06:09",
+    "dhuhr": "12:12",
+    "asr": "15:39",
+    "maghrib": "18:34",
+    "isha": "19:21"
+   },
+   "instants": {
+    "fajr": "2027-03-20T01:15:00.000Z",
+    "sunrise": "2027-03-20T02:39:00.000Z",
+    "dhuhr": "2027-03-20T08:42:00.000Z",
+    "asr": "2027-03-20T12:09:00.000Z",
+    "maghrib": "2027-03-20T15:04:00.000Z",
+    "isha": "2027-03-20T15:51:00.000Z"
+   }
+  },
+  {
+   "place": {
+    "id": "tehran:25",
+    "name": "Tabriz",
+    "lat": 38.069,
+    "lon": 46.291,
+    "tz": "Asia/Tehran"
+   },
+   "date": "2025-03-21",
+   "clock": {
+    "zone": "Asia/Tehran",
+    "offsetMinutes": 210,
+    "label": "Asia/Tehran"
+   },
+   "printed": {
+    "fajr": "05:00",
+    "sunrise": "06:27",
+    "dhuhr": "12:32",
+    "asr": "15:59",
+    "maghrib": "18:56",
+    "isha": "19:45"
+   },
+   "instants": {
+    "fajr": "2025-03-21T01:30:00.000Z",
+    "sunrise": "2025-03-21T02:57:00.000Z",
+    "dhuhr": "2025-03-21T09:02:00.000Z",
+    "asr": "2025-03-21T12:29:00.000Z",
+    "maghrib": "2025-03-21T15:26:00.000Z",
+    "isha": "2025-03-21T16:15:00.000Z"
+   }
+  },
+  {
+   "place": {
+    "id": "tehran:25",
+    "name": "Tabriz",
+    "lat": 38.069,
+    "lon": 46.291,
+    "tz": "Asia/Tehran"
+   },
+   "date": "2025-11-19",
+   "clock": {
+    "zone": "Asia/Tehran",
+    "offsetMinutes": 210,
+    "label": "Asia/Tehran"
+   },
+   "printed": {
+    "fajr": "05:40",
+    "sunrise": "07:10",
+    "dhuhr": "12:10",
+    "asr": "14:50",
+    "maghrib": "17:30",
+    "isha": "18:21"
+   },
+   "instants": {
+    "fajr": "2025-11-19T02:10:00.000Z",
+    "sunrise": "2025-11-19T03:40:00.000Z",
+    "dhuhr": "2025-11-19T08:40:00.000Z",
+    "asr": "2025-11-19T11:20:00.000Z",
+    "maghrib": "2025-11-19T14:00:00.000Z",
+    "isha": "2025-11-19T14:51:00.000Z"
+   }
+  },
+  {
+   "place": {
+    "id": "tehran:25",
+    "name": "Tabriz",
+    "lat": 38.069,
+    "lon": 46.291,
+    "tz": "Asia/Tehran"
+   },
+   "date": "2026-07-20",
+   "clock": {
+    "zone": "Asia/Tehran",
+    "offsetMinutes": 210,
+    "label": "Asia/Tehran"
+   },
+   "printed": {
+    "fajr": "03:31",
+    "sunrise": "05:18",
+    "dhuhr": "12:31",
+    "asr": "16:24",
+    "maghrib": "20:06",
+    "isha": "21:05"
+   },
+   "instants": {
+    "fajr": "2026-07-20T00:01:00.000Z",
+    "sunrise": "2026-07-20T01:48:00.000Z",
+    "dhuhr": "2026-07-20T09:01:00.000Z",
+    "asr": "2026-07-20T12:54:00.000Z",
+    "maghrib": "2026-07-20T16:36:00.000Z",
+    "isha": "2026-07-20T17:35:00.000Z"
+   }
+  },
+  {
+   "place": {
+    "id": "tehran:25",
+    "name": "Tabriz",
+    "lat": 38.069,
+    "lon": 46.291,
+    "tz": "Asia/Tehran"
+   },
+   "date": "2027-03-20",
+   "clock": {
+    "zone": "Asia/Tehran",
+    "offsetMinutes": 210,
+    "label": "Asia/Tehran"
+   },
+   "printed": {
+    "fajr": "05:03",
+    "sunrise": "06:29",
+    "dhuhr": "12:32",
+    "asr": "15:59",
+    "maghrib": "18:55",
+    "isha": "19:44"
+   },
+   "instants": {
+    "fajr": "2027-03-20T01:33:00.000Z",
+    "sunrise": "2027-03-20T02:59:00.000Z",
+    "dhuhr": "2027-03-20T09:02:00.000Z",
+    "asr": "2027-03-20T12:29:00.000Z",
+    "maghrib": "2027-03-20T15:25:00.000Z",
+    "isha": "2027-03-20T16:14:00.000Z"
+   }
+  },
+  {
+   "place": {
+    "id": "tehran:4",
+    "name": "Bandar Abbas",
+    "lat": 27.177,
+    "lon": 56.281,
+    "tz": "Asia/Tehran"
+   },
+   "date": "2025-03-21",
+   "clock": {
+    "zone": "Asia/Tehran",
+    "offsetMinutes": 210,
+    "label": "Asia/Tehran"
+   },
+   "printed": {
+    "fajr": "04:32",
+    "sunrise": "05:48",
+    "dhuhr": "11:52",
+    "asr": "15:19",
+    "maghrib": "18:13",
+    "isha": "18:56"
+   },
+   "instants": {
+    "fajr": "2025-03-21T01:02:00.000Z",
+    "sunrise": "2025-03-21T02:18:00.000Z",
+    "dhuhr": "2025-03-21T08:22:00.000Z",
+    "asr": "2025-03-21T11:49:00.000Z",
+    "maghrib": "2025-03-21T14:43:00.000Z",
+    "isha": "2025-03-21T15:26:00.000Z"
+   }
+  },
+  {
+   "place": {
+    "id": "tehran:4",
+    "name": "Bandar Abbas",
+    "lat": 27.177,
+    "lon": 56.281,
+    "tz": "Asia/Tehran"
+   },
+   "date": "2025-11-19",
+   "clock": {
+    "zone": "Asia/Tehran",
+    "offsetMinutes": 210,
+    "label": "Asia/Tehran"
+   },
+   "printed": {
+    "fajr": "04:49",
+    "sunrise": "06:08",
+    "dhuhr": "11:30",
+    "asr": "14:32",
+    "maghrib": "17:10",
+    "isha": "17:55"
+   },
+   "instants": {
+    "fajr": "2025-11-19T01:19:00.000Z",
+    "sunrise": "2025-11-19T02:38:00.000Z",
+    "dhuhr": "2025-11-19T08:00:00.000Z",
+    "asr": "2025-11-19T11:02:00.000Z",
+    "maghrib": "2025-11-19T13:40:00.000Z",
+    "isha": "2025-11-19T14:25:00.000Z"
+   }
+  },
+  {
+   "place": {
+    "id": "tehran:4",
+    "name": "Bandar Abbas",
+    "lat": 27.177,
+    "lon": 56.281,
+    "tz": "Asia/Tehran"
+   },
+   "date": "2026-07-20",
+   "clock": {
+    "zone": "Asia/Tehran",
+    "offsetMinutes": 210,
+    "label": "Asia/Tehran"
+   },
+   "printed": {
+    "fajr": "03:35",
+    "sunrise": "05:02",
+    "dhuhr": "11:51",
+    "asr": "15:21",
+    "maghrib": "18:58",
+    "isha": "19:47"
+   },
+   "instants": {
+    "fajr": "2026-07-20T00:05:00.000Z",
+    "sunrise": "2026-07-20T01:32:00.000Z",
+    "dhuhr": "2026-07-20T08:21:00.000Z",
+    "asr": "2026-07-20T11:51:00.000Z",
+    "maghrib": "2026-07-20T15:28:00.000Z",
+    "isha": "2026-07-20T16:17:00.000Z"
+   }
+  },
+  {
+   "place": {
+    "id": "tehran:4",
+    "name": "Bandar Abbas",
+    "lat": 27.177,
+    "lon": 56.281,
+    "tz": "Asia/Tehran"
+   },
+   "date": "2027-03-20",
+   "clock": {
+    "zone": "Asia/Tehran",
+    "offsetMinutes": 210,
+    "label": "Asia/Tehran"
+   },
+   "printed": {
+    "fajr": "04:33",
+    "sunrise": "05:49",
+    "dhuhr": "11:52",
+    "asr": "15:19",
+    "maghrib": "18:12",
+    "isha": "18:55"
+   },
+   "instants": {
+    "fajr": "2027-03-20T01:03:00.000Z",
+    "sunrise": "2027-03-20T02:19:00.000Z",
+    "dhuhr": "2027-03-20T08:22:00.000Z",
+    "asr": "2027-03-20T11:49:00.000Z",
+    "maghrib": "2027-03-20T14:42:00.000Z",
+    "isha": "2027-03-20T15:25:00.000Z"
    }
   }
  ]

@@ -28,6 +28,7 @@ import './authorities/albania.js';
 import './authorities/bulgaria.js';
 import './authorities/banuri.js';
 import './authorities/uae.js';
+import './authorities/tehran.js';
 
 export * from './core/index.js';
 export { diyanetCountry } from './authorities/diyanet.js';

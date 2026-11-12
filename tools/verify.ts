@@ -240,6 +240,7 @@ export function checkAuthority(a: CheckRun): Result | null {
     bulgaria: 'Bulgaria — the Grand Mufti’s Office’s timetable',
     banuri: 'Pakistan — Jamia Banuri Town’s timetable',
     uae: 'United Arab Emirates — the Authority’s times',
+    tehran: 'Iran — the Institute of Geophysics’ sheets',
   };
   return check(names[a], placesOf(a), path.join(TABLES, a, 'v1/cities'));
 }

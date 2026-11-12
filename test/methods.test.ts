@@ -7,6 +7,7 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { checkAuthority } from '../tools/verify.js';
 import { preciseApparentSun } from '../src/index.js';
+import { tehranSunsetAndMidnight, tehranTimes } from '../src/methods/tehran.js';
 
 const bars: [Parameters<typeof checkAuthority>[0], number][] = [
   ['indonesia', 0.9996], // 99.965 %
@@ -41,5 +42,18 @@ test('the precise sun is JPL’s to 0.15 s and an arc-second', () => {
     const s = preciseApparentSun(d);
     assert.ok(Math.abs((s.dec * 180) / Math.PI - dec) * 3600 < 1);
     assert.ok(Math.abs(s.eot - eot) * 60 < 0.15);
+  }
+});
+
+test('Tehran: sunset comes before Maghrib, and midnight is halfway from sunset to the next Fajr', () => {
+  for (const [y, m, d] of [[2026, 2, 21], [2026, 5, 21], [2026, 11, 31]] as const) {
+    const day = tehranTimes(35.699, 51.421, y, m, d)!;
+    const next = new Date(Date.UTC(y, m, d) + 86_400_000);
+    const tomorrow = tehranTimes(35.699, 51.421, next.getUTCFullYear(), next.getUTCMonth(), next.getUTCDate())!;
+    const extra = tehranSunsetAndMidnight(35.699, 51.421, y, m, d)!;
+    const minutesAfter = (day.maghrib.getTime() - extra.sunset.getTime()) / 60_000;
+    assert.ok(minutesAfter > 15 && minutesAfter < 25, `Maghrib ${minutesAfter} minutes after sunset`);
+    const half = (extra.sunset.getTime() + tomorrow.fajr.getTime()) / 2;
+    assert.ok(Math.abs(extra.midnight.getTime() - half) <= 60_000);
   }
 });
