@@ -11,6 +11,10 @@ revision bump is at least a minor version.
 
 No method changed; no revision raised.
 
+## 1.15.0 — 2026-11-12
+
+No method changed; no revision raised. The correction lists and the certification record as of 2026-11-12 (correction lists changed (2 files: data/corrections/albania.json, data/corrections/bulgaria.json); the library changed (58 files: dist/cjs/albania.d.ts, dist/cjs/albania.js, dist/cjs/authorities/albania.d.ts, dist/cjs/authorities/albania.js, …); docs changed (1 file: docs/methods.md); schemas changed (1 file: schemas/certification.schema.json); albania: a new method; bulgaria: a new method; new entry points: ./albania, ./bulgaria).
+
 ## 1.14.0 — 2026-11-12
 
 - **Albania and Bulgaria, revision 1 each: a fifteenth and a sixteenth
