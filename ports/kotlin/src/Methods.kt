@@ -1,5 +1,5 @@
 // The methods: Sweden and Diyanet (the Congress method), Morocco, Algeria,
-// Indonesia, Türkiye Takvimi, Kazakhstan, Egypt, Brunei, Qatar, Kuwait, Jordan, Tatarstan, Russia's Central Muftiate, Albania and Bulgaria. A port of src/methods/*.ts — the TypeScript is the reference,
+// Indonesia, Türkiye Takvimi, Kazakhstan, Egypt, Brunei, Qatar, Kuwait, Jordan, Tatarstan, Russia's Central Muftiate, Albania, Bulgaria and Pakistan's Jamia Banuri Town. A port of src/methods/*.ts — the TypeScript is the reference,
 // docs/methods.md says what each does, and the vector check holds this to it.
 //
 // Every function takes a civil date with the month 0-based, as the TypeScript
@@ -648,6 +648,33 @@ fun albaniaMinutes(lon: Double, year: Int, month0: Int, day: Int, asrShadow: Dou
 /** Sofia's table, the sun taken at 11h UT of the day before; rounded to the nearest minute. */
 fun bulgariaMinutes(lon: Double, year: Int, month0: Int, day: Int, asrShadow: Double = 1.0): DayMinutes? =
     townTableRawMinutes(BULGARIA_TABLE, lon, year, month0, day, asrShadow).mapped { floor(it + 0.5) }
+
+// ---------------------------------------------------------------- Pakistan: Jamia Banuri Town
+
+/** As printed, whole minutes: Kazakhstan's sun and arithmetic, Fajr and Isha at 18°, the zenith as Dhuhr, Asr at two shadows (one where asked), no margins, the nearest minute. Null where a time does not form. */
+fun banuriMinutes(lat: Double, lon: Double, year: Int, month0: Int, day: Int, asrShadow: Int = 2): DayMinutes? {
+    val jd = kzJulian(year, month0 + 1, day) - lon / 360
+    fun midday(t: Double) = kzFix(12 - kzSun(jd + t)[1], 24.0)
+    fun at(angle: Double, t: Double, before: Boolean): Double {
+        val decl = kzSun(jd + t)[0]
+        val x = (-sin(angle * RAD) - sin(decl * RAD) * sin(lat * RAD)) / (cos(decl * RAD) * cos(lat * RAD))
+        if (!(abs(x) <= 1)) return Double.NaN
+        val h = acos(x) / RAD / 15
+        return midday(t) + (if (before) -h else h)
+    }
+    val asrAngle = -atan(1 / (asrShadow + tan(abs(lat - kzSun(jd + 13.0 / 24)[0]) * RAD))) / RAD
+    fun minute(h: Double) = floor((h - lon / 15) * 60 + 0.5)
+    val p = DayMinutes(
+        fajr = minute(at(18.0, 5.0 / 24, true)),
+        sunrise = minute(at(0.833, 6.0 / 24, true)),
+        dhuhr = minute(midday(12.0 / 24)),
+        asr = minute(at(asrAngle, 13.0 / 24, false)),
+        maghrib = minute(at(0.833, 18.0 / 24, false)),
+        isha = minute(at(18.0, 18.0 / 24, false)),
+    )
+    if (!(p.fajr.isFinite() && p.sunrise.isFinite() && p.dhuhr.isFinite() && p.asr.isFinite() && p.maghrib.isFinite() && p.isha.isFinite())) return null
+    return p
+}
 
 // ---------------------------------------------------------------- Sweden and Diyanet: the Congress method
 

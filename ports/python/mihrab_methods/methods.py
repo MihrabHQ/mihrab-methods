@@ -1,5 +1,5 @@
 """The methods: Sweden and Diyanet (the Congress method), Morocco, Algeria,
-Indonesia, Türkiye Takvimi, Kazakhstan, Egypt, Brunei, Qatar, Kuwait, Jordan, Tatarstan, Russia's Central Muftiate, Albania and Bulgaria. A port of src/methods/*.ts — the TypeScript is the reference,
+Indonesia, Türkiye Takvimi, Kazakhstan, Egypt, Brunei, Qatar, Kuwait, Jordan, Tatarstan, Russia's Central Muftiate, Albania, Bulgaria and Pakistan's Jamia Banuri Town. A port of src/methods/*.ts — the TypeScript is the reference,
 docs/methods.md says what each does, and test_vectors.py holds this to it.
 
 Every function takes a civil date with the month 0-based, as the TypeScript
@@ -747,6 +747,32 @@ def albania_minutes(lon, year, month0, day, asr_shadow=1):
 def bulgaria_minutes(lon, year, month0, day, asr_shadow=1):
     """Sofia's table, the sun taken at 11h UT of the day before; rounded to the nearest minute."""
     return {k: math.floor(v + 0.5) for k, v in town_table_raw_minutes(BULGARIA_TABLE, lon, year, month0, day, asr_shadow).items()}
+
+
+# ---------------------------------------------------------------- Pakistan: Jamia Banuri Town
+
+
+def banuri_minutes(lat, lon, year, month0, day, asr_shadow=2):
+    """As printed, whole minutes: Kazakhstan's sun and arithmetic, Fajr and Isha at 18°, the zenith as Dhuhr, Asr at two shadows (one where asked), no margins, the nearest minute. None where a time does not form."""
+    jd = _kz_julian(year, month0 + 1, day) - lon / 360
+
+    def midday(t):
+        return _kz_fix(12 - _kz_sun(jd + t)[1], 24)
+
+    def at(angle, t, before):
+        decl = _kz_sun(jd + t)[0]
+        x = (-math.sin(angle * RAD) - math.sin(decl * RAD) * math.sin(lat * RAD)) / (math.cos(decl * RAD) * math.cos(lat * RAD))
+        if not abs(x) <= 1:
+            return NAN
+        h = math.acos(x) / RAD / 15
+        return midday(t) + (-h if before else h)
+
+    asr_angle = -math.atan(1 / (asr_shadow + math.tan(abs(lat - _kz_sun(jd + 13 / 24)[0]) * RAD))) / RAD
+    hours = [at(18, 5 / 24, True), at(0.833, 6 / 24, True), midday(12 / 24), at(asr_angle, 13 / 24, False), at(0.833, 18 / 24, False), at(18, 18 / 24, False)]
+    if not all(math.isfinite(h) for h in hours):
+        return None
+    p = [math.floor((h - lon / 15) * 60 + 0.5) for h in hours]
+    return {'fajr': p[0], 'sunrise': p[1], 'dhuhr': p[2], 'asr': p[3], 'maghrib': p[4], 'isha': p[5]}
 
 
 # ---------------------------------------------------------------- Sweden and Diyanet: the Congress method

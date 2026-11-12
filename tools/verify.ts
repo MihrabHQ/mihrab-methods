@@ -238,6 +238,7 @@ export function checkAuthority(a: CheckRun): Result | null {
     cdum: 'Russia — the Central Muftiate’s timetables',
     albania: 'Albania — the Community’s calendar',
     bulgaria: 'Bulgaria — the Grand Mufti’s Office’s timetable',
+    banuri: 'Pakistan — Jamia Banuri Town’s timetable',
   };
   return check(names[a], placesOf(a), path.join(TABLES, a, 'v1/cities'));
 }

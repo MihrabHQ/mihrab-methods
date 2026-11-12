@@ -9,6 +9,17 @@ revision bump is at least a minor version.
 
 ## Unreleased
 
+- **Pakistan's Jamia Banuri Town, revision 1: a seventeenth method.** The
+  prayer times of Jamia Uloom-ul-Islamia, Banuri Town (Karachi) for a
+  hundred cities of Pakistan: `mihrab-methods/banuri`, authority `banuri`.
+  Kazakhstan's sun and arithmetic with Fajr and Isha at 18°, the zenith as
+  Dhuhr, the Hanafi Asr, no margins and the nearest minute
+  (`docs/methods.md`). With its correction list the method matches the
+  published timetable of every city over the certified span
+  (`docs/status.md`). `certification.json` gains a `banuri` entry and
+  `data/corrections/banuri.json` is new. In every port (`banuri_minutes` /
+  `banuriMinutes`, `REVISIONS` with `banuri: 1`). No other method's output
+  changes.
 No method changed; no revision raised.
 
 ## 1.15.0 — 2026-11-12

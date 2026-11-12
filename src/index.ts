@@ -26,6 +26,7 @@ import './authorities/tatarstan.js';
 import './authorities/cdum.js';
 import './authorities/albania.js';
 import './authorities/bulgaria.js';
+import './authorities/banuri.js';
 
 export * from './core/index.js';
 export { diyanetCountry } from './authorities/diyanet.js';

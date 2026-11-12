@@ -476,6 +476,31 @@ The Grand Mufti's Office's timetable: Sofia (42.708° N, 23.3219° E) and
 forty-seven towns. The sun is taken at **11h UT of the day before**; Fajr
 is a minute earlier than 18°.
 
+## Pakistan: Jamia Banuri Town
+
+`src/methods/banuri.ts`. The prayer times Jamia Uloom-ul-Islamia, Banuri
+Town (Karachi) gives on its own page for a hundred cities of Pakistan, read
+off its year. This is the university the "Karachi" convention of 18° and
+18° is named after; what follows is how its own times are computed, which
+is more than the two angles.
+
+- **Kazakhstan's sun and arithmetic**: the short series for the sun, the day
+  counted from 0h of the civil date at the place's own meridian, each time
+  computed once with the sun taken at a fixed first guess of its hour (Fajr
+  5h, sunrise 6h, the zenith 12h, Asr 13h, sunset and Isha 18h), not
+  iterated.
+- **Fajr** and **Isha** at 18°; **sunrise** and **Maghrib** at −0.833°.
+- **Dhuhr** is the zenith (zawal), the sun's transit: the page prints that
+  moment and no Dhuhr of its own.
+- **Asr** at two shadow lengths beyond the noon shadow, the Hanafi Asr the
+  page gives by default; `banuriTimes` takes one shadow length as its last
+  argument for the page's other setting. The library's places print the
+  default.
+- **No margin on any time.** Each is rounded to the nearest minute.
+- Each city is computed at its own point (`data/places/banuriCities.json`),
+  read off the timetable: the point at which the method prints the city's
+  year.
+
 ## Checking a port
 
 1. Take `test/vectors.json`. For each case, compute the six times at the

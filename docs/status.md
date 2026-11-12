@@ -45,8 +45,9 @@ each method.
 | **Russia (Central Muftiate)** | the Central Muftiate’s timetables | 18 | 39,342 | **0** | 99.877 % | 48 | 1 Jan 2026 → 31 Dec 2026 |
 | **Albania** | the Community’s calendar | 22 | 48,180 | **0** | 98.082 % | 924 | 1 Jan 2026 → 31 Dec 2026 |
 | **Bulgaria** | the Grand Mufti’s Office’s timetable | 48 | 105,120 | **0** | 97.671 % | 2,448 | 1 Jan 2026 → 31 Dec 2026 |
+| **Pakistan (Banuri Town)** | Jamia Banuri Town’s timetable | 100 | 219,000 | **0** | 99.996 % | 8 | 1 Jan 2026 → 31 Dec 2026 |
 
-16 of 16 methods certified; 0 of 76,724,216 times off the printed minute. Last checked 9 November 2026. Generated from [`certification.json`](../certification.json) by `scripts/readme.mjs`.
+17 of 17 methods certified; 0 of 76,943,216 times off the printed minute. Last checked 9 November 2026. Generated from [`certification.json`](../certification.json) by `scripts/readme.mjs`.
 <!-- certification-table:end -->
 
 ## Sweden
@@ -412,6 +413,22 @@ towns): the method gives <!--fig:bulgaria.alonePct-->97.671<!--/fig--> % alone, 
 > table is computed afresh each year or kept is not known from one year of
 > it, and the next year's check will say. The margins are the old temkin:
 > seven minutes at each end of the day, five on Dhuhr, four on Asr.
+
+## Pakistan: Jamia Banuri Town
+
+Certified over <!--fig:banuri.span-->1 Jan 2026 → 31 Dec 2026<!--/fig--> (<!--fig:banuri.check0.places-->100<!--/fig-->
+cities): the method gives <!--fig:banuri.alonePct-->99.996<!--/fig--> % alone, and a list of
+<!--fig:banuri.corrections-->8<!--/fig--> corrections the rest.
+
+> **Research note, 2026-11-12** (not generated). The page computes any city
+> it is asked for, in Pakistan and abroad, under several settings; what is
+> certified here is the cities of Pakistan under the settings it opens
+> with: its own method and the Hanafi Asr. The arithmetic is the one many
+> prayer-time programs share, and what tells it from an iterated sun is a
+> minute here and there at sunrise and Asr. A city's point is not printed;
+> it is the point at which the method gives the city's whole year, and the
+> year pins it to about a ten-thousandth of a degree, since every minute
+> of 2,190 has to fall on the right side. Karachi's is 24°52′ N, 67°03′ E.
 
 ## Not here, and why
 

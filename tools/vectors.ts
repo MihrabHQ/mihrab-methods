@@ -28,6 +28,7 @@ const PICK: Record<string, string[]> = {
   cdum: ['cdum:1', 'cdum:2', 'cdum:14', 'cdum:17'],
   albania: ['albania:1', 'albania:2', 'albania:11', 'albania:20'],
   bulgaria: ['bulgaria:1', 'bulgaria:2', 'bulgaria:3'],
+  banuri: ['banuri:7487', 'banuri:7488', 'banuri:7494'],
 };
 
 function dates(from: string, to: string): string[] {

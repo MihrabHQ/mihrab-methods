@@ -1,5 +1,5 @@
 // The methods: Sweden and Diyanet (the Congress method), Morocco, Algeria,
-// Indonesia, Türkiye Takvimi, Kazakhstan, Egypt, Brunei, Qatar, Kuwait, Jordan, Tatarstan, Russia's Central Muftiate, Albania and Bulgaria. A port of src/methods/*.ts — the TypeScript is the reference,
+// Indonesia, Türkiye Takvimi, Kazakhstan, Egypt, Brunei, Qatar, Kuwait, Jordan, Tatarstan, Russia's Central Muftiate, Albania, Bulgaria and Pakistan's Jamia Banuri Town. A port of src/methods/*.ts — the TypeScript is the reference,
 // docs/methods.md says what each does, and the vector check holds this to it.
 //
 // Every function takes a civil date with the month 0-based, as the TypeScript
@@ -676,6 +676,34 @@ DayMinutes? albaniaMinutes(double lon, int year, int month0, int day, {double as
 /// Sofia's table, the sun taken at 11h UT of the day before; rounded to the nearest minute.
 DayMinutes? bulgariaMinutes(double lon, int year, int month0, int day, {double asrShadow = 1.0}) =>
     townTableRawMinutes(bulgariaTable, lon, year, month0, day, asrShadow: asrShadow).mapped((v) => (v + 0.5).floorToDouble());
+
+// ---------------------------------------------------------------- Pakistan: Jamia Banuri Town
+
+/// As printed, whole minutes: Kazakhstan's sun and arithmetic, Fajr and Isha at 18°, the zenith as Dhuhr, Asr at two shadows (one where asked), no margins, the nearest minute. Null where a time does not form.
+DayMinutes? banuriMinutes(double lat, double lon, int year, int month0, int day, {int asrShadow = 2}) {
+  final jd = _kzJulian(year, month0 + 1, day) - lon / 360;
+  double midday(double t) => _kzFix(12 - _kzSun(jd + t)[1], 24);
+  double at(double angle, double t, bool before) {
+    final decl = _kzSun(jd + t)[0];
+    final x = (-sin(angle * rad) - sin(decl * rad) * sin(lat * rad)) / (cos(decl * rad) * cos(lat * rad));
+    if (!(x.abs() <= 1)) return double.nan;
+    final h = acos(x) / rad / 15;
+    return midday(t) + (before ? -h : h);
+  }
+
+  final asrAngle = -atan(1 / (asrShadow + tan((lat - _kzSun(jd + 13.0 / 24)[0]).abs() * rad))) / rad;
+  double minute(double h) => h.isFinite ? ((h - lon / 15) * 60 + 0.5).floorToDouble() : double.nan;
+  final p = DayMinutes(
+    minute(at(18.0, 5.0 / 24, true)),
+    minute(at(0.833, 6.0 / 24, true)),
+    minute(midday(12.0 / 24)),
+    minute(at(asrAngle, 13.0 / 24, false)),
+    minute(at(0.833, 18.0 / 24, false)),
+    minute(at(18.0, 18.0 / 24, false)),
+  );
+  if (!(p.fajr.isFinite && p.sunrise.isFinite && p.dhuhr.isFinite && p.asr.isFinite && p.maghrib.isFinite && p.isha.isFinite)) return null;
+  return p;
+}
 
 // ---------------------------------------------------------------- Sweden and Diyanet: the Congress method
 

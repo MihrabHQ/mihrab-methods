@@ -1,7 +1,7 @@
 {
   "name": "mihrab-methods",
   "version": "1.15.0",
-  "description": "The prayer-time authorities' own calculation methods, each reproducing its published timetable to the minute: Sweden (Diyanet, as Islamiska Förbundet prints it), Diyanet worldwide, Morocco (Habous), Algeria (Ministry of Religious Affairs), Indonesia (Kemenag), Türkiye Takvimi, Kazakhstan (Spiritual Administration), Egypt (General Authority of Survey), Brunei (Ministry of Religious Affairs), Qatar (Qatar Calendar House), Kuwait (Ministry of Awqaf and Islamic Affairs), Jordan (Ministry of Awqaf, Islamic Affairs and Holy Places), Tatarstan (Spiritual Administration of Muslims), Russia (Central Spiritual Administration of Muslims), Albania (Muslim Community of Albania), Bulgaria (Grand Mufti’s Office).",
+  "description": "The prayer-time authorities' own calculation methods, each reproducing its published timetable to the minute: Sweden (Diyanet, as Islamiska Förbundet prints it), Diyanet worldwide, Morocco (Habous), Algeria (Ministry of Religious Affairs), Indonesia (Kemenag), Türkiye Takvimi, Kazakhstan (Spiritual Administration), Egypt (General Authority of Survey), Brunei (Ministry of Religious Affairs), Qatar (Qatar Calendar House), Kuwait (Ministry of Awqaf and Islamic Affairs), Jordan (Ministry of Awqaf, Islamic Affairs and Holy Places), Tatarstan (Spiritual Administration of Muslims), Russia (Central Spiritual Administration of Muslims), Albania (Muslim Community of Albania), Bulgaria (Grand Mufti’s Office), Pakistan (Jamia Banuri Town).",
   "license": "MPL-2.0",
   "author": "Hassan El Ghamri",
   "repository": {
@@ -39,6 +39,7 @@
     "./dist/*/cdum.js",
     "./dist/*/albania.js",
     "./dist/*/bulgaria.js",
+    "./dist/*/banuri.js",
     "./dist/*/authorities/*.js",
     "./src/index.ts",
     "./src/sweden.ts",
@@ -57,6 +58,7 @@
     "./src/cdum.ts",
     "./src/albania.ts",
     "./src/bulgaria.ts",
+    "./src/banuri.ts",
     "./src/authorities/*.ts"
   ],
   "engines": {
@@ -253,6 +255,16 @@
         "default": "./dist/cjs/bulgaria.js"
       }
     },
+    "./banuri": {
+      "import": {
+        "types": "./dist/esm/banuri.d.ts",
+        "default": "./dist/esm/banuri.js"
+      },
+      "require": {
+        "types": "./dist/cjs/banuri.d.ts",
+        "default": "./dist/cjs/banuri.js"
+      }
+    },
     "./locate": {
       "import": {
         "types": "./dist/esm/locate.d.ts",
@@ -320,6 +332,9 @@
       ],
       "bulgaria": [
         "./dist/cjs/bulgaria.d.ts"
+      ],
+      "banuri": [
+        "./dist/cjs/banuri.d.ts"
       ],
       "locate": [
         "./dist/cjs/locate.d.ts"
