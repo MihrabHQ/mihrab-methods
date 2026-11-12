@@ -1,18 +1,20 @@
 # mihrab-methods
 
 [![npm](https://img.shields.io/npm/v/mihrab-methods)](https://www.npmjs.com/package/mihrab-methods)
+[![PyPI](https://img.shields.io/pypi/v/mihrab-methods)](https://pypi.org/project/mihrab-methods/)
 [![checks](https://github.com/MihrabHQ/mihrab-methods/actions/workflows/ci.yml/badge.svg)](https://github.com/MihrabHQ/mihrab-methods/actions/workflows/ci.yml)
 [![feed](https://github.com/MihrabHQ/mihrab-methods/actions/workflows/feed.yml/badge.svg)](https://github.com/MihrabHQ/mihrab-methods/actions/workflows/feed.yml)
 [![downloads](https://img.shields.io/npm/dm/mihrab-methods)](#usage)
 [![certification](docs/certification.svg)](#how-verification-works)
 
 **Prayer times that match the published timetable to the printed minute.**
-Each national authority's own calculation method, worked out again from its
-published times and checked day by day against its timetables: <!--fig:total.off-->0<!--/fig--> of
+Each authority's own calculation method — a ministry's, a muftiate's, a
+council of scholars' — worked out again from its published times and
+checked day by day against its timetables: <!--fig:total.off-->0<!--/fig--> of
 <!--fig:total.times-->77,123,526<!--/fig--> times off the printed minute. Free for any app, site or
 mosque to use.
 
-[![Usage, a day: npm downloads and API requests](docs/stats.svg)](#usage)
+[![Usage, a day: npm downloads, PyPI downloads and API requests](docs/stats.svg)](#usage)
 
 ```sh
 npm install mihrab-methods
@@ -31,6 +33,25 @@ day.certifiedUntil;  // the last date checked; past it, status is 'method-only'
 
 The full API, the HTTP server and the per-authority imports are in
 [docs/usage.md](docs/usage.md).
+
+In Python the same methods and correction lists are on
+[PyPI](https://pypi.org/project/mihrab-methods/), with nothing beyond the
+standard library:
+
+```sh
+pip install mihrab-methods
+```
+
+```python
+from mihrab_methods import load_corrections, times_for
+
+lists = load_corrections()
+stockholm = {'authority': 'sweden', 'lat': 59.33, 'lon': 18.034, 'tz': 'Europe/Stockholm'}
+times_for(stockholm, '2026-11-12', lists['sweden'])['printed']   # the six times as 'HH:MM'
+```
+
+Swift, Kotlin and Dart ports are in [ports/](ports/README.md); every port
+is held to the same test vectors as the library on every push.
 
 ## What is certified
 
@@ -115,10 +136,11 @@ as fixed addresses and the details: [docs/feed.md](docs/feed.md).
 <!-- usage:start -->
 | | Last 7 days | Last 30 days | Since the first release |
 |---|---:|---:|---:|
-| npm downloads | 264 | 977 | 977 |
-| API requests | 1,900 | 1,900 | 1,900 (since 2026-11-04) |
+| npm downloads | 2,407 | 3,345 | 3,345 |
+| PyPI downloads | 804 | 804 | 804 (since 2026-11-11) |
+| API requests | 1,890 | 1,900 | 1,900 (since 2026-11-04) |
 
-Counts only, to 2026-11-08, updated weekly (`scripts/stats.mjs`, history in [docs/stats.json](docs/stats.json)): npm's public download counts — every install counts, CI and mirrors included — and Cloudflare's request counts for the API. No addresses, queries or places are recorded anywhere.
+Counts only, to 2026-11-11, updated weekly (`scripts/stats.mjs`, history in [docs/stats.json](docs/stats.json)): npm's public download counts — every install counts, CI and mirrors included — PyPI's for the [Python port](https://pypi.org/project/mihrab-methods/) (pypistats.org, mirrors left out), and Cloudflare's request counts for the API. No addresses, queries or places are recorded anywhere.
 <!-- usage:end -->
 
 ## More
@@ -127,7 +149,7 @@ Counts only, to 2026-11-08, updated weekly (`scripts/stats.mjs`, history in [doc
 |---|---|
 | [docs/usage.md](docs/usage.md) | The API, the entry points, the HTTP server, this repository's commands and layout |
 | [docs/methods.md](docs/methods.md) | Each method in words and formulas, for ports to other languages; `test/vectors.json` to check one |
-| [ports/](ports/README.md) | The methods in Python, Swift, Kotlin and Dart, each held to `test/vectors.json` |
+| [ports/](ports/README.md) | The methods in Python ([on PyPI](https://pypi.org/project/mihrab-methods/)), Swift, Kotlin and Dart, each held to `test/vectors.json` |
 | [docs/status.md](docs/status.md) | Per method: what is certified, what was set aside, what is not yet covered |
 | [docs/diyanet.md](docs/diyanet.md) | What Diyanet's worldwide tables add: Isha by country, midsummer, Türkiye's points, tables on their own clocks |
 | [docs/feed.md](docs/feed.md) | `certification.json` and the lists as a feed: schemas, hashes, revisions, tags |

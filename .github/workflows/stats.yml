@@ -1,7 +1,7 @@
 name: stats
 
-# How much the library is used, weekly: npm's download counts and the public
-# API's request counts (scripts/stats.mjs) into docs/stats.json, the chart
+# How much the library is used, weekly: npm's and PyPI's download counts and
+# the public API's request counts (scripts/stats.mjs) into docs/stats.json, the chart
 # docs/stats.svg and the README's "Usage" block. Counts only.
 #
 # The API's counts need the CLOUDFLARE_API_TOKEN secret to carry "Account

@@ -8,6 +8,7 @@
  *   node scripts/stats.mjs                      # fetch, merge, write
  *   node scripts/stats.mjs --offline            # rewrite the chart and README from docs/stats.json
  *
+ * PyPI: the Python port's downloads, from pypistats.org (mirrors left out).
  * npm: the registry's public download counts (api.npmjs.org; every
  * install counts, CI and mirrors included). The API: Cloudflare's own
  * request counts for the worker (its GraphQL analytics; needs
@@ -59,6 +60,18 @@ async function npmDaily(since) {
     for (const d of r.downloads ?? []) out[d.day] = d.downloads;
     from = addDays(to, 1);
   }
+  return out;
+}
+
+/**
+ * PyPI's daily downloads of the Python port, mirrors left out (pypistats.org,
+ * which serves PyPI's public download log; it answers the last 180 days, and
+ * older days are kept from before). Null when it cannot be read.
+ */
+async function pypiDaily() {
+  const r = await get(`https://pypistats.org/api/packages/${PACKAGE}/overall?mirrors=false`);
+  const out = {};
+  for (const row of r.data ?? []) if (row.category === 'without_mirrors' && row.date <= yesterday) out[row.date] = row.downloads;
   return out;
 }
 
@@ -115,8 +128,8 @@ function niceStep(max, n = 3) {
 }
 
 /**
- * Two stacked panels on one time axis — npm downloads and API requests, a
- * bar a day from the first release (the last 120 days at most), with the
+ * Three stacked panels on one time axis — npm downloads, PyPI downloads and
+ * API requests, a bar a day from the first release (the last 120 days at most), with the
  * last seven days' total and the whole total over each.
  *
  * A day, not a week: the counts are a few weeks old, and four weekly bars
@@ -129,7 +142,7 @@ function niceStep(max, n = 3) {
 function chart(stats) {
   const W = 760, left = 4, right = 44, plotW = W - left - right;
   const panelH = 160, head = 40, plotH = 82, foot = 26;
-  const firstDay = [stats.npm.daily, stats.api?.daily ?? {}].flatMap((d) => Object.keys(d)).sort()[0] ?? yesterday;
+  const firstDay = [stats.npm.daily, stats.pypi?.daily ?? {}, stats.api?.daily ?? {}].flatMap((d) => Object.keys(d)).sort()[0] ?? yesterday;
   const from = [firstDay, addDays(yesterday, -119)].sort().at(-1);
   const days = [];
   for (let d = from; d <= yesterday; d = addDays(d, 1)) days.push(d);
@@ -139,7 +152,8 @@ function chart(stats) {
 
   const panels = [
     { title: 'npm downloads a day', unit: 'downloads', cls: 'n', daily: stats.npm.daily, pick: (v) => v },
-    { title: 'API requests a day', unit: 'requests', cls: 'p', daily: stats.api?.daily ?? null, pick: (v) => v.requests },
+    { title: 'PyPI downloads a day', unit: 'downloads', cls: 'y', daily: stats.pypi?.daily ?? null, pick: (v) => v, absent: 'not counted yet' },
+    { title: 'API requests a day', unit: 'requests', cls: 'p', daily: stats.api?.daily ?? null, pick: (v) => v.requests, absent: 'not deployed yet' },
   ];
   const parts = [];
   panels.forEach((p, k) => {
@@ -147,7 +161,7 @@ function chart(stats) {
     const base = y0 + head + plotH;
     parts.push(`<text x="${left}" y="${y0 + 16}" class="t">${p.title}</text>`);
     if (!p.daily || !Object.keys(p.daily).length) {
-      parts.push(`<text x="${left}" y="${y0 + head + plotH / 2}" class="m">${p.daily ? 'none yet' : 'not deployed yet'}</text>`);
+      parts.push(`<text x="${left}" y="${y0 + head + plotH / 2}" class="m">${p.daily ? 'none yet' : p.absent}</text>`);
       return;
     }
     const counts = days.map((d) => (d in p.daily ? p.pick(p.daily[d]) : null));
@@ -203,13 +217,13 @@ function chart(stats) {
   });
   // The last panel's dates are the bottom of the picture.
   const H = (panels.length - 1) * panelH + head + plotH + foot;
-  return `<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H}" viewBox="0 0 ${W} ${H}" role="img" aria-label="${esc(`Usage, a day: npm downloads and API requests, to ${yesterday}`)}">
+  return `<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H}" viewBox="0 0 ${W} ${H}" role="img" aria-label="${esc(`Usage, a day: npm downloads, PyPI downloads and API requests, to ${yesterday}`)}">
 <style>
 text{font-family:system-ui,-apple-system,"Segoe UI",sans-serif}
 .t{font-size:13px;font-weight:600;fill:#1f2328}.s{font-size:12px;fill:#59636e}.v{font-size:12px;font-weight:600;fill:#1f2328}
 .m{font-size:11px;fill:#59636e}.a{stroke:#8c959f}.g{stroke:#8c959f;stroke-opacity:.25}
-.n{fill:#2f7d68}.p{fill:#3f6fb5}.b{fill:#ffffff}
-@media (prefers-color-scheme:dark){.t,.v{fill:#e6edf3}.s,.m{fill:#9198a1}.a{stroke:#656c76}.g{stroke:#656c76;stroke-opacity:.4}.n{fill:#3fa58a}.p{fill:#5b8fd9}.b{fill:#0d1117}}
+.n{fill:#2f7d68}.y{fill:#b5803f}.p{fill:#3f6fb5}.b{fill:#ffffff}
+@media (prefers-color-scheme:dark){.t,.v{fill:#e6edf3}.s,.m{fill:#9198a1}.a{stroke:#656c76}.g{stroke:#656c76;stroke-opacity:.4}.n{fill:#3fa58a}.y{fill:#d9a55b}.p{fill:#5b8fd9}.b{fill:#0d1117}}
 </style>
 ${parts.join('\n')}
 </svg>
@@ -223,6 +237,12 @@ function block(stats) {
     '|---|---:|---:|---:|',
     `| npm downloads | ${int(sum(n, addDays(yesterday, -6)))} | ${int(sum(n, addDays(yesterday, -29)))} | ${int(sum(n, '0000-00-00'))} |`,
   ];
+  if (stats.pypi && Object.keys(stats.pypi.daily).length) {
+    const y = stats.pypi.daily;
+    rows.push(`| PyPI downloads | ${int(sum(y, addDays(yesterday, -6)))} | ${int(sum(y, addDays(yesterday, -29)))} | ${int(sum(y, '0000-00-00'))} (since ${Object.keys(y).sort()[0]}) |`);
+  } else {
+    rows.push('| PyPI downloads | — | — | not counted yet |');
+  }
   if (stats.api) {
     const a = stats.api.daily, r = (v) => v.requests;
     rows.push(`| API requests | ${int(sum(a, addDays(yesterday, -6), yesterday, r))} | ${int(sum(a, addDays(yesterday, -29), yesterday, r))} | ${int(sum(a, '0000-00-00', yesterday, r))} (since ${Object.keys(a).sort()[0] ?? '—'}) |`);
@@ -233,7 +253,7 @@ function block(stats) {
     // The chart itself is at the top of the README, over the install line.
     ...rows,
     '',
-    `Counts only, to ${yesterday}, updated weekly (\`scripts/stats.mjs\`, history in [docs/stats.json](docs/stats.json)): npm's public download counts — every install counts, CI and mirrors included — and Cloudflare's request counts for the API. No addresses, queries or places are recorded anywhere.`,
+    `Counts only, to ${yesterday}, updated weekly (\`scripts/stats.mjs\`, history in [docs/stats.json](docs/stats.json)): npm's public download counts — every install counts, CI and mirrors included — PyPI's for the [Python port](https://pypi.org/project/mihrab-methods/) (pypistats.org, mirrors left out), and Cloudflare's request counts for the API. No addresses, queries or places are recorded anywhere.`,
   ].join('\n');
 }
 
@@ -246,7 +266,7 @@ function fillReadme(stats) {
 }
 
 async function main() {
-  const old = kept ?? { npm: { daily: {} }, api: null };
+  const old = kept ?? { npm: { daily: {} }, pypi: null, api: null };
   let stats = old;
   if (!OFFLINE) {
     const first = process.env.NPM_SINCE ?? '2026-10-18'; // the first release
@@ -259,8 +279,16 @@ async function main() {
       // The chart keeps the days it has; the next run fills the rest (Cloudflare keeps 30 days).
       console.warn(`::warning::API counts not read: ${e.message}`);
     }
-    stats = { updated: yesterday, npm: { daily: { ...old.npm.daily, ...npm } }, api };
+    let pypi = old.pypi ?? null;
+    try {
+      pypi = { daily: { ...(old.pypi?.daily ?? {}), ...(await pypiDaily()) } };
+    } catch (e) {
+      // The chart keeps the days it has; the next run fills the rest (180 days are answered).
+      console.warn(`::warning::PyPI counts not read: ${e.message}`);
+    }
+    stats = { updated: yesterday, npm: { daily: { ...old.npm.daily, ...npm } }, pypi, api };
     stats.npm.daily = Object.fromEntries(Object.entries(stats.npm.daily).sort());
+    if (stats.pypi) stats.pypi.daily = Object.fromEntries(Object.entries(stats.pypi.daily).sort());
     if (stats.api) stats.api.daily = Object.fromEntries(Object.entries(stats.api.daily).sort());
     fs.writeFileSync(FILE, JSON.stringify(stats, null, 1) + '\n');
   }
@@ -268,6 +296,7 @@ async function main() {
   fillReadme(stats);
   const n = stats.npm.daily;
   console.log(`npm: ${int(sum(n, addDays(yesterday, -6)))} downloads in the last 7 days, ${int(sum(n, '0000-00-00'))} in all`);
+  console.log(stats.pypi ? `PyPI: ${int(sum(stats.pypi.daily, addDays(yesterday, -6)))} downloads in the last 7 days, ${int(sum(stats.pypi.daily, '0000-00-00'))} in all` : 'PyPI: not counted yet');
   console.log(stats.api ? `API: ${int(sum(stats.api.daily, addDays(yesterday, -6), yesterday, (v) => v.requests))} requests in the last 7 days` : 'API: not deployed yet (no Cloudflare secrets)');
 }
 
