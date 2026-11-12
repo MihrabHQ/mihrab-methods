@@ -228,18 +228,18 @@
       {
         "tables": "Qatar — the Calendar House’s times",
         "places": 1,
-        "times": 708,
+        "times": 720,
         "off": 0,
         "offWithoutCorrections": 27,
         "from": "2026-06-16",
-        "to": "2026-10-11"
+        "to": "2026-11-12"
       }
     ],
     "corrections": {
       "from": "2026-06-16",
-      "to": "2026-10-11",
+      "to": "2026-11-12",
       "entries": 27,
-      "sha256": "e6fc01f1ab8332d8e02a376474474748539b7d9edfacbd55cc36a3e1ebee6220"
+      "sha256": "0fd4b772e9d33346f35f841016b39ff4007ff24b6b03c9f37a6b011131e611f3"
     },
     "revision": 1
   },

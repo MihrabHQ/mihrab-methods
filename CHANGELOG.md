@@ -9,6 +9,15 @@ revision bump is at least a minor version.
 
 ## Unreleased
 
+- **Qatar: the list runs to today again.** The Calendar House's monthly
+  calendars after Rabi II 1448 are not posted yet, and the correction list
+  had ended with the last one, on 11 October 2026. It now also takes the
+  day the House's own home page gives for Doha, each day, until that
+  month's calendar is read; the two days held so far are the method's own
+  minutes. The days between 12 October and 10 November 2026 were never
+  published in a form read here: the method's times for them are inside
+  the span and were not checked. The method is unchanged.
+
 No method changed; no revision raised.
 
 ## 1.22.0 — 2026-11-12
