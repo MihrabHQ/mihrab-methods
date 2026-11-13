@@ -13,7 +13,7 @@ means, so you can decide how far to rely on it.
 **In one line:** <!--fig:total.times-->77,658,583<!--/fig--> printed times compared
 across <!--fig:total.methods-->21<!--/fig--> methods;
 <!--fig:total.off-->0<!--/fig--> differ. Last checked
-<!--fig:total.checkedAtLong-->12 November 2026<!--/fig-->.
+<!--fig:total.checkedAtLong-->13 November 2026<!--/fig-->.
 
 ## What is compared
 
@@ -60,7 +60,7 @@ off is **zero**; a method at 99.9 % is not shipped.
 | **United Kingdom (Wifaqul Ulama)** | Wifaqul Ulama’s timetables | 81 | 350,400 | **0** | 98.625 % | 4,641 | 1 Jan 2026 → 31 Dec 2027 |
 | **Tunisia** | the Institute’s times | 26 | 94,855 | **0** | 97.727 % | 2,156 | 1 Jan 2025 → 31 Dec 2026 |
 
-21 of 21 methods certified; 0 of 77,658,583 times off the printed minute. Last checked 12 November 2026. Generated from [`certification.json`](https://github.com/MihrabHQ/mihrab-methods/blob/main/certification.json) by `scripts/readme.mjs`.
+21 of 21 methods certified; 0 of 77,658,583 times off the printed minute. Last checked 13 November 2026. Generated from [`certification.json`](https://github.com/MihrabHQ/mihrab-methods/blob/main/certification.json) by `scripts/readme.mjs`.
 
 <!-- certification-table:end -->
 
