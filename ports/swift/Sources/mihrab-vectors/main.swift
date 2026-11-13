@@ -43,6 +43,8 @@ for c in cases {
                       lon: (p["lon"] as! NSNumber).doubleValue, tz: p["tz"] as! String)
     place.ishaDeg = (p["ishaDeg"] as? NSNumber)?.doubleValue
     place.temkin = (p["temkin"] as? NSNumber)?.doubleValue
+    place.dipDegEarlier = (p["dipDegEarlier"] as? NSNumber)?.doubleValue
+    place.dipDegUntil = (p["dipDegUntil"] as? NSNumber)?.intValue
     place.dipDeg = (p["dipDeg"] as? NSNumber)?.doubleValue
     place.dipMaghribDeg = (p["dipMaghribDeg"] as? NSNumber)?.doubleValue
     place.fajrMinutes = (p["fajrMinutes"] as? NSNumber)?.doubleValue

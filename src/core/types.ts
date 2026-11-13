@@ -31,6 +31,10 @@ export type Place = {
   dipDeg?: number;
   /** Morocco: the horizon's dip westward, at Maghrib (fitted per city). */
   dipMaghribDeg?: number;
+  /** Tunisia: the allowance at Fajr and Isha the authority used up to and including `dipDegUntil` (a year), where it later changed. */
+  dipDegEarlier?: number;
+  /** The last year `dipDegEarlier` applies to. */
+  dipDegUntil?: number;
   /** Jordan: the zone's margin on Fajr, minutes (negative: earlier). */
   fajrMinutes?: number;
   /** Indonesia: Kemenag's highland class (sunrise and Maghrib at −2°). */

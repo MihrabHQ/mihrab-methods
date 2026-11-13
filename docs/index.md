@@ -39,7 +39,7 @@ day.status;              // 'certified'
 <div class="wrap">
 <div class="stats">
 <div class="stat good"><b><!--fig:total.off-->0<!--/fig--></b><span>times off the printed minute</span></div>
-<div class="stat"><b><!--fig:total.times-->77,611,133<!--/fig--></b><span>published times compared, day by day</span></div>
+<div class="stat"><b><!--fig:total.times-->77,658,583<!--/fig--></b><span>published times compared, day by day</span></div>
 <div class="stat"><b><!--fig:total.methods-->21<!--/fig--></b><span>authorities, each with its own method</span></div>
 <div class="stat"><b>Offline</b><span>no request per reader; a free HTTP API if you want one</span></div>
 </div>

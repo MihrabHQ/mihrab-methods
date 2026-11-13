@@ -14,7 +14,7 @@ enum Authority { sweden, diyanet, morocco, algeria, indonesia, turkiyetakvimi, k
 enum Prayer { fajr, sunrise, dhuhr, asr, maghrib, isha }
 
 /// The method revisions this port reproduces. A correction list belongs to one revision.
-const Map<String, int> revisions = {'sweden': 1, 'diyanet': 2, 'morocco': 3, 'algeria': 1, 'indonesia': 2, 'turkiyetakvimi': 1, 'kazakhstan': 1, 'egypt': 1, 'brunei': 1, 'qatar': 1, 'kuwait': 1, 'jordan': 1, 'tatarstan': 1, 'cdum': 1, 'albania': 1, 'bulgaria': 1, 'banuri': 1, 'uae': 1, 'tehran': 1, 'wifaq': 2, 'tunisia': 1};
+const Map<String, int> revisions = {'sweden': 1, 'diyanet': 2, 'morocco': 3, 'algeria': 1, 'indonesia': 2, 'turkiyetakvimi': 1, 'kazakhstan': 1, 'egypt': 1, 'brunei': 1, 'qatar': 1, 'kuwait': 1, 'jordan': 1, 'tatarstan': 1, 'cdum': 1, 'albania': 1, 'bulgaria': 1, 'banuri': 1, 'uae': 1, 'tehran': 1, 'wifaq': 2, 'tunisia': 2};
 
 /// One change of a table's own clock: from a date on, minutes east of UTC.
 class ClockChange {
@@ -52,6 +52,10 @@ class Place {
   /// Türkiye Takvimi: the city's temkin, minutes.
   final double? temkin;
 
+  /// Tunisia: the allowance at Fajr and Isha up to and including the year [dipDegUntil].
+  final double? dipDegEarlier;
+  final int? dipDegUntil;
+
   const Place({
     required this.authority,
     required this.lat,
@@ -67,6 +71,8 @@ class Place {
     this.twilightDip = false,
     this.afternoon,
     this.temkin,
+    this.dipDegEarlier,
+    this.dipDegUntil,
   });
 }
 
@@ -216,7 +222,10 @@ Day? timesFor(Place place, String date, {int? zoneOffsetMinutes, CorrectionList?
       t = banuriMinutes(place.lat, place.lon, year, month0, day);
       break;
     case Authority.tunisia:
-      t = tunisiaMinutes(place.lat, place.lon, year, month0, day, asrShadow: asrShadow, dipDeg: place.dipDeg ?? 0.0, dipSunsetDeg: place.dipMaghribDeg);
+      final earlier = place.dipDegEarlier;
+      final until = place.dipDegUntil;
+      final twilight = (earlier != null && until != null && year <= until) ? earlier : (place.dipDeg ?? 0.0);
+      t = tunisiaMinutes(place.lat, place.lon, year, month0, day, asrShadow: asrShadow, dipDeg: twilight, dipSunsetDeg: place.dipMaghribDeg);
       break;
     case Authority.wifaq:
       t = wifaqMinutes(place.lat, place.lon, year, month0, day);

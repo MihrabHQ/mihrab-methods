@@ -54,7 +54,7 @@ const FILES = {
   uaeZones: ['data/places/uaeZones.json', '{ id: number; name: string; lat: number; lon: number; dipEast: number; dipWest: number; morningMinutes: number }[]'],
   tehranCities: ['data/places/tehranCities.json', '{ id: number; name: string; lat: number; lon: number }[]'],
   wifaqTowns: ['data/places/wifaqTowns.json', '{ id: number; name: string; lat: number; lon: number; country: string }[]'],
-  tunisiaPlaces: ['data/places/tunisiaPlaces.json', '{ id: number; name: string; lat: number; lon: number; dip: number; dipSunset: number }[]'],
+  tunisiaPlaces: ['data/places/tunisiaPlaces.json', '{ id: number; name: string; lat: number; lon: number; dip: number; dipSunset: number; dipEarlier?: number; dipEarlierUntil?: number }[]'],
   countryOutlines: ['data/locate/countryOutlines.json', '{ scale: number; countries: Record<string, number[][][]> }'],
 };
 for (const a of ['sweden', 'diyanet', 'morocco', 'algeria', 'indonesia', 'turkiyetakvimi', 'kazakhstan', 'egypt', 'brunei', 'qatar', 'kuwait', 'jordan', 'tatarstan', 'cdum', 'albania', 'bulgaria', 'banuri', 'uae', 'tehran', 'wifaq', 'tunisia']) {

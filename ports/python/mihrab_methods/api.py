@@ -4,7 +4,7 @@ then its correction list — what `timesFor` does in the TypeScript library.
 A place is a dict shaped like the library's `Place` (see docs/api.md):
 `authority`, `lat`, `lon`, `tz`, and where the list has them `ishaDeg`,
 `clock`, `prayerPoints`, `dipDeg`, `dipMaghribDeg`, `fajrMinutes`, `highland`,
-`twilightDip`, `afternoon`, `temkin`.
+`twilightDip`, `afternoon`, `temkin`, `dipDegEarlier`, `dipDegUntil`.
 """
 import datetime
 import json
@@ -17,7 +17,7 @@ from . import methods
 
 PRAYERS = ('fajr', 'sunrise', 'dhuhr', 'asr', 'maghrib', 'isha')
 #: The method revisions this port reproduces. A correction list belongs to one revision.
-REVISIONS = {'sweden': 1, 'diyanet': 2, 'morocco': 3, 'algeria': 1, 'indonesia': 2, 'turkiyetakvimi': 1, 'kazakhstan': 1, 'egypt': 1, 'brunei': 1, 'qatar': 1, 'kuwait': 1, 'jordan': 1, 'tatarstan': 1, 'cdum': 1, 'albania': 1, 'bulgaria': 1, 'banuri': 1, 'uae': 1, 'tehran': 1, 'wifaq': 2, 'tunisia': 1}
+REVISIONS = {'sweden': 1, 'diyanet': 2, 'morocco': 3, 'algeria': 1, 'indonesia': 2, 'turkiyetakvimi': 1, 'kazakhstan': 1, 'egypt': 1, 'brunei': 1, 'qatar': 1, 'kuwait': 1, 'jordan': 1, 'tatarstan': 1, 'cdum': 1, 'albania': 1, 'bulgaria': 1, 'banuri': 1, 'uae': 1, 'tehran': 1, 'wifaq': 2, 'tunisia': 2}
 
 _UTC = datetime.timezone.utc
 
@@ -26,6 +26,13 @@ def _to_fixed(x):
     """A coordinate to three decimals, as JavaScript's toFixed(3) writes it:
     the binary value's exact decimal expansion, ties away from zero."""
     return str(Decimal(float(x) + 0.0).quantize(Decimal('0.001'), rounding=ROUND_HALF_UP))  # + 0.0: -0 is written 0.000
+
+
+def _tunisia_twilight_dip(place, year):
+    """Tunisia's allowance at Fajr and Isha in a year: the earlier one up to its last year."""
+    if place.get('dipDegEarlier') is not None and place.get('dipDegUntil') is not None and year <= place['dipDegUntil']:
+        return place['dipDegEarlier']
+    return place.get('dipDeg') or 0
 
 
 def point_key(lat, lon):
@@ -130,7 +137,7 @@ def minutes_for(place, date, corrections=None, asr_shadow=1):
     elif a == 'banuri':
         t = methods.banuri_minutes(place['lat'], place['lon'], year, month0, day)
     elif a == 'tunisia':
-        t = methods.tunisia_minutes(place['lat'], place['lon'], year, month0, day, asr_shadow, place.get('dipDeg') or 0, place.get('dipMaghribDeg'))
+        t = methods.tunisia_minutes(place['lat'], place['lon'], year, month0, day, asr_shadow, _tunisia_twilight_dip(place, year), place.get('dipMaghribDeg'))
     elif a == 'wifaq':
         t = methods.wifaq_minutes(place['lat'], place['lon'], year, month0, day)
     elif a == 'tehran':

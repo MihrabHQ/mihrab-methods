@@ -621,7 +621,11 @@ twenty-six places.
 
 Each place is computed at its own point with its own allowance
 (`data/places/tunisiaPlaces.json`). Two places, Kairouan and Sidi Bouzid,
-take theirs at sunset only: their Fajr and Isha are at a plain 18°.
+take theirs at sunset only from 2026: their Fajr and Isha are at a plain
+18°. Through 2025 the Institute lowered their Fajr and Isha by the same
+allowance as their sunset, like every other place's; the place carries
+that earlier allowance and the last year it applies to
+(`Place.dipDegEarlier`, `Place.dipDegUntil`; revision 2).
 
 ## Checking a port
 

@@ -11,7 +11,7 @@ public enum Prayer: String, CaseIterable {
 }
 
 /// The method revisions this port reproduces. A correction list belongs to one revision.
-public let REVISIONS: [String: Int] = ["sweden": 1, "diyanet": 2, "morocco": 3, "algeria": 1, "indonesia": 2, "turkiyetakvimi": 1, "kazakhstan": 1, "egypt": 1, "brunei": 1, "qatar": 1, "kuwait": 1, "jordan": 1, "tatarstan": 1, "cdum": 1, "albania": 1, "bulgaria": 1, "banuri": 1, "uae": 1, "tehran": 1, "wifaq": 2, "tunisia": 1]
+public let REVISIONS: [String: Int] = ["sweden": 1, "diyanet": 2, "morocco": 3, "algeria": 1, "indonesia": 2, "turkiyetakvimi": 1, "kazakhstan": 1, "egypt": 1, "brunei": 1, "qatar": 1, "kuwait": 1, "jordan": 1, "tatarstan": 1, "cdum": 1, "albania": 1, "bulgaria": 1, "banuri": 1, "uae": 1, "tehran": 1, "wifaq": 2, "tunisia": 2]
 
 /// A place as the library's lists have it (data/places). Use the coordinates
 /// exactly as the list gives them: the correction lists are looked up by them.
@@ -38,6 +38,9 @@ public struct Place {
     public var afternoon: (Double, Double)?
     /// Türkiye Takvimi: the city's temkin, minutes.
     public var temkin: Double?
+    /// Tunisia: the allowance at Fajr and Isha up to and including the year `dipDegUntil`.
+    public var dipDegEarlier: Double?
+    public var dipDegUntil: Int?
 
     public init(authority: Authority, lat: Double, lon: Double, tz: String) {
         self.authority = authority
@@ -201,7 +204,13 @@ public func timesFor(_ place: Place, _ date: String, corrections: CorrectionList
     case .banuri:
         t = banuriMinutes(place.lat, place.lon, year, month0, day)
     case .tunisia:
-        t = tunisiaMinutes(place.lat, place.lon, year, month0, day, asrShadow: asrShadow, dipDeg: place.dipDeg ?? 0, dipSunsetDeg: place.dipMaghribDeg)
+        let twilight: Double
+        if let earlier = place.dipDegEarlier, let until = place.dipDegUntil, year <= until {
+            twilight = earlier
+        } else {
+            twilight = place.dipDeg ?? 0
+        }
+        t = tunisiaMinutes(place.lat, place.lon, year, month0, day, asrShadow: asrShadow, dipDeg: twilight, dipSunsetDeg: place.dipMaghribDeg)
     case .wifaq:
         t = wifaqMinutes(place.lat, place.lon, year, month0, day)
     case .tehran:

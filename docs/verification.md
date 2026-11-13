@@ -10,7 +10,7 @@ Every method in Mihrab Methods is compared, time by time, with the
 timetable its authority publishes. This page says precisely what that
 means, so you can decide how far to rely on it.
 
-**In one line:** <!--fig:total.times-->77,611,133<!--/fig--> printed times compared
+**In one line:** <!--fig:total.times-->77,658,583<!--/fig--> printed times compared
 across <!--fig:total.methods-->21<!--/fig--> methods;
 <!--fig:total.off-->0<!--/fig--> differ. Last checked
 <!--fig:total.checkedAtLong-->12 November 2026<!--/fig-->.
@@ -58,9 +58,9 @@ off is **zero**; a method at 99.9 % is not shipped.
 | **United Arab Emirates** | the Authority’s times | 41 | 179,580 | **0** | 98.221 % | 3,036 | 1 Jan 2026 → 31 Dec 2027 |
 | **Iran (Tehran Institute of Geophysics)** | the Institute of Geophysics’ sheets | 31 | 90,520 | **0** | 99.002 % | 903 | 21 Mar 2025 → 20 Mar 2027 |
 | **United Kingdom (Wifaqul Ulama)** | Wifaqul Ulama’s timetables | 81 | 350,400 | **0** | 98.625 % | 4,641 | 1 Jan 2026 → 31 Dec 2027 |
-| **Tunisia** | the Institute’s times | 26 | 47,405 | **0** | 97.782 % | 1,051 | 1 Jan 2026 → 31 Dec 2026 |
+| **Tunisia** | the Institute’s times | 26 | 94,855 | **0** | 97.727 % | 2,156 | 1 Jan 2025 → 31 Dec 2026 |
 
-21 of 21 methods certified; 0 of 77,611,133 times off the printed minute. Last checked 12 November 2026. Generated from [`certification.json`](https://github.com/MihrabHQ/mihrab-methods/blob/main/certification.json) by `scripts/readme.mjs`.
+21 of 21 methods certified; 0 of 77,658,583 times off the printed minute. Last checked 12 November 2026. Generated from [`certification.json`](https://github.com/MihrabHQ/mihrab-methods/blob/main/certification.json) by `scripts/readme.mjs`.
 
 <!-- certification-table:end -->
 

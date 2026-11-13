@@ -26,6 +26,9 @@ function buildPlaces(): Place[] {
       tz: TZ,
       dipDeg: p.dip,
       dipMaghribDeg: p.dipSunset,
+      ...(p.dipEarlier !== undefined && p.dipEarlierUntil !== undefined
+        ? { dipDegEarlier: p.dipEarlier, dipDegUntil: p.dipEarlierUntil }
+        : {}),
     };
   });
 }

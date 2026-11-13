@@ -30,7 +30,7 @@ print(day['instants'])    # the same six times as timezone-aware datetimes
 A place is a dict shaped like the library's `Place`: `authority`, `lat`,
 `lon`, `tz`, and the fields a list gives some of its places (`ishaDeg`,
 `clock`, `prayerPoints`, `dipDeg`, `dipMaghribDeg`, `highland`,
-`twilightDip`, `afternoon`, `temkin`). The places themselves are in `data/places/`;
+`twilightDip`, `afternoon`, `temkin`, `dipDegEarlier`, `dipDegUntil`). The places themselves are in `data/places/`;
 use the coordinates exactly as the list has them, since the correction
 lists are looked up by them.
 

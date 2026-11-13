@@ -27,7 +27,7 @@ if let day = timesFor(stockholm, "2026-11-12", corrections: list) {
 
 `Place` has the fields a list gives some of its places as optional
 properties (`ishaDeg`, `clock`, `prayerPoints`, `dipDeg`, `dipMaghribDeg`,
-`highland`, `twilightDip`, `afternoon`, `temkin`). The Congress method keeps a small
+`highland`, `twilightDip`, `afternoon`, `temkin`, `dipDegEarlier`, `dipDegUntil`). The Congress method keeps a small
 cache of years; call it from one thread at a time.
 
 ## Check

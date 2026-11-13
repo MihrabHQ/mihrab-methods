@@ -143,6 +143,8 @@ fun main(args: Array<String>) {
             twilightDip = p["twilightDip"] == true,
             afternoon = p["afternoon"]?.let(::pair),
             temkin = p["temkin"] as Double?,
+            dipDegEarlier = p["dipDegEarlier"] as Double?,
+            dipDegUntil = (p["dipDegUntil"] as Double?)?.toInt(),
         )
         val date = c["date"] as String
         val want = c["printed"]?.let(::obj)

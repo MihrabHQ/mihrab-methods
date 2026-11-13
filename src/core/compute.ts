@@ -23,7 +23,7 @@ import { banuriTimes } from '../methods/banuri.js';
 import { uaeTimes } from '../methods/uae.js';
 import { tehranTimes } from '../methods/tehran.js';
 import { wifaqTimes } from '../methods/wifaq.js';
-import { tunisiaTimes } from '../methods/tunisia.js';
+import { tunisiaTimes, tunisiaTwilightDip } from '../methods/tunisia.js';
 import { authorityData } from './registry.js';
 import { placeClockAt } from './clock.js';
 import type { AsrChoice, Authority, Instants, Place, PrayerKey } from './types.js';
@@ -109,7 +109,7 @@ export function candidateInstants(place: Place, year: number, month: number, day
     case 'tunisia': {
       const t =
         place.authority === 'tunisia'
-          ? tunisiaTimes(place.lat, place.lon, year, month, day, shadow, place.dipDeg, place.dipMaghribDeg)
+          ? tunisiaTimes(place.lat, place.lon, year, month, day, shadow, tunisiaTwilightDip(place, year), place.dipMaghribDeg)
           : place.authority === 'morocco'
           ? moroccoTimes(place.lat, place.lon, year, month, day, place.dipDeg, shadow, place.dipMaghribDeg)
           : place.authority === 'algeria'

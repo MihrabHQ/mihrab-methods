@@ -14,7 +14,7 @@ enum class Authority { sweden, diyanet, morocco, algeria, indonesia, turkiyetakv
 enum class Prayer { fajr, sunrise, dhuhr, asr, maghrib, isha }
 
 /** The method revisions this port reproduces. A correction list belongs to one revision. */
-val REVISIONS: Map<String, Int> = mapOf("sweden" to 1, "diyanet" to 2, "morocco" to 3, "algeria" to 1, "indonesia" to 2, "turkiyetakvimi" to 1, "kazakhstan" to 1, "egypt" to 1, "brunei" to 1, "qatar" to 1, "kuwait" to 1, "jordan" to 1, "tatarstan" to 1, "cdum" to 1, "albania" to 1, "bulgaria" to 1, "banuri" to 1, "uae" to 1, "tehran" to 1, "wifaq" to 2, "tunisia" to 1)
+val REVISIONS: Map<String, Int> = mapOf("sweden" to 1, "diyanet" to 2, "morocco" to 3, "algeria" to 1, "indonesia" to 2, "turkiyetakvimi" to 1, "kazakhstan" to 1, "egypt" to 1, "brunei" to 1, "qatar" to 1, "kuwait" to 1, "jordan" to 1, "tatarstan" to 1, "cdum" to 1, "albania" to 1, "bulgaria" to 1, "banuri" to 1, "uae" to 1, "tehran" to 1, "wifaq" to 2, "tunisia" to 2)
 
 /**
  * A place as the library's lists have it (data/places). Use the coordinates
@@ -41,6 +41,9 @@ class Place(
     val afternoon: Pair<Double, Double>? = null,
     /** Türkiye Takvimi: the city's temkin, minutes. */
     val temkin: Double? = null,
+    /** Tunisia: the allowance at Fajr and Isha up to and including the year `dipDegUntil`. */
+    val dipDegEarlier: Double? = null,
+    val dipDegUntil: Int? = null,
 )
 
 /**
@@ -150,7 +153,9 @@ fun timesFor(place: Place, date: String, corrections: CorrectionList? = null, as
         Authority.albania -> albaniaMinutes(place.lon, year, month0, day, asrShadow)
         Authority.bulgaria -> bulgariaMinutes(place.lon, year, month0, day, asrShadow)
         Authority.banuri -> banuriMinutes(place.lat, place.lon, year, month0, day)
-        Authority.tunisia -> tunisiaMinutes(place.lat, place.lon, year, month0, day, asrShadow, place.dipDeg ?: 0.0, place.dipMaghribDeg)
+        Authority.tunisia -> tunisiaMinutes(place.lat, place.lon, year, month0, day, asrShadow,
+            if (place.dipDegEarlier != null && place.dipDegUntil != null && year <= place.dipDegUntil) place.dipDegEarlier else place.dipDeg ?: 0.0,
+            place.dipMaghribDeg)
         Authority.wifaq -> wifaqMinutes(place.lat, place.lon, year, month0, day)
         Authority.tehran -> tehranMinutes(place.lat, place.lon, year, month0, day, asrShadow)
         Authority.uae -> uaeMinutes(place.lat, place.lon, year, month0, day, place.dipDeg ?: 0.0, asrShadow, place.dipMaghribDeg, place.fajrMinutes ?: 0.0)

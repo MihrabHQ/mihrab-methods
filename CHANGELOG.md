@@ -9,7 +9,19 @@ revision bump is at least a minor version.
 
 ## Unreleased
 
-No method changed; no revision raised.
+- **Tunisia, revision 2: checked over two years.** The Institute's 2025
+  times are now compared as well as its 2026 ones, and the method is
+  certified over both (`docs/status.md`). They showed one change in the
+  Institute's practice: through 2025 it lowered Fajr and Isha at Kairouan
+  and Sidi Bouzid by the same horizon allowance as their sunset, as it does
+  everywhere else; from 2026 those two places have Fajr and Isha at a
+  plain 18°. A place now carries its earlier allowance and the last year it
+  applies to (`Place.dipDegEarlier`, `Place.dipDegUntil`, in every port).
+  What the method prints changes only for those two places, and only for
+  dates up to the end of 2025; `REVISIONS` has `tunisia: 2` in every port,
+  and `data/corrections/tunisia.json` is the list for revision 2.
+
+No other method's output changes.
 
 ## 1.23.1 — 2026-11-12
 
