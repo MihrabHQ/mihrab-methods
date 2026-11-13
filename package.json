@@ -1,6 +1,6 @@
 {
   "name": "mihrab-methods",
-  "version": "1.23.1",
+  "version": "1.24.0",
   "description": "Accurate, offline-first Islamic prayer times library: the calculation methods of national Islamic authorities (Diyanet, Islamiska Förbundet in Sweden, Morocco’s Habous, Indonesia’s Kemenag, Egypt, the UAE, Qatar, Kuwait and more), each reproducing its published timetable to the minute. Fajr, Dhuhr, Asr, Maghrib, Isha. TypeScript, no dependencies; free HTTP API.",
   "license": "MPL-2.0",
   "author": "Hassan El Ghamri",

@@ -9,6 +9,10 @@ revision bump is at least a minor version.
 
 ## Unreleased
 
+No method changed; no revision raised.
+
+## 1.24.0 — 2026-11-13
+
 - **Tunisia, revision 2: checked over two years.** The Institute's 2025
   times are now compared as well as its 2026 ones, and the method is
   certified over both (`docs/status.md`). They showed one change in the
