@@ -91,8 +91,18 @@ img { max-width: 100%; }
 .menu summary::-webkit-details-marker { display: none; }
 .menu summary span { display: block; width: 18px; height: 2px; background: var(--ink); border-radius: 2px; }
 .menu[open] summary { background: var(--accent-wash); }
+.menu summary span { transition: transform .2s, opacity .2s; }
+/* Open, the three bars are a cross: the same button closes it. */
+.menu[open] summary span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
+.menu[open] summary span:nth-child(2) { opacity: 0; }
+.menu[open] summary span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
+/* Absolute under the bar, not fixed: the bar's backdrop-filter makes it the
+   containing block of anything fixed inside it, so a fixed panel was sized
+   to the bar's 60 px and the page showed through (Safari, Chrome, phones). */
 .menu-panel {
-  position: fixed; top: var(--top); left: 0; right: 0; bottom: 0; overflow-y: auto;
+  position: absolute; top: 100%; left: 0; right: 0;
+  height: calc(100vh - var(--top)); height: calc(100dvh - var(--top));
+  overflow-y: auto; overscroll-behavior: contain;
   background: var(--paper); padding: 12px 20px 40px; border-top: 1px solid var(--line);
 }
 
