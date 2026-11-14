@@ -12,7 +12,7 @@ websites.** Unlike generic prayer-time calculators, Mihrab Methods
 reproduces the calculation methods of recognised Islamic authorities — a
 ministry's, a muftiate's, a council of scholars' — and checks every result
 against the timetables they publish: <!--fig:total.off-->0<!--/fig--> of
-<!--fig:total.times-->77,658,583<!--/fig--> times off the printed minute, across
+<!--fig:total.times-->77,658,595<!--/fig--> times off the printed minute, across
 <!--fig:total.methods-->21<!--/fig--> methods. Free for any app, site or
 mosque to use.
 
@@ -116,7 +116,7 @@ Coming from Adhan JS or AlAdhan?
 | **Kazakhstan** | the Spiritual Administration’s times | 84 | 551,880 | **0** | 100.000 % | 0 | 1 Jan 2025 → 31 Dec 2027 |
 | **Egypt** | the Survey Authority’s times | 77 | 168,630 | **0** | 99.373 % | 1,056 | 1 Jan 2026 → 31 Dec 2026 |
 | **Brunei** | the Ministry’s times | 4 | 17,064 | **0** | 99.671 % | 56 | 9 Jan 2025 → 31 Dec 2026 |
-| **Qatar** | the Calendar House’s times | 1 | 720 | **0** | 96.250 % | 27 | 16 Jun 2026 → 12 Nov 2026 |
+| **Qatar** | the Calendar House’s times | 1 | 732 | **0** | 96.174 % | 28 | 16 Jun 2026 → 14 Nov 2026 |
 | **Kuwait** | the Ministry’s table | 46 | 201,480 | **0** | 95.205 % | 9,660 | 1 Jan 2026 → 31 Dec 2027 |
 | **Jordan** | the Ministry’s times | 17 | 37,230 | **0** | 98.380 % | 603 | 1 Jan 2026 → 31 Dec 2026 |
 | **Tatarstan** | the Administration’s timetable | 44 | 96,360 | **0** | 98.071 % | 1,858 | 1 Jan 2026 → 31 Dec 2026 |
@@ -129,7 +129,7 @@ Coming from Adhan JS or AlAdhan?
 | **United Kingdom (Wifaqul Ulama)** | Wifaqul Ulama’s timetables | 81 | 350,400 | **0** | 98.625 % | 4,641 | 1 Jan 2026 → 31 Dec 2027 |
 | **Tunisia** | the Institute’s times | 26 | 94,855 | **0** | 97.727 % | 2,156 | 1 Jan 2025 → 31 Dec 2026 |
 
-21 of 21 methods certified; 0 of 77,658,583 times off the printed minute. Last checked 13 November 2026. Generated from [`certification.json`](certification.json) by `scripts/readme.mjs`.
+21 of 21 methods certified; 0 of 77,658,595 times off the printed minute. Last checked 14 November 2026. Generated from [`certification.json`](certification.json) by `scripts/readme.mjs`.
 <!-- certification-table:end -->
 
 "By the method alone" is the formula without its correction list. The list
