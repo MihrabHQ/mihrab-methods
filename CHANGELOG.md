@@ -11,6 +11,10 @@ revision bump is at least a minor version.
 
 No method changed; no revision raised.
 
+## 1.24.3 — 2026-11-16
+
+No method changed; no revision raised. The correction lists and the certification record as of 2026-11-16 (qatar: npm's certified span ends 2026-11-15 (past); main's reaches 2026-11-16).
+
 ## 1.24.2 — 2026-11-16
 
 No method changed; no revision raised. The correction lists and the certification record as of 2026-11-16 (qatar: npm's certified span ends 2026-11-14 (past); main's reaches 2026-11-15).
