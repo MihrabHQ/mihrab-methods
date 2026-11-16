@@ -39,7 +39,7 @@ each method.
 | **Kazakhstan** | the Spiritual Administration’s times | 84 | 551,880 | **0** | 100.000 % | 0 | 1 Jan 2025 → 31 Dec 2027 |
 | **Egypt** | the Survey Authority’s times | 77 | 168,630 | **0** | 99.373 % | 1,056 | 1 Jan 2026 → 31 Dec 2026 |
 | **Brunei** | the Ministry’s times | 4 | 17,064 | **0** | 99.671 % | 56 | 9 Jan 2025 → 31 Dec 2026 |
-| **Qatar** | the Calendar House’s times | 1 | 732 | **0** | 96.174 % | 28 | 16 Jun 2026 → 14 Nov 2026 |
+| **Qatar** | the Calendar House’s times | 1 | 738 | **0** | 96.205 % | 28 | 16 Jun 2026 → 15 Nov 2026 |
 | **Kuwait** | the Ministry’s table | 46 | 201,480 | **0** | 95.205 % | 9,660 | 1 Jan 2026 → 31 Dec 2027 |
 | **Jordan** | the Ministry’s times | 17 | 37,230 | **0** | 98.380 % | 603 | 1 Jan 2026 → 31 Dec 2026 |
 | **Tatarstan** | the Administration’s timetable | 44 | 96,360 | **0** | 98.071 % | 1,858 | 1 Jan 2026 → 31 Dec 2026 |
@@ -52,7 +52,7 @@ each method.
 | **United Kingdom (Wifaqul Ulama)** | Wifaqul Ulama’s timetables | 81 | 350,400 | **0** | 98.625 % | 4,641 | 1 Jan 2026 → 31 Dec 2027 |
 | **Tunisia** | the Institute’s times | 26 | 94,855 | **0** | 97.727 % | 2,156 | 1 Jan 2025 → 31 Dec 2026 |
 
-21 of 21 methods certified; 0 of 77,660,923 times off the printed minute. Last checked 14 November 2026. Generated from [`certification.json`](https://github.com/MihrabHQ/mihrab-methods/blob/main/certification.json) by `scripts/readme.mjs`.
+21 of 21 methods certified; 0 of 77,660,929 times off the printed minute. Last checked 14 November 2026. Generated from [`certification.json`](https://github.com/MihrabHQ/mihrab-methods/blob/main/certification.json) by `scripts/readme.mjs`.
 
 <!-- certification-table:end -->
 
@@ -291,8 +291,8 @@ are one check counted four times.
 
 ## Qatar
 
-Certified over <!--fig:qatar.span-->16 Jun 2026 → 14 Nov 2026<!--/fig--> (<!--fig:qatar.check0.places-->1<!--/fig-->
-place, Doha): the method gives <!--fig:qatar.alonePct-->96.174<!--/fig--> % alone, and a list of
+Certified over <!--fig:qatar.span-->16 Jun 2026 → 15 Nov 2026<!--/fig--> (<!--fig:qatar.check0.places-->1<!--/fig-->
+place, Doha): the method gives <!--fig:qatar.alonePct-->96.205<!--/fig--> % alone, and a list of
 <!--fig:qatar.corrections-->28<!--/fig--> corrections the rest.
 
 > **Research note, 2026-11-12** (not generated). The span is short, and
