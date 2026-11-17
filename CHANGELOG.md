@@ -11,6 +11,10 @@ revision bump is at least a minor version.
 
 No method changed; no revision raised.
 
+## 1.24.4 — 2026-11-17
+
+No method changed; no revision raised. The correction lists and the certification record as of 2026-11-17 (correction lists changed (1 file: data/corrections/qatar.json); the library changed (2 files: dist/cjs/data/generated/qatarCorrections.js, dist/esm/data/generated/qatarCorrections.js); qatar: npm's certified span ends 2026-11-16 (past); main's reaches 2026-11-17).
+
 ## 1.24.3 — 2026-11-16
 
 No method changed; no revision raised. The correction lists and the certification record as of 2026-11-16 (qatar: npm's certified span ends 2026-11-15 (past); main's reaches 2026-11-16).
