@@ -328,6 +328,13 @@ as the reference for the east coast, from Al Khor to Al Wakra.
 The margins are the calendar's own, to the hundredth of a minute they can
 be read to; computed at 25.29° N, 51.53° E.
 
+The tables it is certified on are the House's own, from three of its
+sources that agree to the minute: its app's timetable (Doha's whole year,
+read ahead), its monthly wall calendars, and its home page (today, for six
+places). On the days the margins were not read from, the method alone is a
+minute off about one time in sixteen and never more; the correction list
+puts those on the printed minute.
+
 ## Kuwait
 
 `src/methods/kuwait.ts`. The Ministry of Awqaf and Islamic Affairs' table,

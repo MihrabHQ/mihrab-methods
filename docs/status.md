@@ -309,6 +309,23 @@ place, Doha): the method gives <!--fig:qatar.alonePct-->95.393<!--/fig--> % alon
 > the calendar prints Doha in full and, for Al-Shamal, Dukhan and Abu
 > Samra, minutes to add at Fajr and Maghrib only.
 
+> **Research note, 2026-11-17** (not generated). The year is now known
+> ahead: the House's own app reads Doha's whole Gregorian year from its
+> server, and every one of the 125 days held from the calendars and the
+> home page agreed with it to the minute. That gave the first days the
+> margins were not read from — 74, the unread 12 October – 10 November and
+> the rest of 2026 — and on them the method alone is exact on 417 of 444
+> times, never more than a minute off. Winter has now been seen, and it
+> does not call for a new revision: fitting Doha's point, the horizon and
+> the margins on June–September and scoring on October–December, the best
+> rule cut the misses there from 22 to 18 and was worse at Fajr — no rule
+> was exact. The two runs of five September days whose Maghrib is printed a
+> minute later than its neighbours' (12–16 and 23–27) fit no geometry; they
+> are the calendar's own, and the correction list carries them. The other
+> five places the House gives (on its home page, daily) move a minute
+> either way from Doha's day to day — computed at their own points, not
+> Doha plus a fixed offset — and are not certified: a week of them is held.
+
 ## Kuwait
 
 Certified over <!--fig:kuwait.span-->1 Jan 2026 → 31 Dec 2027<!--/fig--> (<!--fig:kuwait.check0.places-->46<!--/fig-->

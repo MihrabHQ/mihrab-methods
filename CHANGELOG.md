@@ -11,6 +11,19 @@ revision bump is at least a minor version.
 
 No method changed; no revision raised.
 
+- **Qatar: the whole year, from the Calendar House's own app.** The House's
+  app reads Doha's times for the whole Gregorian year from the House's
+  server, and mihrab-methods-data now takes them from there, daily, with the
+  wall calendars and the home page checked against them: all 125 days held
+  from those agreed to the minute. Doha's table runs 16 June – 31 December
+  2026 without a gap, so the days 12 October – 10 November, until now inside
+  the certified span unchecked, are checked. On the 74 days added, none of
+  which the margins were read from, the method alone is exact on 417 of 444
+  times (93.9 %) and never more than a minute off; the correction list puts
+  them on the printed minute. A search for a rule the margins miss (Doha's
+  point, the horizon, the rounding) found none exact on days it was not
+  fitted on, so the method stays at revision 1.
+
 ## 1.24.4 — 2026-11-17
 
 No method changed; no revision raised. The correction lists and the certification record as of 2026-11-17 (correction lists changed (1 file: data/corrections/qatar.json); the library changed (2 files: dist/cjs/data/generated/qatarCorrections.js, dist/esm/data/generated/qatarCorrections.js); qatar: npm's certified span ends 2026-11-16 (past); main's reaches 2026-11-17).
