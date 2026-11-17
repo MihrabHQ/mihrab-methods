@@ -11,6 +11,10 @@ revision bump is at least a minor version.
 
 No method changed; no revision raised.
 
+## 1.24.6 — 2026-11-17
+
+No method changed; no revision raised.
+
 - **Qatar: the whole year, from the Calendar House's own app.** The House's
   app reads Doha's times for the whole Gregorian year from the House's
   server, and mihrab-methods-data now takes them from there, daily, with the
