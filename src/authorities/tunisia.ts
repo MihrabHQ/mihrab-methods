@@ -41,7 +41,7 @@ export const tunisia = registerAuthority({
   certification,
   description: {
     "name": "Tunisia — Institut National de la Météorologie",
-    "method": "Meeus’s apparent sun. Dhuhr seven minutes after the transit and Asr (one shadow length, plain geometry) on the sun of 0 h UT; Fajr and Isha at 18° and sunset at 0.8333°, the sun at each time’s own moment, the horizon lowered by the place’s allowance; Maghrib two minutes after sunset; the nearest minute. No sunrise is given: the one here mirrors the sunset and is not checked.",
+    "method": "Meeus’s apparent sun with the Institute’s equation of time (up to three seconds from Meeus’s, a curve of the sun’s mean longitude). Dhuhr seven minutes after the transit and Asr (one shadow length, plain geometry) on the sun of 0 h UT; Fajr and Isha at 18° and sunset at 0.8333°, the sun at each time’s own moment on the place’s mean-time clock, the horizon lowered by the place’s allowance — at Fajr and Isha through 2026 only, a plain 18° from 2027; Maghrib two minutes after sunset; the nearest minute. No sunrise is given: the one here mirrors the sunset and is not checked.",
     "countries": [
       "TN"
     ],

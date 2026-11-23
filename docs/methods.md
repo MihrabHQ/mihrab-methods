@@ -610,29 +610,41 @@ read off its timetable; the timetables print none.
 Météorologie gives for a place and a day, read off a year of its answers at
 twenty-six places.
 
-- **Meeus's apparent sun.**
+- **Meeus's apparent sun, with the Institute's equation of time.** Its
+  sun's transit stands up to three seconds from Meeus's, the same way
+  every year: a curve of the sun's mean longitude L, a constant and six
+  harmonics (`EOT_SERIES_SECONDS`, seconds: the constant, then cos kL and
+  sin kL for k = 1…6), added to Meeus's equation of time.
 - **Dhuhr** and **Asr** on *the sun of the day*: its declination and
   equation of time at 0 h UT, held for both. Dhuhr is seven minutes after
   that sun's transit; Asr is where its shadow is one length beyond the noon
   shadow, in plain geometry (no refraction).
 - **Fajr** and **Isha** at 18°, the sun taken at each time's own moment
-  (iterated), **the horizon lowered by the place's allowance**: the dip of
-  its height, 0.06° on the coast, 0.5° at Béja and Tataouine, 0.88° at Le
-  Kef.
+  (iterated) — **the moment on the place's mean-time clock, read as UT**:
+  the sun of `t + 4 × longitude` minutes, 36 minutes on at Tunis — and,
+  through 2026, **the horizon lowered by the place's allowance**: the dip
+  of its height, 0.06° on the coast, 0.5° at Béja and Tataouine, 0.88° at
+  Le Kef. **From 2027 Fajr and Isha are at a plain 18° everywhere.**
 - **Maghrib** two minutes after sunset; sunset with the sun's centre
-  0.8333° below the horizon, lowered by the same allowance.
+  0.8333° below the horizon, lowered by the place's allowance at sunset
+  (every year), the sun at its own moment as above.
 - **Every time rounded to the nearest minute.**
 - **No sunrise is given.** The one the method returns is the mirror of its
   sunset — the same horizon and allowance, no margin — and is not checked
   against anything.
 
 Each place is computed at its own point with its own allowance
-(`data/places/tunisiaPlaces.json`). Two places, Kairouan and Sidi Bouzid,
-take theirs at sunset only from 2026: their Fajr and Isha are at a plain
-18°. Through 2025 the Institute lowered their Fajr and Isha by the same
-allowance as their sunset, like every other place's; the place carries
-that earlier allowance and the last year it applies to
-(`Place.dipDegEarlier`, `Place.dipDegUntil`; revision 2).
+(`data/places/tunisiaPlaces.json`). The allowance at Fajr and Isha has an
+end: Kairouan and Sidi Bouzid lost theirs in 2026, and every other place
+in 2027 — the first days the Institute gave for 2027 are a plain 18°
+everywhere, up to five minutes from what the allowance gives at the high
+places. So each place carries the earlier allowance and the last year it
+applies to (`Place.dipDegEarlier`, `Place.dipDegUntil`: 2025 for those
+two, 2026 for the rest), its present one being none (`dipDeg` 0), and the
+allowance at sunset apart (`dipMaghribDeg`), which did not change
+(revision 3). The method alone is on the Institute's minute for 98.97 % of
+its times and never more than a minute from it; the correction list has
+the rest.
 
 ## Checking a port
 

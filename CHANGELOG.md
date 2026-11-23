@@ -9,7 +9,35 @@ revision bump is at least a minor version.
 
 ## Unreleased
 
-No method changed; no revision raised.
+- **Tunisia, revision 3: 2027 at a plain 18°, and the Institute's own sun.**
+  The first days the Institute gave for 2027 (1–7 January, seen 23
+  November 2026) drop the height allowance at Fajr and Isha at every place,
+  as Kairouan and Sidi Bouzid lost theirs in 2026: Fajr up to five minutes
+  later and Isha as much earlier at the high places (Le Kef, Kasserine, Aïn
+  Draham), sunset unchanged. Revision 2 kept the allowance and was off on
+  263 of those 364 times. Every place now carries its allowance as the
+  earlier one, with 2026 as its last year (`dipDegEarlier`, `dipDegUntil`;
+  `dipDeg` is 0), so **a date from 2027 on prints Fajr later and Isha
+  earlier than revision 2 did, by up to five minutes**. And the calculation
+  itself is closer in every year: the Institute's equation of time stands
+  up to three seconds from Meeus's, the same way each year (a constant and
+  six harmonics of the sun's mean longitude, `EOT_SERIES_SECONDS`), and it
+  takes the sun of a time's own moment on the place's mean-time clock (four
+  minutes later per degree east); seven places' allowances moved by 0.01°.
+  **What changes in the output:** inside the certified dates nothing but
+  the sunrise the Institute does not give (a minute, now and then) — both
+  revisions print its minute there; beyond them, besides Fajr and Isha, a
+  time in forty or so by one minute. The method alone was on the
+  Institute's minute for 97.7 % of its times and is now on it for 98.97 %
+  of 95,765, never more than a minute off, and the correction list fell
+  from 2,156 entries to 986. Certified at 0 off, 1 January 2025 – 7 January
+  2027, twenty-six places.
+  Not explained yet: those first days of 2027 run about two seconds later
+  than the two years before; the correction list carries the minutes that
+  moves, and it is to be looked at again with more of 2027. In every port
+  (`tunisia_eot_ripple` / `tunisiaEotRipple`), with the places' new fields
+  as `placesOf('tunisia')` gives them. `data/corrections/tunisia.json` is
+  the list for revision 3.
 
 ## 1.24.7 — 2026-11-17
 

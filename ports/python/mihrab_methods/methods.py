@@ -878,19 +878,35 @@ def tehran_minutes(lat, lon, year, month0, day, asr_shadow=1):
 # ---------------------------------------------------------------- Tunisia: the Institut National de la Météorologie
 
 
+TUNISIA_EOT_SERIES_SECONDS = (0.134, -0.095, -0.059, 0.082, 0.532, 0.661, -0.437, -0.13, 0.468, 0.7, 0.272, -0.01, -0.409)
+
+
+def tunisia_eot_ripple(d):
+    """Minutes the Institute's equation of time stands from Meeus's at `d` days from J2000.0: harmonics of the sun's mean longitude, the constant then (cos kL, sin kL) for k = 1…6."""
+    L = (280.46646 + (d / 36525) * 36000.76983) * RAD
+    s = TUNISIA_EOT_SERIES_SECONDS[0]
+    for k in range(1, 7):
+        s += TUNISIA_EOT_SERIES_SECONDS[2 * k - 1] * math.cos(k * L) + TUNISIA_EOT_SERIES_SECONDS[2 * k] * math.sin(k * L)
+    return s / 60
+
+
 def tunisia_raw_minutes(lat, lon, year, month0, day, asr_shadow=1, dip_deg=0, dip_sunset_deg=None):
-    """Before rounding: the Institut National de la Météorologie's program — Meeus's apparent sun; Dhuhr seven minutes after the transit and Asr (plain geometry) on the sun of 0 h UT; Fajr and Isha at 18° and sunset at 0.8333° with the sun iterated and the horizon lowered by the place's allowance; Maghrib two minutes after sunset. The sunrise mirrors the sunset and is not checked: the Institute gives none."""
+    """Before rounding. The Institut National de la Météorologie's program — Meeus's apparent sun with the Institute's equation of time (a ripple of the sun's mean longitude, up to three seconds); Dhuhr seven minutes after the transit and Asr (plain geometry) on the sun of 0 h UT; Fajr and Isha at 18° and sunset at 0.8333° with the sun iterated at each time's own moment on the place's mean-time clock read as UT (four minutes later per degree east), the horizon lowered by the place's allowance; Maghrib two minutes after sunset. The sunrise mirrors the sunset and is not checked: the Institute gives none."""
     if dip_sunset_deg is None:
         dip_sunset_deg = dip_deg
     d0 = _d0(year, month0, day)
     sp, cp = math.sin(lat * RAD), math.cos(lat * RAD)
     dec0, eot0 = meeus_apparent_sun(d0)
+    eot0 += tunisia_eot_ripple(d0)
     noon0 = 720 - 4 * lon - eot0
+    ahead = 4 * lon
 
     def event(alt, sign, start):
         t = start
         for _ in range(3):
-            dec, eot = meeus_apparent_sun(d0 + t / 1440)
+            dm = d0 + (t + ahead) / 1440
+            dec, eot = meeus_apparent_sun(dm)
+            eot += tunisia_eot_ripple(dm)
             c = (math.sin(alt * RAD) - sp * math.sin(dec)) / (cp * math.cos(dec))
             if not abs(c) <= 1:
                 return NAN

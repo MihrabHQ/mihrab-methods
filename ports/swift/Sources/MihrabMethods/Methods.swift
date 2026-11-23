@@ -789,20 +789,34 @@ func tehranMinutes(_ lat: Double, _ lon: Double, _ year: Int, _ month0: Int, _ d
 
 // ---------------------------------------------------------------- Tunisia: the Institut National de la Météorologie
 
-/// Before rounding: the Institut National de la Météorologie's program — Meeus's apparent sun; Dhuhr seven minutes after the transit and Asr (plain geometry) on the sun of 0 h UT; Fajr and Isha at 18° and sunset at 0.8333° with the sun iterated and the horizon lowered by the place's allowance; Maghrib two minutes after sunset. The sunrise mirrors the sunset and is not checked: the Institute gives none.
+let TUNISIA_EOT_SERIES_SECONDS: [Double] = [0.134, -0.095, -0.059, 0.082, 0.532, 0.661, -0.437, -0.13, 0.468, 0.7, 0.272, -0.01, -0.409]
+
+/// Minutes the Institute's equation of time stands from Meeus's at `d` days from J2000.0: harmonics of the sun's mean longitude, the constant then (cos kL, sin kL) for k = 1…6.
+func tunisiaEotRipple(_ d: Double) -> Double {
+    let L = (280.46646 + (d / 36525) * 36000.76983) * RAD
+    var s = TUNISIA_EOT_SERIES_SECONDS[0]
+    for k in 1...6 {
+        s += TUNISIA_EOT_SERIES_SECONDS[2 * k - 1] * cos(Double(k) * L) + TUNISIA_EOT_SERIES_SECONDS[2 * k] * sin(Double(k) * L)
+    }
+    return s / 60
+}
+
+/// Before rounding. The Institut National de la Météorologie's program — Meeus's apparent sun with the Institute's equation of time (a ripple of the sun's mean longitude, up to three seconds); Dhuhr seven minutes after the transit and Asr (plain geometry) on the sun of 0 h UT; Fajr and Isha at 18° and sunset at 0.8333° with the sun iterated at each time's own moment on the place's mean-time clock read as UT (four minutes later per degree east), the horizon lowered by the place's allowance; Maghrib two minutes after sunset. The sunrise mirrors the sunset and is not checked: the Institute gives none.
 func tunisiaRawMinutes(_ lat: Double, _ lon: Double, _ year: Int, _ month0: Int, _ day: Int, asrShadow: Double = 1, dipDeg: Double = 0, dipSunsetDeg: Double? = nil) -> DayMinutes {
     let dipSunset = dipSunsetDeg ?? dipDeg
     let d0 = d0Of(year, month0, day)
     let sp = sin(lat * RAD), cp = cos(lat * RAD)
     let sun0 = meeusApparentSun(d0)
-    let noon0 = 720 - 4 * lon - sun0.eot
+    let noon0 = 720 - 4 * lon - (sun0.eot + tunisiaEotRipple(d0))
+    let ahead = 4 * lon
     func event(_ alt: Double, _ sign: Double, _ start: Double) -> Double {
         var t = start
         for _ in 0..<3 {
-            let s = meeusApparentSun(d0 + t / 1440)
+            let dm = d0 + (t + ahead) / 1440
+            let s = meeusApparentSun(dm)
             let c = (sin(alt * RAD) - sp * sin(s.dec)) / (cp * cos(s.dec))
             if !(abs(c) <= 1) { return Double.nan }
-            t = 720 - 4 * lon - s.eot + (sign * 4 * acos(c)) / RAD
+            t = 720 - 4 * lon - (s.eot + tunisiaEotRipple(dm)) + (sign * 4 * acos(c)) / RAD
         }
         return t
     }

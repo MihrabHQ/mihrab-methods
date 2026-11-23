@@ -765,21 +765,35 @@ fun tehranMinutes(lat: Double, lon: Double, year: Int, month0: Int, day: Int, as
 
 // ---------------------------------------------------------------- Tunisia: the Institut National de la Météorologie
 
-/** Before rounding: the Institut National de la Météorologie's program — Meeus's apparent sun; Dhuhr seven minutes after the transit and Asr (plain geometry) on the sun of 0 h UT; Fajr and Isha at 18° and sunset at 0.8333° with the sun iterated and the horizon lowered by the place's allowance; Maghrib two minutes after sunset. The sunrise mirrors the sunset and is not checked: the Institute gives none. */
+val TUNISIA_EOT_SERIES_SECONDS = doubleArrayOf(0.134, -0.095, -0.059, 0.082, 0.532, 0.661, -0.437, -0.13, 0.468, 0.7, 0.272, -0.01, -0.409)
+
+/** Minutes the Institute's equation of time stands from Meeus's at `d` days from J2000.0: harmonics of the sun's mean longitude, the constant then (cos kL, sin kL) for k = 1…6. */
+fun tunisiaEotRipple(d: Double): Double {
+    val L = (280.46646 + (d / 36525) * 36000.76983) * RAD
+    var s = TUNISIA_EOT_SERIES_SECONDS[0]
+    for (k in 1..6) {
+        s += TUNISIA_EOT_SERIES_SECONDS[2 * k - 1] * cos(k * L) + TUNISIA_EOT_SERIES_SECONDS[2 * k] * sin(k * L)
+    }
+    return s / 60
+}
+
+/** Before rounding. The Institut National de la Météorologie's program — Meeus's apparent sun with the Institute's equation of time (a ripple of the sun's mean longitude, up to three seconds); Dhuhr seven minutes after the transit and Asr (plain geometry) on the sun of 0 h UT; Fajr and Isha at 18° and sunset at 0.8333° with the sun iterated at each time's own moment on the place's mean-time clock read as UT (four minutes later per degree east), the horizon lowered by the place's allowance; Maghrib two minutes after sunset. The sunrise mirrors the sunset and is not checked: the Institute gives none. */
 fun tunisiaRawMinutes(lat: Double, lon: Double, year: Int, month0: Int, day: Int, asrShadow: Double = 1.0, dipDeg: Double = 0.0, dipSunsetDeg: Double? = null): DayMinutes {
     val dipSunset = dipSunsetDeg ?: dipDeg
     val d0 = d0Of(year, month0, day)
     val sp = sin(lat * RAD)
     val cp = cos(lat * RAD)
     val sun0 = meeusApparentSun(d0)
-    val noon0 = 720 - 4 * lon - sun0.eot
+    val noon0 = 720 - 4 * lon - (sun0.eot + tunisiaEotRipple(d0))
+    val ahead = 4 * lon
     fun event(alt: Double, sign: Double, start: Double): Double {
         var t = start
         repeat(3) {
-            val s = meeusApparentSun(d0 + t / 1440)
+            val dm = d0 + (t + ahead) / 1440
+            val s = meeusApparentSun(dm)
             val c = (sin(alt * RAD) - sp * sin(s.dec)) / (cp * cos(s.dec))
             if (!(abs(c) <= 1)) return Double.NaN
-            t = 720 - 4 * lon - s.eot + (sign * 4 * acos(c)) / RAD
+            t = 720 - 4 * lon - (s.eot + tunisiaEotRipple(dm)) + (sign * 4 * acos(c)) / RAD
         }
         return t
     }

@@ -800,20 +800,34 @@ DayMinutes? tehranMinutes(double lat, double lon, int year, int month0, int day,
 
 // ---------------------------------------------------------------- Tunisia: the Institut National de la Météorologie
 
-/// Before rounding: the Institut National de la Météorologie's program — Meeus's apparent sun; Dhuhr seven minutes after the transit and Asr (plain geometry) on the sun of 0 h UT; Fajr and Isha at 18° and sunset at 0.8333° with the sun iterated and the horizon lowered by the place's allowance; Maghrib two minutes after sunset. The sunrise mirrors the sunset and is not checked: the Institute gives none.
+const List<double> tunisiaEotSeriesSeconds = [0.134, -0.095, -0.059, 0.082, 0.532, 0.661, -0.437, -0.13, 0.468, 0.7, 0.272, -0.01, -0.409];
+
+/// Minutes the Institute's equation of time stands from Meeus's at `d` days from J2000.0: harmonics of the sun's mean longitude, the constant then (cos kL, sin kL) for k = 1…6.
+double tunisiaEotRipple(double d) {
+  final l = (280.46646 + (d / 36525) * 36000.76983) * rad;
+  var s = tunisiaEotSeriesSeconds[0];
+  for (var k = 1; k <= 6; k++) {
+    s += tunisiaEotSeriesSeconds[2 * k - 1] * cos(k * l) + tunisiaEotSeriesSeconds[2 * k] * sin(k * l);
+  }
+  return s / 60;
+}
+
+/// Before rounding. The Institut National de la Météorologie's program — Meeus's apparent sun with the Institute's equation of time (a ripple of the sun's mean longitude, up to three seconds); Dhuhr seven minutes after the transit and Asr (plain geometry) on the sun of 0 h UT; Fajr and Isha at 18° and sunset at 0.8333° with the sun iterated at each time's own moment on the place's mean-time clock read as UT (four minutes later per degree east), the horizon lowered by the place's allowance; Maghrib two minutes after sunset. The sunrise mirrors the sunset and is not checked: the Institute gives none.
 DayMinutes tunisiaRawMinutes(double lat, double lon, int year, int month0, int day, {double asrShadow = 1.0, double dipDeg = 0.0, double? dipSunsetDeg}) {
   final dipSunset = dipSunsetDeg ?? dipDeg;
   final d0 = _d0Of(year, month0, day);
   final sp = sin(lat * rad), cp = cos(lat * rad);
   final sun0 = meeusApparentSun(d0);
-  final noon0 = 720 - 4 * lon - sun0.eot;
+  final noon0 = 720 - 4 * lon - (sun0.eot + tunisiaEotRipple(d0));
+  final ahead = 4 * lon;
   double event(double alt, double sign, double start) {
     var t = start;
     for (var i = 0; i < 3; i++) {
-      final s = meeusApparentSun(d0 + t / 1440);
+      final dm = d0 + (t + ahead) / 1440;
+      final s = meeusApparentSun(dm);
       final c = (sin(alt * rad) - sp * sin(s.dec)) / (cp * cos(s.dec));
       if (!(c.abs() <= 1)) return double.nan;
-      t = 720 - 4 * lon - s.eot + (sign * 4 * acos(c)) / rad;
+      t = 720 - 4 * lon - (s.eot + tunisiaEotRipple(dm)) + (sign * 4 * acos(c)) / rad;
     }
     return t;
   }
