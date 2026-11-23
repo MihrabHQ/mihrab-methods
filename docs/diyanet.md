@@ -4,10 +4,10 @@
 
 The method reproduces Diyanet's computation; what it cannot reproduce is the
 arithmetic of Diyanet's program, which puts a few times
-(<!--fig:sweden.correctionsPct-->0.015<!--/fig--> % in Sweden) on the other side of a minute's rounding point — a fraction of a second
+(<!--fig:sweden.correctionsPct-->0.014<!--/fig--> % in Sweden) on the other side of a minute's rounding point — a fraction of a second
 away, independently from place to place and day to day.
 `data/corrections/sweden.json` lists those times (point, date, prayer, a
-minute either way: <!--fig:sweden.corrections-->261<!--/fig--> over
+minute either way: <!--fig:sweden.corrections-->271<!--/fig--> over
 <!--fig:sweden.span-->1 Jan 2024 → 31 Dec 2027<!--/fig-->) and `timesFor` applies them. The list covers the
 dates the timetables do, and certification holds over those dates only:
 outside them `timesFor` answers with `status: 'method-only'` (or refuses,

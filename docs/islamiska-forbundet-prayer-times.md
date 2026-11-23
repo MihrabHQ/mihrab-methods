@@ -34,9 +34,9 @@ GET https://mihrab-api.elghamri.se/v1/times?authority=sweden&lat=55.60&lng=13.00
 | | |
 |---|---|
 | Towns of Islamiska Förbundet's timetable | <!--fig:sweden.check0.places-->108<!--/fig--> |
-| Times compared | <!--fig:sweden.check0.times-->285,504<!--/fig--> |
+| Times compared | <!--fig:sweden.check0.times-->465,996<!--/fig--> |
 | Off the printed minute | <!--fig:sweden.check0.off-->0<!--/fig--> |
-| Dates | <!--fig:sweden.check0.span-->11 Oct 2026 → 28 Dec 2027<!--/fig--> |
+| Dates | <!--fig:sweden.check0.span-->1 Jan 2026 → 28 Dec 2027<!--/fig--> |
 
 The match is to the minute, for all six times of the day: Fajr, sunrise,
 Dhuhr, Asr, Maghrib and Isha.
@@ -63,7 +63,7 @@ formula, in [the methods reference](methods.md#sweden-and-diyanet).
 A comparison is only worth something if it says what it left out. Two
 kinds of entries in the published timetable were not counted:
 
-- **<!--fig:sweden.check0.sourceFaults-->368<!--/fig--> times that differ from
+- **<!--fig:sweden.check0.sourceFaults-->850<!--/fig--> times that differ from
   Diyanet's own table for the same town and day.** In the published
   timetable the following year's rows repeat the current year's figures,
   while Diyanet's table for that year has its own. On those days the

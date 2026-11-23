@@ -9,15 +9,14 @@ revision bump is at least a minor version.
 
 ## Unreleased
 
-- **Sweden's correction list against Islamiska Förbundet's real 2027.** Its
-  site's day widget answered a 2027 date with 2026's row; its month tables
-  hold the year itself, and the method is on them for 285,503 of 285,504
-  times at 108 towns. The list gains the one: sunrise at Munkedal on 21
-  September 2027, a minute earlier. Ten entries go — Isha at Torsby on nine
-  days of June 2026 and Fajr at Munkedal on 17 June 2026 — which stood on
-  the copied rows (2026's, served as 2027's) and on nothing now held; they
-  moved times on dates already past. No revision raised: the method is
-  unchanged.
+- **Sweden: checked against Islamiska Förbundet's real 2027, and all of its
+  2026.** Its site's day widget answered a 2027 date with 2026's row; its
+  month tables hold the year itself. Those are what is compared now, with
+  the widget's rows kept as what they were — 2026's — so the check runs
+  from 1 January 2026 to the end of 2027: 465,996 times at 108 towns, the
+  method alone off on 83. The correction list gains one entry, sunrise at
+  Munkedal on 21 September 2027, a minute earlier; nothing else in it
+  changes. No revision raised: the method is unchanged.
 - **Tunisia, revision 3: 2027 at a plain 18°, and the Institute's own sun.**
   The first days the Institute gave for 2027 (1–7 January, seen 23
   November 2026) drop the height allowance at Fajr and Isha at every place,

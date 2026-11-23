@@ -20,7 +20,7 @@ Swedish mosques do not improvise. Most follow a published timetable —
 
 | Timetable | Places | Times compared | Off the printed minute | Dates |
 |---|---:|---:|---:|---|
-| Islamiska Förbundet's | <!--fig:sweden.check0.places-->108<!--/fig--> | <!--fig:sweden.check0.times-->285,504<!--/fig--> | <!--fig:sweden.check0.off-->0<!--/fig--> | <!--fig:sweden.check0.span-->11 Oct 2026 → 28 Dec 2027<!--/fig--> |
+| Islamiska Förbundet's | <!--fig:sweden.check0.places-->108<!--/fig--> | <!--fig:sweden.check0.times-->465,996<!--/fig--> | <!--fig:sweden.check0.off-->0<!--/fig--> | <!--fig:sweden.check0.span-->1 Jan 2026 → 28 Dec 2027<!--/fig--> |
 | Diyanet's tables for Swedish towns | <!--fig:sweden.check1.places-->159<!--/fig--> | <!--fig:sweden.check1.times-->1,393,794<!--/fig--> | <!--fig:sweden.check1.off-->0<!--/fig--> | <!--fig:sweden.check1.span-->1 Jan 2024 → 31 Dec 2027<!--/fig--> |
 
 Both are the same method: the one agreed at the 2021 Istanbul prayer times
