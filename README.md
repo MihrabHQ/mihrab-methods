@@ -12,7 +12,7 @@ websites.** Unlike generic prayer-time calculators, Mihrab Methods
 reproduces the calculation methods of recognised Islamic authorities — a
 ministry's, a muftiate's, a council of scholars' — and checks every result
 against the timetables they publish: <!--fig:total.off-->0<!--/fig--> of
-<!--fig:total.times-->77,662,295<!--/fig--> times off the printed minute, across
+<!--fig:total.times-->77,882,357<!--/fig--> times off the printed minute, across
 <!--fig:total.methods-->21<!--/fig--> methods. Free for any app, site or
 mosque to use.
 
@@ -106,7 +106,7 @@ Coming from Adhan JS or AlAdhan?
 <!-- certification-table:start -->
 | Authority | Tables matched | Places | Times checked | Off the printed minute | By the method alone | Correction entries | Checked over |
 |---|---|---:|---:|---:|---:|---:|---|
-| **Sweden** | Islamiska Förbundet’s tables | 107 | 65,442 | **0** | 99.969 % | 270 | 11 Oct 2026 → 21 Dec 2027 |
+| **Sweden** | Islamiska Förbundet’s tables | 108 | 285,504 | **0** | 99.984 % | 261 | 11 Oct 2026 → 28 Dec 2027 |
 |  | Diyanet’s own tables | 159 | 1,393,794 | **0** | 99.981 % |  | 1 Jan 2024 → 31 Dec 2027 |
 | **Diyanet** | its tables worldwide | 8,318 | 71,630,078 | **0** | 99.987 % | 9,101 | 1 Jan 2024 → 31 Dec 2027 |
 | **Morocco** | Habous | 164 | 94,350 | **0** | 99.885 % | 108 | 27 Aug 2026 → 30 Nov 2026 |
@@ -129,7 +129,7 @@ Coming from Adhan JS or AlAdhan?
 | **United Kingdom (Wifaqul Ulama)** | Wifaqul Ulama’s timetables | 81 | 350,400 | **0** | 98.625 % | 4,641 | 1 Jan 2026 → 31 Dec 2027 |
 | **Tunisia** | the Institute’s times | 26 | 95,765 | **0** | 98.970 % | 986 | 1 Jan 2025 → 7 Jan 2027 |
 
-21 of 21 methods certified; 0 of 77,662,295 times off the printed minute. Last checked 17 November 2026. Generated from [`certification.json`](certification.json) by `scripts/readme.mjs`.
+21 of 21 methods certified; 0 of 77,882,357 times off the printed minute. Last checked 17 November 2026. Generated from [`certification.json`](certification.json) by `scripts/readme.mjs`.
 <!-- certification-table:end -->
 
 "By the method alone" is the formula without its correction list. The list

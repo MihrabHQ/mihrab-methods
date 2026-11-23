@@ -6,16 +6,16 @@
     "checks": [
       {
         "tables": "Sweden — Islamiska Förbundet’s tables",
-        "places": 107,
-        "times": 65442,
+        "places": 108,
+        "times": 285504,
         "off": 0,
-        "offWithoutCorrections": 20,
+        "offWithoutCorrections": 45,
         "from": "2026-10-11",
-        "to": "2027-12-21",
+        "to": "2027-12-28",
         "setAside": {
           "misplaced": [],
-          "sourceFaults": 35852,
-          "copiedRows": 710
+          "sourceFaults": 368,
+          "copiedRows": 0
         }
       },
       {
@@ -31,8 +31,8 @@
     "corrections": {
       "from": "2024-01-01",
       "to": "2027-12-31",
-      "entries": 270,
-      "sha256": "173d7145b5ec917882f8ac9890dd1fa5f3143bd714eb540482861bf8a6bac660"
+      "entries": 261,
+      "sha256": "b50161de3e10ba6da0737527f2470167a4f82e4518e34f2c078244f663bdc2d0"
     },
     "revision": 1
   },
