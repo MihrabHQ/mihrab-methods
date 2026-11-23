@@ -9,6 +9,10 @@ revision bump is at least a minor version.
 
 ## Unreleased
 
+No method changed; no revision raised.
+
+## 1.25.0 — 2026-11-23
+
 - **Sweden: checked against Islamiska Förbundet's real 2027, and all of its
   2026.** Its site's day widget answered a 2027 date with 2026's row; its
   month tables hold the year itself. Those are what is compared now, with
