@@ -186,11 +186,11 @@ as fixed addresses and the details: [docs/feed.md](docs/feed.md).
 <!-- usage:start -->
 | | Last 7 days | Last 30 days | Since the first release |
 |---|---:|---:|---:|
-| npm downloads | 5,623 | 6,630 | 6,630 |
-| PyPI downloads | 2,842 | 2,842 | 2,842 (since 2026-11-11) |
-| API requests | 1,370 | 3,270 | 3,270 (since 2026-11-04) |
+| npm downloads | 1,261 | 7,228 | 7,891 |
+| PyPI downloads | 787 | 3,629 | 3,629 (since 2026-11-11) |
+| API requests | 4,260 | 7,530 | 7,530 (since 2026-11-04) |
 
-Counts only, to 2026-11-15, updated weekly (`scripts/stats.mjs`, history in [docs/stats.json](docs/stats.json)): npm's public download counts — every install counts, CI and mirrors included — PyPI's for the [Python port](https://pypi.org/project/mihrab-methods/) (pypistats.org, mirrors left out), and Cloudflare's request counts for the API. No addresses, queries or places are recorded anywhere.
+Counts only, to 2026-11-22, updated weekly (`scripts/stats.mjs`, history in [docs/stats.json](docs/stats.json)): npm's public download counts — every install counts, CI and mirrors included — PyPI's for the [Python port](https://pypi.org/project/mihrab-methods/) (pypistats.org, mirrors left out), and Cloudflare's request counts for the API. No addresses, queries or places are recorded anywhere.
 <!-- usage:end -->
 
 ## More
