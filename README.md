@@ -129,7 +129,7 @@ Coming from Adhan JS or AlAdhan?
 | **United Kingdom (Wifaqul Ulama)** | Wifaqul Ulama’s timetables | 81 | 350,400 | **0** | 98.625 % | 4,641 | 1 Jan 2026 → 31 Dec 2027 |
 | **Tunisia** | the Institute’s times | 26 | 95,765 | **0** | 98.970 % | 986 | 1 Jan 2025 → 7 Jan 2027 |
 
-21 of 21 methods certified; 0 of 78,062,849 times off the printed minute. Last checked 17 November 2026. Generated from [`certification.json`](certification.json) by `scripts/readme.mjs`.
+21 of 21 methods certified; 0 of 78,062,849 times off the printed minute. Last checked 23 November 2026. Generated from [`certification.json`](certification.json) by `scripts/readme.mjs`.
 <!-- certification-table:end -->
 
 "By the method alone" is the formula without its correction list. The list
